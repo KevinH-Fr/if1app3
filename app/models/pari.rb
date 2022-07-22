@@ -5,10 +5,10 @@ class Pari < ApplicationRecord
     validates :coureur_id, presence: true
     validates :parieur_id, presence: true
     
-    validates :typepari, presence: true
+    validates :typePari, presence: true
    
 
-    enum typepari: [:victoire, :podium, :top10]
+    enum typePari: [:victoire, :podium, :top10]
     #TYPES_PARI = ["victoire", "podium"]
 
    # scope :typevictoire, -> { where(typepari: 'victoire')}

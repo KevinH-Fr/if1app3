@@ -145,6 +145,6 @@ class ParisController < ApplicationController
 
     def pari_params
       
-      params.fetch(:pari, {}).permit(:montant, :cote, :resultat, :solde, :event_id, :parieur_id, :coureur_id, :typepari)
+      params.fetch(:pari, {}).permit(:montant, :cote, :resultat, :solde, :event_id, :parieur_id, :coureur_id, :typePari)
     end
 end
