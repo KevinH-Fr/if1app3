@@ -25,7 +25,7 @@ class Pari < ApplicationRecord
     scope :sum_parieur, -> {select('parieur_id, SUM(solde) AS total')}
 
 
-    validate :verif_montant
+#    validate :verif_montant
 
     def verif_montant
 
