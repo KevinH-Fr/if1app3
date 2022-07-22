@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_18_195228) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_22_214623) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -88,6 +88,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_18_195228) do
     t.integer "saison_id"
     t.integer "division_id"
     t.integer "numero"
+    t.integer "circuit_id", null: false
+    t.index ["circuit_id"], name: "index_events_on_circuit_id"
     t.index ["division_id"], name: "index_events_on_division_id"
     t.index ["saison_id"], name: "index_events_on_saison_id"
   end
@@ -177,6 +179,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_18_195228) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "classements", "events"
   add_foreign_key "classements", "pilotes"
+  add_foreign_key "events", "circuits"
   add_foreign_key "events", "divisions"
   add_foreign_key "events", "saisons"
   add_foreign_key "licences", "events"
