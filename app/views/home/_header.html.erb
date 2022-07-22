@@ -59,6 +59,15 @@
                <%= link_to 'Paris',
                paris_path, class:"nav-link" %> 
             </li>
+
+             <li class="nav-item">
+               <%= link_to 'Cotes',
+               cotes_path, class:"nav-link" %> 
+            </li>
+            <li class="nav-item">
+               <%= link_to 'Parieurs',
+               parieurs_path, class:"nav-link" %> 
+            </li>
                <% if current_user.admin? %>
                   <li class="nav-item">
                      <%= link_to 'Admin', users_path, class:"nav-link text-warning" %>

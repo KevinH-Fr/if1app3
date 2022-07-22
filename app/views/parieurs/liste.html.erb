@@ -1,0 +1,42 @@
+
+<br/>
+<h1> Classement Parieurs </h1>
+<br/>
+
+<%# haut de page depuis partial %>
+<%= render "shared/hautpdf" %>
+<%#= tableau data classement %>
+ <% if (@eventId).blank? %>
+ <% else %>
+  <% eventNum = Event.find(@eventId).numero %>
+    
+<%# tab datas %>
+
+ <table style="margin-left:auto;margin-right:auto">
+    <thead class="table-dark">
+      <tr>  
+        <th>#</th>
+        <th>Parieur</th>
+        <th>Cumul</th>
+      </tr>
+    </thead>
+
+       <tbody>
+          <% @parisEvent.each_with_index do | pari, i | %> 
+           <tr>
+             <td> <%= i + 1 %>  </td>
+             <td> <%= pari.parieur.nom %> </td>
+             <td> <%= @valDepart + pari.total %> </td>
+            
+          </tr>
+         <% end %>
+    </tbody>
+   
+  </table>
+
+
+  <br/>
+
+<%# bas de page depuis partial %>
+<%= render "shared/baspdf" %>
+<% end %>
