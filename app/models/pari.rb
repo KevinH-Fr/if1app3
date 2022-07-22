@@ -34,7 +34,7 @@ class Pari < ApplicationRecord
       saisonId = Event.find(eventId).saison_id
       eventNum = Event.find(eventId).numero 
 
-      soldeParieurAvant = Pari.saison_courant(saisonId).division_courant(divisionId).numero_until_courant(eventNum).pilote_courant(self.parieur_id).sum_parieur.first.total
+     # soldeParieurAvant = Pari.saison_courant(saisonId).division_courant(divisionId).numero_until_courant(eventNum).pilote_courant(self.parieur_id).sum_parieur.first.total
 
       if soldeParieurAvant.present?
         if soldeParieurAvant - montant < 0 
