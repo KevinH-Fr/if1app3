@@ -48,8 +48,8 @@
       </div>
        <br>
       <div>
-        <%= form.label :typePari, style: "display: block" %>
-        <%= form.select(:typePari, Pari.typeParis.keys, 
+        <%= form.label :paritype, style: "display: block" %>
+        <%= form.select(:paritype, Pari.paritypes.keys, 
               {include_blank: true}, 
               {data: { action: "change->form-element#remotesubmit"}}) %>
       </div>
@@ -59,11 +59,11 @@
   <%= turbo_frame_tag :cote_field do %>
     <div>
         <% if form.object.coureur_id.present? %>
-          <% if form.object.typePari.present? %>
+          <% if form.object.paritype.present? %>
             <%# valCote = Classement.find(5).cote_victoire %>
             <% piloteId = form.object.coureur_id %>
             <% eventId =  form.object.event_id %>
-            <% typepari = form.object.typePari %>
+            <% typepari = form.object.paritype %>
             <% @montantPari = form.object.montant %>
               <% if typepari == "victoire" %>
                 <% @valCote = Classement.all.where(event_id: eventId, pilote_id: piloteId).first.cote_victoire %>

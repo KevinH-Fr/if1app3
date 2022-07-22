@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_22_223222) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_22_224450) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -122,6 +122,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_22_223222) do
     t.decimal "cote"
     t.boolean "resultat"
     t.integer "solde"
+    t.integer "paritype"
     t.index ["coureur_id"], name: "index_paris_on_coureur_id"
     t.index ["event_id"], name: "index_paris_on_event_id"
     t.index ["parieur_id"], name: "index_paris_on_parieur_id"

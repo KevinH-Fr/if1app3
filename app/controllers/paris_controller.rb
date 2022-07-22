@@ -111,7 +111,7 @@ class ParisController < ApplicationController
     @parisEvent.all.each do |pari|
 
       coureurId = pari.coureur_id
-      typePari = pari.typepari
+      typePari = pari.paritype
       resultatCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.course
 
       if typePari == "victoire" && resultatCoureur == 1
@@ -145,6 +145,6 @@ class ParisController < ApplicationController
 
     def pari_params
       
-      params.fetch(:pari, {}).permit(:montant, :cote, :resultat, :solde, :event_id, :parieur_id, :coureur_id, :typePari)
+      params.fetch(:pari, {}).permit(:montant, :cote, :resultat, :solde, :event_id, :parieur_id, :coureur_id, :paritype)
     end
 end
