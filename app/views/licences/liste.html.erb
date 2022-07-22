@@ -1,0 +1,59 @@
+<br>
+<h1> Licences </h1>
+<br>
+
+<%# haut de page depuis partial %>
+<%= render "shared/hautpdf" %>
+
+ <%# table des situation licences pilotes titulaires %>
+
+    <table style="margin-left:auto;margin-right:auto">
+      <thead class="table-dark">
+        <tr>
+          <th>Titulaires</th>
+          <th>Val départ</th>
+          <th>perdus</th>
+          <th>recupérés</th>
+          <th>Solde</th>
+        </tr>
+      </thead>
+
+        <tbody>
+        <tr>
+          <% @licencesFiltres.each_with_index do | licence, i| %>
+          
+            <td>
+             <div class="contenant">
+              <% idPilote = licence.pilote_id %> 
+              <% idEcurie = Pilote.find(idPilote).ecurie %>
+              <% nomPilote = Pilote.find(idPilote).nom %> 
+                <%= image_tag Equipe.find(idEcurie).logo, style: "width: 340px; display: block", class: "img-fluid rounded" %>
+                      <div class="texte_centrer">
+                        <%= nomPilote %>
+                      </div>
+             </div>
+            </td>
+              
+            <td class="cols_pos_score">
+              <%= @licencesValDepart %>
+             </td>
+            <td class="cols_pos_score">
+                <%= licence.total_penalite %>
+            </td>
+           <td class="cols_pos_score">
+                <%= licence.total_recupere %>
+            </td>
+             <td class="cols_solde">
+              <strong>
+                <%= @licencesValDepart.to_i - licence.total_penalite.to_i + licence.total_recupere.to_i %>
+              </strong>
+            </td>
+             
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+ </div>
+
+ <%# bas de page depuis partial %>
+<%= render "shared/baspdf" %>

@@ -1,0 +1,15 @@
+<h1> hello world PDF :D </h1>
+
+PDF generation date:
+<%= Time.zone.now %>
+
+<p style="color: green"><%= notice %></p>
+
+<%= render @equipe %>
+
+<strong> Equipe ID: </strong>
+<%= @equipe.id %>
+
+ <%= image_tag(@equipe.logo, style: "width: 400px; display: block", class: "img-fluid rounded") if @equipe.logo.attached? %>
+ <%= image_tag(@equipe.voiture, style: "width: 400px; display: block", class: "img-fluid rounded") if @equipe.voiture.attached? %>
+

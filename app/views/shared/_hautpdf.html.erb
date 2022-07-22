@@ -1,0 +1,45 @@
+
+<%# entete haut des pdf resultats, classements %>
+
+<%= wicked_pdf_image_tag asset_url('/images/if1main.png'), style: "width: 150px;", class: "img-fluid rounded", id:"imgLogoIf1" %> 
+
+<% eventId = @eventId %>
+<% Event.find(eventId).date %>
+<% circuitId = Event.find(eventId).circuit_id %> 
+
+  <% if Circuit.find(circuitId).drapeau.present? %>
+    <%= image_tag(Circuit.find(circuitId).drapeau, style: "width: 100px; display: block", class: "img-fluid rounded", id:"imgDrapeau") %> 
+  <% end %>
+
+ <table width="600" style="margin-left:auto;margin-right:auto">
+    <thead>
+      <tr>
+        <th>GP n°</th>
+        <th>Date</th>
+        <th>Pays</th>
+        <th>Division</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td class="val_entete">
+            <%= Event.find(eventId).numero %>
+        </td>
+        <td class="val_entete">
+            <%= Event.find(eventId).date %>
+        </td>
+        <td class="val_entete">
+          <% circuitId = Event.find(eventId).circuit_id %> 
+          <%= Circuit.find(circuitId).pays %>
+        </td>
+         <td class="val_entete">
+          <% divisionId = Event.find(eventId).division_id %> 
+          <%= Division.find(divisionId).nom %>
+        </td>
+      
+      </tr>
+  </tbody>
+</table>
+
+<hr/> 

@@ -1,0 +1,55 @@
+
+<% if user_signed_in? %>
+  <h1>Cotes Paris</h1>  <br/>
+
+  <%= render "shared/choixevent" %>
+
+  <% if (@eventId).present? %> 
+    <%= render "shared/eventactif" %>
+    
+    <%#= link_to "Calculs cotes", toggle_calculcotes_cote_path(@eventId), class:"btn btn-success", style:"margin: 2px" %>
+    <br><br>
+
+    <%#= tableau data cotes %>
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th style="text-align: center;">#</th>
+          <th>Pilote</th>
+          <th>victoire</th>
+          <th>podium</th>
+          <th>top10</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <% @cotes.each_with_index do | cote, i| %>
+           <td>
+              <%= cote.position %>
+            </td>
+            <td>
+              <%= Pilote.find(cote.pilote_id).nom %>
+            </td>
+           
+
+            <td> <%= cote.cote_victoire %> </td>
+            <td> <%= cote.cote_podium %> </td>
+            <td> <%= cote.cote_top10 %> </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <br/> <hr/>
+        
+    <%# PDF event actif %>
+    <% numGp = Event.find(@eventId).numero %>
+    <%= link_to "PDF",  cotes_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp, format: :pdf), class:"btn btn-dark" %>
+
+   <% end %>
+
+<% else %>
+  <br/>   <strong>Vous n'avez pas les droits...</strong>
+<% end %>
+

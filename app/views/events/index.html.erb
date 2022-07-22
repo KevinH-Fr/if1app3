@@ -1,0 +1,80 @@
+
+<% if user_signed_in? %>
+
+<br/>
+
+      <h1 class="fa-solid fa-calendar-check fa-2xl fw-bold fs-1"> - Events </h1>   
+      <br/> <br/> <hr/> <br/>
+
+ <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="table-dark">
+        <tr>
+
+          <th>Numero</th>
+          <th>Pays</th>
+          <th>Drapeau</th>
+          <th>Date</th>
+          <th>Division</th>
+          <th colspan="3">Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @events.each do |event| %>
+          <tr>
+            
+            <td> <strong><%= event.numero %> </strong>   </td>
+            <td>  
+             
+              <%= link_to(event) do %>
+                    <% circuitLie = event.circuit_id %> 
+                      <% if circuitLie.present? %>
+                        <%= Circuit.find(circuitLie).pays %>
+                      <% end %>
+                </td>
+                <td>  
+                     <% if circuitLie.present? %>
+                      <%= image_tag(Circuit.find(circuitLie).drapeau, style: "width: 50px; display: block", class: "img-fluid rounded") if Circuit.find(circuitLie).drapeau.attached? %>
+                     <% end %>
+                </td>
+              <% end %>
+
+            <td> 
+              <% if event.date.present? %>
+                <% datetime = event.date.to_date %>
+                <%= datetime.strftime("%d/%m/%y") %>
+              <% end %>
+            </td>
+
+            <td> <%= Division.find(event.division_id).nom %>    </td>
+            
+                  <td class="col_actions">
+                      <%= link_to '', event, class:"fa-solid fa-eye btn btn-primary" %> 
+                  </td>
+                      <% if current_user.admin? %>
+                       <td class="col_actions">
+                            <%= link_to "", edit_event_path(event), class:"fa-regular fa-pen-to-square btn btn-secondary" %> 
+                        </td> 
+                        <td class="col_actions">
+                          <%= button_to '', event, class:"fa-solid fa-trash-can btn btn-danger", method: :delete, :onclick => "return confirm('Sûr ?')" %>
+                        </td> 
+                      <% end %>
+                
+            </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <br>
+
+ 
+
+  <% if current_user.admin? %>
+   <%= link_to "Nouveau event", new_event_path, class:"btn btn-primary" %>
+  <% end %>
+
+  <% else %>
+    <br/>   <strong>Vous n'avez pas les droits...</strong>
+<% end %>

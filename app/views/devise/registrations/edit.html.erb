@@ -1,0 +1,35 @@
+<h2>Edit <%= resource_name.to_s.humanize %></h2>
+
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+  <%= render "devise/shared/error_messages", resource: resource %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div>
+     <%= f.label :nom %><br />
+     <%= f.text_field :nom, autofocus: true %>
+ </div>
+
+  <div>
+     <%= f.label :role %><br />
+     <%= f.text_field :role, autofocus: true %>
+ </div>
+
+  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+  <% end %>
+
+<br>
+  <div class="actions">
+    <%= f.submit "Update", class:"btn btn-success" %>
+  </div>
+<% end %>
+
+<br>
+<%= button_to "Supprimer le compte", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class:"btn btn-outline-danger" %></p>
+
+
+<%= link_to "Back", :back, class:"btn btn-secondary" %>

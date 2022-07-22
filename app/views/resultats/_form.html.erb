@@ -1,0 +1,167 @@
+<%= form_with(model: resultat) do |form| %>
+  <% if resultat.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(resultat.errors.count, "error") %> prohibited this resultat from being saved:</h2>
+
+      <ul>
+        <% resultat.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% piloteId = form.object.pilote_id %>
+  <% if piloteId.nil? %>
+  <% else %>
+    <% Pilote.find(piloteId).ecurie %>
+  <% end %>
+  
+  <%#<div id="turbo-stream-target">hello </div>%>
+
+  <div data-controller="form-element">
+    <%= form.button "Validate", formaction: new_resultat_path, 
+        formmethod: :get, data: {turbo_frame: :ecurie_field, 
+        form_element_target: "submitbtn"} %>
+      <div>
+          <%= form.label :pilote_id, style: "display: block" %>
+          <%= form.select(:pilote_id, options_from_collection_for_select(
+                    @pilote,'id', 'nom',
+                    :selected => form.object.pilote_id), 
+                    {include_blank: true}, 
+                    {data: { action: "change->form-element#remotesubmit"}}) %>
+      </div>
+  </div>
+
+  <div>
+    <%= form.label :event, style: "display: block" %>
+    <%= form.select(:event_id, options_from_collection_for_select(
+                  @event,'id', 'formatted_name_bis', 
+                 :selected => form.object.event_id), 
+                 :include_blank => true )%>
+ </div>
+
+  <%= turbo_frame_tag :ecurie_field do %>
+    <div>
+
+     <% if piloteId.nil? %>
+     <% else %>
+       <% ecurieLiee = Pilote.find(piloteId).ecurie %>
+     <% end %>
+
+      <% form.label :ecurie, style: "display: block" %>
+      <%= form.hidden_field :ecurie, value: ecurieLiee %>
+    </div>
+  <%# end %>
+<% end %>
+
+ <div data-controller="form-element">
+    <%= form.button "Validate", formaction: new_resultat_path, 
+        formmethod: :get, data: {turbo_frame: :score_field, 
+        form_element_target: "submitbtn"} %>
+
+      <div>
+        <br/>
+        <%= form.label :qualification, style: "display: block" %>
+        <%= form.select(:qualification, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
+                        11, 12, 13, 14, 15, 16, 17, 18, 19, 20], 
+                        :selected => form.object.qualification, 
+                        :include_blank => true )%>
+      </div>
+ 
+      <div>
+          <%= form.label :course, style: "display: block" %>
+          <%= form.select :course, Resultat.positions, 
+          {include_blank: true}, { data: { action: "change->form-element#remotesubmit"}} %>
+      </div>
+
+       <div>
+          <%= form.label :"Pilote du jour", style: "display: block" %>
+          <%= form.check_box :dotd, { data: { action: "change->form-element#remotesubmit"}} %>
+      </div>
+       <div>
+          <%= form.label :"Meilleur tour", style: "display: block" %>
+          <%= form.check_box :mt,{ data: { action: "change->form-element#remotesubmit"}} %>
+      </div>
+  </div>
+
+  <%= turbo_frame_tag :score_field do %>
+    <div>
+
+        <% positionCourse = form.object.course %>
+        <% if positionCourse.blank? %>
+          <% scoreCourse = 0 %>
+        <% else %>
+          <% if positionCourse == 1 %>
+            <% scoreCourse = 25 %>
+          <% else %>
+            <% if positionCourse == 2 %>
+              <% scoreCourse = 18 %>
+            <% else %>
+              <% if positionCourse == 3 %>
+                <% scoreCourse = 15 %> 
+              <% else %>
+                <% if positionCourse == 4 %>
+                  <% scoreCourse = 12 %>
+                <% else %>
+                  <% if positionCourse == 5 %>
+                    <% scoreCourse = 10 %>
+                  <% else %>
+                    <% if positionCourse == 6 %>
+                      <%  scoreCourse = 8 %>
+                    <% else%>
+                      <% if positionCourse == 7 %>
+                        <% scoreCourse = 6 %>
+                      <% else%>
+                        <% if positionCourse == 8 %>
+                          <% scoreCourse = 4 %>
+                        <%else%>
+                          <% if positionCourse == 9 %>
+                            <% scoreCourse = 2 %>
+                          <%else %>
+                            <% if positionCourse == 10 %>
+                              <% scoreCourse = 1 %>
+                            <% else %>
+                              <% scoreCourse = 0 %>
+                            <% end %>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                    <% end%>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+
+        <% resultatDotd = form.object.dotd %>
+        <% scoreDotd = 0 %>
+        <% if resultatDotd == true %>
+          <% scoreDotd = 1 %>
+        <% end %>
+
+        <% resultatMt = form.object.mt %>
+        <% scoreMt = 0 %>
+        <% if resultatMt == true %>
+          <% scoreMt = 1 %>
+        <% end %>
+  
+        <% scoreTotal = scoreCourse + scoreDotd.to_i + scoreMt.to_i %> 
+
+        <%= form.label :score, style: "display: block" %>
+        <%= form.text_field :score, value: scoreTotal %>
+      </div>
+  <% end %>
+
+  <%# points manuels %>
+  <%#= link_to "Points manuels", "", class:"btn btn-outline-danger" %>
+
+<br/>
+
+  <div>
+    
+     <%= form.submit "Valider", class:"btn btn-success" %>
+  </div>
+<% end %>
+

@@ -1,0 +1,47 @@
+<div id="<%= dom_id event %>">
+  <p>
+    <strong>Numero:</strong>
+    <%= event.numero %>
+  </p>
+
+  <p>
+    <strong>Date:</strong>
+    <% if event.date.present? %>
+      <% datetime = event.date.to_date %>
+      <%= datetime.strftime("%d/%m/%y") %>
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Saison:</strong>
+    <%= event.saison_id %>
+  </p>
+
+  <p>
+    <strong>Division:</strong>
+    <% event.division_id %>
+    <% divisionLiee = event.division_id %>
+    <%= Division.find(divisionLiee).nom %>
+  </p>
+
+   <p>
+    <strong>Circuit:</strong>
+    <% event.circuit_id %>
+    <% circuitLie = event.circuit_id %>
+
+       <% if circuitLie.present? %>
+        <%= Circuit.find(circuitLie).pays %>
+      <% end %>
+
+     <br/> <br/>
+
+    <%# si pas d'ecurie selectionnée, image blank, sinon logo ecurie %>
+      <% if circuitLie.blank?%>
+        <%= image_tag 'no-image.png', alt: 'icon', width: '200' %>
+      <% else %>
+        <%= image_tag(Circuit.find(circuitLie).drapeau, style: "width: 200px; display: block", class: "img-fluid rounded") if Circuit.find(circuitLie).drapeau.attached? %>
+
+      <% end %>
+ </p>
+
+</div>

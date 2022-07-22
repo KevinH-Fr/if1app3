@@ -1,0 +1,52 @@
+<%= form_with(model: event) do |form| %>
+  <% if event.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+        <% event.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :numero, style: "display: block" %>
+    <%= form.text_field :numero %>
+  </div>
+
+  <div>
+    <%= form.label :date, style: "display: block" %>
+    <%= form.date_field :date %>
+  </div>
+
+  <div>
+    <%= form.label :circuit, style: "display: block" %>
+    <%= form.select(:circuit_id, options_from_collection_for_select(
+                  @circuit,'id', 'pays', 
+                 :selected => form.object.circuit_id), 
+                 :include_blank => true )%>
+  </div>
+
+  <div>
+    <%= form.label :saison, style: "display: block" %>
+    <%= form.select(:saison_id, options_from_collection_for_select(
+                  @saison,'id', 'nom', 
+                 :selected => form.object.saison_id), 
+                 :include_blank => true )%>
+  </div>
+
+  <div>
+    <%= form.label :division, style: "display: block" %>
+    <%= form.select(:division_id, options_from_collection_for_select(
+                  @division,'id', 'nom', 
+                 :selected => form.object.division_id), 
+                 :include_blank => true )%>
+  </div>
+
+  <div>
+    <br>
+    <%= form.submit "Valider", class:"btn btn-success" %>
+  </div>
+<% end %>

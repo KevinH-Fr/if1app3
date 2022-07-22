@@ -1,0 +1,29 @@
+<% if user_signed_in? %>
+
+<p style="color: green"><%= notice %></p>
+
+<%= render @saison %>
+    <div>
+      <% if current_user.admin? %>
+        <table>
+          <tr>
+            <td>
+              <%= link_to "", edit_saison_path(@saison), class:"fa-regular fa-pen-to-square btn btn-primary" %>
+            </td>
+            <td>
+              | 
+            </td>
+            <td>
+              <%= button_to "", @saison, class:"fa-solid fa-trash-can btn btn-danger", method: :delete %>
+            </td>
+          </tr>
+        </table>
+      <% end %>
+      <br/>
+        <%= link_to "", saisons_path, class:"fa-solid fa-arrow-rotate-left btn btn-secondary" %> 
+    </div>
+
+<% else %>
+  <br/>
+  <strong>Vous n'avez pas les droits...</strong>
+<% end %>

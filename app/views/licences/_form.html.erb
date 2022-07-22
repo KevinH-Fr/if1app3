@@ -1,0 +1,44 @@
+<%= form_with(model: licence) do |form| %>
+  <% if licence.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(licence.errors.count, "error") %> prohibited this licence from being saved:</h2>
+
+      <ul>
+        <% licence.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :pilote, style: "display: block" %>
+    <%= form.select(:pilote_id, options_from_collection_for_select(
+                  @pilote,'id', 'nom', 
+                 :selected => form.object.pilote_id), 
+                 :include_blank => true )%>
+  </div>
+
+  <div>
+    <%= form.label :event, style: "display: block" %>
+    <%= form.select(:event_id, options_from_collection_for_select(
+                  @event,'id', 'date', 
+                 :selected => form.object.event_id), 
+                 :include_blank => true )%>
+  </div>
+
+  <div>
+    <%= form.label :penalite, style: "display: block" %>
+    <%= form.number_field :penalite %>
+  </div>
+
+  <div>
+    <%= form.label :recupere, style: "display: block" %>
+    <%= form.number_field :recupere %>
+  </div>
+
+  <br/>
+  <div>
+     <%= form.submit "Valider", class:"btn btn-success" %>
+  </div>
+<% end %>

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @pari %>
+
+<div>
+  <%= link_to "Edit this pari", edit_pari_path(@pari) %> |
+  <%= link_to "Back to paris", paris_path %>
+
+  <%= button_to "Destroy this pari", @pari, method: :delete %>
+</div>

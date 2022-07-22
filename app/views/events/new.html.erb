@@ -1,0 +1,15 @@
+<% if user_signed_in? %>
+  <% if current_user.admin? %>
+
+    <h1>Nouvel event</h1>
+    <%= render "form", event: @event %>
+
+    <br>
+    <div>
+      <%= link_to "Retour events", events_path, class:"btn btn-secondary" %>
+    </div>
+
+  <% else %>
+    <br/> <strong>Vous n'avez pas les droits...</strong>
+  <% end %>
+<% end %>

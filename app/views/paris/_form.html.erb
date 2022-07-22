@@ -1,0 +1,125 @@
+<%= form_with(model: pari) do |form| %>
+  <% if pari.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(pari.errors.count, "error") %> prohibited this pari from being saved:</h2>
+
+      <ul>
+        <% pari.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+   <div>
+      <%= form.label :event, style: "display: block" %>
+      <%= form.select(:event_id, options_from_collection_for_select(
+                  @event,'id', 'date', 
+                 :selected => @eventId), 
+                 :include_blank => true) %>  
+    </div>
+      <br>
+
+   <div>
+    <%= form.label :parieur, style: "display: block" %>
+    <%= form.select(:parieur_id, options_from_collection_for_select(
+                  @parieur,'id', 'nom', 
+                 :selected => form.object.parieur_id), 
+                 :include_blank => true) %>
+  </div>
+  <br>
+
+  <div data-controller="form-element">
+    <%= form.button "Validate", formaction: new_pari_path, 
+        formmethod: :get, data: {turbo_frame: :cote_field, 
+        form_element_target: "submitbtn"} %>
+      <div>
+        <%= form.label :coureur, style: "display: block" %>
+        <%= form.select(:coureur_id, options_from_collection_for_select(
+               @coureur,'id', 'nom', :selected => form.object.coureur_id), 
+              {include_blank: true}, 
+              {data: { action: "change->form-element#remotesubmit"}}) %>
+      </div>
+       <br>
+      <div>
+        <%= form.label :montant, style: "display: block" %>
+        <%= form.number_field :montant, 
+              {data: { action: "change->form-element#remotesubmit"}} %>
+      </div>
+       <br>
+      <div>
+        <%= form.label :typepari, style: "display: block" %>
+        <%= form.select(:typepari, Pari.typeparis.keys, 
+              {include_blank: true}, 
+              {data: { action: "change->form-element#remotesubmit"}}) %>
+      </div>
+   <br>
+  </div>
+
+  <%= turbo_frame_tag :cote_field do %>
+    <div>
+        <% if form.object.coureur_id.present? %>
+          <% if form.object.typepari.present? %>
+            <%# valCote = Classement.find(5).cote_victoire %>
+            <% piloteId = form.object.coureur_id %>
+            <% eventId =  form.object.event_id %>
+            <% typepari = form.object.typepari %>
+            <% @montantPari = form.object.montant %>
+              <% if typepari == "victoire" %>
+                <% @valCote = Classement.all.where(event_id: eventId, pilote_id: piloteId).first.cote_victoire %>
+              <% end %>
+               <% if typepari == "podium" %>
+                <% @valCote = Classement.all.where(event_id: eventId, pilote_id: piloteId).first.cote_podium %>
+              <% end %>
+             <% if typepari == "top10" %>
+                <% @valCote = Classement.all.where(event_id: eventId, pilote_id: piloteId).first.cote_top10 %>
+              <% end %>
+                <div> cote retenue | <strong>  <%= @valCote %> </strong>  </div>
+                <div> gains possibles | <strong>  <%= @valCote * form.object.montant %> </strong>  </div>
+                <br>
+          <% end %>
+        <% end %>
+        <%# valCote = valCote %> 
+        <% form.label :cote, style: "display: block" %>
+        <%= form.text_field :cote, value: @valCote %>
+
+    </div>
+  <% end %>
+
+
+
+ <div data-controller="form-element">
+    <%= form.button "Validate", formaction: new_pari_path, 
+        formmethod: :get, data: {turbo_frame: :solde_field, 
+        form_element_target: "submitbtn"} %>
+    <div>
+      <%= form.label :resultat, style: "display: block" %>
+      <%= form.check_box :resultat, {data: { action: "change->form-element#remotesubmit"}} %>
+
+      <% valCB = form.object.resultat %>
+      <%= valCB %>
+    </div>
+  </div>
+
+
+ <%= turbo_frame_tag :solde_field do %>
+  <%# repasser les variables montantpari et valcote pour recalculer en cas de changement ? %>
+  
+  <div>
+    <% if form.object.resultat == true %>
+      <% valSolde =  @montantPari * @valCote %>
+    <% else %>
+      <% valSolde = 0 %>
+    <% end %>  
+      <%= form.label :solde, style: "display: block" %>
+      <%= form.number_field :solde, value: valSolde %>
+  </div>
+<% end %>  
+
+
+  <br/>
+
+  <div>
+     <%= form.submit "Valider", class:"btn btn-success" %>
+  </div>
+<% end %>

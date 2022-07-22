@@ -1,0 +1,16 @@
+ <% if user_signed_in? %>
+  <% if current_user.admin? %>
+
+      <h1>Editer circuit</h1>
+
+      <%= render "form", circuit: @circuit %>
+      <br>
+        <div>
+          <%= link_to "", @circuit, class:"fa-solid fa-eye btn btn-primary" %> |
+          <%= link_to "", circuits_path, class:"fa-solid fa-arrow-rotate-left btn btn-secondary"  %>
+        </div>
+  
+    <% end %>
+  <% end %>
+<br/>   <strong>Vous n'avez pas les droits...</strong>
+

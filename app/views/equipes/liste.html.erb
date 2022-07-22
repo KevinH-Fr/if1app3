@@ -1,0 +1,44 @@
+<h1> LISTE hello world PDF :D </h1>
+
+PDF generation date:
+<%= Time.zone.now %>
+
+
+
+<% if user_signed_in? %>
+
+<br/>
+
+      <h1 class="fa-solid fa-car fa-2xl fw-bold fs-1"> - Equipes </h1> 
+      
+      <br/> <br/> <hr/> <br/>
+
+  <table class="table table-striped table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Nom</th>
+        <th>Logo</th>
+        <th>Voiture</th>
+     
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @equipes.each do |equipe| %>
+        <tr>
+          <td> <%= link_to equipe.nom, equipe %> </td>
+          <td>  <%= image_tag(equipe.logo, style: "width: 200px; display: block", class: "img-fluid rounded") if equipe.logo.attached? %>  </td> 
+          <td>   <%= image_tag(equipe.voiture, style: "width: 200px; display: block", class: "img-fluid rounded") if equipe.voiture.attached? %>  </td> 
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+
+<% else %>
+
+  <h3> Vous n'avez pas les droits...</h3>
+  
+<% end %>

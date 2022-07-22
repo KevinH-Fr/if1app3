@@ -1,0 +1,84 @@
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+
+  <%= link_to image_tag("if1main.png", border: 0, width: 100), root_path, class:"navbar-brand" %>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+     <span class="navbar-toggler-icon"></span> 
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+         <%#  <li class="nav-item">
+      	<%= link_to 'A propos',
+      		home_index_path, class:"nav-link" %> 
+      
+
+         <% if user_signed_in? %>
+            <% if current_user.admin? %>
+               <li class="nav-item">
+                  <%= link_to 'Saisons', saisons_path, class:"nav-link" %> 
+               </li>
+               <li class="nav-item">
+                  <%= link_to 'Divisions', divisions_path, class:"nav-link" %> 
+               </li>
+               <li class="nav-item">
+                 <%= link_to 'Equipes', equipes_path, class:"nav-link" %> 
+               </li>
+            <% end %>
+           
+            <li class="nav-item">
+               <%= link_to 'Circuits',
+               circuits_path, class:"nav-link" %> 
+            </li>
+            <li class="nav-item">
+               <%= link_to 'Events',
+               events_path, class:"nav-link" %> 
+            </li>
+            <li class="nav-item">
+               <%= link_to 'Pilotes',
+               pilotes_path, class:"nav-link" %> 
+            </li>       
+            <li class="nav-item">
+               <%= link_to 'Résultats',
+               resultats_path, class:"nav-link" %> 
+            </li>      
+               <li class="nav-item">
+               <%= link_to 'Classement Pilotes',
+               classements_path, class:"nav-link" %> 
+            </li> 
+            <li class="nav-item">
+               <%= link_to 'Classement Ecuries',
+               classecuries_path, class:"nav-link" %> 
+            </li>
+             <li class="nav-item">
+               <%= link_to 'Licences',
+               licences_path, class:"nav-link" %> 
+            </li>
+             <li class="nav-item">
+               <%= link_to 'Paris',
+               paris_path, class:"nav-link" %> 
+            </li>
+               <% if current_user.admin? %>
+                  <li class="nav-item">
+                     <%= link_to 'Admin', users_path, class:"nav-link text-warning" %>
+                  </li>
+               <% end %>
+                  <li class="nav-item">
+                     <%= link_to '', destroy_user_session_path, class:"nav-link fa-solid fa-xl fa-right-from-bracket", 
+                        'data-turbo-method': :delete %>
+                  </li>
+         <% else %>
+            <li class="nav-item">
+               <%= link_to 'Connexion',
+               new_user_session_path, class:"nav-link" %> 
+            </li>
+            <li class="nav-item">
+               <%= link_to 'Inscription',
+               new_user_registration_path, class:"nav-link" %> 
+            </li>
+         <% end %>
+    </ul>
+  </div>
+</nav>
+

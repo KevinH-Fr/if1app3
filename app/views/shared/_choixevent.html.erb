@@ -1,0 +1,37 @@
+      
+<%# btn choix saison %>
+  Choix saison |
+  <% @saisons.each do |saison| %>
+    <%= link_to "#{saison.nom}", url_for(saisonId: saison.id), class:"btn btn-sm btn-secondary", :method => :post %> 
+  <% end %>
+
+    <% if (@saisonId).present? %>
+      <hr/> 
+      <%# btn choix division %>
+      Choix division |
+        <% @divisions.each do |division| %>
+          <%= link_to "#{division.nom}", url_for(saisonId: @saisonId, divisionId: division.id), 
+                class:"btn btn-sm btn-dark", :method => :post %>   
+           
+        <% end %>
+
+          <% if (@divisionId).present? %>
+           
+              <hr/> 
+              <%# btn choix event %>
+              Choix event |
+              <% @eventsFiltres.order(:numero).each do |event| %>
+                <% if @saisonId = event.saison_id %>
+                  <% if @divisionId = event.division_id %>
+                    <% divGp = Division.find(event.division_id).numero %>
+                    <% saisonEvent = Saison.find(event.saison_id).nom %>
+                    <% @numGp = Event.find(event.id).numero %>
+                    <% nomPays = Circuit.find(event.circuit_id).pays %>
+                    <%= link_to "GP #{event.numero}"" - #{nomPays}", url_for(saisonId: @saisonId, divisionId: @divisionId, eventId: event.id, numGp: @numGp), 
+                          class:"btn btn-sm btn-primary", style:"margin: 2px", :method => :post %> 
+                 <% end %>
+              <% end %>
+          <% end %>
+    <% end %>
+  <% end %>
+<hr/> 

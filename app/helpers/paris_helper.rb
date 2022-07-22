@@ -1,0 +1,2 @@
+module ParisHelper
+end

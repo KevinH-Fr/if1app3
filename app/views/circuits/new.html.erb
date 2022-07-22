@@ -1,0 +1,14 @@
+ <% if user_signed_in? %>
+    <% if current_user.admin? %>
+
+    <h1>Nouveau circuit</h1>
+
+    <%= render "form", circuit: @circuit %>
+    <br>
+    <div>
+      <%= link_to "Retour circuits", circuits_path, class:"btn btn-secondary" %>
+    </div>
+  <% else %>
+    <br/> <strong>Vous n'avez pas les droits...</strong>
+  <% end %>
+<% end %>

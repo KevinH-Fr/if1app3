@@ -1,0 +1,25 @@
+<div id="<%= dom_id licence %>">
+  
+  <p>
+    <strong>Pilote:</strong>
+    <% piloteLie = licence.pilote_id %>
+    <%= Pilote.find(piloteLie).nom %>
+  </p>
+
+  <p>
+    <strong>Event:</strong>
+    <% eventLie = licence.event_id %>
+    <%= Event.find(eventLie).date %>
+  </p>
+
+<p>
+    <strong>Penalite:</strong>
+    <%= licence.penalite %>
+  </p>
+
+  <p>
+    <strong>Recupere:</strong>
+    <%= licence.recupere %>
+  </p>
+  
+</div>

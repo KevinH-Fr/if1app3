@@ -1,0 +1,57 @@
+
+
+<% divId = @divId %>
+<% @divId %>
+
+<table>
+  <tr>
+    <td>
+      <%= wicked_pdf_image_tag asset_url('/images/if1main.png'), style: "width: 200px; display: block", class: "img-fluid rounded" %> 
+    </td>
+    <td width="450">
+      <h1> Grille <%= Division.find(divId).nom %> </h1>
+    </td>
+  </tr>
+</table>
+
+
+<% if user_signed_in? %> 
+
+  <hr/> <br/>
+
+  <%# tableau datas %>
+
+  <table width="200" style="margin-left:auto;margin-right:auto">
+    <thead>
+      <tr>
+        <th>Pilote</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @pilotes.each do |pilote| %>
+            <tr>
+             <td>
+                  <div class="contenant">
+                    <% pilote.ecurie %>  
+                    <%= image_tag Equipe.find(pilote.ecurie).logo, style: "width: 400px; height: 40px; display: block", class: "img-fluid rounded" %>
+                      <div class="texte_centrer">
+                        <%= pilote.nom %>  
+                      </div>
+                  </div>
+                </td>
+            </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<br/>
+
+<%# bas de page depuis partial %>
+<%= render "shared/baspdf" %>
+
+<% else %>
+
+  <h3> Vous n'avez pas les droits...</h3>
+  
+<% end %>

@@ -1,0 +1,17 @@
+ <% if user_signed_in? %>
+  <% if current_user.admin? %>
+
+    <h1>Editer resultat</h1>
+
+    <%= render "form", resultat: @resultat %>
+    <br>
+
+    <div>
+      <%= link_to "", @resultat, class:"fa-solid fa-eye btn btn-primary" %> |
+      <%= link_to "", resultats_path, class:"fa-solid fa-arrow-rotate-left btn btn-secondary"  %>
+    </div>
+
+    <% else %>
+    <br/>   <strong>Vous n'avez pas les droits...</strong>
+  <% end %>
+<% end %>

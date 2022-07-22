@@ -1,0 +1,24 @@
+
+<% if current_user %>
+  
+    <%# partial accueil  %>
+    <%= render "home/accueil" %>
+
+    Hello <strong> <%= current_user.email %> </strong> ! <br/>
+    <p> Vous êtes connecté en tant que <strong><%= current_user.role %> </strong>. </p>
+    <p> Vous pouvez désormais parcourir l'application.</p>
+
+    <% if current_user.admin? %>
+      Il y a <strong> <%= User.count %> </strong> users dans le système.
+      <br/> <br/>
+    <% end %>
+
+<%= link_to "Déconnexion", destroy_user_session_path, 'data-turbo-method': :delete, class:"btn btn-outline-danger" %>
+
+<% else %>
+    <h1>Connexion</h1>
+    <p> Vous n'êtes pas connecté(e). </p>
+    <%= link_to "Se connecter", new_user_session_path, class:"btn btn-success" %>
+    <br/> <br/>
+    <%= link_to "Créer un compte", new_user_registration_path, class:"btn btn-warning" %>
+<% end %>

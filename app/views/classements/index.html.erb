@@ -1,0 +1,68 @@
+
+<% if user_signed_in? %>
+  <h1>Classements Pilotes</h1>  <br/>
+
+  <%= render "shared/choixevent" %>
+
+
+  <% if (@eventId).present? %>
+
+    <%# tempo test val max %>
+    
+  <% @numGp = Event.find(@eventId).numero   %>
+
+
+    
+    <%= render "shared/eventactif" %>
+
+    <%# boutons crea classement %>
+
+    <%= link_to "Créer classement", toggle_creerclassements_classement_path(@eventId), class:"btn btn-warning", style:"margin: 2px"  %>
+    <%= link_to "Update classement", toggle_updateclassements_classement_path(@eventId), class:"btn btn-primary", style:"margin: 2px" %>
+    <%= link_to "Supprimer classement", toggle_supprimerclassements_classement_path(@eventId), class:"btn btn-danger", style:"margin: 2px"%>
+
+   <%= link_to "Trier classement", toggle_triclassements_classement_path(@eventId), class:"btn btn-secondary", style:"margin: 2px"%>
+ 
+   <br><br>
+
+
+    <%#= max points : <%= Classement.saison_courant(@saisonId).division_courant(@divisionId).numero_until_courant(@numGp).max_points.score.to_i %>
+    
+    <%#= tableau data classement %>
+
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th style="text-align: center;">#</th>
+          <th>Pilote</th>
+          <th style="text-align: center;">total</th>
+          <th> cote victoire</th>
+          <th> cote podium </th>
+          <th> cote top10 </th>
+
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <% @classements.order(:score).reverse.each do | classement | %>
+            <td>  <%= classement.position %></td>
+            <td> <%= Pilote.find(classement.pilote_id).nom %>  </td>
+            <td>  <%= classement.score %>  </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <br/> <hr/>
+        
+    <%# PDF event actif %>
+    <% numGp = Event.find(@eventId).numero %>
+    <%= link_to "PDF",  classements_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp, format: :pdf), class:"btn btn-dark" %>
+
+   <% end %>
+
+<% else %>
+  <br/>   <strong>Vous n'avez pas les droits...</strong>
+<% end %>
+

@@ -1,0 +1,63 @@
+<%= form_with(model: pilote) do |form| %>
+  <% if pilote.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(pilote.errors.count, "error") %> prohibited this pilote from being saved:</h2>
+
+      <ul>
+        <% pilote.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :nom, style: "display: block" %>
+    <%= form.text_field :nom %>
+  </div>
+
+  <br/>
+
+  <div>
+    <%= form.label :statut, style: "display: block" %>
+    <%= form.select :statut, ['actif', 'inactif']%>
+  </div>
+
+  <br/>
+
+  <div>
+  <p>
+    <%= form.label :ecurie, style: "display: block" %>
+    <%= form.select(:ecurie, options_from_collection_for_select(
+                  @equipe,'id', 'nom', 
+                 :selected => form.object.ecurie), 
+                 :include_blank => true )%>
+
+ </p>
+  
+ <%# si pas d'ecurie selectionnée, image blank, sinon logo ecurie %>
+    <% if pilote.ecurie.blank?%>
+      <%= image_tag 'no-image.png', alt: 'icon', width: '200' %>
+    <% else %>
+      <%= image_tag Equipe.find(@pilote.ecurie).logo, style: "width: 400px; display: block", class: "img-fluid rounded" %> 
+    <% end %>
+    
+
+  </div>
+
+  <br/>
+  
+  <div>
+    <%= form.label :division, style: "display: block" %>
+    <%= form.select(:division_id, options_from_collection_for_select(
+                  @division,'id', 'nom', 
+                 :selected => form.object.division_id), 
+                 :include_blank => true )%>
+  </div>
+ 
+  <br/>
+ 
+  <div>
+    <%= form.submit "Valider", class:"btn btn-success" %>
+  </div>
+<% end %>

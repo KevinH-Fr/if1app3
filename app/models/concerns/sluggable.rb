@@ -1,0 +1,4 @@
+module Sluggable
+
+    
+end

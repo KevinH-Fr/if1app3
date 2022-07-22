@@ -1,0 +1,63 @@
+<h1>Classements Ecuries </h1>
+
+<%= render "shared/choixevent" %>
+
+  <%# entete event %>
+  <%# @eventId %>
+
+ <% if (@eventId).present? %>
+
+   <%= render "shared/eventactif" %>
+    
+   <%#= tableau data classement %>
+
+   <table class="table table-striped table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th style="text-align: center;">#</th>
+        <th>Ecurie</th>
+        <th style="text-align: center;">total</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <% @resultatsFiltres.each_with_index do | res, i| %>
+          <td style="text-align: center;">
+              <strong>  
+                <%= (i+1) %>
+              </strong> 
+          </td>
+          <td style="text-align: center;">
+           <div class="contenant">
+              <% equipeId = res[0] %>  
+              <% nomEcurie = Equipe.find(res[0]).nom %> 
+              <%= image_tag Equipe.find(equipeId).logo, style: "width: 200px; display: block", class: "img-fluid rounded" %>
+                <div class="texte_centrer">
+                  <%= nomEcurie %> 
+                </div>
+            </div>
+          </td>
+          <td style="text-align: center;">
+            <strong>
+              <%= number_with_precision(res[1], precision: 0) %>
+            </strong>
+          </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+
+
+ <br/> <hr/>
+      
+  <%# PDF event actif %>
+   
+  <% numGp = Event.find(@eventId).numero %>
+  <%= link_to "PDF",  classecuries_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp, format: :pdf), class:"btn btn-dark" %>
+
+
+   <% end %>
+
+

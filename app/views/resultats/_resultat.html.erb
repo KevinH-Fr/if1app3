@@ -1,0 +1,55 @@
+<div id="<%= dom_id resultat %>">
+  <p>
+    <strong>Event:</strong>
+    <%= resultat.event_id %>
+  </p>
+
+  <p>
+    <strong>Pilote:</strong>
+    <% resultat.pilote_id %>
+    <%= @pilote = Pilote.find(@resultat.pilote_id).nom %> 
+  </p>
+
+  <p>
+    <strong>Ecurie:</strong>
+      <%= resultat.ecurie %> 
+  </p>
+
+  <p>
+    <strong>Qualification:</strong>
+    <%= resultat.qualification %>
+  </p>
+
+  <p>
+    <strong>Course:</strong>
+    <%= resultat.course %>
+  </p>
+
+  <p>
+    <strong>DOTD:</strong>
+    <% resultat.dotd %>  
+      <% if resultat.dotd == true %>
+          <i class="fa-solid fa-circle-check fa-xl" style="color:green"></i>
+      <% else %>
+          <i class="fa-solid fa-circle-xmark fa-xl" style="color:red"></i>
+      <% end %>
+  </p>
+  <p>
+    <strong>MeilleurTour:</strong>
+     <% resultat.mt %> 
+        <% if resultat.mt == true %>
+           <i class="fa-solid fa-circle-check fa-xl" style="color:green"></i>
+        <% else %>
+           <i class="fa-solid fa-circle-xmark fa-xl" style="color:red"></i>
+        <% end %>   
+  </p>
+
+  <p>
+    <strong>Score:</strong>
+
+    <%= resultat.score  %> points
+
+  </p>
+
+</div>
+

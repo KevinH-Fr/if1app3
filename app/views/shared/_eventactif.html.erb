@@ -1,0 +1,50 @@
+  <%# afficher les détails de l'event selectionné %>
+  
+  <table width="100%">
+            <thead>
+              <tr>
+                <th class="enteteGp">N°</th>
+                <th class="enteteGp">Date</th>
+                <th class="enteteGp">Pays</th>
+                <th class="enteteGp">Drapeau</th>
+                <th class="enteteGp">Carte</th>
+                <th class="enteteGp">Division</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr>
+                <td>
+                    <%= Event.find(@eventId).numero %>
+                </td>
+                <td>
+                  <% if Event.find(@eventId).date.present? %>
+                    <% datetime = Event.find(@eventId).date.to_date %>
+                    <%= datetime.strftime("%d/%m/%y") %>
+                  <% end %>
+                </td>
+                <td>
+                      <% circuitId = Event.find(@eventId).circuit_id %> 
+                      <%= Circuit.find(circuitId).pays %>
+                </td>
+                <td>
+                  <% if (Circuit.find(circuitId).drapeau).blank? %>
+                  <% else %>
+                    <%= image_tag(Circuit.find(circuitId).drapeau, style: "width: 50px; display: block", class: "img-fluid rounded") %> 
+                  <% end %>
+                </td>
+                <td>
+                  <% if (Circuit.find(circuitId).carte).blank? %>
+                  <% else %>
+                      <%= image_tag(Circuit.find(circuitId).carte, style: "width: 50px; display: block", class: "img-fluid rounded") %>  
+                  <% end %>
+                </td>
+                <td>
+                    <% divisionId = Event.find(@eventId).division_id %> 
+                    <%= Division.find(divisionId).nom %>
+                </td>
+              </tr>
+          </tbody>
+        </table>
+
+        <hr/>

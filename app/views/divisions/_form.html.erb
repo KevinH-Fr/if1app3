@@ -1,0 +1,29 @@
+<%= form_with(model: division) do |form| %>
+  <% if division.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(division.errors.count, "error") %> prohibited this division from being saved:</h2>
+
+      <ul>
+        <% division.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :nom, style: "display: block" %>
+    <%= form.text_field :nom %>
+  </div>
+
+  <div>
+    <%= form.label :numero, style: "display: block" %>
+    <%= form.number_field :numero %>
+  </div>
+
+ <br/>
+ 
+  <div>
+    <%= form.submit "Valider", class:"btn btn-success" %>
+  </div>
+<% end %>

@@ -1,0 +1,57 @@
+
+<br/>
+<h1> Classement Pilotes </h1>
+<br/>
+
+<%# haut de page depuis partial %>
+<%= render "shared/hautpdf" %>
+
+<%#= tableau data classement %>
+
+ <% if (@eventId).blank? %>
+ <% else %>
+  <% eventNum = Event.find(@eventId).numero %>
+    
+      <table style="margin-left:auto;margin-right:auto">
+        <thead class="table-dark">
+          <tr>
+            <th>#</th>
+            <th>Pilote</th>
+            <th>Points</th>
+          </tr>
+        </thead>
+
+          <tbody>
+            <tr>
+              <% @resultatsFiltres.each_with_index do | res, i| %>
+                <td class="cols_pos_score" >
+                    <strong>  
+                      <%= (i+1) %>
+                    </strong> 
+                </td>
+               <td>
+                <div class="contenant">
+                    <% equipeId = Pilote.find(res[0]).ecurie %>  
+                    <% nomPilote = Pilote.find(res[0]).nom %> 
+                    <%= image_tag Equipe.find(equipeId).logo, style: "width: 340px; display: block", class: "img-fluid rounded" %>
+                      <div class="texte_centrer">
+                        <%= nomPilote %> 
+                      </div>
+                  </div>
+                </td>
+                <td class="cols_pos_score">
+                  <strong>
+                    <%= number_with_precision(res[1], precision: 0) %>
+                  </strong>
+                </td>
+            </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <br/>
+
+<%# bas de page depuis partial %>
+<%= render "shared/baspdf" %>
+
+<% end %>

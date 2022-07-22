@@ -1,0 +1,72 @@
+
+<% @users = User.all %>
+<% @admins = User.all.where(role: 2) %>
+
+<br/>
+
+<h2> Liste des admins </h2>
+<strong> Nombre: <%= @admins.count %> </strong>
+
+ <div class="table-responsive">
+   <table  class="table table-striped table-bordered table-hover">  
+    <thead class="table-dark">
+      <tr>
+        <th> # </th>
+        <th> email </th>
+       
+      </tr>
+    </thead>
+    <tbody>
+      <% @admins.each do |admin| %>
+        <tr>
+            <td> <%= admin.id %>    </td>
+            <td> <%= admin.email %> </td>
+           
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+ </div>
+
+<br/> <hr/> <br/>
+
+<h2> Liste des membres </h2>
+<strong> Nombre: <%= @users.count %> </strong>
+
+ <div class="table-responsive">
+   <table  class="table table-striped table-bordered table-hover">  
+    <thead class="table-dark">
+      <tr>
+        <th> # </th>
+        <th> email </th>
+        <th> Action </th>
+    
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+            <td> <%= user.id %>    </td>
+            <td> <%= user.email %> </td>
+
+
+            <td> 
+              <% "changer statut" %>
+            
+              <%= link_to "Passer Admin",  edit_user_path(user), class:"btn btn-dark" %>
+
+             
+   
+            </td>
+
+
+             
+
+
+
+          
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+ </div>

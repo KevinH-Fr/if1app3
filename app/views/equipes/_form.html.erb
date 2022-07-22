@@ -1,0 +1,35 @@
+<%= form_with(model: equipe) do |form| %>
+  <% if equipe.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(equipe.errors.count, "error") %> prohibited this equipe from being saved:</h2>
+
+      <ul>
+        <% equipe.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :nom, style: "display: block" %>
+    <%= form.text_field :nom %>
+      <br/><br/>
+  </div>
+
+  <div class="field">
+    <%= form.label :logo %>
+    <%= form.file_field :logo %>
+  </div>
+
+
+  <div class="field">
+    <%= form.label :voiture %>
+    <%= form.file_field :voiture %>
+  </div>
+
+  <div>
+    <br/>
+     <%= form.submit "Valider", class:"btn btn-success" %>
+  </div>
+<% end %>

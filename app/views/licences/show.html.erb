@@ -1,0 +1,11 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @licence %>
+
+<div>
+    <%= link_to "", edit_licence_path(@licence), class:"fa-regular fa-pen-to-square btn btn-primary" %> |
+    <%= link_to "", licences_path, class:"fa-solid fa-arrow-rotate-left btn btn-secondary" %> 
+
+    <br/> <hr/>
+    <%= button_to "", @licence, class:"fa-solid fa-trash-can btn btn-danger", method: :delete %>
+</div>

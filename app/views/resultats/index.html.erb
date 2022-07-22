@@ -1,0 +1,106 @@
+
+<% if user_signed_in? %>
+    <h1>Resultats</h1>
+
+   <%= render "shared/choixevent" %>
+
+      <% if current_user.admin? %>
+          <%= link_to "Nouveau résultat", new_resultat_path, class:"btn btn-primary" %>
+          <br/><br/>
+      <% end %>
+
+    <% if (@eventId).present? %>
+        
+      <%= render "shared/eventactif" %>
+      
+      <%# tableau datas %>
+      <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover">
+          <thead class="table-dark">
+            <tr>
+            <%#   <th>Event</th> %>
+            <%#  <th>Pays</th> %>
+              <th>Pilote</th>
+              <th>Ecurie</th>
+              <th>Qualification</th>
+              <th>Course</th>
+              <th>DOTD</th>
+              <th>MT</th>
+              <th>Score</th>
+
+              <th colspan="3">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @resultatsFiltres.each do |res| %>
+              <tr>
+                <td>  
+                    <% idPilote = res.pilote_id %> 
+                    <% nomPilote = Pilote.find(idPilote).nom %> 
+                    <%= nomPilote %>
+                </td> 
+                <td> 
+                  <% idEcurie = res.ecurie %>  
+                  <% nomEcurie = Equipe.find(idEcurie).nom %> 
+                  <%= nomEcurie %>
+                  <% if Equipe.find(idEcurie).logo.present? %>
+                      <%= image_tag Equipe.find(idEcurie).logo, style: "width: 300px; display: block", class: "img-fluid rounded" %>
+                  <% end %>
+                </td>
+
+              <td class="col_centree"><%= res.qualification %>  </td>
+              <td class="col_centree"> <%= res.course %>    </td>
+
+                <td> 
+                      <% if res.dotd == true %>
+                        <i class="fa-solid fa-circle-check fa-xl" style="color:green"></i>
+                      <% else %>
+                        <i class="fa-solid fa-circle-xmark fa-xl" style="color:red"></i>
+                      <% end %>
+                    </td>
+                    
+                    <td> 
+                      <% if res.mt == true %>
+                        <i class="fa-solid fa-circle-check fa-xl" style="color:green"></i>
+                      <% else %>
+                        <i class="fa-solid fa-circle-xmark fa-xl" style="color:red"></i>
+                      <% end %>   
+                    </td>
+
+                    <%#= points %>
+                   <td class="col_centree"> <%= res.score.to_i %>    </td>
+
+                      <%#= actions %>
+                      <td class="col_actions">
+                          <%= link_to '', res, class:"fa-solid fa-eye btn btn-primary" %> 
+                      </td>
+                          <% if current_user.admin? %>
+                              <td class="col_actions">
+                                <%= link_to "", edit_resultat_path(res), class:"fa-regular fa-pen-to-square btn btn-warning" %> 
+                              </td> 
+                              <td class="col_actions">
+                                <%= button_to '', res, class:"fa-solid fa-trash-can btn btn-danger", method: :delete, :onclick => "return confirm('Sûr ?')" %>
+                              </td> 
+                          <% end %>
+              </tr>
+            <% end %> 
+          </tbody>  
+        
+        </table>
+      </div>
+      
+      <hr/>
+
+      <%# PDF event actif %>
+    
+      <% numGp = Event.find(@eventId).numero %>
+      <%= link_to "PDF",  resultats_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp, format: :pdf), class:"btn btn-dark" %>
+
+    <% end %>
+
+<% else  %>
+       <br/>   <strong>Vous n'avez pas les droits...</strong>
+<% end %>
+
+
+

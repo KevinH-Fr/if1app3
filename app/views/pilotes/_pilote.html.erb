@@ -1,0 +1,35 @@
+<div id="<%= dom_id pilote %>">
+  <p>
+    <strong>Nom:</strong>
+    <%= pilote.nom %>
+  </p>
+  <br/>
+  <p>
+    <strong>Statut:</strong>
+    <%= pilote.statut %>
+  </p>
+  <br/>
+   <% pilote.ecurie %>
+
+  <p>
+    <strong>Ecurie:</strong>
+   <%=  @equipe = Equipe.find(@pilote.ecurie).nom %> 
+
+ <%# si pas d'ecurie selectionnée, image blank, sinon logo ecurie %>
+    <% if pilote.ecurie.blank?%>
+      <%= image_tag 'no-image.png', alt: 'icon', width: '200' %>
+    <% else %>
+      <%= image_tag Equipe.find(@pilote.ecurie).logo, style: "width: 400px; display: block", class: "img-fluid rounded" %> 
+    <% end %>
+
+  </p>
+ <br/>
+  <p>
+    <strong>Division:</strong>
+    <% divisionLiee =pilote.division_id %>
+    <%= Division.find(divisionLiee).nom %>
+
+  </p>
+
+</div>
+

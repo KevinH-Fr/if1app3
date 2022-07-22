@@ -1,0 +1,86 @@
+/*
+
+ *= require_self
+ */
+
+
+ /* format des champs : */
+
+ .green {
+    color: green;
+    font-weight: bold;
+}
+
+.red {
+    color: red;
+    font-weight: bold;
+}
+
+.darkred {
+    color: rgb(107, 9, 9);
+    font-weight: bold;
+}
+
+.blue {
+    color: rgb(12, 12, 155);
+    font-weight: bold;
+}
+
+@font-face {
+  font-family: 'F1regular';
+  src: url('Formula1-Regular_web_0.ttf');
+}
+
+body {
+  font-family: "F1regular";
+  font-size: small;
+}
+
+textarea {
+  width: 100%;
+  min-height: 70px;
+  min-width: 80%;
+  display: block;
+  border: 0px solid #BBB;
+  color: #444;
+  font-size: medium;
+}
+
+th, td {
+   text-align: left;
+   font-weight: bold;
+ /*  max-width: 50px; */
+}
+
+.bouton {
+  font-size: xx-small;
+}
+.col_actions {
+ /* max-width: 60px; */
+}
+
+.col_centree{
+  text-align: center;
+}
+.col_green{
+  text-decoration: underline;
+  text-align: center;
+  color: rgb(17, 231, 17);
+  font: rgb(128, 26, 0);
+}
+.col_centree_red{
+  text-align: center;
+  font: rgb(150, 7, 7);
+}
+
+.enteteGp{
+  text-decoration: underline;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0px;
+ /* width: 100%; */
+  font-size: xx-small;
+  color: grey;
+}
