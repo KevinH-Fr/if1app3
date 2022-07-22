@@ -31,6 +31,19 @@ scope :sum_by_pilote, -> { sum('score') }
 scope :order_by_sum, -> { order('score').reverse }
 scope :sum_order_score, -> { select('pilote_id, score, SUM(score) AS total')}
 
+
+scope :compte_p1, -> { where("(course) = 1").count}
+scope :compte_p2, -> { where("(course) = 2").count}
+scope :compte_p3, -> { where("(course) = 3").count}
+scope :compte_p4, -> { where("(course) = 4").count}
+scope :compte_p5, -> { where("(course) = 5").count}
+
+
+scope :order_score_positions, -> {order('score') }
+
+
+
+
 # utilisée
 scope :group_sum_order, -> { select('pilote_id, SUM(score) AS total').group('pilote_id').order('total').reverse }
   

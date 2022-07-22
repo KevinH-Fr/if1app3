@@ -36,16 +36,13 @@
           <th style="text-align: center;">#</th>
           <th>Pilote</th>
           <th style="text-align: center;">total</th>
-          <th> cote victoire</th>
-          <th> cote podium </th>
-          <th> cote top10 </th>
 
         </tr>
       </thead>
 
       <tbody>
         <tr>
-          <% @classements.order(:score).reverse.each do | classement | %>
+        <% @classements.each do | classement | %>
             <td>  <%= classement.position %></td>
             <td> <%= Pilote.find(classement.pilote_id).nom %>  </td>
             <td>  <%= classement.score %>  </td>
