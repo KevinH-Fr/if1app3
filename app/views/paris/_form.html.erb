@@ -56,11 +56,11 @@
      
                  <%# val solde parieur %> 
          <% parieurId = form.object.parieur_id %>
-         <% if parieurId.present?%>
-           <% parieurSolde =  Pari.saison_courant(@saisonId).division_courant( @divisionId).numero_until_courant(@eventNum).pilote_courant(parieurId).sum_parieur.first.total %>
+         <%# if parieurId.present?%>
+           <%# parieurSolde =  Pari.saison_courant(@saisonId).division_courant( @divisionId).numero_until_courant(@eventNum).pilote_courant(parieurId).sum_parieur.first.total %>
        
-           <div> solde dispo parieur | <strong>  <%= parieurSolde %> </strong>  </div>
-         <% end %>  
+           <div> solde dispo parieur | <strong>  <%#= parieurSolde %> </strong>  </div>
+         <%# end %>  
         <%#= form.text_field :montant, value: parieurSolde %>
 
 
