@@ -30,6 +30,16 @@ class ParisController < ApplicationController
       @coureur = Pilote.statut_actif.division_courant(@divisionId).all
       @parieur = Pilote.statut_actif.division_non_courant(@divisionId).all
 
+      
+    respond_to do |format|
+      format.html
+      format.pdf do
+
+       render pdf: "resultats", template: "paris/liste", formats: [:html], layout: "pdf"
+      end
+    end
+
+
     else
       
     end
@@ -114,21 +124,17 @@ class ParisController < ApplicationController
       typePari = pari.paritype
       resultatCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.course
 
-      if typePari == "victoire" && resultatCoureur == 1
-          pari.update(resultat: true)
-      else
-        if typePari == "podium" && resultatCoureur <= 3
-          pari.update(resultat: true)
-        else
-          if typePari == "top10" && resultatCoureur <= 10
-            pari.update(resultat: true)
-          else
-            pari.update(resultat: false)
-          end
-        end
-      end
+      pariMontant = pari.montant
+      pariCote = pari.valcote
 
-      
+      if typePari == "victoire" && resultatCoureur == 1 || typePari == "podium" && resultatCoureur <= 3 || typePari == "top10" && resultatCoureur <= 10
+
+          pari.update(resultat: true)
+          pari.update(solde: pariMontant * pariCote - pariMontant )
+        else
+          pari.update(resultat: false)
+          pari.update(solde: - pariMontant )
+        end
 
     end  
     
@@ -145,6 +151,6 @@ class ParisController < ApplicationController
 
     def pari_params
       
-      params.fetch(:pari, {}).permit(:montant, :cote, :resultat, :solde, :event_id, :parieur_id, :coureur_id, :paritype)
+      params.fetch(:pari, {}).permit(:montant, :valcote, :resultat, :solde, :event_id, :parieur_id, :coureur_id, :paritype)
     end
 end

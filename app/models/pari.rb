@@ -27,25 +27,25 @@ class Pari < ApplicationRecord
 
 #    validate :verif_montant
 
-    def verif_montant
+    #def verif_montant
 
-      eventId = event_id # recupere l'id event du record pari courant (s'applique a chaque record)
-      divisionId = Event.find(eventId).division_id
-      saisonId = Event.find(eventId).saison_id
-      eventNum = Event.find(eventId).numero 
+  #    eventId = event_id # recupere l'id event du record pari courant (s'applique a chaque record)
+  #    divisionId = Event.find(eventId).division_id
+  #    saisonId = Event.find(eventId).saison_id
+  #    eventNum = Event.find(eventId).numero 
 
      # soldeParieurAvant = Pari.saison_courant(saisonId).division_courant(divisionId).numero_until_courant(eventNum).pilote_courant(self.parieur_id).sum_parieur.first.total
 
-      if soldeParieurAvant.present?
-        if soldeParieurAvant - montant < 0 
-          errors.add(:montant, "insuffisant, impossible de miser plus que votre solde de points.")
-        end
-      else
-        if 1000 - montant < 0 
-          errors.add(:montant, "insuffisant, impossible de miser plus que votre solde de points.")
-        end
-      end
-    end
+     # if soldeParieurAvant.present?
+     #   if soldeParieurAvant - montant < 0 
+     #     errors.add(:montant, "insuffisant, impossible de miser plus que votre solde de points.")
+     #   end
+     # else
+     #   if 1000 - montant < 0 
+     #     errors.add(:montant, "insuffisant, impossible de miser plus que votre solde de points.")
+     #   end
+     # end
+    #end
 
 
 
@@ -56,6 +56,7 @@ class Pari < ApplicationRecord
     def set_default_montant
       self.montant ||= 0
     end
+
 
     def set_default_cote
         self.cote ||= 0
