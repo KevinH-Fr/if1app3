@@ -22,6 +22,7 @@
       <br>
 
        <div>
+       
 
      <%# @parieurId = Pilote.where(user_id: current_user.id).first.id %>
         <%= form.label :parieur, style: "display: block" %>
@@ -54,15 +55,12 @@
             <% @saisonId = Event.find(@eventId).saison_id %>
           <% end %>
      
+     
     </div>
   <% end %>
 
-     <div>
-                
-                 test val solde parieur <%= Pari.division_courant(1).division_courant(1).numero_until_courant(1).pilote_courant(1).sum(:solde) %>
 
-          </div>
-          
+
 
   <div data-controller="form-element">
     <%= form.button "Validate", formaction: new_pari_path, 
@@ -113,7 +111,7 @@
                 <div> gains possibles | <strong>  <%= @valCote * form.object.montant %> </strong>  </div>
                 <div> montant parié  | <strong>  <%=  form.object.montant %> </strong>  </div>
 
-              
+
                 
                 <br>
           <% end %>
