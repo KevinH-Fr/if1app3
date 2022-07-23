@@ -52,7 +52,7 @@ class Pari < ApplicationRecord
 
 
 
-    after_initialize :set_default_montant, :set_default_cote, :if => :new_record?
+    after_initialize :set_default_montant, :set_default_cote, :set_default_resultat, :if => :new_record?
     def set_default_montant
       self.montant ||= 0
     end
@@ -62,4 +62,7 @@ class Pari < ApplicationRecord
         self.cote ||= 0
       end
 
+      def set_default_resultat
+        self.resultat ||= false
+      end
 end

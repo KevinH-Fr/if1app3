@@ -138,38 +138,9 @@
 
 
 
- <div data-controller="form-element">
-    <%= form.button "Validate", formaction: new_pari_path, 
-        formmethod: :get, data: {turbo_frame: :solde_field, 
-        form_element_target: "submitbtn"} %>
-    <div>
-      <%#= form.label :resultat, style: "display: block" %>
-      <%#= form.check_box :resultat, {data: { action: "change->form-element#remotesubmit"}} %>
-
-     
-
-      <%# valCB = form.object.resultat %>
-      <%#= valCB %>
-    </div>
-  </div>
 
 
- <%#= turbo_frame_tag :solde_field do %>
-  <%# repasser les variables montantpari et valcote pour recalculer en cas de changement ? %>
-  
-  <div>
-  
 
-    <%# if form.object.resultat == true %>
-      <%# valSolde =  @montantPari * @valCote %>
-    <%# else %>
-        
-      <%# valSolde = - form.object.montant  %>
-    <%# end %>  
-      <%#= form.label :solde, style: "display: block" %>
-      <%#= form.number_field :solde, value: valSolde %>
-  </div>
-<%# end %>  
 
 
   <br/>
