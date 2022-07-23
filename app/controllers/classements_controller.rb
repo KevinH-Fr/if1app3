@@ -96,7 +96,7 @@ def toggle_updateclassements
   @numGp = Event.find(@eventId).numero 
 
 
-  @classementsEvent = Classement.all.where(event_id: @eventId).order(:score).reverse
+  @classementsEvent = Classement.all.where(event_id: @eventId).order_score_positions
   
     @classementsEvent.each do |classement|
       @piloteId = classement.pilote_id
@@ -121,9 +121,9 @@ def toggle_triclassements
 
   max_points = Classement.saison_courant(@saisonId).division_courant(@divisionId).numero_until_courant(@numGp).max_points.score.to_i
 
-  @classementsEvent = Classement.all.where(event_id: @eventId).order(:score).reverse
+  @classementsEvent = Classement.all.where(event_id: @eventId).order_score_positions
 
-    @classementsEvent.each_with_index do |classement, i|
+    @classementsEvent.order_score_positions.each_with_index do |classement, i|
       i = i + 1
       valPosition = i 
       valScore = classement.score

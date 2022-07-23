@@ -42,7 +42,7 @@
 
       <tbody>
         <tr>
-        <% @classements.order(:score).reverse.each do | classement | %>
+        <% @classements.order(:position).each do | classement | %>
             <td>  <%= classement.position %></td>
             <td> <%= Pilote.find(classement.pilote_id).nom %>  </td>
             <td>  <%= classement.score %>  </td>
