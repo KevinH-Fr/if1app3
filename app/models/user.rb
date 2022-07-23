@@ -11,6 +11,9 @@ class User < ApplicationRecord
   end
 
 
+  def full_name
+    "#{id} | #{email}"
+ end
 
 
 end

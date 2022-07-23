@@ -4,6 +4,7 @@
     <%= pilote.nom %>
   </p>
   <br/>
+
   <p>
     <strong>Statut:</strong>
     <%= pilote.statut %>
@@ -30,6 +31,12 @@
     <%= Division.find(divisionLiee).nom %>
 
   </p>
+
+   <p>
+    <strong>User lié:</strong>
+     <%= User.find(pilote.user_id).full_name if pilote.user_id.present? %>
+  </p>
+  <br/>
 
 </div>
 

@@ -55,6 +55,18 @@
                  :include_blank => true )%>
   </div>
  
+ <br>
+
+  <%# user associé %>
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.select(:user_id, options_from_collection_for_select(
+                  @user, :id, :full_name, 
+                 :selected => form.object.user_id), 
+                 :include_blank => true )%>
+  </div>
+
+
   <br/>
  
   <div>
