@@ -23,7 +23,7 @@
 
           <tbody>
             <tr>
-              <% @resultatsFiltres.each_with_index do | res, i| %>
+              <% @classements.limit(20).order(:score).reverse.each_with_index do | classement, i| %>
                 <td class="cols_pos_score" >
                     <strong>  
                       <%= (i+1) %>
@@ -31,8 +31,8 @@
                 </td>
                <td>
                 <div class="contenant">
-                    <% equipeId = Pilote.find(res[0]).ecurie %>  
-                    <% nomPilote = Pilote.find(res[0]).nom %> 
+                    <% equipeId = Pilote.find(classement.pilote_id).ecurie %>  
+                    <% nomPilote = Pilote.find(classement.pilote_id).nom %> 
                     <%= image_tag Equipe.find(equipeId).logo, style: "width: 340px; display: block", class: "img-fluid rounded" %>
                       <div class="texte_centrer">
                         <%= nomPilote %> 
@@ -41,7 +41,7 @@
                 </td>
                 <td class="cols_pos_score">
                   <strong>
-                    <%= number_with_precision(res[1], precision: 0) %>
+                    <%= number_with_precision(classement.score, precision: 0) %>
                   </strong>
                 </td>
             </tr>
@@ -55,3 +55,5 @@
 <%= render "shared/baspdf" %>
 
 <% end %>
+
+
