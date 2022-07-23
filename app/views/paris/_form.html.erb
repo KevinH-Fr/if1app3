@@ -57,6 +57,12 @@
     </div>
   <% end %>
 
+     <div>
+                
+                 test val solde parieur <%= Pari.division_courant(1).division_courant(1).numero_until_courant(1).pilote_courant(1).sum(:solde) %>
+
+          </div>
+          
 
   <div data-controller="form-element">
     <%= form.button "Validate", formaction: new_pari_path, 
@@ -106,6 +112,9 @@
                 <div> cote retenue | <strong>  <%= @valCote %> </strong>  </div>
                 <div> gains possibles | <strong>  <%= @valCote * form.object.montant %> </strong>  </div>
                 <div> montant parié  | <strong>  <%=  form.object.montant %> </strong>  </div>
+
+              
+                
                 <br>
           <% end %>
         <% end %>
@@ -114,8 +123,16 @@
         <%= form.text_field :cote, value: @valCote %>
         <br>
         <%= form.number_field :solde, value: - form.object.montant  %>
+
+     
+
+
     </div>
   <% end %>
+
+
+<br>
+
 
 
 

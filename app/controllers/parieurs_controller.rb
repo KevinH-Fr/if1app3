@@ -27,9 +27,9 @@ class ParieursController < ApplicationController
           @divisionId = Event.find(@eventId).division_id 
           @saisonId = Event.find(@eventId).saison_id
   
-          # modifier formuler pour que ca fonctionne avec pg
-        #  @parisEvent = Pari.saison_courant(@saisonId).division_courant(@divisionId).numero_until_courant(@eventNum).group_sum_order
-        @parisEvent = Pari.all
+         # modifier formuler pour que ca fonctionne avec pg
+          @parisEvent = Pari.saison_courant(@saisonId).division_courant(@divisionId).numero_until_courant(@eventNum).group_sum_order
+       # @parisEvent = Pari.all.where()
            
       respond_to do |format|
         format.html

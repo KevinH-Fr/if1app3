@@ -102,10 +102,16 @@ class ParisController < ApplicationController
   end
 
   def destroy
+
     @pari.destroy
 
+    eventId = params[:id]
+    divisionId = Event.find(eventId).division_id
+    saisonId = Event.find(eventId).saison_id
+    
+
     respond_to do |format|
-      format.html { redirect_to paris_url, notice: "Pari was successfully destroyed." }
+      format.html { redirect_to paris_url(saisonId: saisonId, eventId: eventId, divisionId: divisionId), notice: "Pari was successfully destroyed." }
       format.json { head :no_content }
     end
   end

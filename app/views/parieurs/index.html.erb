@@ -26,8 +26,8 @@
           <% @parisEvent.each_with_index do | pari, i | %> 
            <tr>
              <td> <%= i + 1 %>  </td>
-             <td> <%= pari.parieur.nom %> </td>
-             <td> <%#= @valDepart + pari.total %> </td>
+             <td> <%= Pilote.find(pari[0]).nom %> </td>
+             <td> <%= 1000 + pari[1] %> </td>
             
           </tr>
          <% end %>
