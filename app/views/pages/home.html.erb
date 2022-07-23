@@ -4,8 +4,15 @@
     <%# partial accueil  %>
     <%= render "home/accueil" %>
 
-    Hello <strong> <%= current_user.email %> </strong> ! <br/>
-    <p> Vous êtes connecté en tant que <strong><%= current_user.role %> </strong>. </p>
+    Hello <strong> <%= current_user.email %> </strong> ! <br/> <br>
+    <div> Vous êtes connecté en tant que <strong><%= current_user.role %> </strong>. </div>
+
+    <% if Pilote.where(user_id: current_user.id).first.nom.present? %>
+      <div> Votre compte est associé au pilote :    
+      <strong> <%= Pilote.where(user_id: current_user.id).first.nom %> </strong>. </div> <br>
+    <% end %>
+
+    
     <p> Vous pouvez désormais parcourir l'application.</p>
 
     <% if current_user.admin? %>

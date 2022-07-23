@@ -24,13 +24,15 @@
        <div>
        
 
-     <%# @parieurId = Pilote.where(user_id: current_user.id).first.id %>
-        <%= form.label :parieur, style: "display: block" %>
-        <%= form.select(:parieur_id, options_from_collection_for_select(
+     <% @parieurId = Pilote.where(user_id: current_user.id).first.id %>
+        <% form.label :parieur, style: "display: block" %>
+        <%#= form.select(:parieur_id, options_from_collection_for_select(
                       @parieur,'id', 'nom', 
                     :selected => @parieur), 
                     :include_blank => true) %>
-       <%#= form.hidden_field(:parieur_id, value: @parieurId) %>           
+
+       <%= form.hidden_field(:parieur_id, value: @parieurId) %>        
+          
     </div>
 
 

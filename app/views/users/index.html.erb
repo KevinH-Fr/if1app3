@@ -15,7 +15,8 @@
         <thead class="table-dark">
           <tr>
             <th> # </th>
-            <th> email </th>
+            <th>pilote lié</th>
+            <th>email </th>
             <th>changer rôle</th>
           
           
@@ -24,7 +25,14 @@
         <tbody>
           <% @admins.each do |user| %>
             <tr>
-                <td> <%= user.id %>    </td>
+                 <td> <%= user.id %>  </td>
+
+                <td>
+                 <% piloteLie = Pilote.where(user_id: user).first %>
+                  <% if piloteLie.present? %>
+                     <%= piloteLie.nom  %> 
+                  <% end %>
+                 </td>
                 <td> <%= user.email %> </td>
                 <td> <%= link_to "User", toggle_status_user_path(user), class:"btn btn-secondary", 
                       :onclick => "return confirm('Etes-vous certain de vouloir passer cet utilisateur en simple user ?')" %> </td>
@@ -47,6 +55,7 @@
         <thead class="table-dark">
           <tr>
             <th> # </th>
+             <th> pilote lié</th>
             <th> email </th>
             <th> changer role </th>
         
@@ -56,6 +65,12 @@
           <% @users.each do |user| %>
             <tr>
                 <td> <%= user.id %>    </td>
+                <td>
+                 <% piloteLie = Pilote.where(user_id: user).first %>
+                  <% if piloteLie.present? %>
+                     <%= piloteLie.nom  %> 
+                  <% end %>
+                 </td>
                 <td> <%= user.email %> </td>
                 <td> <%= link_to "Admin", toggle_status_user_path(user), class:"btn btn-secondary", 
                         :onclick => "return confirm('Etes-vous certain de vouloir passer cet utilisateur en admin ?')" %> </td> 
