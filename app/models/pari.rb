@@ -4,8 +4,8 @@ class Pari < ApplicationRecord
 
     belongs_to :event, :optional => true
 
-    validates :coureur_id, presence: true
-    validates :parieur_id, presence: true
+   # validates :coureur_id, presence: true
+   # validates :parieur_id, presence: true
     
     validates :paritype, presence: true
    
@@ -22,7 +22,7 @@ class Pari < ApplicationRecord
     #scope :group_sum_order, -> { select('parieur_id, SUM(solde) AS total') }
     #scope :group_sum_order, -> { select('parieur_id, SUM(solde) AS total').group('parieur_id, total').order('parieur_id, total').reverse }
 
-    scope :sum_parieur, -> {select('parieur_id, SUM(solde) AS total')}
+   # scope :sum_parieur, -> {select('parieur_id, SUM(solde) AS total')}
 
 
 #    validate :verif_montant
