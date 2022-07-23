@@ -4,8 +4,8 @@ class Pari < ApplicationRecord
 
     belongs_to :event, :optional => true
 
-   # validates :coureur_id, presence: true
-   # validates :parieur_id, presence: true
+    validates :coureur_id, presence: true
+    validates :parieur_id, presence: true
     
     validates :paritype, presence: true
    
@@ -30,7 +30,7 @@ class Pari < ApplicationRecord
     scope :sum_parieur, -> {select('parieur_id, SUM(solde) AS total')}
 
 
-   # validate :verif_montant
+    validate :verif_montant
 
     def verif_montant
 
@@ -42,17 +42,15 @@ class Pari < ApplicationRecord
       soldeParieurAvant = Pari.saison_courant(saisonId).division_courant(divisionId).numero_until_courant(eventNum).pilote_courant(self.parieur_id).sum(:solde)
 
       if soldeParieurAvant.present?
-        if soldeParieurAvant - montant < 0 
-          errors.add(:montant, "insuffisant, impossible de miser plus que votre solde de points.")
+        if 1000 + soldeParieurAvant - montant < 0 
+          errors.add(:montant, "insuffisant, impossible de miser plus que votre solde de points."  "#{self.parieur_id} | #{soldeParieurAvant}" ) 
         end
       else
         if 1000 - montant < 0 
-          errors.add(:montant, "insuffisant, impossible de miser plus que votre solde de points.")
+          errors.add(:montant, "insuffisant, impossible de miser plus que votre solde de points."  "#{self.parieur_id} | #{soldeParieurAvant}" ) 
         end
       end
     end
-
-
 
 
 

@@ -25,7 +25,7 @@
        
 
      <% @parieurId = Pilote.where(user_id: current_user.id).first.id %>
-        <% form.label :parieur, style: "display: block" %>
+        <%#= form.label :parieur, style: "display: block" %>
         <%#= form.select(:parieur_id, options_from_collection_for_select(
                       @parieur,'id', 'nom', 
                     :selected => @parieur), 
@@ -57,6 +57,15 @@
             <% @saisonId = Event.find(@eventId).saison_id %>
           <% end %>
      
+              <%# val solde parieur %> 
+         <% parieurId = Pilote.where(user_id: current_user.id).first.id %>
+           <%#= form.text_field(:parieur_id, value: @parieurId) %>        
+         <%# if parieurId.present?%>
+           <%# parieurSolde =  Pari.saison_courant(@saisonId).division_courant(@divisionId).numero_until_courant(@eventNum).pilote_courant(parieurId).sum(:solde) %>
+       
+          
+         <%# end %>  
+        <%#= form.text_field :montant, value: parieurSolde %>
      
     </div>
   <% end %>
