@@ -125,7 +125,7 @@ class ParisController < ApplicationController
       resultatCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.course
 
       pariMontant = pari.montant
-      pariCote = pari.valcote
+      pariCote = pari.cote
 
       if typePari == "victoire" && resultatCoureur == 1 || typePari == "podium" && resultatCoureur <= 3 || typePari == "top10" && resultatCoureur <= 10
 
