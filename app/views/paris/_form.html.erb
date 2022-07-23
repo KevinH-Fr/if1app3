@@ -44,7 +44,7 @@
         form_element_target: "submitbtn"} %>
 
   </div>
-  <br>
+  
 
     <%= turbo_frame_tag :montant_field do %>
        <div>
@@ -107,16 +107,25 @@
             <%# valCote = Classement.find(5).cote_victoire %>
             <% piloteId = form.object.coureur_id %>
             <% eventId =  form.object.event_id %>
+            <% divisionId = Event.find(eventId).division_id %>
+            <% saisonId = Event.find(eventId).saison_id %>
+            <%# trouver le num event du gp num precedent %>
+            <%# gérer exception pour gp 1 plus tard %>
+
+            <% numGp = Event.find(eventId).numero %>
+            <% numGp_prec = numGp - 1 %>
+            <% eventId_prec = Event.find_by(saison_id: saisonId, division_id: divisionId, numero: numGp_prec).id %>
+
             <% typepari = form.object.paritype %>
             <% @montantPari = form.object.montant %>
               <% if typepari == "victoire" %>
-                <% @valCote = Classement.all.where(event_id: eventId, pilote_id: piloteId).first.cote_victoire %>
+                <% @valCote = Classement.all.where(event_id: eventId_prec, pilote_id: piloteId).first.cote_victoire %>
               <% end %>
                <% if typepari == "podium" %>
-                <% @valCote = Classement.all.where(event_id: eventId, pilote_id: piloteId).first.cote_podium %>
+                <% @valCote = Classement.all.where(event_id: eventId_prec, pilote_id: piloteId).first.cote_podium %>
               <% end %>
              <% if typepari == "top10" %>
-                <% @valCote = Classement.all.where(event_id: eventId, pilote_id: piloteId).first.cote_top10 %>
+                <% @valCote = Classement.all.where(event_id: eventId_prec, pilote_id: piloteId).first.cote_top10 %>
               <% end %>
                 <div> cote retenue | <strong>  <%= @valCote %> </strong>  </div>
                 <div> gains possibles | <strong>  <%= @valCote * form.object.montant %> </strong>  </div>
