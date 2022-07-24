@@ -35,6 +35,7 @@
         <tr>
           <th style="text-align: center;">#</th>
           <th>Pilote</th>
+           <th>Ecurie</th>
           <th style="text-align: center;">total</th>
 
         </tr>
@@ -43,9 +44,17 @@
       <tbody>
         <tr>
         <% @classements.order(:position).each do | classement | %>
-            <td>  <%= classement.position %></td>
+            <td class="col_centree">  <%= classement.position %></td>
             <td> <%= Pilote.find(classement.pilote_id).nom %>  </td>
-            <td>  <%= classement.score %>  </td>
+             <td> 
+                  <% idEcurie = Pilote.find(classement.pilote_id).ecurie %>  
+                  <% nomEcurie = Equipe.find(idEcurie).nom %> 
+                  <%= nomEcurie %>
+                  <% if Equipe.find(idEcurie).logo.present? %>
+                      <%= image_tag Equipe.find(idEcurie).logo, style: "width: 300px; display: block", class: "img-fluid rounded" %>
+                  <% end %>
+                </td>
+            <td class="col_centree">  <%= number_with_precision(classement.score, precision: 0) %>  </td>
         </tr>
         <% end %>
       </tbody>
