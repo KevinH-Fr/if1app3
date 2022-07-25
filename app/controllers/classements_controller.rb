@@ -123,7 +123,7 @@ def toggle_triclassements
 
   @classementsEvent = Classement.all.where(event_id: @eventId).order_by_score
 
-    @classementsEvent.order_by_score.each_with_index do |classement, i|
+    @classementsEvent.each_with_index do |classement, i|
       i = i + 1
       valPosition = i 
       valScore = classement.score
