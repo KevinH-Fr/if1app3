@@ -23,7 +23,7 @@
 
           <tbody>
             <tr>
-              <% @classements.limit(20).order(:score).reverse.each_with_index do | classement, i| %>
+              <% @classements.order(:score).reverse.each_with_index do | classement, i| %>
                 <td class="cols_pos_score" >
                     <strong>  
                       <%= (i+1) %>
