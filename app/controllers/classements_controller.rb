@@ -121,9 +121,9 @@ def toggle_triclassements
 
   max_points = Classement.saison_courant(@saisonId).division_courant(@divisionId).numero_until_courant(@numGp).max_points.score.to_i
 
-  @classementsEvent = Classement.all.where(event_id: @eventId).order_score_positions
+  @classementsEvent = Classement.all.where(event_id: @eventId).order_by_score
 
-    @classementsEvent.order_score_positions.each_with_index do |classement, i|
+    @classementsEvent.order_by_score.each_with_index do |classement, i|
       i = i + 1
       valPosition = i 
       valScore = classement.score
