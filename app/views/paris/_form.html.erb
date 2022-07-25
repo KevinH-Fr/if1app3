@@ -11,45 +11,28 @@
     </div>
   <% end %>
 
-
    <div>
       <%= form.label :event, style: "display: block" %>
       <%= form.select(:event_id, options_from_collection_for_select(
-                  @event,'id', 'date', 
-                 :selected => @eventId), 
-                 :include_blank => true) %>  
+                  @event,'id', 'date', :selected => @eventId), :include_blank => true) %>  
     </div>
-      <br>
-
-       <div>
-       
-
+    <br>
+    <div>   
      <% @parieurId = Pilote.where(user_id: current_user.id).first.id %>
         <%#= form.label :parieur, style: "display: block" %>
-        <%#= form.select(:parieur_id, options_from_collection_for_select(
-                      @parieur,'id', 'nom', 
-                    :selected => @parieur), 
-                    :include_blank => true) %>
-
+        <%#= form.select(:parieur_id, options_from_collection_for_select(  @parieur,'id', 'nom', 
+                    :selected => @parieur),  :include_blank => true) %>
        <%= form.hidden_field(:parieur_id, value: @parieurId) %>        
-          
     </div>
-
-
-
 
   <div data-controller="form-element">
     <%= form.button "Validate", formaction: new_pari_path, 
-        formmethod: :get, data: {turbo_frame: :montant_field, 
-        form_element_target: "submitbtn"} %>
-
+        formmethod: :get, data: {turbo_frame: :montant_field, form_element_target: "submitbtn"} %>
   </div>
   
-
-    <%= turbo_frame_tag :montant_field do %>
-       <div>
-       
-      
+  <%= turbo_frame_tag :montant_field do %>
+    <div>
+           
          <% @eventId = form.object.event_id %>
           <% if @eventId.present? %>
             <% @eventNum = Event.find(@eventId).numero %>
@@ -62,16 +45,11 @@
            <%#= form.text_field(:parieur_id, value: @parieurId) %>        
          <%# if parieurId.present?%>
            <%# parieurSolde =  Pari.saison_courant(@saisonId).division_courant(@divisionId).numero_until_courant(@eventNum).pilote_courant(parieurId).sum(:solde) %>
-       
-          
          <%# end %>  
         <%#= form.text_field :montant, value: parieurSolde %>
      
     </div>
   <% end %>
-
-
-
 
   <div data-controller="form-element">
     <%= form.button "Validate", formaction: new_pari_path, 
@@ -131,8 +109,6 @@
                 <div> gains possibles | <strong>  <%= @valCote * form.object.montant %> </strong>  </div>
                 <div> montant parié  | <strong>  <%=  form.object.montant %> </strong>  </div>
 
-
-                
                 <br>
           <% end %>
         <% end %>
@@ -142,19 +118,10 @@
         <br>
         <%= form.number_field :solde, value: - form.object.montant  %>
 
-     
-
-
     </div>
   <% end %>
 
-
-<br>
-
-
-
-
-  <br/>
+ <br> <br/>
 
   <div>
      <%= form.submit "Valider", class:"btn btn-success" %>

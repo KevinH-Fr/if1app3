@@ -96,7 +96,7 @@ def toggle_updateclassements
   @numGp = Event.find(@eventId).numero 
 
 
-  @classementsEvent = Classement.all.where(event_id: @eventId).order_score_positions
+  @classementsEvent = Classement.all.where(event_id: @eventId).order_by_score
   
     @classementsEvent.each do |classement|
       @piloteId = classement.pilote_id
