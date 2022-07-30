@@ -36,7 +36,7 @@ class Classement < ApplicationRecord
  #scope :compte_p20, -> { where("(course) = 20").count}
 
 scope :order_score_positions, 
-      -> {order(score: :DESC, compte_p1: :DESC, compte_p2: :DESC ) }
+      -> {order(score: :DESC, compte_p2: :DESC ) }
         #, compte_p3: :DESC, compte_p4: :DESC, compte_p5: :DESC,
         #                      compte_p6: :DESC, compte_p7: :DESC, compte_p8: :DESC, compte_p9: :DESC, compte_p10: :DESC,
         #                      compte_p11: :DESC, compte_p12: :DESC, compte_p13: :DESC, compte_p14: :DESC, compte_p15: :DESC,
