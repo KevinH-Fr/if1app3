@@ -30,7 +30,11 @@
           <th>Pilote</th>
            <th>Ecurie</th>
           <th style="text-align: center;">total</th>
-           <th>nb p1</th>
+
+          <th>rank n-1</th>
+          <th>delta rank </th>
+
+          <th>nb p1</th>
           <th>nb p2</th>
           <th>nb p3</th>
           <th>nb p4</th>
@@ -47,12 +51,35 @@
              <td> 
                   <% idEcurie = Pilote.find(classement.pilote_id).ecurie %>  
                   <% nomEcurie = Equipe.find(idEcurie).nom %> 
-                  <%= nomEcurie %>
+                  <% nomEcurie %>
                   <% if Equipe.find(idEcurie).logo.present? %>
                       <%= image_tag Equipe.find(idEcurie).logo, style: "width: 300px; display: block", class: "img-fluid rounded" %>
                   <% end %>
                 </td>
+
             <td class="col_centree">  <%= number_with_precision(classement.score, precision: 0) %>  </td>
+
+            <td>
+              <% precedentGpNum = @numGp - 1 %>
+              <% if precedentGpNum > 0 %>
+                <% precedentGpId = Event.where(numero: precedentGpNum, saison_id: @saisonId, division_id: @divisionId).first.id %>
+
+                <% if Classement.where(event_id: precedentGpId, pilote_id: classement.pilote_id).present? %>
+                  <% rankN_1 = Classement.where(event_id: precedentGpId, pilote_id: classement.pilote_id).first.position %>
+                <% else %>
+                   <% rankN_1 = 20 %>
+                <% end %>
+
+                <%= rankN_1 %>
+              <% end %>
+            </td>
+
+            <td>
+             <% if precedentGpNum > 0 %>
+              <%= classement.position.to_i - rankN_1.to_i %>
+             <% end %>
+            </td>
+
             <td> <%= classement.nb_p1 %> </td>
             <td> <%= classement.nb_p2 %> </td>
             <td> <%= classement.nb_p3 %> </td>
@@ -75,55 +102,5 @@
   <br/>   <strong>Vous n'avez pas les droits...</strong>
 <% end %>
 
-<br><br> <hr> <br>
-
-
-<%# TEST PARTIE BIS VIRTUELLE %>
-
-<strong> Partie bis viturelle  </strong>
-
 <br>
- <% if (@eventId).present? %>
-   <%#= link_to "Update classement", toggle_updateclassementsbis_classement_path(@eventId), class:"btn btn-primary", style:"margin: 2px" %>
-   <%#= link_to "trier classement", toggle_trierclassementsbis_classement_path(@eventId), class:"btn btn-success", style:"margin: 2px" %>
 
-<% end %>
-<br>
-   <%#= tableau data classement %>
-
-    <table class="table table-striped table-bordered table-hover">
-      <thead class="table-dark">
-        <tr>
-         
-           <th style="text-align: center;">#</th>
-          <th>Pilote</th>
-           <th>Ecurie</th>
-          <th style="text-align: center;">total</th>
-          <th>points</th>
-          <th>nb p1</th>
-          <th>nb p2</th>
-          <th>nb p3</th>
-          <th>nb p4</th>
-          <th>nb p5</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        <tr>
-        <% @pilotesActifDiv.order_score.all.each do | pilote | %>
-           
-            <td> <%#= pilote.rang_n0 %> </td>
-            <td>  <%#= Pilote.find(pilote.id).nom %> </td>
-            <td>  <%#= Equipe.find(pilote.ecurie).nom %> </td>
-            <td> <%#= Resultat.pilote_courant(pilote.id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).sum(:score) %> </td>
-            <td> <%#= pilote.points %> </td>
-            <td> <%#= pilote.nb_p1  %> </td>
-            <td> <%#= pilote.nb_p2  %> </td>
-            <td> <%#= pilote.nb_p3  %> </td>
-            <td> <%#= pilote.nb_p4  %> </td>
-            <td> <%#= pilote.nb_p5  %> </td>
-     
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
