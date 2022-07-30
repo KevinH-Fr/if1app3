@@ -136,6 +136,10 @@ def toggle_updateclassements
     #  valCoteBase = max_points - valScore
 
       classement.update(score: valScore )
+
+
+      nbP1 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 1).count
+      classement.update(nb_p1:  nbP1)
       
     end
 

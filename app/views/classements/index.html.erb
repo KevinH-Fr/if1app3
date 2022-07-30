@@ -30,6 +30,11 @@
           <th>Pilote</th>
            <th>Ecurie</th>
           <th style="text-align: center;">total</th>
+           <th>nb p1</th>
+          <th>nb p2</th>
+          <th>nb p3</th>
+          <th>nb p4</th>
+          <th>nb p5</th>
 
         </tr>
       </thead>
@@ -48,6 +53,7 @@
                   <% end %>
                 </td>
             <td class="col_centree">  <%= number_with_precision(classement.score, precision: 0) %>  </td>
+            <td> <%= classement.nb_p1 %> </td>
         </tr>
         <% end %>
       </tbody>
