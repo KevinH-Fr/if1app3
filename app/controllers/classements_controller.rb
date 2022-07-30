@@ -33,6 +33,36 @@ class ClassementsController < ApplicationController
     
      @classements = Classement.event_courant(@eventId)
 
+
+      @pilotesActifDiv = Pilote.division_courant(@divisionId).statut_actif
+
+      @pilotesActifDiv = @pilotesActifDiv
+
+
+
+
+     # @players = Player.all.sort_by{|player| player.avg_ranking}
+
+     ####
+
+
+
+     @classementScores = Resultat.division_courant(@divisionId).saison_courant(@saisonId).
+                        numero_until_courant(@eventNum).group_by_pilote
+    
+     @classementsNbP1 = Resultat.division_courant(@divisionId).saison_courant(@saisonId).
+                        numero_until_courant(@eventNum).sum_by_pilote
+
+    @resultatsFiltres = Resultat.group_by_pilote.select(
+        'pilote_id, SUM(score) AS total, COUNT(course) AS nbCourses' )
+
+
+    
+  #  @classementsBis = Resultat.division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@eventNum).group_by_pilote
+
+  #  @classementsTer = Classement.sorted_by_days
+
+
     else
       
       @resultats = Resultat.all
@@ -121,7 +151,7 @@ def toggle_triclassements
 
   max_points = Classement.saison_courant(@saisonId).division_courant(@divisionId).numero_until_courant(@numGp).max_points.score.to_i
 
-  @classementsEvent = Classement.all.where(event_id: @eventId).order_by_score
+  @classementsEvent = Classement.all.where(event_id: @eventId).order_score_positions
 
     @classementsEvent.each_with_index do |classement, i|
       i = i + 1
@@ -138,6 +168,70 @@ def toggle_triclassements
   redirect_to classements_url(saisonId: @saisonId, eventId: @eventId, divisionId: @divisionId, numGp: @numGp), 
                 notice: "les classements ont bien été triés"
 end
+
+
+
+
+def toggle_updateclassementsbis
+
+  @eventId = params[:id]
+  @divisionId = Event.find(@eventId).division_id
+  @saisonId = Event.find(@eventId).saison_id
+  @numGp = Event.find(@eventId).numero 
+
+
+  @pilotesActifDiv = Pilote.division_courant(@divisionId).statut_actif.order_score
+
+  @pilotesActifDiv.each do | pilote |
+   
+    valScore = Resultat.pilote_courant(pilote.id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).sum(:score)
+    nbP1 = Resultat.pilote_courant(pilote.id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 1).count
+    nbP2 = Resultat.pilote_courant(pilote.id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 2).count
+    nbP3 = Resultat.pilote_courant(pilote.id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 3).count
+    nbP4 = Resultat.pilote_courant(pilote.id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 4).count
+    nbP5 = Resultat.pilote_courant(pilote.id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 5).count
+
+    pilote.update(points:  valScore)
+    pilote.update(nb_p1:  nbP1)
+    pilote.update(nb_p2:  nbP2)
+    pilote.update(nb_p3:  nbP3)
+    pilote.update(nb_p4:  nbP4)
+    pilote.update(nb_p5:  nbP5)
+  end
+
+  redirect_to classements_url(saisonId: @saisonId, eventId: @eventId, divisionId: @divisionId, numGp: @numGp), 
+  notice: "l'action a été exécutée"
+
+end
+
+def toggle_trierclassementsbis
+
+  @eventId = params[:id]
+  @divisionId = Event.find(@eventId).division_id
+  @saisonId = Event.find(@eventId).saison_id
+  @numGp = Event.find(@eventId).numero 
+
+  @pilotesActifDiv = Pilote.division_courant(@divisionId).statut_actif.order_score
+
+    @pilotesActifDiv.each_with_index do | pilote, i |
+      i = i + 1
+      valPosition = i 
+
+      pilote.update(rang_n0:  valPosition)
+    end
+
+    redirect_to classements_url(saisonId: @saisonId, eventId: @eventId, divisionId: @divisionId, numGp: @numGp), 
+    notice: "l'action a été exécutée"
+  
+end
+
+
+
+
+
+
+
+
 
   private
 

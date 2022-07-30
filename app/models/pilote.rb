@@ -11,6 +11,14 @@ class Pilote < ApplicationRecord
    scope :division_courant, -> (division_courant) { where(division_id: division_courant)}
    scope :division_non_courant, -> (division_courant) { where.not(division_id: division_courant)}
 
+   scope :total_points, -> { Resultat.select('SUM(score) AS total') }
 
+
+   scope :nb_p1, -> { Resultat.where("(course) = 1").count}
+
+   scope :order_score, 
+   -> {order( points: :DESC, nb_p1: :DESC, nb_p2: :DESC, nb_p3: :DESC, nb_p4: :DESC, nb_p5: :DESC) }
+     
+     #,,
 
 end

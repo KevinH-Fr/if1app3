@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_23_132017) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_30_113043) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -137,6 +137,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_23_132017) do
     t.datetime "updated_at", null: false
     t.integer "division_id"
     t.integer "user_id"
+    t.string "rang_n0"
+    t.string "rang_n1"
+    t.integer "nb_p1"
+    t.integer "nb_p2"
+    t.integer "nb_p3"
+    t.integer "nb_p4"
+    t.integer "nb_p5"
+    t.integer "points"
     t.index ["division_id"], name: "index_pilotes_on_division_id"
     t.index ["user_id"], name: "index_pilotes_on_user_id"
   end

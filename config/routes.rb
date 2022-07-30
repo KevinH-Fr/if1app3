@@ -31,6 +31,8 @@ Rails.application.routes.draw do
       get :toggle_updateclassements
       get :toggle_supprimerclassements
       get :toggle_triclassements
+      get :toggle_updateclassementsbis
+      get :toggle_trierclassementsbis
     end
   end
 

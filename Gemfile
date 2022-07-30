@@ -22,6 +22,7 @@ gem "wkhtmltopdf-binary", group: :development
 gem "wkhtmltopdf-heroku", group: :production
 
 
+
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 end
