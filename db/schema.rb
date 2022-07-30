@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_30_205700) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_30_212100) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -62,6 +62,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_30_205700) do
     t.decimal "cote_podium"
     t.decimal "cote_top10"
     t.integer "nb_p1"
+    t.integer "nb_p2"
+    t.integer "nb_p3"
+    t.integer "nb_p4"
+    t.integer "nb_p5"
     t.index ["event_id"], name: "index_classements_on_event_id"
     t.index ["pilote_id"], name: "index_classements_on_pilote_id"
   end

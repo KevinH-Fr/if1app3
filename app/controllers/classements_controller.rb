@@ -139,7 +139,16 @@ def toggle_updateclassements
 
 
       nbP1 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 1).count
+      nbP2 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 2).count
+      nbP3 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 3).count
+      nbP4 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 4).count
+      nbP5 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 5).count
+
       classement.update(nb_p1:  nbP1)
+      classement.update(nb_p2:  nbP2)
+      classement.update(nb_p3:  nbP3)
+      classement.update(nb_p4:  nbP4)
+      classement.update(nb_p5:  nbP5)
       
     end
 
