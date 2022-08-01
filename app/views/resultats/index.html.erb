@@ -4,14 +4,14 @@
 
    <%= render "shared/choixevent" %>
 
-      <% if current_user.admin? %>
-          <%= link_to "Nouveau résultat", new_resultat_path, class:"btn btn-primary" %>
-          <br/><br/>
-      <% end %>
-
     <% if (@eventId).present? %>
         
       <%= render "shared/eventactif" %>
+
+       <% if current_user.admin? %>
+          <%= link_to "Nouveau résultat", new_resultat_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp), class:"btn btn-primary" %>
+          <br/><br/>
+      <% end %>
       
       <%# tableau datas %>
       <div class="table-responsive">
