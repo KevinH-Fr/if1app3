@@ -10,7 +10,7 @@
 
  <% if (@eventId).blank? %>
  <% else %>
-  <% eventNum = Event.find(@eventId).numero %>
+  <% @numGp = Event.find(@eventId).numero   %>
     
       <table style="margin-left:auto;margin-right:auto">
         <thead class="table-dark">
@@ -18,19 +18,16 @@
             <th>#</th>
             <th>Pilote</th>
             <th>Points</th>
+            <th>+-</th>
           </tr>
         </thead>
 
           <tbody>
-            <tr>
-              <% @classements.order(:score).reverse.each_with_index do | classement, i| %>
-                <td class="cols_pos_score" >
-                    <strong>  
-                      <%= (i+1) %>
-                    </strong> 
-                </td>
-               <td>
-                <div class="contenant">
+        <tr>
+        <% @classements.order(:position).each do | classement | %>
+            <td class="cols_pos_score" >  <%= classement.position %></td>
+             <td> 
+                 <div class="contenant">
                     <% equipeId = Pilote.find(classement.pilote_id).ecurie %>  
                     <% nomPilote = Pilote.find(classement.pilote_id).nom %> 
                     <%= image_tag Equipe.find(equipeId).logo, style: "width: 340px; display: block", class: "img-fluid rounded" %>
@@ -38,15 +35,39 @@
                         <%= nomPilote %> 
                       </div>
                   </div>
-                </td>
-                <td class="cols_pos_score">
-                  <strong>
-                    <%= number_with_precision(classement.score, precision: 0) %>
-                  </strong>
-                </td>
-            </tr>
-      <% end %>
-    </tbody>
+              </td>
+
+             <td class="cols_pos_score">  <%= number_with_precision(classement.score, precision: 0) %>  </td>
+
+            <% precedentGpNum = @numGp - 1 %>
+            <% if precedentGpNum > 0 %>
+              <% precedentGpId = Event.where(numero: precedentGpNum, saison_id: @saisonId, division_id: @divisionId).first.id %>
+
+                <% if Classement.where(event_id: precedentGpId, pilote_id: classement.pilote_id).present? %>
+                  <% rankN_1 = Classement.where(event_id: precedentGpId, pilote_id: classement.pilote_id).first.position %>
+                <% else %>
+                   <% rankN_1 = 20 %>
+                <% end %>
+
+               <% @valDeltaRank = classement.position.to_i - rankN_1.to_i %>
+               
+                 <td class="cols_hide">
+                  <% if @valDeltaRank < 0 %>
+                      <strong style="color:green;">
+                      <%= sprintf("%+d", @valDeltaRank) %>
+                      </strong>
+                    <% else %>
+                      <strong style="color:red">
+                        <%= sprintf("%+d", @valDeltaRank) %>
+                      </strong>
+                    <% end %>   
+                 </td>
+             <% else %>
+             <td></td>
+           <% end %>
+        </tr>
+        <% end %>
+      </tbody>
   </table>
 
   <%# bas de page depuis partial %>

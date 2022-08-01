@@ -13,11 +13,11 @@
     <%= render "shared/eventactif" %>
 
     <%# boutons crea classement %>
-    <%= link_to "Créer classement", toggle_creerclassements_classement_path(@eventId), class:"btn btn-warning", style:"margin: 2px"  %>
-    <%= link_to "Update classement", toggle_updateclassements_classement_path(@eventId), class:"btn btn-primary", style:"margin: 2px" %>
-    <%= link_to "Supprimer classement", toggle_supprimerclassements_classement_path(@eventId), class:"btn btn-danger", style:"margin: 2px"%>
-    <%= link_to "Trier classement", toggle_triclassements_classement_path(@eventId), class:"btn btn-secondary", style:"margin: 2px"%>
- 
+    <%= link_to "Créer", toggle_creerclassements_classement_path(@eventId), class:"btn btn-sm btn-warning", style:"margin: 2px"  %>
+    <%= link_to "Update", toggle_updateclassements_classement_path(@eventId), class:"btn btn-sm btn-primary", style:"margin: 2px" %>
+    <%= link_to "Trier", toggle_triclassements_classement_path(@eventId), class:"btn btn-sm btn-secondary", style:"margin: 2px"%>
+    <%= link_to "Supprimer", toggle_supprimerclassements_classement_path(@eventId), class:"btn btn-sm btn-danger", style:"margin: 2px"%>
+
    <br><br>
     <%#= max points : <%= Classement.saison_courant(@saisonId).division_courant(@divisionId).numero_until_courant(@numGp).max_points.score.to_i %>
     
@@ -97,8 +97,9 @@
                       </strong>
                     <% end %>   
                  </td>
-            <% end %>
-
+             <% else %>
+             <td></td>
+           <% end %>
         </tr>
         <% end %>
       </tbody>
