@@ -6,6 +6,10 @@ class Pilote < ApplicationRecord
     has_many :fait_paris, :class_name => 'Pari', :foreign_key => 'parieur_id'
     has_many :recu_paris, :class_name => 'Pari', :foreign_key => 'coureur_id'
 
+
+    validates :nom, presence: true, uniqueness: true, on: :create
+    validates :division_id, presence: true
+
    
    scope :statut_actif, -> { where(statut: "actif") }
    scope :division_courant, -> (division_courant) { where(division_id: division_courant)}
@@ -14,11 +18,5 @@ class Pilote < ApplicationRecord
    scope :total_points, -> { Resultat.select('SUM(score) AS total') }
 
 
-   scope :nb_p1, -> { Resultat.where("(course) = 1").count}
-
-   scope :order_score, 
-   -> {order( points: :DESC, nb_p1: :DESC, nb_p2: :DESC, nb_p3: :DESC, nb_p4: :DESC, nb_p5: :DESC) }
-     
-     #,,
 
 end

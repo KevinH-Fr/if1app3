@@ -11,6 +11,9 @@ class PilotesController < ApplicationController
    
     @divisions = Division.all
 
+
+
+
     @q = Pilote.ransack(params[:q])
   #  @pilotes = @q.result(distinct: true).order(:ecurie)
     @pilotes = @q.result(distinct: true).order(:ecurie).page params[:page]
@@ -83,6 +86,8 @@ class PilotesController < ApplicationController
   def create
     @equipe = Equipe.all
     @pilote = Pilote.new(pilote_params)
+    @division = Division.all
+    @user = User.all
 
     respond_to do |format|
       if @pilote.save

@@ -148,16 +148,16 @@ def toggle_updateclassements
       nbP8 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 8).count
       nbP9 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 9).count
       nbP10 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 10).count
-      nbP11 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 11).count
-      nbP12 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 12).count
-      nbP13 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 13).count
-      nbP14 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 14).count
-      nbP15 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 15).count
-      nbP16 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 16).count
-      nbP17 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 17).count
-      nbP18 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 18).count
-      nbP19 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 19).count
-      nbP20 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 20).count
+      #nbP11 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 11).count
+      #nbP12 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 12).count
+      #nbP13 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 13).count
+      #nbP14 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 14).count
+      #nbP15 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 15).count
+      #nbP16 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 16).count
+      #nbP17 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 17).count
+      #nbP18 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 18).count
+      #nbP19 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 19).count
+      #nbP20 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 20).count
     
 
 
@@ -171,16 +171,16 @@ def toggle_updateclassements
       classement.update(nb_p8:  nbP8)
       classement.update(nb_p9:  nbP9)
       classement.update(nb_p10:  nbP10)
-      classement.update(nb_p11:  nbP11)
-      classement.update(nb_p12:  nbP12)
-      classement.update(nb_p13:  nbP13)
-      classement.update(nb_p14:  nbP14)
-      classement.update(nb_p15:  nbP15)
-      classement.update(nb_p16:  nbP16)
-      classement.update(nb_p17:  nbP17)
-      classement.update(nb_p18:  nbP18)
-      classement.update(nb_p19:  nbP19)
-      classement.update(nb_p20:  nbP20)
+      #classement.update(nb_p11:  nbP11)
+      #classement.update(nb_p12:  nbP12)
+      #classement.update(nb_p13:  nbP13)
+      #classement.update(nb_p14:  nbP14)
+      #classement.update(nb_p15:  nbP15)
+      #classement.update(nb_p16:  nbP16)
+      #classement.update(nb_p17:  nbP17)
+      #classement.update(nb_p18:  nbP18)
+      #classement.update(nb_p19:  nbP19)
+      #classement.update(nb_p20:  nbP20)
       
     end
 
