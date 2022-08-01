@@ -2,9 +2,6 @@
 
 <%= render "shared/choixevent" %>
 
-  <%# entete event %>
-  <%# @eventId %>
-
  <% if (@eventId).present? %>
 
    <%= render "shared/eventactif" %>
@@ -34,7 +31,7 @@
               <% nomEcurie = Equipe.find(res[0]).nom %> 
               <%= image_tag Equipe.find(equipeId).logo, style: "width: 200px; display: block", class: "img-fluid rounded" %>
                 <div class="texte_centrer">
-                  <%= nomEcurie %> 
+                  <% nomEcurie %> 
                 </div>
             </div>
           </td>
@@ -48,16 +45,12 @@
     </tbody>
   </table>
 
-
-
- <br/> <hr/>
+  <hr/>
       
   <%# PDF event actif %>
    
   <% numGp = Event.find(@eventId).numero %>
   <%= link_to "PDF",  classecuries_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp, format: :pdf), class:"btn btn-dark" %>
 
-
    <% end %>
-
 

@@ -25,6 +25,25 @@
     <%= resultat.course %>
   </p>
 
+     <strong>DNF:</strong>
+     <% resultat.dnf %> 
+        <% if resultat.dnf == true %>
+           <i class="fa-solid fa-circle-check fa-xl" style="color:green"></i>
+        <% else %>
+           <i class="fa-solid fa-circle-xmark fa-xl" style="color:red"></i>
+        <% end %>   
+  </p>
+
+     <strong>DNS:</strong>
+     <% resultat.dns %> 
+        <% if resultat.dns == true %>
+           <i class="fa-solid fa-circle-check fa-xl" style="color:green"></i>
+        <% else %>
+           <i class="fa-solid fa-circle-xmark fa-xl" style="color:red"></i>
+        <% end %>   
+  </p>
+
+
   <p>
     <strong>DOTD:</strong>
     <% resultat.dotd %>  

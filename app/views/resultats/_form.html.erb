@@ -82,6 +82,16 @@
           {include_blank: true}, { data: { action: "change->form-element#remotesubmit"}} %>
       </div>
 
+      <div> <br>
+          <strong>DNF | </strong>
+          <%= form.check_box :dnf, { data: { action: "change->form-element#remotesubmit"}} %>
+      </div>
+      <div> <br>
+          <strong>DNS | </strong>
+          <%= form.check_box :dns, { data: { action: "change->form-element#remotesubmit"}} %>
+      </div>
+
+
        <div> <br>
           <strong>Pilote du jour | </strong>
           <%= form.check_box :dotd, { data: { action: "change->form-element#remotesubmit"}} %>
@@ -140,7 +150,14 @@
               <% end %>
             <% end %>
           <% end %>
-        <% end %>
+        <% end %> 
+
+        <% statutDnf = form.object.dnf %>
+          <% if statutDnf == true %>
+            <% scoreCourse = 0 %>
+          <% end %>
+       
+
 
         <% resultatDotd = form.object.dotd %>
         <% scoreDotd = 0 %>

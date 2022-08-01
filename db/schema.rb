@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_01_093641) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_01_230434) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -180,6 +180,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_01_093641) do
     t.boolean "mt"
     t.decimal "score"
     t.integer "ecurie"
+    t.boolean "dnf"
+    t.boolean "dns"
     t.index ["event_id"], name: "index_resultats_on_event_id"
     t.index ["pilote_id"], name: "index_resultats_on_pilote_id"
   end

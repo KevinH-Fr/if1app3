@@ -169,7 +169,7 @@ end
     def resultat_params
     #  params.require(:resultat).permit(:event_id, :pilote_id, :qualification, :course, :dotd, :mt, :score, :ecurie)
 
-      params.fetch(:resultat, {}).permit(:event_id, :pilote_id, :qualification, :course, :dotd, :mt, :score, :ecurie, :positions)
+      params.fetch(:resultat, {}).permit(:event_id, :pilote_id, :qualification, :course, :dotd, :mt, :score, :ecurie, :positions, :dnf, :dns)
     
     end
 
