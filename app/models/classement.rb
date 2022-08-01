@@ -16,7 +16,10 @@ class Classement < ApplicationRecord
 
 scope :order_score_positions, 
       -> {order(score: :DESC, 
-        nb_p1: :DESC, nb_p2: :DESC, nb_p3: :DESC, nb_p4: :DESC, nb_p5: :DESC      
+        nb_p1: :DESC, nb_p2: :DESC, nb_p3: :DESC, nb_p4: :DESC, nb_p5: :DESC,    
+        nb_p6: :DESC, nb_p7: :DESC, nb_p8: :DESC, nb_p9: :DESC, nb_p10: :DESC,     
+        nb_p11: :DESC, nb_p12: :DESC, nb_p13: :DESC, nb_p14: :DESC, nb_p15: :DESC,     
+        nb_p16: :DESC, nb_p17: :DESC, nb_p18: :DESC, nb_p19: :DESC, nb_p20: :DESC      
         ) }
       
 
