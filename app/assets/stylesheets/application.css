@@ -62,6 +62,15 @@ th, td {
 .col_centree{
   text-align: center;
 }
+
+.col_rank_gain{
+  color: rgb(12, 150, 12);
+}
+
+.col_rank_perte{
+  color: rgb(180, 15, 15);
+}
+
 .col_green{
   text-decoration: underline;
   text-align: center;

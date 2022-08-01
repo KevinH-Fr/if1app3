@@ -31,8 +31,8 @@
            <th>Ecurie</th>
           <th style="text-align: center;">total</th>
 
-          <th>rank n-1</th>
-          <th>delta rank </th>
+         <%# <th>rank n-1</th> %>
+          <th style="text-align: center;">delta rank </th>
 
         <%#  <th>nb p1</th>
           <th>nb p2</th>
@@ -70,14 +70,13 @@
                   <% if Equipe.find(idEcurie).logo.present? %>
                       <%= image_tag Equipe.find(idEcurie).logo, style: "width: 300px; display: block", class: "img-fluid rounded" %>
                   <% end %>
-                </td>
+              </td>
 
             <td class="col_centree">  <%= number_with_precision(classement.score, precision: 0) %>  </td>
 
-            <td>
-              <% precedentGpNum = @numGp - 1 %>
-              <% if precedentGpNum > 0 %>
-                <% precedentGpId = Event.where(numero: precedentGpNum, saison_id: @saisonId, division_id: @divisionId).first.id %>
+            <% precedentGpNum = @numGp - 1 %>
+            <% if precedentGpNum > 0 %>
+              <% precedentGpId = Event.where(numero: precedentGpNum, saison_id: @saisonId, division_id: @divisionId).first.id %>
 
                 <% if Classement.where(event_id: precedentGpId, pilote_id: classement.pilote_id).present? %>
                   <% rankN_1 = Classement.where(event_id: precedentGpId, pilote_id: classement.pilote_id).first.position %>
@@ -85,23 +84,25 @@
                    <% rankN_1 = 20 %>
                 <% end %>
 
-                <%= rankN_1 %>
-              <% end %>
-            </td>
+               <% @valDeltaRank = classement.position.to_i - rankN_1.to_i %>
+               
+                <td class="col_centree">
+                  <% if @valDeltaRank < 0 %>
+                      <strong class="col_rank_gain">
+                      <%= sprintf("%+d", @valDeltaRank) %>
+                      </strong>
+                    <% else %>
+                      <strong class="col_rank_perte">
+                        <%= sprintf("%+d", @valDeltaRank) %>
+                      </strong>
+                    <% end %>   
+                 </td>
+            <% end %>
 
-            <td>
-             <% if precedentGpNum > 0 %>
-              <%= classement.position.to_i - rankN_1.to_i %>
-             <% end %>
-            </td>
-
-          
         </tr>
         <% end %>
       </tbody>
-    </table>
-
-  <br/> <hr/>
+    </table> <hr/>
         
     <%# PDF event actif %>
     <% numGp = Event.find(@eventId).numero %>
