@@ -4,6 +4,27 @@ class FriendsController < ApplicationController
   # GET /friends or /friends.json
   def index
     @friends = Friend.all
+
+    respond_to do |format|
+      format.html
+      format.png do
+
+      #  render png: "test1", template: "friends/liste", formats: [:html], layout: "pdf"
+      # kit = IMGKit.new('http://google.com')
+
+    #  html_content = "YOUR HTML CONTENT"
+    #  kit = IMGKit.new(html_content, height: 900, transparent:true, quality:10) 
+     # send_file("#{Rails.root}/public/screenshot.png")
+
+    #kit = IMGKit.new('http://google.com')
+
+     render pdf: "resultats", template: "friends/liste", formats: [:html], layout: "pdf"
+
+
+      end
+    end
+
+
   end
 
   # GET /friends/1 or /friends/1.json

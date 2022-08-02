@@ -114,6 +114,7 @@ GEM
       domain_name (~> 0.5)
     i18n (1.10.0)
       concurrent-ruby (~> 1.0)
+    imgkit (1.6.2)
     importmap-rails (1.1.2)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
@@ -291,6 +292,7 @@ DEPENDENCIES
   debug
   devise (~> 4.8)
   hotwire-rails
+  imgkit
   importmap-rails
   jbuilder
   kaminari
