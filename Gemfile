@@ -21,6 +21,8 @@ gem 'wicked_pdf'
 gem "wkhtmltopdf-binary", group: :development
 gem "wkhtmltopdf-heroku", group: :production
 
+#gem "mini_magick"
+#"gem 'rmagick'
 
 
 group :development, :test do

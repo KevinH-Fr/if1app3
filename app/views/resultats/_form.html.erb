@@ -28,9 +28,6 @@
 
 <br>
 
-  
-  <%#<div id="turbo-stream-target">hello </div>%>
-
   <div data-controller="form-element">
     <%= form.button "Validate", formaction: new_resultat_path, 
         formmethod: :get, data: {turbo_frame: :ecurie_field, 
@@ -178,9 +175,6 @@
         <%= form.text_field :score, value: scoreTotal %>
       </div>
   <% end %>
-
-  <%# points manuels %>
-  <%#= link_to "Points manuels", "", class:"btn btn-outline-danger" %>
 
 <br/>
 

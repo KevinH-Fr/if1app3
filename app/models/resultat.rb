@@ -13,8 +13,6 @@ class Resultat < ApplicationRecord
     validates :pilote_id, presence: true
     validates :ecurie, presence: true
 
-
-
     scope :with_mt, -> { where("(mt) = true") }
 
 scope :division_courant, -> (division_courant) { joins(:event).where("division_id = ?", division_courant)}
@@ -39,7 +37,7 @@ scope :compte_p3, -> { where("(course) = 3").count}
 scope :compte_p4, -> { where("(course) = 4").count}
 scope :compte_p5, -> { where("(course) = 5").count}
 
-
+scope :nb_courses, -> (pilote_courant) { where("pilote_id = ?", pilote_courant).count}
 
 scope :order_score_positions, 
       -> {order(score: :DESC ) }
@@ -47,13 +45,9 @@ scope :order_score_positions,
 
 scope :order_by_sum, -> { order(score.to_i).reverse }
 
-
-
 # utilisée
 scope :group_sum_order, -> { select('pilote_id, SUM(score) AS total').group('pilote_id').order('total').reverse }
   
-
-
 
 
 end

@@ -1,15 +1,15 @@
 <div id="<%= dom_id pilote %>">
+
+  <h5> Infos :</h5>
   <p>
     <strong>Nom:</strong>
     <%= pilote.nom %>
   </p>
-  <br/>
 
   <p>
     <strong>Statut:</strong>
     <%= pilote.statut %>
   </p>
-  <br/>
    <% pilote.ecurie %>
 
   <p>
@@ -24,7 +24,7 @@
     <% end %>
 
   </p>
- <br/>
+
   <p>
     <strong>Division:</strong>
     <% divisionLiee =pilote.division_id %>
@@ -36,7 +36,24 @@
     <strong>User lié:</strong>
      <%= User.find(pilote.user_id).full_name if pilote.user_id.present? %>
   </p>
-  <br/>
+
+  <hr>  
+
+  <h5> Stats :</h5>
+
+    <strong> Nb courses : </strong> <%= Resultat.nb_courses(pilote.id) %> <br> 
+
+    <strong> Nb P1 : </strong> <%= Resultat.pilote_courant(pilote.id).compte_p1 %> <br> 
+    <strong> Nb P2 : </strong> <%= Resultat.pilote_courant(pilote.id).compte_p2 %> <br>
+    <strong> Nb P3 : </strong> <%= Resultat.pilote_courant(pilote.id).compte_p3 %> <br>
+
+
+
+    <%# ajout  
+      % podium
+      % top 5
+      % top 10
+    %>
 
 </div>
 

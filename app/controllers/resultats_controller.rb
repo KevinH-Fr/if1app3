@@ -158,8 +158,6 @@ class ResultatsController < ApplicationController
    # "#{id} | #{event_id} | #{pilote_id}"
 end
 
-
-
     # Use callbacks to share common setup or constraints between actions.
     def set_resultat
       @resultat = Resultat.find(params[:id])
@@ -172,8 +170,6 @@ end
       params.fetch(:resultat, {}).permit(:event_id, :pilote_id, :qualification, :course, :dotd, :mt, :score, :ecurie, :positions, :dnf, :dns)
     
     end
-
-
 
 
     def valPoints
