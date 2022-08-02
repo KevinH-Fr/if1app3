@@ -114,9 +114,9 @@
         <% end %>
         <%# valCote = valCote %> 
         <% form.label :cote, style: "display: block" %>
-        <%= form.text_field :cote, value: @valCote %>
+        <%= form.hidden_field :cote, value: @valCote %>
         <br>
-        <%= form.number_field :solde, value: - form.object.montant  %>
+        <%= form.hidden_field :solde, value: - form.object.montant  %>
 
     </div>
   <% end %>
