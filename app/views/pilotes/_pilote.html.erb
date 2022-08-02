@@ -1,6 +1,5 @@
 <div id="<%= dom_id pilote %>">
 
-  <h5> Infos :</h5>
   <p>
     <strong>Nom:</strong>
     <%= pilote.nom %>
@@ -27,7 +26,7 @@
 
   <p>
     <strong>Division:</strong>
-    <% divisionLiee =pilote.division_id %>
+    <% divisionLiee = pilote.division_id %>
     <%= Division.find(divisionLiee).nom %>
 
   </p>
@@ -40,20 +39,62 @@
   <hr>  
 
   <h5> Stats :</h5>
+  <% nbCourses = Resultat.nb_courses(pilote.id)  %>
+ <strong> Nb courses : </strong> <%= nbCourses %> <br> 
 
-    <strong> Nb courses : </strong> <%= Resultat.nb_courses(pilote.id) %> <br> 
+  <table class="table">
+  <thead class="table-dark">
+    <th> résultat </th>
+    <th> nombre</th>
+    <th> %</th>
+  </thead>
+    
+  <tbody>
+    <td>Victoire</td>
+    <td>
+      <% nbVictoire = Resultat.pilote_courant(pilote.id).compte_p1 %>
+      <%= nbVictoire %> 
+    </td>
+    <td>
+      <% pourcentageVictoire = Float(nbVictoire) / nbCourses * 100 %>
+      <%= pourcentageVictoire.to_i %> %
+    </td>
+  </tbody>
+  <tbody>
+    <td>Podium</td>
+    <td>
+      <% nbPodium = Resultat.pilote_courant(pilote.id).compte_podium %>
+      <%= nbPodium %> 
+    </td>
+    <td>
+      <% pourcentagePodium = Float(nbPodium) / nbCourses * 100 %>
+      <%= pourcentagePodium.to_i %> %  
+    </td>
+  </tbody>
+  <tbody>
+    <td>Top5</td>
+    <td>
+      <% nbTop5 = Resultat.pilote_courant(pilote.id).compte_top5 %>
+      <%= nbTop5 %> 
+    </td>
+    <td>
+      <% pourcentageTop5 = Float(nbTop5) / nbCourses * 100 %>
+      <%= pourcentageTop5.to_i %> %  
+    </td>  
+  </tbody>
+  <tbody>
+      <td>Top10</td>
+    <td>
+      <% nbTop10 = Resultat.pilote_courant(pilote.id).compte_top10 %>
+      <%= nbTop10 %> 
+    </td>
+    <td>
+      <% pourcentageTop10 = Float(nbTop10) / nbCourses * 100 %>
+      <%= pourcentageTop10.to_i %> %  
+    </td> 
+  </tbody>
 
-    <strong> Nb P1 : </strong> <%= Resultat.pilote_courant(pilote.id).compte_p1 %> <br> 
-    <strong> Nb P2 : </strong> <%= Resultat.pilote_courant(pilote.id).compte_p2 %> <br>
-    <strong> Nb P3 : </strong> <%= Resultat.pilote_courant(pilote.id).compte_p3 %> <br>
-
-
-
-    <%# ajout  
-      % podium
-      % top 5
-      % top 10
-    %>
+</table>
 
 </div>
 
