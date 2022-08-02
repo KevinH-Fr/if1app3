@@ -43,7 +43,7 @@ class Pari < ApplicationRecord
 
       if soldeParieurAvant.present?
         if 1000 + soldeParieurAvant - montant < 0 
-          errors.add(:montant, "insuffisant, impossible de miser plus que votre solde de points."  "#{self.parieur_id} | #{soldeParieurAvant}" ) 
+          errors.add(:montant, "insuffisant, impossible de miser plus que votre solde de points | Solde : #{soldeParieurAvant + montant}" ) 
         end
       else
         if 1000 - montant < 0 

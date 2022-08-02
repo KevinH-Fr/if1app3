@@ -1,7 +1,7 @@
 <%= form_with(model: pari) do |form| %>
   <% if pari.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(pari.errors.count, "error") %> prohibited this pari from being saved:</h2>
+      <h2><%= pluralize(pari.errors.count, "error") %> enregistrement de ce pari impossible :</h2>
 
       <ul>
         <% pari.errors.each do |error| %>
@@ -11,12 +11,15 @@
     </div>
   <% end %>
 
+
    <div>
+
       <%= form.label :event, style: "display: block" %>
       <%= form.select(:event_id, options_from_collection_for_select(
                   @event,'id', 'date', :selected => @eventId), :include_blank => true) %>  
     </div>
     <br>
+    
     <div>   
      <% @parieurId = Pilote.where(user_id: current_user.id).first.id %>
         <%#= form.label :parieur, style: "display: block" %>
