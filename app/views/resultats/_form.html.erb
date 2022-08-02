@@ -155,7 +155,6 @@
           <% end %>
        
 
-
         <% resultatDotd = form.object.dotd %>
         <% scoreDotd = 0 %>
         <% if resultatDotd == true %>
@@ -164,7 +163,7 @@
 
         <% resultatMt = form.object.mt %>
         <% scoreMt = 0 %>
-        <% if resultatMt == true %>
+        <% if resultatMt == true && scoreCourse > 0 %>
           <% scoreMt = 1 %>
         <% end %>
   

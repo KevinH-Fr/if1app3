@@ -12,6 +12,7 @@ class Resultat < ApplicationRecord
 
     validates :pilote_id, presence: true
     validates :ecurie, presence: true
+    validates :event_id, presence: true
 
     scope :with_mt, -> { where("(mt) = true") }
 
