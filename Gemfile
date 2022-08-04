@@ -21,7 +21,9 @@ gem 'wicked_pdf'
 gem "wkhtmltopdf-binary", group: :development
 gem "wkhtmltopdf-heroku", group: :production
 
-gem 'imgkit'
+#gem 'imgkit'
+
+gem 'grover'
 
 #gem "mini_magick"
 #"gem 'rmagick'
