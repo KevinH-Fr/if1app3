@@ -1,3 +1,75 @@
-<h1>  hello world 5 </h1>
+<br>
+<h1> Résultats </h1>
+<br>
 
-      <%= link_to "IMAGE",   listebis_resultats_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-dark" %>
+<%# haut de page depuis partial %>
+<%= render "shared/hautpdf" %>
+
+
+  <%#= tableau data classement %>
+
+ <% if (@eventId).blank? %>
+ <% else %>
+  <% eventNum = Event.find(@eventId).numero %>
+    
+      <table style="margin-left:auto;margin-right:auto">
+        <thead class="table-dark">
+          <tr>
+            <th class="cols_hide"></th>
+            <th>#</th>
+            <th>Pilote</th>
+            <th>Points</th>
+            <th class="cols_hide"></th>
+          </tr>
+        </thead>
+
+           <tbody>
+     <% @resultatsFiltres.each_with_index do | res| %>
+     <tr>
+
+         <td>
+              <% if res.dotd == true %>
+                <%= wicked_pdf_image_tag asset_url('/images/dotd_white.png'), style: "width: 28px; margin-top: 4px;" %>
+              <% end %>
+           </td>
+
+        <td class="cols_pos_score">
+           <strong>  
+              <%= res.course %> 
+            </strong> 
+        </td>
+
+          <td>  
+            <div class="contenant">
+              <% idPilote = res.pilote_id %> 
+              <% idEcurie = res.ecurie %> 
+              <% nomPilote = Pilote.find(idPilote).nom %> 
+                <%= image_tag Equipe.find(idEcurie).logo, style: "width: 340px; display: block", class: "img-fluid rounded" %>
+                      <div class="texte_centrer">
+                        <%= nomPilote %>
+                      </div>
+                  </div>
+          </td> 
+           <td class="cols_pos_score">
+              <strong> <%= res.score.to_i %> </strong> 
+           </td>
+           <td>
+              <% if res.mt == true %>
+                 <%= wicked_pdf_image_tag asset_url('/images/mt_white.png'),style: "width: 28px; margin-top: 4px;" %>
+              <% end %>
+           </td>
+        </tr>
+      <% end %> 
+    </tbody>  
+    
+  </table>
+
+<%# bas de page depuis partial %>
+<%= render "shared/baspdf" %>
+
+<% end %>
+
+
+<hr/> 
+
+<%= link_to "IMAGE",   listebis_resultats_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-dark" %>

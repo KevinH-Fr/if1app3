@@ -143,10 +143,23 @@ class ResultatsController < ApplicationController
   end
 
   def listebis
+    @eventId = params[:eventId]
+    @eventNum =  params[:numero]
+    @saisonId = params[:saisonId]
+    @divisionId = params[:divisionId]
+
+    @resultatsFiltres = Resultat.joins(:event).where(
+      'event_id = :event_id',
+       event_id: @eventId)
+     
+  @resultatsFiltres = @resultatsFiltres.order(:course)
+
     respond_to do |format|
       format.html
       format.png do
-        png = Grover.new(url_for(only_path: false)).to_png
+      #  png = Grover.new(url_for(only_path: false)).to_png
+      png = Grover.new(url_for(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp)).to_png
+
         send_data(png, disposition: 'inline', 
                        filename: "filename.png", 
                        type: 'application/png')
