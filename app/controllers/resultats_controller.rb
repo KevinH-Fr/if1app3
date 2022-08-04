@@ -162,7 +162,8 @@ class ResultatsController < ApplicationController
 
         send_data(png, disposition: 'inline', 
                        filename: "filename.png", 
-                       type: 'application/png')
+                       type: 'application/png',
+                      format: 'A4')
       end 
     end
   end
