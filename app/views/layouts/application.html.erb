@@ -29,7 +29,11 @@
 
   <body>
 
-   <%= render 'home/header' %>
+   <%#= render 'home/header' %>
+
+  <% unless action_name == "listebis" %>
+    <%= render 'home/header' %>
+  <% end %>
 
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>

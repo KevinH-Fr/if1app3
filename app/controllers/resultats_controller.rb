@@ -147,7 +147,9 @@ class ResultatsController < ApplicationController
       format.html
       format.png do
         png = Grover.new(url_for(only_path: false)).to_png
-        send_data(png, disposition: 'inline', filename: "filename.png", type: 'application/png')
+        send_data(png, disposition: 'inline', 
+                       filename: "filename.png", 
+                       type: 'application/png')
       end 
     end
   end
