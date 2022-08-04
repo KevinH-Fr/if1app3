@@ -62,6 +62,13 @@ class ResultatsController < ApplicationController
 
        render pdf: "resultats", template: "resultats/liste", formats: [:html], layout: "pdf"
       end
+
+      format.png do
+        png = Grover.new(url_for(only_path: false)).to_png
+        send_data(png, disposition: 'inline', filename: "filename.png", type: 'application/png')
+      end
+
+
     end
 
   end
@@ -135,6 +142,15 @@ class ResultatsController < ApplicationController
     end
   end
 
+  def listebis
+    respond_to do |format|
+      format.html
+      format.png do
+        png = Grover.new(url_for(only_path: false)).to_png
+        send_data(png, disposition: 'inline', filename: "filename.png", type: 'application/png')
+      end 
+    end
+  end
 
   # test hotwire maj select option
   def pilotes

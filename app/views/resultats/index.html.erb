@@ -96,6 +96,9 @@
       <% numGp = Event.find(@eventId).numero %>
       <%= link_to "PDF",  resultats_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp, format: :pdf), class:"btn btn-dark" %>
 
+ <%= link_to "Show liste", listebis_resultats_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp), class:"btn btn-sm btn-warning", style:"margin: 2px"  %>
+
+
     <% end %>
 
 <% else  %>

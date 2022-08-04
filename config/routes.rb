@@ -20,7 +20,11 @@ Rails.application.routes.draw do
   resources :events
   resources :equipes
   resources :pilotes
-  resources :resultats
+
+  resources :resultats do
+    get 'listebis', :on => :collection
+  end
+  
   resources :classecuries
   
   resources :parieurs
