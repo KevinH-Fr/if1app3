@@ -102,9 +102,7 @@ th, td {
   color: grey;
 }
 
-
 /* utilisés pour docs edités */
-
 
 .val_entete {
   background-color: rgb(125, 125, 125);
@@ -124,7 +122,6 @@ th, td {
     
     border: 8px solid  #313130;
     
-
  }
 
  .cols_solde {
@@ -177,7 +174,6 @@ th, td {
   .hr_doc{
     border-top: 2px solid  #ccc;
     background-color: #ccc;
-   
   }
 
   .btns_edition{
