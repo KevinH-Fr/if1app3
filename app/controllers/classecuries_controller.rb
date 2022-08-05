@@ -64,6 +64,38 @@ class ClassecuriesController < ApplicationController
       end
   end
 
+  
+def documentedition
+  @eventId = params[:eventId]
+  @eventNum = Event.find(@eventId).numero 
+  @saisonId = params[:saisonId]
+  @divisionId = params[:divisionId]
+
+#  @resultats = Resultat.division_courant(@divisionId).saison_courant(@saisonId).
+ # numero_until_courant(@eventNum).group_by_ecurie.select(
+  #  'ecurie, SUM(score) AS total')
+
+
+  @resultats = Resultat.division_courant(@divisionId).saison_courant(@saisonId).
+  numero_until_courant(@eventNum).
+  group_by_ecurie.select('ecurie, SUM(score) AS total')
+
+    @resultats = @resultats.order(:total).reverse
+
+  respond_to do |format|
+    format.html
+    format.png do
+    #  png = Grover.new(url_for(only_path: false)).to_png
+    png = Grover.new(url_for(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp)).to_png
+
+      send_data(png, disposition: 'inline', 
+                     filename: "ClassementEcuries.png", 
+                     type: 'application/png',
+                    format: 'A4')
+    end 
+  end
+end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

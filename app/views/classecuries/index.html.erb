@@ -5,6 +5,12 @@
  <% if (@eventId).present? %>
 
    <%= render "shared/eventactif" %>
+
+    <%# document %>
+    <% numGp = Event.find(@eventId).numero %>
+    <%= link_to "Document", documentedition_classecuries_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp), class:"btn btn-sm btn-warning", style:"margin: 2px"  %>
+
+    <br/><br/>
     
    <%#= tableau data classement %>
 

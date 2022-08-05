@@ -26,6 +26,8 @@ scope :numero_until_courant, -> (numero_until_courant) { joins(:event).where("nu
 
 # tempo
 scope :group_by_pilote, -> { group('pilote_id') }
+scope :group_by_ecurie, -> { group('ecurie') }
+
 scope :sum_by_pilote, -> { sum('score') }
 
 scope :sum_order_score, -> { select('pilote_id, score, SUM(score) AS total')}

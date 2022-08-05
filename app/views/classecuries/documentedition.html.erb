@@ -1,0 +1,57 @@
+<body style="background-color: #313130;">
+  <br/>
+  <h1 class="titre_doc"> Classement Ecuries </h1> <br> <br>
+
+    <%# haut de page depuis partial %>
+    <%= render "shared/hautpdf" %>
+
+    <%#= tableau data classement %>
+
+      <% @numGp = Event.find(@eventId).numero   %>
+        <table style="margin-left:auto;margin-right:auto">
+          <thead class="table-dark">
+            <tr>
+              <th class="th_doc">#</th>
+              <th class="th_doc">Ecurie</th>
+              <th class="th_doc">Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <% @resultats.each_with_index do | res, i| %>
+                 <td class="cols_pos_score">
+                    <strong>  <%= (i+1) %>   </strong> 
+                </td>
+                 <td style="text-align: center;">
+                  <div class="contenant">
+                      <% equipeId = res.ecurie %>  
+                      <% nomEcurie = Equipe.find(equipeId).nom %> 
+                      <%= image_tag Equipe.find(equipeId).logo, style: "width: 300px; display: block", class: "img-fluid rounded" %>
+                        <div class="texte_centrer">
+                          <%= nomEcurie %> 
+                        </div>
+                  </div>
+                </td>
+                <td class="cols_pos_score">
+                  <strong>
+                    <%= number_with_precision(res.total, precision: 0) %>
+                  </strong>
+                </td>
+             
+            </tr>
+             <% end %>
+            
+           </tbody>
+        </table>
+
+     <%# bas de page depuis partial %>
+     <%= render "shared/baspdf" %>
+
+    <div class="btns_edition">
+      <%= link_to "Générer image",   documentedition_classecuries_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-sm btn-warning" %>
+      <br><br>
+      <%= link_to "Retour",   classecuries_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp), class:"btn btn-sm btn-dark" %>
+      <br><br>
+    </div>
+
+</body>

@@ -1,0 +1,84 @@
+
+<body style="background-color: #313130;">
+
+ <br/> 
+ <h1 class="titre_doc"> Classement Pilotes </h1>  
+ <br> <br>
+
+ <%# haut de page depuis partial %>
+ <%= render "shared/hautpdf" %>
+
+ <%#= tableau data classement %>
+ <% if (@eventId).blank? %>
+ <% else %>
+  <% @numGp = Event.find(@eventId).numero   %>
+    <table style="margin-left:auto;margin-right:auto">
+      <thead class="table-dark">
+        <tr>
+          <th class="th_doc">#</th>
+          <th class="th_doc">Pilote</th>
+          <th class="th_doc">Points</th>
+          <th class="cols_hide">+-</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <% @classements.order(:position).limit(20).each do | classement | %>
+            <td class="cols_pos_score" >  <%= classement.position %></td>
+             <td> 
+                 <div class="contenant">
+                    <% equipeId = Pilote.find(classement.pilote_id).ecurie %>  
+                    <% nomPilote = Pilote.find(classement.pilote_id).nom %> 
+                    <%= image_tag Equipe.find(equipeId).logo, style: "width: 300px; display: block", class: "img-fluid rounded" %>
+                      <div class="texte_centrer">
+                        <%= nomPilote %> 
+                      </div>
+                  </div>
+              </td>
+
+             <td class="cols_pos_score">  <%= number_with_precision(classement.score, precision: 0) %>  </td>
+
+            <% precedentGpNum = @numGp - 1 %>
+            <% if precedentGpNum > 0 %>
+              <% precedentGpId = Event.where(numero: precedentGpNum, saison_id: @saisonId, division_id: @divisionId).first.id %>
+
+                <% if Classement.where(event_id: precedentGpId, pilote_id: classement.pilote_id).present? %>
+                  <% rankN_1 = Classement.where(event_id: precedentGpId, pilote_id: classement.pilote_id).first.position %>
+                <% else %>
+                   <% rankN_1 = 20 %>
+                <% end %>
+
+               <% @valDeltaRank = classement.position.to_i - rankN_1.to_i %>
+               
+                 <td class="cols_hide">
+                  <% if @valDeltaRank < 0 %>
+                      <strong style="color:green;">
+                      <%= sprintf("%+d", @valDeltaRank) %>
+                      </strong>
+                    <% else %>
+                      <strong style="color:red">
+                        <%= sprintf("%+d", @valDeltaRank) %>
+                      </strong>
+                    <% end %>   
+                 </td>
+             <% else %>
+             <td></td>
+           <% end %>
+        </tr>
+        <% end %>
+      </tbody>
+  </table>
+
+  <%# bas de page depuis partial %>
+  <%= render "shared/baspdf" %>
+
+ <% end %>
+
+  <div class="btns_edition">
+    <%= link_to "Générer image",   documentedition_classements_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-sm btn-warning" %>
+    <br><br>
+    <%= link_to "Retour",   classements_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp), class:"btn btn-sm btn-dark" %>
+    <br><br>
+  </div>
+
+</body>

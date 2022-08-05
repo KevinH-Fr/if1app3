@@ -33,18 +33,13 @@ class ClassementsController < ApplicationController
     
      @classements = Classement.event_courant(@eventId)
 
-
       @pilotesActifDiv = Pilote.division_courant(@divisionId).statut_actif
-
       @pilotesActifDiv = @pilotesActifDiv
-
-
 
 
      # @players = Player.all.sort_by{|player| player.avg_ranking}
 
      ####
-
 
 
      @classementScores = Resultat.division_courant(@divisionId).saison_courant(@saisonId).
@@ -55,13 +50,9 @@ class ClassementsController < ApplicationController
 
     @resultatsFiltres = Resultat.group_by_pilote.select(
         'pilote_id, SUM(score) AS total, COUNT(course) AS nbCourses' )
-
-
     
   #  @classementsBis = Resultat.division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@eventNum).group_by_pilote
-
   #  @classementsTer = Classement.sorted_by_days
-
 
     else
       
@@ -92,6 +83,30 @@ def destroy
     format.json { head :no_content }
   end
 end
+
+
+def documentedition
+  @eventId = params[:eventId]
+  @eventNum =  params[:numero]
+  @saisonId = params[:saisonId]
+  @divisionId = params[:divisionId]
+
+  @classements = Classement.event_courant(@eventId)
+
+  respond_to do |format|
+    format.html
+    format.png do
+    #  png = Grover.new(url_for(only_path: false)).to_png
+    png = Grover.new(url_for(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp)).to_png
+
+      send_data(png, disposition: 'inline', 
+                     filename: "ClassementPilotes.png", 
+                     type: 'application/png',
+                    format: 'A4')
+    end 
+  end
+end
+
 
 def toggle_creerclassements
   @eventId = params[:id]
@@ -159,8 +174,6 @@ def toggle_updateclassements
       #nbP19 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 19).count
       #nbP20 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 20).count
     
-
-
       classement.update(nb_p1:  nbP1)
       classement.update(nb_p2:  nbP2)
       classement.update(nb_p3:  nbP3)

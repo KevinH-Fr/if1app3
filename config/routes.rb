@@ -25,11 +25,15 @@ Rails.application.routes.draw do
     get 'documentedition', :on => :collection
   end
   
-  resources :classecuries
+  resources :classecuries  do
+    get 'documentedition', :on => :collection
+  end
   
   resources :parieurs
 
   resources :classements do
+    get 'documentedition', :on => :collection
+    
     member do
       get :toggle_creerclassements
       get :toggle_updateclassements
