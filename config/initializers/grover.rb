@@ -11,6 +11,9 @@ Grover.configure do |config|
         width: 640,
         height: 1080
       },
+
+    #  full_page: true,
+
       prefer_css_page_size: true,
       emulate_media: 'screen',
     #  bypass_csp: true,

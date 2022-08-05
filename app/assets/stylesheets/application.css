@@ -83,12 +83,10 @@ th, td {
 
 .col_rank_gain{
   color: rgb(12, 150, 12);
-  background-color: rgb(85, 84, 84);
 }
 
 .col_rank_perte{
   color: rgb(180, 15, 15);
-  background-color: rgb(85, 84, 84);
 }
 
 .col_green{
@@ -151,6 +149,10 @@ th, td {
   text-align: center;
  }
 
+
+ .cols_hidden {
+  width: 50px;
+ }
  /* format des image ecurie avec nom pilote au dessus : */
 
  .contenant {

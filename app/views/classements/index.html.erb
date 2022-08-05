@@ -14,7 +14,7 @@
 
     <%# document %>
     <% numGp = Event.find(@eventId).numero %>
-    <%= link_to "Document", documentedition_classements_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp), class:"btn btn-sm btn-warning", style:"margin: 2px"  %>
+    <%= link_to "Document", documentedition_classements_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp), class:"btn btn-sm btn-success", style:"margin: 2px"  %>
 
     <br/><br/>
 

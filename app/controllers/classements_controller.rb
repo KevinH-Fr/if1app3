@@ -81,6 +81,9 @@ def documentedition
   @saisonId = params[:saisonId]
   @divisionId = params[:divisionId]
 
+  @circuitId = Event.find(@eventId).circuit_id
+  @circuitNom = Circuit.find(@circuitId).pays
+
   @classements = Classement.event_courant(@eventId)
 
   respond_to do |format|
@@ -89,7 +92,7 @@ def documentedition
     #  png = Grover.new(url_for(only_path: false)).to_png
     png = Grover.new(url_for(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp)).to_png
 
-    customFilename = "ClassementPilotes_gp#{@eventId}"" .png"
+    customFilename = "ClassPilotes_" "S#{@saisonId}_" "D#{@divisionId}_" "GP#{@eventId}_" "#{@circuitNom}_" " .png"
 
       send_data(png, disposition: 'inline', 
                      filename: customFilename, 
