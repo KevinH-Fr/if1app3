@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   resources :pilotes
 
   resources :resultats do
-    get 'listebis', :on => :collection
+    get 'documentedition', :on => :collection
   end
   
   resources :classecuries

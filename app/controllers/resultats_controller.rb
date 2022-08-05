@@ -142,7 +142,7 @@ class ResultatsController < ApplicationController
     end
   end
 
-  def listebis
+  def documentedition
     @eventId = params[:eventId]
     @eventNum =  params[:numero]
     @saisonId = params[:saisonId]
@@ -161,7 +161,7 @@ class ResultatsController < ApplicationController
       png = Grover.new(url_for(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp)).to_png
 
         send_data(png, disposition: 'inline', 
-                       filename: "filename.png", 
+                       filename: "Resultats.png", 
                        type: 'application/png',
                       format: 'A4')
       end 

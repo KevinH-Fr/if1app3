@@ -9,6 +9,6 @@
 
 # focntionne en dev :
 
-WickedPdf.config = {
-  :exe_path => 'C:\wkhtmltopdf\bin\wkhtmltopdf.exe'
-}
+#WickedPdf.config = {
+#  :exe_path => 'C:\wkhtmltopdf\bin\wkhtmltopdf.exe'
+#}

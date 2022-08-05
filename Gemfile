@@ -16,10 +16,12 @@ gem 'kaminari'
 gem "sassc-rails"
 gem 'cloudinary'
 gem "hotwire-rails"
-gem 'wicked_pdf'
 
-gem "wkhtmltopdf-binary", group: :development
-gem "wkhtmltopdf-heroku", group: :production
+
+#gem 'wicked_pdf'
+
+#gem "wkhtmltopdf-binary", group: :development
+#gem "wkhtmltopdf-heroku", group: :production
 
 #gem 'imgkit'
 

@@ -156,7 +156,7 @@ th, td {
     font-size: large;
   }
 
-  h1 {
+  .titre_doc {
     text-align: center;
     color: white;
     font-family: "F1regular";
@@ -165,11 +165,23 @@ th, td {
   #imgDrapeau{
     position: absolute;
     top: 2%;
-    left: 85%;
+    left: 80%;
   }
 
   #imgLogoIf1{
     position: absolute;
-    top: 2%;
+    top: 3%;
     left: 1%;
+  }
+
+  .hr_doc{
+    border-top: 2px solid  #ccc;
+    background-color: #ccc;
+   
+  }
+
+  .btns_edition{
+    position: absolute;
+    top: 2%;
+    left: 100%;
   }
