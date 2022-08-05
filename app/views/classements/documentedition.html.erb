@@ -14,13 +14,15 @@
   <% @numGp = Event.find(@eventId).numero   %>
     <table style="margin-left:auto;margin-right:auto">
       <thead class="table-dark">
-        <tr>
+       
           <th class="th_doc">#</th>
           <th class="th_doc">Pilote</th>
           <th class="th_doc">Points</th>
-          <th class="cols_hide">+-</th>
-        </tr>
+          <th class="th_doc">+-</th>
+         
+       
       </thead>
+  
       <tbody>
         <tr>
           <% @classements.order(:position).limit(20).each do | classement | %>
@@ -51,7 +53,7 @@
                <% @valDeltaRank = classement.position.to_i - rankN_1.to_i %>
                
                  <td class="cols_hide">
-                  <% if @valDeltaRank < 0 %>
+                  <% if @valDeltaRank <= 0 %>
                       <strong style="color:green;">
                       <%= sprintf("%+d", @valDeltaRank) %>
                       </strong>

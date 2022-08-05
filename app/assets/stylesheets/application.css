@@ -49,6 +49,7 @@ textarea {
 th, td {
    text-align: left;
    font-weight: bold;
+   
  /*  max-width: 50px; */
 }
 
@@ -57,15 +58,24 @@ th, td {
   color: white;
   font-size: large;
   text-align: center;
+  
 }
 
+.th_doc_delta {
+  background-color: rgb(37, 36, 36);
+  color: white;
+  font-size: large;
+  text-align: center;
+}
 
 .bouton {
   font-size: xx-small;
 }
+
+ /*
 .col_actions {
- /* max-width: 60px; */
-}
+ max-width: 60px;
+} */
 
 .col_centree{
   text-align: center;
@@ -73,10 +83,12 @@ th, td {
 
 .col_rank_gain{
   color: rgb(12, 150, 12);
+  background-color: rgb(85, 84, 84);
 }
 
 .col_rank_perte{
   color: rgb(180, 15, 15);
+  background-color: rgb(85, 84, 84);
 }
 
 .col_green{
@@ -115,13 +127,12 @@ th, td {
  .cols_pos_score {
     background-color: rgb(255, 255, 255);
     width: 80px;
+    height: 20px;
     font-weight: bold;
-    font-size: large;
+    font-size: x-large;
     color: rgb(0, 0, 0);
     text-align: center;
-    
-    border: 8px solid  #313130;
-    
+    box-shadow:inset 0px 0px 0px 4px #313130;
  }
 
  .cols_solde {
@@ -130,10 +141,14 @@ th, td {
   font-weight: bold;
   font-size: x-large;
   color: rgb(0, 0, 0);
+  
 }
 
  .cols_hide {
-  background-color: #313130;
+  width: 50px;
+  background-color: #4a4a48;
+  box-shadow:inset 0px 0px 0px 4px #313130;
+  text-align: center;
  }
 
  /* format des image ecurie avec nom pilote au dessus : */
@@ -142,6 +157,7 @@ th, td {
     position: relative;
     text-align: left;
     color: white;
+   
   }
   
   .texte_centrer {
@@ -151,6 +167,7 @@ th, td {
     transform: translate(0%, -50%);
     font-weight: bold;
     font-size: large;
+   
   }
 
   .titre_doc {
