@@ -36,12 +36,6 @@ class ClassementsController < ApplicationController
       @pilotesActifDiv = Pilote.division_courant(@divisionId).statut_actif
       @pilotesActifDiv = @pilotesActifDiv
 
-
-     # @players = Player.all.sort_by{|player| player.avg_ranking}
-
-     ####
-
-
      @classementScores = Resultat.division_courant(@divisionId).saison_courant(@saisonId).
                         numero_until_courant(@eventNum).group_by_pilote
     
@@ -50,9 +44,6 @@ class ClassementsController < ApplicationController
 
     @resultatsFiltres = Resultat.group_by_pilote.select(
         'pilote_id, SUM(score) AS total, COUNT(course) AS nbCourses' )
-    
-  #  @classementsBis = Resultat.division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@eventNum).group_by_pilote
-  #  @classementsTer = Classement.sorted_by_days
 
     else
       
@@ -84,7 +75,6 @@ def destroy
   end
 end
 
-
 def documentedition
   @eventId = params[:eventId]
   @eventNum =  params[:numero]
@@ -99,8 +89,10 @@ def documentedition
     #  png = Grover.new(url_for(only_path: false)).to_png
     png = Grover.new(url_for(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp)).to_png
 
+    customFilename = "ClassementPilotes_gp#{@eventId}"" .png"
+
       send_data(png, disposition: 'inline', 
-                     filename: "ClassementPilotes.png", 
+                     filename: customFilename, 
                      type: 'application/png',
                     format: 'A4')
     end 
