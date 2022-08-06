@@ -70,12 +70,6 @@ def documentedition
   @circuitId = Event.find(@eventId).circuit_id
   @circuitNom = Circuit.find(@circuitId).pays
 
-
-#  @resultats = Resultat.division_courant(@divisionId).saison_courant(@saisonId).
- # numero_until_courant(@eventNum).group_by_ecurie.select(
-  #  'ecurie, SUM(score) AS total')
-
-
   @resultats = Resultat.division_courant(@divisionId).saison_courant(@saisonId).
   numero_until_courant(@eventNum).
   group_by_ecurie.select('ecurie, SUM(score) AS total')
@@ -88,7 +82,7 @@ def documentedition
     #  png = Grover.new(url_for(only_path: false)).to_png
     png = Grover.new(url_for(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp)).to_png
 
-    customFilename = "ClassEcuries_" "S#{@saisonId}_" "D#{@divisionId}_" "GP#{@eventId}_" "#{@circuitNom}_" " .png"
+    customFilename = "ClassEcuries_" "S#{@saisonId}_" "D#{@divisionId}_" "GP#{@eventId}_" "#{@circuitNom}"".png"
 
       send_data(png, disposition: 'inline', 
                      filename: customFilename, 

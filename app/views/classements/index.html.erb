@@ -12,10 +12,8 @@
 
     <%= render "shared/eventactif" %>
 
-    <%# document %>
-    <% numGp = Event.find(@eventId).numero %>
-    <%= link_to "Document", documentedition_classements_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp), class:"btn btn-sm btn-success", style:"margin: 2px"  %>
-
+     <%= link_to "Générer image",   documentedition_classements_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-sm btn-success" %>
+ 
     <br/><br/>
 
     <%# boutons crea classement %>
@@ -103,9 +101,10 @@
     </table> <hr/>
         
     <%# PDF event actif %>
-    <% numGp = Event.find(@eventId).numero %>
-    <%= link_to "PDF",  classements_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp, format: :pdf), class:"btn btn-dark" %>
-
+    <%# numGp = Event.find(@eventId).numero %>
+    <%#= link_to "PDF",  classements_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp, format: :pdf), class:"btn btn-dark" %>
+    <%#= link_to "Générer image",   documentedition_classements_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-sm btn-success" %>
+ 
    <% end %>
 
 <% else %>
