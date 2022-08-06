@@ -16,19 +16,19 @@ Grover.configure do |config|
 
       prefer_css_page_size: true,
       emulate_media: 'screen',
-    #  bypass_csp: true,
-    #  media_features: [{ name: 'prefers-color-scheme', value: 'dark' }],
-    #  timezone: 'Australia/Sydney',
+      bypass_csp: true,
+      media_features: [{ name: 'prefers-color-scheme', value: 'dark' }],
+      timezone: 'Australia/Sydney',
     #  vision_deficiency: 'deuteranopia',
-    #  extra_http_headers: { 'Accept-Language': 'en-US' },
-    #  geolocation: { latitude: 59.95, longitude: 30.31667 },
+      extra_http_headers: { 'Accept-Language': 'en-US' },
+      geolocation: { latitude: 59.95, longitude: 30.31667 },
     #  focus: '#some-element',
     #  hover: '#another-element',
-    #  cache: false,
+      cache: false,
      # timeout: 0, # Timeout in ms. A value of `0` means 'no timeout'
      # request_timeout: 3000, # Timeout when fetching the content (overloads the `timeout` option)
      # convert_timeout: 2000, # Timeout when converting the content (overloads the `timeout` option, only applies to PDF conversion)
-     # launch_args: ['--font-render-hinting=medium'],
+     launch_args: ['--font-render-hinting=medium'],
      # wait_until: 'domcontentloaded'
     }
   end
