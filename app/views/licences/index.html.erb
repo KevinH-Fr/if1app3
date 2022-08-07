@@ -35,6 +35,7 @@
         <tr>
         
           <th>Titulaires</th>
+          <th>Ecurie</th>
           <th>perdus</th>
           <th>recupérés</th>
           <th colspan="4">Actions</th>
@@ -45,6 +46,12 @@
           <% @licencesEvent.each do | licence| %>
           
             <td> <%= Pilote.find(licence.pilote_id).nom  %> </td>
+            <td>                  
+              <% idEcurie = Pilote.find(licence.pilote_id).ecurie %> 
+                <% if Equipe.find(idEcurie).ecusson.present? %>
+                  <%= image_tag Equipe.find(idEcurie).ecusson, style: "width: 100px; display: block", class: "img-fluid rounded" %>
+                <% end %>
+            </td>
             <td class="col_centree"> <%= licence.penalite %> </td>
             <td class="col_centree"> <%= licence.recupere %> </td>
     

@@ -86,6 +86,6 @@ class EquipesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def equipe_params
-      params.require(:equipe).permit(:nom, :text, :logo, :voiture)
+      params.require(:equipe).permit(:nom, :text, :logo, :voiture, :ecusson)
     end
 end

@@ -4,7 +4,8 @@
 
   <%= render @equipe %>
 
-  <%= image_tag(@equipe.logo, style: "width: 400px; display: block", class: "img-fluid rounded") if @equipe.logo.attached? %>
+  <%= image_tag(@equipe.logo, style: "width: 400px; display: block", class: "img-fluid rounded") if @equipe.logo.attached? %> <br>
+  <%= image_tag(@equipe.ecusson, style: "width: 100px; display: block", class: "img-fluid rounded") if @equipe.ecusson.attached? %>
   <%= image_tag(@equipe.voiture, style: "width: 400px; display: block", class: "img-fluid rounded") if @equipe.voiture.attached? %>
 
     
