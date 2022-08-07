@@ -74,6 +74,9 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :synthlicences
+  resources :synthlicences do
+    get 'documentedition', :on => :collection
+  end
+    
 
 end

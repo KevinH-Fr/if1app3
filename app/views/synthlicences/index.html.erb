@@ -9,6 +9,12 @@
 
     <%= render "shared/eventactif" %>
 
+    <%# document %>
+    <% numGp = Event.find(@eventId).numero %>
+    <%= link_to "Générer image",   documentedition_synthlicences_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp, format: :png), class:"btn btn-sm btn-success" %>
+  
+    <br/><br/>
+
     <%# table des situation licences pilotes titulaires %>
 
     <div class="table-responsive">

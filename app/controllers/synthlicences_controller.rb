@@ -38,4 +38,35 @@ class SynthlicencesController < ApplicationController
     end
   end
 
+  def documentedition
+    @eventId = params[:eventId]
+    @eventNum =  params[:numGp]
+    @saisonId = params[:saisonId]
+    @divisionId = params[:divisionId]
+  
+    @circuitId = Event.find(@eventId).circuit_id
+    @circuitNom = Circuit.find(@circuitId).pays
+
+    @licencesValDepart = 12
+  
+    @licencesFiltres = Licence.joins(:event).where(
+      'numero <= :numero AND 
+      saison_id = :saison_id AND 
+      division_id = :division_id',  
+      numero: params[:numGp],
+      saison_id: params[:saisonId],
+      division_id: params[:divisionId]).group(:event_id, :penalite, :recupere, :pilote_id)
+      .select('pilote_id, event_id, penalite, recupere, SUM(penalite) AS total_penalite, SUM(recupere) AS total_recupere')
+  
+    respond_to do |format|
+      format.html
+      format.png do
+        png = Grover.new(url_for(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @eventNum)).to_png
+        customFilename = "Licences" "S#{@saisonId}_" "D#{@divisionId}_" "GP#{@eventId}_" "#{@circuitNom}"".png"
+  
+        send_data(png, disposition: 'inline', filename: customFilename, type: 'application/png', format: 'A4')
+      end 
+    end
+  end
+
 end

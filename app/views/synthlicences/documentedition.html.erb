@@ -1,0 +1,64 @@
+
+<body style="background-color: #313130;">
+
+ <br/> 
+ <h1 class="titre_doc"> Licences </h1>  
+ <br> <br>
+
+ <%# haut de page depuis partial %>
+ <%= render "shared/hautpdf" %>
+ <%# table des situation licences pilotes titulaires %>
+
+      <table class="table table-striped table-bordered table-hover">
+        <thead class="table-dark">
+          <tr>
+            <th class="th_doc">Titulaires</th>
+            <th class="th_doc">Val départ</th>
+            <th class="th_doc">perdus</th>
+            <th class="th_doc">recupérés</th>
+            <th class="th_doc">Solde</th>
+          </tr>
+        </thead>
+
+            <tbody>
+            <tr>
+            <% @licencesFiltres.each_with_index do | licence, i| %>
+            
+              <td>  
+                <div class="contenant">
+                  <% idPilote = licence.pilote_id %> 
+                  <% idEcurie = Pilote.find(idPilote).ecurie %> 
+                  <% nomPilote = Pilote.find(idPilote).nom %> 
+                  <%= image_tag Equipe.find(idEcurie).logo, style: "width: 300px; display: block", class: "img-fluid rounded" %>
+                    <div class="texte_centrer">
+                      <%= nomPilote %>
+                    </div>
+                </div>
+              </td> 
+
+                
+                <td class="cols_pos_score">
+                <%= @licencesValDepart %>
+                </td>
+                <td class="cols_pos_score">
+                    <%= licence.total_penalite %>
+                </td>
+                <td class="cols_pos_score">
+                    <%= licence.total_recupere %>
+                </td>
+                <td class="cols_pos_score">
+                <strong>
+                    <%= @licencesValDepart.to_i - licence.total_penalite.to_i + licence.total_recupere.to_i %>
+                </strong>
+                </td>
+                
+            </tr>
+            <% end %>
+        </tbody>
+      </table>
+
+  <%# bas de page depuis partial %>
+  <%= render "shared/baspdf" %>
+
+
+</body>
