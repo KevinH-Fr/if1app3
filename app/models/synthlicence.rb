@@ -1,0 +1,2 @@
+class Synthlicence < ApplicationRecord
+end

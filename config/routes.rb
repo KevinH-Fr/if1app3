@@ -74,4 +74,6 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :synthlicences
+
 end
