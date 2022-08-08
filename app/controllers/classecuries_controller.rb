@@ -84,10 +84,8 @@ def documentedition
 
     customFilename = "ClassEcuries_" "S#{@saisonId}_" "D#{@divisionId}_" "GP#{@eventId}_" "#{@circuitNom}"".png"
 
-      send_data(png, disposition: 'inline', 
-                     filename: customFilename, 
-                     type: 'application/png',
-                    format: 'A4')
+      send_data(png, disposition: 'inline', filename: customFilename, 
+                     type: 'application/png', format: 'A4')
     end 
   end
 end
