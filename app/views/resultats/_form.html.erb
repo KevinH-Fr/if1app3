@@ -81,7 +81,7 @@
 
       <div> <br>
           <strong>DNF | </strong>
-          <%#= form.check_box :dnf, { data: { action: "change->form-element#remotesubmit"}} %>
+          <%= form.check_box :dnf, { data: { action: "change->form-element#remotesubmit"}} %>
       </div>
       <div> <br>
           <strong>DNS | </strong>
@@ -149,10 +149,10 @@
           <% end %>
         <% end %> 
 
-        <% statutDnf = form.object.dnf %>
-          <% if statutDnf == true %>
-            <% scoreCourse = 0 %>
-          <% end %>
+        <%# statutDnf = form.object.dnf %>
+          <%# if statutDnf == true %>
+            <%# scoreCourse = 0 %>
+          <%# end %>
        
 
         <% resultatDotd = form.object.dotd %>
