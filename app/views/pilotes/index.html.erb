@@ -27,8 +27,6 @@
         <br>
       </table>
 
-
-
       <table>
         <tr>
           <td>
@@ -116,9 +114,9 @@
 
             <td>
                 <% if pilote.ecurie.present?%>
-                     <% Equipe.find(pilote.ecurie).nom %>
-                        <% if Equipe.find(pilote.ecurie).logo.present? %>
-                             <%= image_tag(Equipe.find(pilote.ecurie).logo, class: "rounded", style: "max-width:150px") %> 
+                     <% idEcurie = Pilote.find(pilote.id).ecurie %> 
+                        <% if Equipe.find(pilote.ecurie).ecusson.present? %>
+                             <%= image_tag Equipe.find(idEcurie).ecusson, style: "width: 50px; display: block", class: "img-fluid rounded" %>
                         <% end %>
                 <% end %>
             </td>

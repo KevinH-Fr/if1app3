@@ -36,7 +36,7 @@
           <th style="text-align: center;">total</th>
 
          <%# <th>rank n-1</th> %>
-          <th style="text-align: center;">delta rank </th>
+          <th style="text-align: center;">+- </th>
 
         <%#  <th>nb p1</th>
           <th>nb p2</th>
@@ -62,8 +62,8 @@
                   <% idEcurie = Pilote.find(classement.pilote_id).ecurie %>  
                   <% nomEcurie = Equipe.find(idEcurie).nom %> 
                   <% nomEcurie %>
-                  <% if Equipe.find(idEcurie).logo.present? %>
-                      <%= image_tag Equipe.find(idEcurie).logo, style: "width: 300px; display: block", class: "img-fluid rounded" %>
+                  <% if Equipe.find(idEcurie).ecusson.present? %>
+                      <%= image_tag Equipe.find(idEcurie).ecusson, style: "width: 50px; display: block", class: "img-fluid rounded" %>
                   <% end %>
               </td>
 
