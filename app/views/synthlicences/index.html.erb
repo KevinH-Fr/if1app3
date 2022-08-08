@@ -23,7 +23,7 @@
           <tr>
             <th>Titulaires</th>
             <th>Ecuries</th>
-            <th>Val départ</th>
+            <th>départ</th>
             <th>perdus</th>
             <th>recupérés</th>
             <th>Solde</th>
@@ -41,24 +41,23 @@
                 </td>
                 <td>
                   <% idEcurie = Pilote.find(licence.pilote_id).ecurie %> 
-                  <% if Equipe.find(idEcurie).logo.present? %>
-                    <%= image_tag Equipe.find(idEcurie).logo, style: "width: 300px; display: block", class: "img-fluid rounded" %>
+                  <% if Equipe.find(idEcurie).ecusson.present? %>
+                    <%= image_tag Equipe.find(idEcurie).ecusson, style: "width: 50px; display: block", class: "img-fluid rounded" %>
                   <% end %>
                 </td>
                 
-                <td style="text-align: center;">
-                <%= @licencesValDepart %>
+                <td class="col_centree">
+                  <%= @licencesValDepart %>
                 </td>
-                <td style="text-align: center;">
-                    <%= licence.total_penalite %>
+
+                <td class="col_centree">
+                  <strong class="col_rank_perte"> <%= licence.total_penalite %>
                 </td>
-                <td style="text-align: center;">
-                    <%= licence.total_recupere %>
+               <td class="col_centree">
+                  <strong class="col_rank_gain"> <%= licence.total_recupere %>
                 </td>
-                <td style="text-align: center;">
-                <strong>
-                    <%= @licencesValDepart.to_i - licence.total_penalite.to_i + licence.total_recupere.to_i %>
-                </strong>
+               <td class="col_centree">
+                  <strong> <%= @licencesValDepart.to_i - licence.total_penalite.to_i + licence.total_recupere.to_i %> </strong>
                 </td>
                 
             </tr>

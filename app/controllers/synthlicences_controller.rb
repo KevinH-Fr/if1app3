@@ -24,15 +24,16 @@ class SynthlicencesController < ApplicationController
       @pilotesActifDiv = Pilote.all.where(statut: "actif", division_id: @divisionId) 
       @licencesValDepart = 12
       @licencesEvent = Licence.all.where(event_id: @eventId)
-      
-      @licencesFiltres = Licence.joins(:event).where(
-        'numero <= :numero AND 
-        saison_id = :saison_id AND 
-        division_id = :division_id',  
-        numero: params[:numGp],
-        saison_id: params[:saisonId],
-        division_id: params[:divisionId]).group(:event_id, :penalite, :recupere, :pilote_id)
-        .select('pilote_id, event_id, penalite, recupere, SUM(penalite) AS total_penalite, SUM(recupere) AS total_recupere')
+
+        @licencesFiltres = Licence.joins(:event).where(
+          'numero <= :numero AND 
+          saison_id = :saison_id AND 
+          division_id = :division_id',  
+          numero: params[:numGp],
+          saison_id: params[:saisonId],
+          division_id: params[:divisionId])
+          .group_by_pilote.select('pilote_id, SUM(penalite) AS total_penalite, SUM(recupere) AS total_recupere')
+
     else
       @pilotesActifDiv = Pilote.all
     end

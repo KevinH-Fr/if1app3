@@ -49,13 +49,11 @@
             <td>                  
               <% idEcurie = Pilote.find(licence.pilote_id).ecurie %> 
                 <% if Equipe.find(idEcurie).ecusson.present? %>
-                  <%= image_tag Equipe.find(idEcurie).ecusson, style: "width: 100px; display: block", class: "img-fluid rounded" %>
+                  <%= image_tag Equipe.find(idEcurie).ecusson, style: "width: 50px; display: block", class: "img-fluid rounded" %>
                 <% end %>
             </td>
-            <td class="col_centree"> <%= licence.penalite %> </td>
-            <td class="col_centree"> <%= licence.recupere %> </td>
-    
-            <%#= link_to "Calcul indiv", toggle_calculrecuplicencesIndiv_licence_path(licence.id), class:"btn btn-warning" %>
+            <td class="col_centree">  <strong class="col_rank_perte">  <%= licence.penalite %> </td>
+            <td class="col_centree">  <strong class="col_rank_gain"> <%= licence.recupere %> </td>
       
             <td>
               <%= link_to '', licence, class:"fa-solid fa-eye btn btn-sm btn-primary" %> 
