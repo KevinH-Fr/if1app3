@@ -44,7 +44,7 @@
               
             <td> <%= link_to circuit.nom, circuit %> </td>
             <td> <%= circuit.pays %> </td>
-            <td> <%= image_tag(circuit.drapeau, style: "width: 100px; display: block", class: "img-fluid rounded") if circuit.drapeau.attached? %>  </td>
+            <td> <%= image_tag(circuit.drapeau, style: "width: 80px; display: block", class: "img-fluid rounded") if circuit.drapeau.attached? %>  </td>
             <td> <%= image_tag(circuit.carte, style: "width: 100px; display: block", class: "img-fluid rounded") if circuit.carte.attached? %>  </td>
                   <td>
                       <%= link_to '', circuit, class:"fa-solid fa-eye btn btn-primary" %> 
@@ -67,6 +67,6 @@
     <% if current_user.admin? %>
       <%= link_to "Nouveau circuit", new_circuit_path, class:"btn btn-primary" %>
     <% end %>
-<% else %>
-  <br/>   <strong>Vous n'avez pas les droits...</strong>
+<% else  %>
+       <br/>   <strong>Vous n'avez pas les droits...</strong>
 <% end %>

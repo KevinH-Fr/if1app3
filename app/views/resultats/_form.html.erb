@@ -149,11 +149,13 @@
           <% end %>
         <% end %> 
 
-        <%# statutDnf = form.object.dnf %>
-          <%# if statutDnf == true %>
-            <%# scoreCourse = 0 %>
-          <%# end %>
-       
+        <% if form.object.dnf == true %>
+          <% statutDnf = true %>
+           <% scoreCourse = 0 %>
+        <% else %>
+          <% statutDnf = false %>
+           <% scoreCourse = scoreCourse %>
+        <% end %>
 
         <% resultatDotd = form.object.dotd %>
         <% scoreDotd = 0 %>
