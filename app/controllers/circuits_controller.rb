@@ -7,6 +7,8 @@ class CircuitsController < ApplicationController
 
     @q = Circuit.ransack(params[:q])
     @circuits = @q.result(distinct: true)
+
+    @circuits = @circuits.order(:pays)
   end
 
   # GET /circuits/1 or /circuits/1.json

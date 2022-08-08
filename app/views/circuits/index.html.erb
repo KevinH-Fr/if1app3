@@ -19,12 +19,12 @@
          <div class="col-md-auto">
             <%= search_form_for(@q, url: circuits_path, method: :get, class:'d-flex') do |f| %>
                 <%= f.hidden_field :nom_eq, value: "" %>
-                <%= f.submit "Effacer filtres", class:"btn btn-sm btn-outline-danger" %>
+                <%= f.submit "Effacer filtres", class:"btn btn-outline-danger" %>
             <% end %>
         </div>
       </div>
 
-  <br/>  <hr/>
+ <hr/>
   
   <div class="table-responsive">
     <table class="table table-striped table-bordered table-hover">
@@ -62,7 +62,7 @@
       </tbody>
     </table>
   </div>
-  <br>
+
 
     <% if current_user.admin? %>
       <%= link_to "Nouveau circuit", new_circuit_path, class:"btn btn-primary" %>

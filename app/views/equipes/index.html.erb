@@ -2,7 +2,7 @@
 
 <br/>
 
-      <h1 class="fa-solid fa-car fa-2xl fw-bold fs-1"> - Equipes </h1> 
+      <h1 class="fa-solid fa-car fa-2xl fw-bold fs-1"> - Constructeurs </h1> 
       
       <br/> <br/> <hr/> <br/>
 
@@ -11,6 +11,7 @@
       <thead class="table-dark">
         <tr>
           <th>Nom</th>
+          <th>Ecusson</th>
           <th>Logo</th>
           <th>Voiture</th>
           <th colspan="4">Actions</th>
@@ -22,6 +23,7 @@
           <tr>
             <td> <%= link_to equipe.nom, equipe %> </td>
             <td>  <%= image_tag(equipe.logo, style: "width: 200px; display: block", class: "img-fluid rounded") if equipe.logo.attached? %>  </td> 
+            <td>   <%= image_tag(equipe.ecusson, style: "width: 200px; display: block", class: "img-fluid rounded") if equipe.ecusson.attached? %>  </td> 
             <td>   <%= image_tag(equipe.voiture, style: "width: 200px; display: block", class: "img-fluid rounded") if equipe.voiture.attached? %>  </td> 
 
             <td width="5%">
