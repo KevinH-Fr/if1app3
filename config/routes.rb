@@ -46,8 +46,9 @@ Rails.application.routes.draw do
 
   resources :cotes do
     member do
-      get :toggle_calculcotes
-      get :cote_victoire
+      get :toggle_creercotes
+      get :toggle_updatecotes
+      get :toggle_supprimercotes
     end
   end
 

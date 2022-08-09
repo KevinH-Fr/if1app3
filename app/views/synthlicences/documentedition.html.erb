@@ -9,14 +9,13 @@
  <%= render "shared/hautpdf" %>
  <%# table des situation licences pilotes titulaires %>
 
-      <table class="table table-striped table-bordered table-hover">
+      <table style="margin-left:auto;margin-right:auto">
         <thead class="table-dark">
           <tr>
-            <th class="th_doc">Titulaires</th>
-            <th class="th_doc">Val départ</th>
-            <th class="th_doc">perdus</th>
-            <th class="th_doc">recupérés</th>
-            <th class="th_doc">Solde</th>
+            <th class="th_doc">pilote</th>
+            <th class="th_doc">perte</th>
+            <th class="th_doc">gain</th>
+            <th class="th_doc">solde</th>
           </tr>
         </thead>
 
@@ -36,15 +35,15 @@
                 </div>
               </td> 
 
-                
-                <td class="cols_pos_score">
-                <%= @licencesValDepart %>
-                </td>
-                <td class="cols_pos_score">
+               <td class="cols_pos_score">
+                  <strong class="col_rank_perte">
                     <%= licence.total_penalite %>
+                  </strong>
                 </td>
-                <td class="cols_pos_score">
+               <td class="cols_pos_score">
+                  <strong class="col_rank_gain">
                     <%= licence.total_recupere %>
+                  </strong>
                 </td>
                 <td class="cols_pos_score">
                 <strong>

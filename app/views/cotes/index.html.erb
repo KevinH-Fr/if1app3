@@ -6,8 +6,12 @@
 
   <% if (@eventId).present? %> 
     <%= render "shared/eventactif" %>
-    
-    <%#= link_to "Calculs cotes", toggle_calculcotes_cote_path(@eventId), class:"btn btn-success", style:"margin: 2px" %>
+
+        <%# boutons crea classement %>
+    <%= link_to "Créer", toggle_creercotes_cote_path(@eventId), class:"btn btn-sm btn-warning", style:"margin: 2px"  %>
+    <%= link_to "Update", toggle_updatecotes_cote_path(@eventId), class:"btn btn-sm btn-primary", style:"margin: 2px" %>
+    <%= link_to "Supprimer", toggle_supprimercotes_cote_path(@eventId), class:"btn btn-sm btn-danger", style:"margin: 2px"%>
+
     <br><br>
 
     <%#= tableau data cotes %>
@@ -33,9 +37,9 @@
             </td>
            
 
-            <td> <%= cote.cote_victoire %> </td>
-            <td> <%= cote.cote_podium %> </td>
-            <td> <%= cote.cote_top10 %> </td>
+            <td> <%= cote.coteVictoire %> </td>
+            <td> <%= cote.cotePodium %> </td>
+            <td> <%= cote.coteTop10 %> </td>
         </tr>
         <% end %>
       </tbody>

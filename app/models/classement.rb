@@ -10,6 +10,8 @@ class Classement < ApplicationRecord
  scope :division_courant, -> (division_courant) { joins(:event).where("division_id = ?", division_courant)}
  scope :numero_until_courant, -> (numero_until_courant) { joins(:event).where("numero <= ?", numero_until_courant)}
 
+ scope :numero_precedent, -> (numero_precedent) { joins(:event).where("numero = ?", numero_precedent)}
+
  scope :order_by_score, -> { order('score').reverse }
 
  #scope :compte_p1, -> { where("(course) = 1").count}

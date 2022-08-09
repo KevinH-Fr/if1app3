@@ -12,7 +12,7 @@
 
     <%= render "shared/eventactif" %>
 
-     <%= link_to "Générer image",   documentedition_classements_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-sm btn-success" %>
+     <%= link_to "Générer image", documentedition_classements_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-sm btn-success" %>
  
     <br/><br/>
 
@@ -32,23 +32,11 @@
         <tr>
           <th style="text-align: center;">#</th>
           <th>Pilote</th>
-           <th>Ecurie</th>
+          <th>Ecurie</th>
           <th style="text-align: center;">total</th>
 
          <%# <th>rank n-1</th> %>
           <th style="text-align: center;">+- </th>
-
-        <%#  <th>nb p1</th>
-          <th>nb p2</th>
-          <th>nb p3</th>
-          <th>nb p4</th>
-          <th>nb p5</th>
-          <th>nb p6</th>
-          <th>nb p7</th>
-          <th>nb p8</th>
-          <th>nb p9</th>
-          <th>nb p10</th>
-         %>
 
         </tr>
       </thead>

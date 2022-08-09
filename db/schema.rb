@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_07_000912) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_09_101340) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -83,6 +83,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_000912) do
     t.integer "nb_p20"
     t.index ["event_id"], name: "index_classements_on_event_id"
     t.index ["pilote_id"], name: "index_classements_on_pilote_id"
+  end
+
+  create_table "cotes", force: :cascade do |t|
+    t.decimal "coteVictoire"
+    t.decimal "cotePodium"
+    t.decimal "coteTop10"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "pilote_id", null: false
+    t.integer "event_id", null: false
+    t.integer "position"
+    t.index ["event_id"], name: "index_cotes_on_event_id"
+    t.index ["pilote_id"], name: "index_cotes_on_pilote_id"
   end
 
   create_table "divisions", force: :cascade do |t|
@@ -217,6 +230,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_07_000912) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "classements", "events"
   add_foreign_key "classements", "pilotes"
+  add_foreign_key "cotes", "events"
+  add_foreign_key "cotes", "pilotes"
   add_foreign_key "events", "circuits"
   add_foreign_key "events", "divisions"
   add_foreign_key "events", "saisons"

@@ -94,31 +94,34 @@
             <%# gérer exception pour gp 1 plus tard %>
 
             <% numGp = Event.find(eventId).numero %>
-            <% numGp_prec = numGp - 1 %>
-            <% eventId_prec = Event.find_by(saison_id: saisonId, division_id: divisionId, numero: numGp_prec).id %>
+            <%# numGp_prec = numGp - 1 %>
 
+              <%# if numGp_prec => 1 %>
+                <%# eventId_prec = Event.find_by(saison_id: saisonId, division_id: divisionId, numero: numGp_prec).id %>
+              <%# end %>
+           
             <% typepari = form.object.paritype %>
             <% @montantPari = form.object.montant %>
               <% if typepari == "victoire" %>
-                <% @valCote = Classement.all.where(event_id: eventId_prec, pilote_id: piloteId).first.cote_victoire %>
+                <% @valCote = Cote.find_by(event_id: eventId, pilote_id: piloteId).coteVictoire %>
               <% end %>
                <% if typepari == "podium" %>
-                <% @valCote = Classement.all.where(event_id: eventId_prec, pilote_id: piloteId).first.cote_podium %>
+                <% @valCote = Cote.find_by(event_id: eventId, pilote_id: piloteId).cotePodium %>
               <% end %>
              <% if typepari == "top10" %>
-                <% @valCote = Classement.all.where(event_id: eventId_prec, pilote_id: piloteId).first.cote_top10 %>
+                <% @valCote = Cote.find_by(event_id: eventId, pilote_id: piloteId).coteTop10 %>
               <% end %>
                 <div> cote retenue | <strong>  <%= @valCote %> </strong>  </div>
                 <div> gains possibles | <strong>  <%= @valCote * form.object.montant %> </strong>  </div>
-                <div> montant parié  | <strong>  <%=  form.object.montant %> </strong>  </div>
+               <%# <div> montant parié  | <strong>   form.object.montant  </strong>  </div> %>
 
-                <br>
+                
           <% end %>
         <% end %>
         <%# valCote = valCote %> 
         <% form.label :cote, style: "display: block" %>
         <%= form.hidden_field :cote, value: @valCote %>
-        <br>
+        
         <%= form.hidden_field :solde, value: - form.object.montant  %>
 
     </div>
