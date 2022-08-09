@@ -64,6 +64,7 @@ class ParisController < ApplicationController
   end
 
   def edit
+    @event = Event.all
     @divisionId = params[:divisionId]
     @coureur = Pilote.statut_actif.division_courant(@divisionId).all
     @parieur = Pilote.statut_actif.division_non_courant(@divisionId).all

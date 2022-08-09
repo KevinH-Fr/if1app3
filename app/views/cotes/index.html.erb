@@ -37,9 +37,10 @@
             </td>
            
 
-            <td> <%= cote.coteVictoire %> </td>
-            <td> <%= cote.cotePodium %> </td>
-            <td> <%= cote.coteTop10 %> </td>
+            <td class="col_centree"> <%= number_with_precision(cote.coteVictoire, precision:2) %> </td>
+            <td class="col_centree"> <%= number_with_precision(cote.cotePodium, precision:2) %> </td>
+            <td class="col_centree"> <%= number_with_precision(cote.coteTop10, precision:2) %> </td>
+           
         </tr>
         <% end %>
       </tbody>

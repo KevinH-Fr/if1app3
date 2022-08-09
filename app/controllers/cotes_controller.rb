@@ -69,38 +69,31 @@ class CotesController < ApplicationController
 
       @cotesEvent = Cote.all.where(event_id: @eventId)
       @cotesEvent.each do |cote| 
-        if @numGp == 1
+        if @numGp == 1 # gestion exception pour premier gp
           cote.update(position: 1 )
           cote.update(coteVictoire: 4 )
           cote.update(cotePodium: 3 )
           cote.update(coteTop10: 2 )
         else
-
           @piloteId = cote.pilote_id
-
           eventN_1 = Event.find_by(saison_id: @saisonLiee, division_id: @divisionId, numero: @numGp - 1).id
-        
-         # max_points = Classement.find_by(event_id: eventN_1).max_points.score.to_i
           max_points = Classement.where(event_id: eventN_1).max_points.score.to_i
-
-          valScore = Classement.find_by(pilote_id: @piloteId, event_id: eventN_1).score
-          valPosition = Classement.find_by(pilote_id: @piloteId, event_id: eventN_1).position
-
-          valCoteBase = 1 + (((max_points - valScore)/100) * valPosition )
-
-          cote.update(position: valPosition )
-          cote.update(coteVictoire: valCoteBase + 1.4 )
-          cote.update(cotePodium:  valCoteBase + 0.9 )
-          cote.update(coteTop10:   valCoteBase + 0.3)
-         
-
+            if Classement.find_by(pilote_id: @piloteId, event_id: eventN_1).nil? # gestion exception nouveau pilote
+              valScore = 0
+              valPosition = Pilote.statut_actif.division_courant(@divisionId).count 
+            else
+              valScore = Classement.find_by(pilote_id: @piloteId, event_id: eventN_1).score
+              valPosition = Classement.find_by(pilote_id: @piloteId, event_id: eventN_1).position
+            end
+              valCoteBase = 1 + (((max_points.to_f - valScore)/100) * valPosition )
+              cote.update(position: valPosition )
+              cote.update(coteVictoire: valCoteBase + ((0.9 * valPosition) /1 )) 
+              cote.update(cotePodium:  valCoteBase + ((0.5 * valPosition) /1.5))
+              cote.update(coteTop10:   valCoteBase + ((0.3 * valPosition) /2))
         end 
-
       end
         redirect_to cotes_url(saisonId: @saisonLiee, eventId: @eventId, divisionId: @divisionId, numGp: @numGp), 
         notice: "les cotes ont bien été mises à jour"
-
-
     end
     
     def toggle_supprimercotes
@@ -113,9 +106,6 @@ class CotesController < ApplicationController
       redirect_to cotes_url(saisonId: @saisonId, eventId: @eventId, divisionId: @divisionId),
                    notice: "les cotes de l'event courant ont bien été supprimées"
     end
-    
-    
-
   
     private
   
