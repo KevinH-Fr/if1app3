@@ -19,7 +19,7 @@
       <thead class="table-dark">
         <tr>
           <th style="text-align: center;">#</th>
-          <th>Pilote</th>
+          <th colspan=2>Pilote</th>
           <th>victoire</th>
           <th>podium</th>
           <th>top10</th>
@@ -35,6 +35,14 @@
             <td>
               <%= Pilote.find(cote.pilote_id).nom %>
             </td>
+             <td> 
+                  <% idEcurie = Pilote.find(cote.pilote_id).ecurie %>  
+                  <% nomEcurie = Equipe.find(idEcurie).nom %> 
+                  <% nomEcurie %>
+                  <% if Equipe.find(idEcurie).ecusson.present? %>
+                      <%= image_tag Equipe.find(idEcurie).ecusson, style: "width: 50px; display: block", class: "img-fluid rounded" %>
+                  <% end %>
+              </td>
            
 
             <td class="col_centree"> <%= number_with_precision(cote.coteVictoire, precision:2) %> </td>

@@ -77,7 +77,9 @@ class CotesController < ApplicationController
         else
           @piloteId = cote.pilote_id
           eventN_1 = Event.find_by(saison_id: @saisonLiee, division_id: @divisionId, numero: @numGp - 1).id
-          max_points = Classement.where(event_id: eventN_1).max_points.score.to_i
+          if Classement.where(event_id: eventN_1).first.present? # si classement existe
+            @texteNotif = "les cotes ont bien été mises à jour"
+            max_points = Classement.where(event_id: eventN_1).max_points.score.to_i
             if Classement.find_by(pilote_id: @piloteId, event_id: eventN_1).nil? # gestion exception nouveau pilote
               valScore = 0
               valPosition = Pilote.statut_actif.division_courant(@divisionId).count 
@@ -90,10 +92,14 @@ class CotesController < ApplicationController
               cote.update(coteVictoire: valCoteBase + ((0.9 * valPosition) /1 )) 
               cote.update(cotePodium:  valCoteBase + ((0.5 * valPosition) /1.5))
               cote.update(coteTop10:   valCoteBase + ((0.3 * valPosition) /2))
+          else
+            @texteNotif = "le classement du GP précédent doit d'abord être créé"
+          end
+           
         end 
       end
         redirect_to cotes_url(saisonId: @saisonLiee, eventId: @eventId, divisionId: @divisionId, numGp: @numGp), 
-        notice: "les cotes ont bien été mises à jour"
+        notice: @texteNotif
     end
     
     def toggle_supprimercotes
