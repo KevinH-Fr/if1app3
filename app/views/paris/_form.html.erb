@@ -11,13 +11,13 @@
     </div>
   <% end %>
 
-
    <div>
-
-      <%= form.label :event, style: "display: block" %>
-      <%= form.select(:event_id, options_from_collection_for_select(
+      <% form.label :event, style: "display: block" %>
+      <%#= form.select(:event_id, options_from_collection_for_select(
                   @event,'id', 'date', :selected => @eventId), :include_blank => true) %>  
+      <%= form.text_field(:event_id, value: @eventId ) %>   
     </div>
+
     <br>
     
     <div>   
@@ -60,10 +60,16 @@
         form_element_target: "submitbtn"} %>
       <div>
         <%= form.label :coureur, style: "display: block" %>
-        <%= form.select(:coureur_id, options_from_collection_for_select(
+        <%#= form.select(:coureur_id, options_from_collection_for_select(
                @coureur,'id', 'nom', :selected => form.object.coureur_id), 
               {include_blank: true}, 
               {data: { action: "change->form-element#remotesubmit"}}) %>
+      
+       <%= form.select :coureur_id, Pilote.all.collect { | pilote | [pilote.nom, pilote.id] },
+              {include_blank: true}, 
+              {data: { action: "change->form-element#remotesubmit"}} %>
+
+      
       </div>
        <br>
       <div>
@@ -73,7 +79,7 @@
       </div>
        <br>
       <div>
-        <%= form.label :paritype, style: "display: block" %>
+        <%= form.label :type, style: "display: block" %>
         <%= form.select(:paritype, Pari.paritypes.keys, 
               {include_blank: true}, 
               {data: { action: "change->form-element#remotesubmit"}}) %>
@@ -105,14 +111,17 @@
               <% if typepari == "victoire" %>
                 <% @valCote = Cote.find_by(event_id: eventId, pilote_id: piloteId).coteVictoire %>
               <% end %>
-               <% if typepari == "podium" %>
+              <% if typepari == "podium" %>
                 <% @valCote = Cote.find_by(event_id: eventId, pilote_id: piloteId).cotePodium %>
               <% end %>
-             <% if typepari == "top10" %>
+              <% if typepari == "top10" %>
                 <% @valCote = Cote.find_by(event_id: eventId, pilote_id: piloteId).coteTop10 %>
               <% end %>
-                <div> cote retenue | <strong>  <%= @valCote %> </strong>  </div>
-                <div> gains possibles | <strong>  <%= @valCote * form.object.montant %> </strong>  </div>
+              <% if typepari == "pole" %>
+                <% @valCote = Cote.find_by(event_id: eventId, pilote_id: piloteId).cotePole %>
+              <% end %>
+                <div> cote retenue | <strong>  <%= number_with_precision(@valCote, precision: 2) %> </strong>  </div>
+                <div> gains possibles | <strong>  <%= number_with_precision(@valCote * form.object.montant, precision: 0) %> </strong>  </div>
                <%# <div> montant parié  | <strong>   form.object.montant  </strong>  </div> %>
 
                 

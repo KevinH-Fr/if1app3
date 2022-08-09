@@ -23,6 +23,8 @@ class ParisController < ApplicationController
 
     if params[:eventId]
       @eventId = params[:eventId]
+      @@eventId = params[:eventId]
+
       @eventNum = Event.find(@eventId).numero 
 
       @paris = Pari.event_courant(@eventId).all
@@ -70,12 +72,15 @@ class ParisController < ApplicationController
     @parieur = Pilote.statut_actif.division_non_courant(@divisionId).all
     
     @eventId = params[:eventId]
+    @@eventId = params[:eventId]
   end
 
   def create
     @divisionId = params[:divisionId]
     @pari = Pari.new(pari_params)
     @coureur = Pilote.all
+
+    @eventId = params[:eventId]
    
     @event = Event.all
     @pilote = Pilote.all
@@ -133,6 +138,7 @@ class ParisController < ApplicationController
 
       if Resultat.where(event_id: @eventId, pilote_id: coureurId).present?
         resultatCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.course
+        resultatQualif = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.qualification
       else
         resultatCoureur = 20
       end
@@ -140,7 +146,7 @@ class ParisController < ApplicationController
       pariMontant = pari.montant
       pariCote = pari.cote
 
-      if typePari == "victoire" && resultatCoureur == 1 || typePari == "podium" && resultatCoureur <= 3 || typePari == "top10" && resultatCoureur <= 10
+      if typePari == "victoire" && resultatCoureur == 1 || typePari == "podium" && resultatCoureur <= 3 || typePari == "top10" && resultatCoureur <= 10 || typePari == "pole" && resultatQualif == 1
 
           pari.update(resultat: true)
           pari.update(solde: pariMontant * pariCote - pariMontant )

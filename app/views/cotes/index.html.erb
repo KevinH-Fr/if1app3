@@ -1,7 +1,8 @@
 
 <% if user_signed_in? %>
-  <h1>Cotes Paris</h1>  <br/>
-
+  <br>
+  <h1 class="fa-solid fa-money-bill-1-wave fa-2xl fw-bold fs-1"> - Cotes Paris</h1>  <br/>
+  <br>
   <%= render "shared/choixevent" %>
 
   <% if (@eventId).present? %> 
@@ -23,6 +24,7 @@
           <th>victoire</th>
           <th>podium</th>
           <th>top10</th>
+          <th>pole</th>
         </tr>
       </thead>
 
@@ -44,17 +46,16 @@
                   <% end %>
               </td>
            
-
             <td class="col_centree"> <%= number_with_precision(cote.coteVictoire, precision:2) %> </td>
             <td class="col_centree"> <%= number_with_precision(cote.cotePodium, precision:2) %> </td>
             <td class="col_centree"> <%= number_with_precision(cote.coteTop10, precision:2) %> </td>
-           
+            <td class="col_centree"> <%= number_with_precision(cote.cotePole, precision:2) %> </td>
         </tr>
         <% end %>
       </tbody>
     </table>
 
-  <br/> <hr/>
+   <hr/>
         
     <%# PDF event actif %>
     <% numGp = Event.find(@eventId).numero %>

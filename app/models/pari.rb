@@ -9,7 +9,7 @@ class Pari < ApplicationRecord
     
     validates :paritype, presence: true
    
-    enum paritype: [:victoire, :podium, :top10]
+    enum paritype: [:victoire, :podium, :top10, :pole]
 
 
     scope :division_courant, -> (division_courant) { joins(:event).where("division_id = ?", division_courant)}
