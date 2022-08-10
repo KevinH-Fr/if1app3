@@ -45,11 +45,12 @@ Rails.application.routes.draw do
   end
 
   resources :cotes do
-    member do
-      get :toggle_creercotes
-      get :toggle_updatecotes
-      get :toggle_supprimercotes
-    end
+    get 'documentedition', :on => :collection
+      member do
+        get :toggle_creercotes
+        get :toggle_updatecotes
+        get :toggle_supprimercotes
+      end
   end
 
   resources :paris do

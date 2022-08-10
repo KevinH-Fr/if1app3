@@ -23,11 +23,8 @@ class CotesController < ApplicationController
         @eventNum = Event.find(@eventId).numero 
 
       #  eventN_1 = Event.find_by(saison_id: @saisonId, division_id: @divisionId, numero: @eventNum - 1).id
-        
-
        # @calculs_cotes = Resultat.saison_courant(@saisonId).division_courant(@divisionId).numero_until_courant(@eventNum)
         #.group_sum_order
-
       #  @cotes = Classement.event_courant(@eventId).order(:score).reverse
 
       @cotes = Cote.where(event: @eventId).order(:position)
@@ -41,6 +38,7 @@ class CotesController < ApplicationController
         format.pdf do
          render pdf: "CotesParis", template: "classements/liste", formats: [:html], layout: "pdf"
         end
+
       end
   
     end
@@ -112,6 +110,31 @@ class CotesController < ApplicationController
     
       redirect_to cotes_url(saisonId: @saisonId, eventId: @eventId, divisionId: @divisionId),
                    notice: "les cotes de l'event courant ont bien été supprimées"
+    end
+
+    def documentedition
+      @eventId = params[:eventId]
+      @eventNum =  params[:numero]
+      @saisonId = params[:saisonId]
+      @divisionId = params[:divisionId]
+  
+      @circuitId = Event.find(@eventId).circuit_id
+      @circuitNom = Circuit.find(@circuitId).pays
+
+      @cotes = Cote.where(event: @eventId).order(:position)
+  
+      respond_to do |format|
+        format.html
+        format.png do
+        #  png = Grover.new(url_for(only_path: false)).to_png
+        png = Grover.new(url_for(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp)).to_png
+  
+        customFilename = "Cotes_" "S#{@saisonId}_" "D#{@divisionId}_" "GP#{@eventNum}_" "#{@circuitNom}"".png"
+  
+          send_data(png, disposition: 'inline', filename: customFilename, 
+                         type: 'application/png', format: 'A4')
+        end 
+      end
     end
   
     private

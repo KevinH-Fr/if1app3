@@ -1,0 +1,53 @@
+
+<body style="background-color: #313130;">
+
+  <br>
+  <h1 class="titre_doc"> Cotes </h1>   <br><br>
+
+  <%# haut de page depuis partial %>
+  <%= render "shared/hautpdf" %>
+
+    <%#= tableau data cotes %>
+    <table style="margin-left:auto;margin-right:auto">
+      <thead class="table-dark">
+        <tr>
+          <th class="th_doc">#</th>
+          <th class="th_doc">pilote</th>
+          <th class="th_doc">victoire</th>
+          <th class="th_doc">podium</th>
+          <th class="th_doc">top10</th>
+          <th class="th_doc">pole</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <% @cotes.each_with_index do | cote, i| %>
+            <td class="cols_pos_score">
+              <%= cote.position %>
+            </td>
+              <td>  
+                  <div class="contenant">
+                    <% idPilote = cote.pilote_id %> 
+                    <% idEcurie = Pilote.find(idPilote).ecurie %> 
+                    <% nomPilote = Pilote.find(idPilote).nom %> 
+                      <%= image_tag Equipe.find(idEcurie).logo, style: "width: 300px; display: block", class: "img-fluid rounded" %>
+                            <div class="texte_centrer">
+                              <%= nomPilote %>
+                            </div>
+                        </div>
+                </td> 
+           
+            <td class="cols_pos_score"> <%= number_with_precision(cote.coteVictoire, precision:2) %> </td>
+            <td class="cols_pos_score"> <%= number_with_precision(cote.cotePodium, precision:2) %> </td>
+            <td class="cols_pos_score"> <%= number_with_precision(cote.coteTop10, precision:2) %> </td>
+            <td class="cols_pos_score"> <%= number_with_precision(cote.cotePole, precision:2) %> </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <%# bas de page depuis partial %>
+  <%= render "shared/baspdf" %>
+
+</body>
