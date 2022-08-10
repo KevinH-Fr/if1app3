@@ -23,14 +23,15 @@ class ParisController < ApplicationController
 
     if params[:eventId]
       @eventId = params[:eventId]
-      @@eventId = params[:eventId]
-
+  
       @eventNum = Event.find(@eventId).numero 
 
       @paris = Pari.event_courant(@eventId).all
 
       @coureur = Pilote.statut_actif.division_courant(@divisionId).all
       @parieur = Pilote.statut_actif.division_non_courant(@divisionId).all
+
+      session[:event] = params[:eventId]
 
       
     respond_to do |format|
@@ -53,15 +54,16 @@ class ParisController < ApplicationController
   end
 
   def new
-    @divisionId = params[:divisionId]
-    @eventId = params[:eventId]
-
     @pari = Pari.new(pari_params)
+    @divisionId = params[:divisionId]
+   # @eventId = params[:eventId]
+
+   @event_id_test = session[:event]
 
     @coureur = Pilote.statut_actif.division_courant(@divisionId).all
     @parieur = Pilote.statut_actif.division_non_courant(@divisionId).all
 
-    @event = Event.all
+  #  @event = Event.all
 
   end
 
@@ -71,18 +73,21 @@ class ParisController < ApplicationController
     @coureur = Pilote.statut_actif.division_courant(@divisionId).all
     @parieur = Pilote.statut_actif.division_non_courant(@divisionId).all
     
-    @eventId = params[:eventId]
-    @@eventId = params[:eventId]
+  #  @eventId = params[:eventId]
+   # session[:event] =  params[:eventId]
+   
   end
 
   def create
-    @divisionId = params[:divisionId]
     @pari = Pari.new(pari_params)
+    @divisionId = params[:divisionId]
+
     @coureur = Pilote.all
 
-    @eventId = params[:eventId]
+   # @eventId = params[:eventId]
+   # session[:event] =  params[:eventId]
    
-    @event = Event.all
+  #  @event = Event.all
     @pilote = Pilote.all
 
     respond_to do |format|
@@ -97,6 +102,8 @@ class ParisController < ApplicationController
   end
 
   def update
+
+
     respond_to do |format|
       if @pari.update(pari_params)
         format.html { redirect_to pari_url(@pari), notice: "Pari was successfully updated." }
@@ -162,6 +169,13 @@ class ParisController < ApplicationController
 
   end
 
+  def toggle_recupEvent
+
+
+
+    redirect_to new_pari_path(),
+    notice: "test recup event courant "
+  end
 
   private
     def set_pari
@@ -171,5 +185,7 @@ class ParisController < ApplicationController
     def pari_params
       
       params.fetch(:pari, {}).permit(:montant, :cote, :resultat, :solde, :event_id, :parieur_id, :coureur_id, :paritype)
+      
+
     end
 end

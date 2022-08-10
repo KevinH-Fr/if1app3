@@ -55,6 +55,7 @@ Rails.application.routes.draw do
   resources :paris do
     member do
       get :toggle_calculresultats
+      get :toggle_recupEvent
     end
   end
 

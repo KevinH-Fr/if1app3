@@ -8,10 +8,9 @@
 <% if (@eventId).present? %>
   <%= render "shared/eventactif" %>
 
-
    <% if current_user.admin? %>
      <%= link_to "calcul résultats", toggle_calculresultats_pari_path(@eventId), class:"btn btn-warning btn-sm", style:"margin: 2px" %>
-     <%= link_to "Nouveu pari", new_pari_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp), class:"btn btn-sm btn-primary" %>
+     <%= link_to "Nouveau pari", new_pari_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp), class:"btn btn-sm btn-primary" %>
      <br/> <br>
    <% end %>
       
@@ -40,7 +39,7 @@
             <td> <%= pari.montant %> </td>
             <td> <%= pari.paritype %> </td>
             <td> <%= pari.coureur.nom %> </td>
-            <td> <%= pari.cote %> </td>
+            <td> <%= number_with_precision(pari.cote, precision: 2) %> </td>
             <td> 
               <% if pari.resultat == true %>
                 <i class="fa-solid fa-circle-check fa-xl" style="color:green"></i>
@@ -51,7 +50,7 @@
             <td> <%= pari.solde %> </td>
             <td> <%= link_to '', pari, class:"fa-solid fa-eye btn btn-primary btn-sm" %>  </td>
             <td> <%= button_to '', pari, class:"fa-solid fa-trash-can btn btn-danger btn-sm", method: :delete, :onclick => "return confirm('Sûr ?')" %>  </td> 
-            <td> <%= link_to "", edit_pari_path(pari), class:"fa-regular fa-pen-to-square btn btn-secondary btn-sm" %> </td> 
+            <td> <%= link_to "", edit_pari_path(pari, eventId: @eventId), class:"fa-regular fa-pen-to-square btn btn-secondary btn-sm" %> </td> 
           </tr>
          <% end %>
     </tbody>

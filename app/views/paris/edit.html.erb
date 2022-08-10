@@ -5,6 +5,7 @@
 <br>
 
 <div>
-  <%= link_to "Show this pari", @pari %> |
-  <%= link_to "Back to paris", paris_path %>
+  <%= link_to "", pari_path(@pari), class:"fa-regular fa-eye btn btn-primary" %> |
+  <%= link_to "", paris_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp), class:"fa-solid fa-arrow-rotate-left btn btn-secondary" %> <br><br>
+ 
 </div>

@@ -3,6 +3,8 @@ class Event < ApplicationRecord
   belongs_to :circuit, :optional => true
 
   has_many :resultats, :dependent => :delete_all 
+  has_many :paris, :dependent => :delete_all
+
 
     def formatted_name
        datetime = date.to_date

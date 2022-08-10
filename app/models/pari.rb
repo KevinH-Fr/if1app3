@@ -1,4 +1,5 @@
 class Pari < ApplicationRecord
+
     belongs_to :parieur, :class_name => 'Pilote', :optional => true
     belongs_to :coureur, :class_name => 'Pilote', :optional => true
 
@@ -20,14 +21,20 @@ class Pari < ApplicationRecord
     scope :numero_until_courant, -> (numero_until_courant) { joins(:event).where("numero <= ?", numero_until_courant)}
 
 
-
-    #scope :group_sum_order, -> { select('parieur_id, SUM(solde) AS total') }
-
-    #scope :group_sum_order, -> { select('parieur_id, SUM(solde) AS total').group('parieur_id, total').order('parieur_id, total').reverse }
-
     scope :group_sum_order, -> { group('parieur_id').sum('solde')}
 
     scope :sum_parieur, -> {select('parieur_id, SUM(solde) AS total')}
+
+    before_validation :modifier_solde
+
+    private
+  
+    def modifier_solde
+      if self.resultat == false
+        self.solde = -self.montant
+      end
+    end
+
 
 
     validate :verif_montant
@@ -53,8 +60,6 @@ class Pari < ApplicationRecord
     end
 
 
-
-
     after_initialize :set_default_montant, :set_default_cote, :set_default_resultat, :if => :new_record?
     def set_default_montant
       self.montant ||= 0
@@ -68,4 +73,7 @@ class Pari < ApplicationRecord
       def set_default_resultat
         self.resultat ||= false
       end
+
+  
+
 end
