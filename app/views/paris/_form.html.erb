@@ -65,7 +65,7 @@
               {include_blank: true}, 
               {data: { action: "change->form-element#remotesubmit"}}) %>
       
-       <%= form.select :coureur_id, Pilote.all.collect { | pilote | [pilote.nom, pilote.id] },
+       <%= form.select :coureur_id, @coureur.all.collect { | pilote | [pilote.nom, pilote.id] },
               {include_blank: true}, 
               {data: { action: "change->form-element#remotesubmit"}} %>
 

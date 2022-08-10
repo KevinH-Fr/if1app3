@@ -146,6 +146,13 @@ class ParisController < ApplicationController
       if Resultat.where(event_id: @eventId, pilote_id: coureurId).present?
         resultatCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.course
         resultatQualif = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.qualification
+        statutDnsCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.dns
+
+        if resultatCoureur.nil? # exception resultat pilote sans val qualif et course
+          resultatCoureur = 20
+          resultatQualif = 20
+        end
+         
       else
         resultatCoureur = 20
       end
@@ -153,13 +160,21 @@ class ParisController < ApplicationController
       pariMontant = pari.montant
       pariCote = pari.cote
 
+     
+
+
       if typePari == "victoire" && resultatCoureur == 1 || typePari == "podium" && resultatCoureur <= 3 || typePari == "top10" && resultatCoureur <= 10 || typePari == "pole" && resultatQualif == 1
 
           pari.update(resultat: true)
           pari.update(solde: pariMontant * pariCote - pariMontant )
         else
-          pari.update(resultat: false)
-          pari.update(solde: - pariMontant )
+          if statutDnsCoureur == true   # rembourser mise si dns
+            pari.update(resultat: true)
+            pari.update(solde: pariMontant )
+          else
+            pari.update(resultat: false)
+            pari.update(solde: - pariMontant )
+          end
         end
 
     end  
