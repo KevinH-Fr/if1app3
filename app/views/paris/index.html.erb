@@ -26,10 +26,12 @@
     <thead class="table-dark">
       <tr>  
         <th>#</th>
-        <th>parieur</th>
+        <th colspan=1>parieur</th>
+        <th>ecurie</th>
         <th>montant</th>
         <th>type</th>
-        <th>coureur</th>
+        <th colspan=1>coureur</th>
+        <th>ecurie</th>
         <th>cote</th>
         <th>=</th>
         <th>solde</th>
@@ -41,10 +43,24 @@
            <tr>
             <td> <%= pari.id  %> </td>
             <td> <%= pari.parieur.nom %> </td>
-            <td> <%= pari.montant %> </td>
-            <td> <%= pari.paritype %> </td>
+             <td> 
+                  <% idEcurie = Pilote.find(pari.parieur.id).ecurie %>  
+                  <%# if Equipe.find(idEcurie).ecusson.present? %>
+                      <%= image_tag Equipe.find(idEcurie).ecusson, style: "width: 50px; display: block", class: "img-fluid rounded" %>
+                  <%# end %>
+              </td>
+
+            <td class="col_centree"> <%= pari.montant %> </td>
+            <td class="col_centree"> <%= pari.paritype %> </td>
             <td> <%= pari.coureur.nom %> </td>
-            <td> <%= number_with_precision(pari.cote, precision: 2) %> </td>
+             <td> 
+                  <% idEcurie = Pilote.find(pari.coureur.id).ecurie %>  
+                  <%# if Equipe.find(idEcurie).ecusson.present? %>
+                      <%= image_tag Equipe.find(idEcurie).ecusson, style: "width: 50px; display: block", class: "img-fluid rounded" %>
+                  <%# end %>
+              </td>
+
+            <td class="col_centree"> <%= number_with_precision(pari.cote, precision: 2) %> </td>
             <td> 
               <% if pari.resultat == true %>
                 <i class="fa-solid fa-circle-check fa-xl" style="color:green"></i>
@@ -52,7 +68,7 @@
                 <i class="fa-solid fa-circle-xmark fa-xl" style="color:red"></i>
               <% end %>
             </td>
-            <td> <%= pari.solde %> </td>
+            <td class="col_centree"> <%= pari.solde %> </td>
             <td> <%= link_to '', pari, class:"fa-solid fa-eye btn btn-primary btn-sm" %>  </td>
             <td> <%= button_to '', pari, class:"fa-solid fa-trash-can btn btn-danger btn-sm", method: :delete, :onclick => "return confirm('Sûr ?')" %>  </td> 
             <td> <%= link_to "", edit_pari_path(pari, eventId: @eventId), class:"fa-regular fa-pen-to-square btn btn-secondary btn-sm" %> </td> 
