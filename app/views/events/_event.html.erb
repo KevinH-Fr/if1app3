@@ -12,6 +12,14 @@
     <% end %>
   </p>
 
+    <p>
+    <strong>Horaire:</strong>
+    <% if event.horaire.present? %>
+      <% datetime = event.horaire.to_time %>
+      <%= datetime.strftime("%H:%M") %>
+    <% end %>
+  </p>
+
   <p>
     <strong>Saison:</strong>
     <%= event.saison_id %>

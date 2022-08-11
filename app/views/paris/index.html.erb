@@ -14,7 +14,18 @@
      <%# ajouter test si current user membre de la div opposé pour parier sur div courant %>
      <% userDivision = Pilote.where(user_id: current_user.id).first.division_id %> 
       <% if userDivision != @divisionId %>
-        <%= link_to "Nouveau pari", new_pari_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp), class:"btn btn-sm btn-primary" %>
+        <%# tester delta temps entre courant et event %>
+        <% if Event.find(@eventId).horaire.present? %>
+          <% horaireCourant = Time.now %>
+          <% dateGP = Event.find(@eventId).date %>
+          <% horaireGP = Event.find(@eventId).horaire %>
+          <% horaireCompletGP = dateGP.strftime("%d/%m/%Y") + ' ' + horaireGP.strftime("%H:%M")  %>
+          <% formatDateHoraireCompletGP = horaireCompletGP.to_time %>
+          <% deltaTime = horaireCourant < formatDateHoraireCompletGP %>
+            <% if deltaTime == true %>
+            <%= link_to "Nouveau pari", new_pari_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp), class:"btn btn-sm btn-primary" %>
+            <% end %>
+        <% end %>
       <% end %>
      <br/> <br>
    <% end %>

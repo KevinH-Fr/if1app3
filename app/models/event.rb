@@ -18,13 +18,14 @@ class Event < ApplicationRecord
       "n°#{numero} - | #{pays} - | #{datetime}"
     end 
 
+    before_validation :horaire_defaut
 
-
-
-   # scope :event_courant, -> (event_courant) { where(event_id: event_courant)}
- 
- #  scope :division_courant, -> (division_courant) { where(division_id: division_courant)}
- 
-
+    private
+  
+    def horaire_defaut
+      if self.horaire.blank?
+        self.horaire = "21:00"
+      end
+    end
 
 end
