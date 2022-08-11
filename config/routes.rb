@@ -29,7 +29,9 @@ Rails.application.routes.draw do
     get 'documentedition', :on => :collection
   end
   
-  resources :parieurs
+  resources :parieurs do
+    get 'documentedition', :on => :collection
+  end
 
   resources :classements do
     get 'documentedition', :on => :collection

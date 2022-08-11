@@ -133,6 +133,18 @@ th, td {
     box-shadow:inset 0px 0px 0px 4px #313130;
  }
 
+ .cols_pos_score_wide {
+  background-color: rgb(255, 255, 255);
+  width: 200px;
+  height: 20px;
+  font-weight: bold;
+  font-size: x-large;
+  color: rgb(0, 0, 0);
+  text-align: center;
+  box-shadow:inset 0px 0px 0px 4px #313130;
+}
+
+
  .cols_solde {
   background-color: rgb(148, 147, 147);
   width: 80px;

@@ -1,0 +1,50 @@
+
+<body style="background-color: #313130;">
+
+  <br>
+  <h1 class="titre_doc"> Parieurs </h1>   <br><br>
+
+  <%# haut de page depuis partial %>
+  <%= render "shared/hautpdf" %>
+  <% @numGp = Event.find(@eventId).numero   %>
+
+  <table style="margin-left:auto;margin-right:auto">
+    <thead class="table-dark">
+      <tr>  
+        <th class="th_doc">#</th>
+        <th class="th_doc">parieur</th>
+        <th class="th_doc">cumul</th>
+      </tr>
+    </thead>
+      <tbody>
+         
+           <tr>
+            <% @parisEvent.each_with_index do | pari, i | %>
+
+              <td class="cols_pos_score">  <strong>  <%= (i+1) %>   </strong>  </td>
+            
+              <td>  
+                  <div class="contenant">
+                    <% idPilote = pari.parieur_id %> 
+                    <% idEcurie = Pilote.find(idPilote).ecurie %> 
+                    <% nomPilote = Pilote.find(idPilote).nom %> 
+                      <%= image_tag Equipe.find(idEcurie).logo, style: "width: 300px; display: block", class: "img-fluid rounded" %>
+                            <div class="texte_centrer">
+                              <%= nomPilote %>
+                            </div>
+                        </div>
+              </td> 
+               
+              <td class="cols_pos_score_wide"> <%= number_with_precision(1000 + pari.total, precision: 2) %> </td>
+              
+          
+           
+          </tr>
+     <% end %>
+    </tbody>
+  </table>
+
+  <%# bas de page depuis partial %>
+  <%= render "shared/baspdf" %>
+
+</body>

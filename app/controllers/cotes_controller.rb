@@ -38,7 +38,6 @@ class CotesController < ApplicationController
         format.pdf do
          render pdf: "CotesParis", template: "classements/liste", formats: [:html], layout: "pdf"
         end
-
       end
   
     end

@@ -13,7 +13,7 @@
     <%= link_to "Update", toggle_updatecotes_cote_path(@eventId), class:"btn btn-sm btn-primary", style:"margin: 2px" %>
     <%= link_to "Supprimer", toggle_supprimercotes_cote_path(@eventId), class:"btn btn-sm btn-danger", style:"margin: 2px"%>
 
-    <%# PDF event actif %>
+    <%# Doc event actif %>
     <% numGp = Event.find(@eventId).numero %>
     <%= link_to "Image",   documentedition_cotes_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-sm btn-success" %>
 

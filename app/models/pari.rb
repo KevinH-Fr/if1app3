@@ -20,6 +20,7 @@ class Pari < ApplicationRecord
     scope :pilote_courant, -> (pilote_courant) { where("parieur_id = ?", pilote_courant)}
     scope :numero_until_courant, -> (numero_until_courant) { joins(:event).where("numero <= ?", numero_until_courant)}
 
+    scope :group_by_parieur, -> { group('parieur_id') }
 
     scope :group_sum_order, -> { group('parieur_id').sum('solde')}
 

@@ -9,6 +9,10 @@
 <% if (@eventId).present? %>
   <%= render "shared/eventactif" %>
 
+  <%# Doc event actif %>
+  <% numGp = Event.find(@eventId).numero %>
+  <%= link_to "Image",   documentedition_parieurs_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-sm btn-success" %>
+  <br><br>
 
 
 <%# tab datas %>
@@ -18,7 +22,7 @@
     <thead class="table-dark">
       <tr>  
         <th>#</th>
-        <th>parieur</th>
+        <th colspan=2>parieur</th>
         <th>cumul</th>
       </tr>
     </thead>
@@ -26,18 +30,18 @@
           <% @parisEvent.each_with_index do | pari, i | %> 
            <tr>
              <td> <%= i + 1 %>  </td>
-             <td> <%= Pilote.find(pari[0]).nom %> </td>
-             <td> <%= 1000 + pari[1] %> </td>
+             <td> <%= Pilote.find(pari.parieur_id).nom %> </td>
+              <td>
+                <% idEcurie = Pilote.find(pari.parieur_id).ecurie %>  
+                <%= image_tag Equipe.find(idEcurie).ecusson, style: "width: 50px; display: block", class: "img-fluid rounded" %>
+              </td>
+
+             <td> <%= 1000 + pari.total %> </td>
             
           </tr>
          <% end %>
     </tbody>
   </table>
 </div>
-
-    <%# PDF event actif %>
-    <% numGp = Event.find(@eventId).numero %>
-    <%= link_to "PDF",  parieurs_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp, format: :pdf), class:"btn btn-dark" %>
-
 
 <% end %>
