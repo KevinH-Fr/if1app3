@@ -1,4 +1,6 @@
 
+<% if user_signed_in? %>
+
   <br/>
   <h1 class="fa-solid fa-person-military-pointing fa-2xl fw-bold fs-1"> - Synthese Licences </h1>   
   <br/> <hr/> 
@@ -8,12 +10,12 @@
   <% if (@eventId).present? %>
 
     <%= render "shared/eventactif" %>
+      <% if current_user.admin? %>
+        <%# document %>
+        <% numGp = Event.find(@eventId).numero %>
+        <%= link_to "Générer image", documentedition_synthlicences_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp, format: :png), class:"btn btn-sm btn-success" %>    <br/><br/>
+      <% end %>
 
-    <%# document %>
-    <% numGp = Event.find(@eventId).numero %>
-    <%= link_to "Générer image", documentedition_synthlicences_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp, format: :png), class:"btn btn-sm btn-success" %>
-  
-    <br/><br/>
 
     <%# table des situation licences pilotes titulaires %>
 
@@ -60,3 +62,9 @@
         </table>
     </div>
   <% end %>
+
+  <% else %>
+
+ <br> <strong> Vous n'avez pas les droits...</strong>
+  
+<% end %>

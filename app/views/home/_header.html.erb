@@ -52,10 +52,13 @@
                <%= link_to 'Classement Ecuries',
                classecuries_path, class:"nav-link" %> 
             </li>
-             <li class="nav-item">
-               <%= link_to 'Licences',
-               licences_path, class:"nav-link" %> 
-            </li>
+
+            <% if current_user.admin? %>
+               <li class="nav-item">
+                  <%= link_to 'Licences',
+                  licences_path, class:"nav-link" %> 
+               </li>
+            <% end %>
              <li class="nav-item">
                <%= link_to 'Synthèse Licences',
                synthlicences_path, class:"nav-link" %> 

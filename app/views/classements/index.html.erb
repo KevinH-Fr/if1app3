@@ -12,19 +12,17 @@
 
     <%= render "shared/eventactif" %>
 
-     <%= link_to "Générer image", documentedition_classements_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-sm btn-success" %>
- 
-    <br/><br/>
+       <% if current_user.admin? %>
+         <%= link_to "Générer image", documentedition_classements_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-sm btn-success" %>
+         <br/><br/>
+         <%# boutons crea classement %>
+         <%= link_to "Créer", toggle_creerclassements_classement_path(@eventId), class:"btn btn-sm btn-warning", style:"margin: 2px"  %>
+         <%= link_to "Update", toggle_updateclassements_classement_path(@eventId), class:"btn btn-sm btn-primary", style:"margin: 2px" %>
+         <%= link_to "Trier", toggle_triclassements_classement_path(@eventId), class:"btn btn-sm btn-secondary", style:"margin: 2px"%>
+         <%= link_to "Supprimer", toggle_supprimerclassements_classement_path(@eventId), class:"btn btn-sm btn-danger", style:"margin: 2px"%>
+         <br><br>
+      <% end %>
 
-    <%# boutons crea classement %>
-    <%= link_to "Créer", toggle_creerclassements_classement_path(@eventId), class:"btn btn-sm btn-warning", style:"margin: 2px"  %>
-    <%= link_to "Update", toggle_updateclassements_classement_path(@eventId), class:"btn btn-sm btn-primary", style:"margin: 2px" %>
-    <%= link_to "Trier", toggle_triclassements_classement_path(@eventId), class:"btn btn-sm btn-secondary", style:"margin: 2px"%>
-    <%= link_to "Supprimer", toggle_supprimerclassements_classement_path(@eventId), class:"btn btn-sm btn-danger", style:"margin: 2px"%>
-
-   <br><br>
-    <%#= max points : <%= Classement.saison_courant(@saisonId).division_courant(@divisionId).numero_until_courant(@numGp).max_points.score.to_i %>
-    
     <%#= tableau data classement %>
 
     <table class="table table-striped table-bordered table-hover">

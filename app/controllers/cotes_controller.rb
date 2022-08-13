@@ -71,6 +71,7 @@ class CotesController < ApplicationController
           cote.update(coteVictoire: 4 )
           cote.update(cotePodium: 3 )
           cote.update(coteTop10: 2 )
+          cote.update(cotePole: 3.5)
         else
           @piloteId = cote.pilote_id
           eventN_1 = Event.find_by(saison_id: @saisonLiee, division_id: @divisionId, numero: @numGp - 1).id

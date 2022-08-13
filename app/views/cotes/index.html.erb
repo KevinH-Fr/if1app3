@@ -7,17 +7,18 @@
 
   <% if (@eventId).present? %> 
     <%= render "shared/eventactif" %>
+    
+    <% if current_user.admin? %>
+      <%# boutons crea classement %>
+      <%= link_to "Créer", toggle_creercotes_cote_path(@eventId), class:"btn btn-sm btn-warning", style:"margin: 2px"  %>
+      <%= link_to "Update", toggle_updatecotes_cote_path(@eventId), class:"btn btn-sm btn-primary", style:"margin: 2px" %>
+      <%= link_to "Supprimer", toggle_supprimercotes_cote_path(@eventId), class:"btn btn-sm btn-danger", style:"margin: 2px"%>
 
-        <%# boutons crea classement %>
-    <%= link_to "Créer", toggle_creercotes_cote_path(@eventId), class:"btn btn-sm btn-warning", style:"margin: 2px"  %>
-    <%= link_to "Update", toggle_updatecotes_cote_path(@eventId), class:"btn btn-sm btn-primary", style:"margin: 2px" %>
-    <%= link_to "Supprimer", toggle_supprimercotes_cote_path(@eventId), class:"btn btn-sm btn-danger", style:"margin: 2px"%>
-
-    <%# Doc event actif %>
-    <% numGp = Event.find(@eventId).numero %>
-    <%= link_to "Image",   documentedition_cotes_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-sm btn-success" %>
-
-    <br><br>
+      <%# Doc event actif %>
+      <% numGp = Event.find(@eventId).numero %>
+      <%= link_to "Image",   documentedition_cotes_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-sm btn-success" %>
+      <br><br>
+    <% end %>
 
     <%#= tableau data cotes %>
     <table class="table table-striped table-bordered table-hover">
@@ -61,10 +62,6 @@
 
    <hr/>
         
-    <%# PDF event actif %>
-    <% numGp = Event.find(@eventId).numero %>
-    <%= link_to "PDF",  cotes_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp, format: :pdf), class:"btn btn-dark" %>
-
    <% end %>
 
 <% else %>
