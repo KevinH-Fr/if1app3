@@ -9,10 +9,7 @@
   <% if (@eventId).present? %>
     <%= render "shared/eventactif" %>
 
-    <% if current_user.admin? %>
-      <%= link_to "calcul résultats", toggle_calculresultats_pari_path(@eventId), class:"btn btn-warning btn-sm", style:"margin: 2px" %>
-
-
+    <% if current_user.user? || current_user.admin? %>
         <%# ajouter test si current user membre de la div opposé pour parier sur div courant %>
         <% userDivision = Pilote.where(user_id: current_user.id).first.division_id %> 
           <% if userDivision != @divisionId %>
@@ -23,16 +20,20 @@
               <% horaireGP = Event.find(@eventId).horaire %>
               <% horaireCompletGP = dateGP.strftime("%d/%m/%Y") + ' ' + horaireGP.strftime("%H:%M")  %>
               <% formatDateHoraireCompletGP = horaireCompletGP.to_time %>
-              <% deltaTime = horaireCourant < formatDateHoraireCompletGP %>
-                <% if deltaTime == true %>
-                <%= link_to "Nouveau pari", new_pari_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp), class:"btn btn-sm btn-primary" %>
+              <% deltaTime = formatDateHoraireCompletGP.to_time - horaireCourant.to_time %>
+             
+             <strong> tps restant pour parier en secondes trop tard si negatif :</strong> <%= deltaTime %> <br>
+                <% if deltaTime > 0 %>
+                  <%= link_to "Nouveau pari", new_pari_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp), class:"btn btn-sm btn-primary" %>
                 <% end %>
             <% end %>
-          <% end %>
-        <br/> <br>
-      <% end %>
+          <% end %> <br/> <br>
+    <% end %>
 
-        
+    <% if current_user.admin? %>
+      <%= link_to "calcul résultats", toggle_calculresultats_pari_path(@eventId), class:"btn btn-warning btn-sm", style:"margin: 2px" %>
+    <% end %>
+
   <%# tab datas %>
 
   <div class="table-responsive">
