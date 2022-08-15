@@ -22,8 +22,8 @@
               <% formatDateHoraireCompletGP = horaireCompletGP.to_time %>
               <% deltaTime = formatDateHoraireCompletGP.to_time - horaireCourant.to_time %>
              
-             <strong> tps restant pour parier en secondes trop tard si negatif :</strong> <%= deltaTime %> <br>
-                <% if deltaTime > 0 %>
+            <%#= deltaTime %> 
+                <% if deltaTime > 7200 %> <%# 2h de decalage en prod soit 7200 secondes %>
                   <%= link_to "Nouveau pari", new_pari_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp), class:"btn btn-sm btn-primary" %>
                 <% end %>
             <% end %>
