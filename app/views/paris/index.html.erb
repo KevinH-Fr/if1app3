@@ -11,9 +11,8 @@
 
     <% if current_user.admin? %>
       <%= link_to "calcul résultats", toggle_calculresultats_pari_path(@eventId), class:"btn btn-warning btn-sm", style:"margin: 2px" %>
-    <% end %>
 
-    <% if current_user.user? %>
+
         <%# ajouter test si current user membre de la div opposé pour parier sur div courant %>
         <% userDivision = Pilote.where(user_id: current_user.id).first.division_id %> 
           <% if userDivision != @divisionId %>
@@ -32,7 +31,7 @@
           <% end %>
         <br/> <br>
       <% end %>
-    <% end %>
+
         
   <%# tab datas %>
 
