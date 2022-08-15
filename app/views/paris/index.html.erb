@@ -11,24 +11,27 @@
 
     <% if current_user.admin? %>
       <%= link_to "calcul résultats", toggle_calculresultats_pari_path(@eventId), class:"btn btn-warning btn-sm", style:"margin: 2px" %>
+    <% end %>
 
-      <%# ajouter test si current user membre de la div opposé pour parier sur div courant %>
-      <% userDivision = Pilote.where(user_id: current_user.id).first.division_id %> 
-        <% if userDivision != @divisionId %>
-          <%# tester delta temps entre courant et event %>
-          <% if Event.find(@eventId).horaire.present? %>
-            <% horaireCourant = Time.now %>
-            <% dateGP = Event.find(@eventId).date %>
-            <% horaireGP = Event.find(@eventId).horaire %>
-            <% horaireCompletGP = dateGP.strftime("%d/%m/%Y") + ' ' + horaireGP.strftime("%H:%M")  %>
-            <% formatDateHoraireCompletGP = horaireCompletGP.to_time %>
-            <% deltaTime = horaireCourant < formatDateHoraireCompletGP %>
-              <% if deltaTime == true %>
-              <%= link_to "Nouveau pari", new_pari_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp), class:"btn btn-sm btn-primary" %>
-              <% end %>
+    <% if current_user.user? %>
+        <%# ajouter test si current user membre de la div opposé pour parier sur div courant %>
+        <% userDivision = Pilote.where(user_id: current_user.id).first.division_id %> 
+          <% if userDivision != @divisionId %>
+            <%# tester delta temps entre courant et event %>
+            <% if Event.find(@eventId).horaire.present? %>
+              <% horaireCourant = Time.now %>
+              <% dateGP = Event.find(@eventId).date %>
+              <% horaireGP = Event.find(@eventId).horaire %>
+              <% horaireCompletGP = dateGP.strftime("%d/%m/%Y") + ' ' + horaireGP.strftime("%H:%M")  %>
+              <% formatDateHoraireCompletGP = horaireCompletGP.to_time %>
+              <% deltaTime = horaireCourant < formatDateHoraireCompletGP %>
+                <% if deltaTime == true %>
+                <%= link_to "Nouveau pari", new_pari_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp), class:"btn btn-sm btn-primary" %>
+                <% end %>
+            <% end %>
           <% end %>
-        <% end %>
-      <br/> <br>
+        <br/> <br>
+      <% end %>
     <% end %>
         
   <%# tab datas %>
