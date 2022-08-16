@@ -1,22 +1,33 @@
 
 <hr class="hr_doc"> 
 
- <table style="width:100%;margin-left:60px;margin-right:auto;">
-  <tr>
-    <th>
-      <%= image_tag asset_url('/images/Discord.png'), style: "width: 50px; display: block", class: "img-fluid rounded" %> 
-    </th>
-    <th>
-      <%= image_tag asset_url('/images/logo_f1.png'), style: "width: 50px; display: block", class: "img-fluid rounded" %> 
-    </th>
-    <th>
-      <%= image_tag asset_url('/images/twitch.png'), style: "width: 50px; display: block", class: "img-fluid rounded" %> 
-    </th>
-    <th>
-      <%= image_tag asset_url('/images/xbox.png'), style: "width: 50px; display: block", class: "img-fluid rounded" %> 
-    </th>
-  </tr>
-</table>
+<div class="row">
+  <div class="column">
+    <%= image_tag asset_url('/images/logo_f1_3.png'), style: "width: 100%"%> 
+  </div>
+  <div class="column">
+     <%= image_tag asset_url('/images/xbox.png'), style: "width: 35%; margin-left:70px;" %> 
+  </div>
+  <div class="column">
+   <%= image_tag asset_url('/images/twitch.png'), style: "width: 55%; margin-top:-5px; margin-left:50px;" %> 
+  </div>
+    <div class="column">
+   <%= image_tag asset_url('/images/Discord.png'), style: "width: 50%; margin-left:50px;" %> 
+  </div>
+</div>
 
-<br>  
+<style> 
+/* Three image containers (use 25% for four, and 50% for two, etc) */
+.column {
+  float: left;
+  width: 25%;
+ /* padding: 5px;*/
+}
 
+/* Clear floats after image containers */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+</style>
