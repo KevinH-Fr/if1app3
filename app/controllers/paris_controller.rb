@@ -69,7 +69,7 @@ class ParisController < ApplicationController
 
   def edit
     @event = Event.all
-    @divisionId = params[:divisionId]
+    @divisionId = Event.find(session[:event]).division_id # utiliser param event session
     @coureur = Pilote.statut_actif.division_courant(@divisionId).all
     @parieur = Pilote.statut_actif.division_non_courant(@divisionId).all
     
@@ -92,7 +92,7 @@ class ParisController < ApplicationController
 
     respond_to do |format|
       if @pari.save
-        format.html { redirect_to pari_url(@pari), notice: "Pari was successfully created." }
+        format.html { redirect_to pari_url(@pari), notice: "le pari a bien été placé" }
         format.json { render :show, status: :created, location: @pari }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -103,10 +103,9 @@ class ParisController < ApplicationController
 
   def update
 
-
     respond_to do |format|
       if @pari.update(pari_params)
-        format.html { redirect_to pari_url(@pari), notice: "Pari was successfully updated." }
+        format.html { redirect_to pari_url(@pari), notice: "le pari a bien été mis à jour" }
         format.json { render :show, status: :ok, location: @pari }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -118,14 +117,12 @@ class ParisController < ApplicationController
   def destroy
 
     @pari.destroy
-
     eventId = params[:id]
     divisionId = Event.find(eventId).division_id
     saisonId = Event.find(eventId).saison_id
-    
 
     respond_to do |format|
-      format.html { redirect_to paris_url(saisonId: saisonId, eventId: eventId, divisionId: divisionId), notice: "Pari was successfully destroyed." }
+      format.html { redirect_to paris_url(saisonId: saisonId, eventId: eventId, divisionId: divisionId), notice: "le pari a bien été supprimé" }
       format.json { head :no_content }
     end
   end

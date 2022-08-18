@@ -25,7 +25,7 @@ class SaisonsController < ApplicationController
 
     respond_to do |format|
       if @saison.save
-        format.html { redirect_to saison_url(@saison), notice: "Saison was successfully created." }
+        format.html { redirect_to saison_url(@saison), notice: "la saison a bien été créée" }
         format.json { render :show, status: :created, location: @saison }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class SaisonsController < ApplicationController
   def update
     respond_to do |format|
       if @saison.update(saison_params)
-        format.html { redirect_to saison_url(@saison), notice: "Saison was successfully updated." }
+        format.html { redirect_to saison_url(@saison), notice: "la saison a bien été mise à jour" }
         format.json { render :show, status: :ok, location: @saison }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +52,7 @@ class SaisonsController < ApplicationController
     @saison.destroy
 
     respond_to do |format|
-      format.html { redirect_to saisons_url, notice: "Saison was successfully destroyed." }
+      format.html { redirect_to saisons_url, notice: "la saison a bien été supprimée" }
       format.json { head :no_content }
     end
   end

@@ -10,9 +10,8 @@ class User < ApplicationRecord
     self.role ||= :user
   end
 
-
-  def full_name
-    "#{id} | #{email}"
+ def full_name
+    "#{email}"
  end
 
 

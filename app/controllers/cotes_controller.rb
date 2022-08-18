@@ -54,7 +54,7 @@ class CotesController < ApplicationController
         end
       
       redirect_to cotes_url(saisonId: @saisonLiee, eventId: @eventId, divisionId: @divisionId, numGp: @numGp), 
-                    notice: "les cotes ont bien été créés"
+                    notice: "les cotes ont bien été créées"
     end
 
     def toggle_updatecotes
