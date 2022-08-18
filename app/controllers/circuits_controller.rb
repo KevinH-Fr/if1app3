@@ -30,7 +30,7 @@ class CircuitsController < ApplicationController
 
     respond_to do |format|
       if @circuit.save
-        format.html { redirect_to circuit_url(@circuit), notice: "Circuit was successfully created." }
+        format.html { redirect_to circuit_url(@circuit), notice: "le circuit a bien été créé" }
         format.json { render :show, status: :created, location: @circuit }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -43,7 +43,7 @@ class CircuitsController < ApplicationController
   def update
     respond_to do |format|
       if @circuit.update(circuit_params)
-        format.html { redirect_to circuit_url(@circuit), notice: "Circuit was successfully updated." }
+        format.html { redirect_to circuit_url(@circuit), notice: "le circuit a bien été mis à jour" }
         format.json { render :show, status: :ok, location: @circuit }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -57,7 +57,7 @@ class CircuitsController < ApplicationController
     @circuit.destroy
 
     respond_to do |format|
-      format.html { redirect_to circuits_url, notice: "Circuit was successfully destroyed." }
+      format.html { redirect_to circuits_url, notice: "le circuit a bien été supprimé" }
       format.json { head :no_content }
     end
   end

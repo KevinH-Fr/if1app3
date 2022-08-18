@@ -27,11 +27,13 @@
                   <%= link_to "Nouveau pari", new_pari_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp), class:"btn btn-sm btn-primary" %>
                 <% end %>
             <% end %>
-          <% end %> <br/> <br>
+          <% end %> 
     <% end %>
 
     <% if current_user.admin? %>
+      
       <%= link_to "calcul résultats", toggle_calculresultats_pari_path(@eventId), class:"btn btn-warning btn-sm", style:"margin: 2px" %>
+      <br><br>
     <% end %>
 
   <%# tab datas %>

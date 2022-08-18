@@ -113,7 +113,7 @@ def toggle_creerlicences
     end
   
   redirect_to licences_url(saisonId: @saisonLiee, eventId: @eventId, divisionId: @divisionLiee), 
-                notice: "la licence2 a bien été créée"
+                notice: "les licences ont bien été créées"
 end
 
 def toggle_supprimerlicences
@@ -124,7 +124,7 @@ def toggle_supprimerlicences
   Licence.where(event_id: @eventId).destroy_all
 
   redirect_to licences_url(saisonId: @saisonLiee, eventId: @eventId, divisionId: @divisionLiee),
-               notice: "les licences de l'event courant ont bien été supprimées"
+               notice: "les licences ont bien été supprimées"
 end
 
 def toggle_calculrecuplicences
@@ -208,7 +208,7 @@ def toggle_calculrecuplicences
     end
 
     redirect_to licences_url(numGp: numEvent, saisonId: @saisonLiee, eventId: @eventId, divisionId: @divisionLiee), 
-                  notice: "les points ont bien été calculés"
+                  notice: "les licences ont bien été calculées"
   else
     redirect_to licences_url(saisonId: @saisonLiee, eventId: @eventId, divisionId: @divisionLiee), 
                   notice: "les points ne peuvent pas être récupérés avant l'event 4"

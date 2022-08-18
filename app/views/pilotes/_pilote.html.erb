@@ -18,6 +18,8 @@
     <% else %>
       <%= image_tag Equipe.find(@pilote.ecurie).logo, style: "width: 400px; display: block", class: "img-fluid rounded" %> 
     <% end %>
+
+
   </p>
 
   <p>
@@ -30,6 +32,11 @@
     <strong>User lié:</strong>
      <%= User.find(pilote.user_id).full_name if pilote.user_id.present? %>
   </p>
+
+    <% if pilote.ecurie.present?%>
+      <%= image_tag Equipe.find(@pilote.ecurie).voiture, style: "width: 400px; display: block", class: "img-fluid rounded" %> 
+    <% end %>
+
   <hr>  
 
   <% nbCourses = Resultat.nb_courses(pilote.id)  %>
