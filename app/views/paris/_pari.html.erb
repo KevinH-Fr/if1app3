@@ -2,7 +2,8 @@
 
   <p>
     <strong>Event:</strong>
-    <%= pari.event_id %>
+    <% pari.event_id %>
+    <%= Event.find(pari.event_id).formatted_name_bis %>
   </p>
 
   <p>
@@ -33,7 +34,13 @@
 
   <p>
     <strong>Resultat:</strong>
-    <%= pari.resultat %>
+    <% valResultat = pari.resultat %>
+
+        <% if valResultat == true %>
+           <i class="fa-solid fa-circle-check fa-xl" style="color:green"></i>
+        <% else %>
+           <i class="fa-solid fa-circle-xmark fa-xl" style="color:red"></i>
+        <% end %>   
   </p>
 
   <p>
