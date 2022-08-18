@@ -1,9 +1,15 @@
 
 <% if user_signed_in? %>
+<div> 
+  <table class="table_icon_titre">
+    <tr>
+     <br>
+      <th class="fa-solid fa-road fa-xl fs-1 table_icon_titre"> </th>
+      <th class="table_icon_titre"> &nbsp;|&nbsp;Circuits </th>
+    </tr>
+  </table>
+</div>
 
-<br/>
-
-      <h1 class="fa-solid fa-road fa-2xl fw-bold fs-1"> - Circuits </h1>   
       <hr>
 
       <div class="container">
@@ -63,10 +69,10 @@
     </table>
   </div>
 
-
-    <% if current_user.admin? %>
-      <%= link_to "Nouveau circuit", new_circuit_path, class:"btn btn-primary" %>
-    <% end %>
-<% else  %>
-       <br/>   <strong>Vous n'avez pas les droits...</strong>
-<% end %>
+  <% if current_user.admin? %> <br>
+     <%= link_to "Nouveau circuit", new_circuit_path, class:"btn btn-primary" %>
+     <br> <br>
+  <% end %>
+  <% else  %>
+    <br/>   <strong>Vous n'avez pas les droits...</strong>
+  <% end %>

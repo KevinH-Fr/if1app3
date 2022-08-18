@@ -6,6 +6,17 @@
 
  /* format des champs : */
 
+.table_icon_titre {
+ vertical-align: middle;
+ font-size: x-large;
+}
+
+ .navbar-nav
+ {
+   font-size: x-small;
+
+ }
+
  .green {
     color: green;
     font-weight: bold;
@@ -212,3 +223,5 @@ th, td {
     top: 2%;
     left: 100%;
   }
+
+

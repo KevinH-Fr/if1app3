@@ -1,9 +1,16 @@
 <% if user_signed_in? %>
 
-  <br/>
-  <h1 class="fa-solid fa-money-bill-1-wave fa-2xl fw-bold fs-1"> - Paris </h1>   
-  <br/> <hr/> 
-  
+<div> 
+  <table class="table_icon_titre">
+    <tr>
+     <br>
+      <th class="fa-solid fa-money-bill-1-wave fa-xl fs-1 table_icon_titre"> </th>
+      <th class="table_icon_titre"> &nbsp;|&nbsp;Paris </th>
+    </tr>
+  </table>
+</div>
+  <hr/> 
+
   <%= render "shared/choixevent" %>
 
   <% if (@eventId).present? %>

@@ -1,10 +1,16 @@
 <% if user_signed_in? %>
 
-<br/>
+<div> 
+  <table class="table_icon_titre">
+    <tr>
+     <br>
+      <th class="fa-solid fa-car fa-xl fs-1 table_icon_titre"> </th>
+      <th class="table_icon_titre"> &nbsp;|&nbsp;Constructeurs </th>
+    </tr>
+  </table>
+</div>
 
-      <h1 class="fa-solid fa-car fa-2xl fw-bold fs-1"> - Constructeurs </h1> 
-      
-      <br/> <br/> <hr/> <br/>
+  <hr/>
 
  <div class="table-responsive">
     <table class="table table-striped table-bordered table-hover">
@@ -23,24 +29,23 @@
           <tr>
             <td> <%= link_to equipe.nom, equipe %> </td>
             <td>  <%= image_tag(equipe.logo, style: "width: 200px; display: block", class: "img-fluid rounded") if equipe.logo.attached? %>  </td> 
-            <td>   <%= image_tag(equipe.ecusson, style: "width: 200px; display: block", class: "img-fluid rounded") if equipe.ecusson.attached? %>  </td> 
-            <td>   <%= image_tag(equipe.voiture, style: "width: 200px; display: block", class: "img-fluid rounded") if equipe.voiture.attached? %>  </td> 
+            <td>   <%= image_tag(equipe.ecusson, style: "width: 50px; display: block", class: "img-fluid rounded") if equipe.ecusson.attached? %>  </td> 
+            <td>   <%= image_tag(equipe.voiture, style: "width: 100px; display: block", class: "img-fluid rounded") if equipe.voiture.attached? %>  </td> 
 
             <td width="5%">
-              <%= link_to '', equipe, class:"fa-solid fa-eye btn btn-primary" %> 
+              <%= link_to '', equipe, class:"fa-solid fa-eye btn btn-sm btn-primary" %> 
             </td>
             <td width="5%">
-              <%= button_to '', equipe, class:"fa-solid fa-trash-can btn btn-danger", method: :delete, :onclick => "return confirm('Sûr ?')" %>
+              <%= button_to '', equipe, class:"fa-solid fa-trash-can btn btn-sm btn-danger", method: :delete, :onclick => "return confirm('Sûr ?')" %>
             </td>    
             <td width="5%">
-              <%= link_to "", edit_equipe_path(equipe), class:"fa-regular fa-pen-to-square btn btn-secondary" %> 
+              <%= link_to "", edit_equipe_path(equipe), class:"fa-regular fa-pen-to-square btn btn-sm btn-secondary" %> 
             </td> 
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
-  <br>
 
 <% if current_user.admin? %>
   <%= link_to "Nouvelle equipe", new_equipe_path, class:"btn btn-primary" %>

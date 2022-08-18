@@ -1,19 +1,26 @@
 
 <% if user_signed_in? %>
 
-  <br/>
-  <h1 class="fa-solid fa-money-bill-1-wave fa-2xl fw-bold fs-1"> - Parieurs </h1>   
-  <br/> <hr/> 
+<div> 
+  <table class="table_icon_titre">
+    <tr>
+     <br>
+      <th class="fa-solid fa-money-bill-1-wave fa-xl fs-1 table_icon_titre"> </th>
+      <th class="table_icon_titre"> &nbsp;|&nbsp;Parieurs </th>
+    </tr>
+  </table>
+</div>
+
+   <hr/> 
   
   <%= render "shared/choixevent" %>
-
 
   <% if (@eventId).present? %>
     <%= render "shared/eventactif" %>
         <% if current_user.admin? %>
           <%# Doc event actif %>
           <% numGp = Event.find(@eventId).numero %>
-          <%= link_to "Image",   documentedition_parieurs_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-sm btn-success" %>
+          <%= link_to "Image", documentedition_parieurs_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-sm btn-success" %>
           <br><br>
         <% end %>
 
@@ -34,12 +41,11 @@
             <tr>
               <td> <%= i + 1 %>  </td>
               <td> <%= Pilote.find(pari.parieur_id).nom %> </td>
-                <td>
-                  <% idEcurie = Pilote.find(pari.parieur_id).ecurie %>  
-                  <%= image_tag Equipe.find(idEcurie).ecusson, style: "width: 50px; display: block", class: "img-fluid rounded" %>
-                </td>
-
-              <td> <%= 1000 + pari.total %> </td>
+              <td>
+                <% idEcurie = Pilote.find(pari.parieur_id).ecurie %>  
+                <%= image_tag Equipe.find(idEcurie).ecusson, style: "width: 50px; display: block", class: "img-fluid rounded" %>
+              </td>
+              <td> <%= number_with_precision(1000 + pari.total, precision: 2 ) %> </td>
               
             </tr>
           <% end %>

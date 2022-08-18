@@ -2,12 +2,23 @@
 <% if user_signed_in? %>
     <% if current_user.admin? %>
 
+     <div> 
+       <table class="table_icon_titre">
+         <tr>
+           <br>
+             <th class="fa-solid fa-users-gear fa-xl fs-1 table_icon_titre"> </th>
+             <th class="table_icon_titre"> &nbsp;|&nbsp;Admin </th>
+          </tr>
+       </table>
+    </div>
+
+
     <% @users = User.all.where(role: 0) %>
     <% @admins = User.all.where(role: 2) %>
 
     <br/>
 
-    <h2> Liste des admins </h2>
+    <h5> Liste des admins </h5>
     <strong> Nombre: <%= @admins.count %> </strong>
 
     <div class="table-responsive">
@@ -47,7 +58,7 @@
 
     <br/> <hr/> <br/>
 
-    <h2> Liste des membres </h2>
+    <h5> Liste des membres </h5>
     <strong> Nombre: <%= @users.count %> </strong>
 
     <div class="table-responsive">

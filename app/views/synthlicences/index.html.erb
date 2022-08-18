@@ -1,9 +1,17 @@
 
 <% if user_signed_in? %>
 
-  <br/>
-  <h1 class="fa-solid fa-person-military-pointing fa-2xl fw-bold fs-1"> - Synthese Licences </h1>   
-  <br/> <hr/> 
+<div> 
+  <table class="table_icon_titre">
+    <tr>
+     <br>
+      <th class="fa-solid fa-person-military-pointing fs-1 table_icon_titre"> </th>
+      <th class="table_icon_titre"> &nbsp;|&nbsp;Synthèse Licences </th>
+    </tr>
+  </table>
+</div>
+
+  <hr/> 
 
 <%= render "shared/choixevent" %>
 

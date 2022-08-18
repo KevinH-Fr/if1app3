@@ -73,9 +73,7 @@ class ParisController < ApplicationController
     @coureur = Pilote.statut_actif.division_courant(@divisionId).all
     @parieur = Pilote.statut_actif.division_non_courant(@divisionId).all
     
-  #  @eventId = params[:eventId]
-   # session[:event] =  params[:eventId]
-   
+
   end
 
   def create

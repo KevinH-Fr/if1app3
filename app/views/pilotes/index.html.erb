@@ -1,8 +1,17 @@
 
 <% if user_signed_in? %>
 
-  <br/>
-  <h1 class="fa-solid fa-user fa-2xl fw-bold fs-1"> - Pilotes </h1>  <br/>  <hr/>
+<div> 
+  <table class="table_icon_titre">
+    <tr>
+     <br>
+      <th class="fa-solid fa-user fa-xl fs-1 table_icon_titre"> </th>
+      <th class="table_icon_titre"> &nbsp;|&nbsp;Pilotes </th>
+    </tr>
+  </table>
+</div>
+
+  <hr/>
 
   <div class="container">
     <div class="row">
@@ -18,7 +27,7 @@
             <div class="col-md-auto">
               <%= search_form_for(@q, url: pilotes_path, method: :get, class:'d-flex') do |f| %>
                 <%= f.search_field :nom_cont, placeholder: "Recherche...", class: "form-control me-2" %>
-                <%= f.submit "Go!", class:"btn btn-outline-primary" %>
+                <%= f.submit "Go!", class:"btn btn-sm btn-outline-primary" %>
               <% end %>
             </div>
           </td>
@@ -33,7 +42,7 @@
             <div class="col-md-auto">
               <%= search_form_for(@q, url: pilotes_path, method: :get, class:'d-flex') do |f| %>
                 <%= f.hidden_field :statut_eq, value: "actif" %>
-                <%= f.submit "Actif", class:"btn btn-success" %>
+                <%= f.submit "Actif", class:"btn btn-sm btn-success" %>
               <% end %>
             </div>
           </td>
@@ -41,7 +50,7 @@
            <div class="col-md-auto">
                 <%= search_form_for(@q, url: pilotes_path, method: :get, class:'d-flex') do |f| %>
                     <%= f.hidden_field :statut_eq, value: "inactif" %>
-                    <%= f.submit "Inactif", class:"btn btn-danger" %>
+                    <%= f.submit "Inactif", class:"btn btn-sm btn-danger" %>
                 <% end %>
             </div>
 
@@ -50,7 +59,7 @@
                 <div class="col-md-auto">
                     <%= search_form_for(@q, url: pilotes_path, method: :get, class:'d-flex') do |f| %>
                         <%= f.hidden_field :division_id_eq, value: division.id %>
-                        <%= f.submit division.nom, class:"btn btn-dark" %>
+                        <%= f.submit division.nom, class:"btn btn-sm btn-dark" %>
                     <% end %>
                 </div>
               </td>
@@ -73,7 +82,7 @@
                 <div class="col-md-auto">
                     <%= search_form_for(@q, url: pilotes_path, method: :get, class:'d-flex') do |f| %>
                         <%= f.hidden_field :statut_eq, value: "" %>
-                        <%= f.submit "Effacer filtres", class:"btn btn-outline-danger" %>
+                        <%= f.submit "Effacer filtres", class:"btn btn-sm btn-outline-danger" %>
                     <% end %>
                 </div>
           
@@ -86,7 +95,7 @@
     
     <br>
     <% if current_user.admin? %>
-        <%= link_to "Nouveau pilote", new_pilote_path, class:"btn btn-primary" %>
+        <%= link_to "Nouveau pilote", new_pilote_path, class:"btn btn-sm btn-primary" %>
     <% end %>
 
   <hr/> 
