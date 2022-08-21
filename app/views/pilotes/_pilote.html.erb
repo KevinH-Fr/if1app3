@@ -19,7 +19,6 @@
       <%= image_tag Equipe.find(@pilote.ecurie).logo, style: "width: 400px; display: block", class: "img-fluid rounded" %> 
     <% end %>
 
-
   </p>
 
   <p>
@@ -34,7 +33,9 @@
   </p>
 
     <% if pilote.ecurie.present?%>
-      <%= image_tag Equipe.find(@pilote.ecurie).voiture, style: "width: 400px; display: block", class: "img-fluid rounded" %> 
+      <% if Equipe.find(@pilote.ecurie).voiture.present? %>
+        <%= image_tag Equipe.find(@pilote.ecurie).voiture, style: "width: 400px; display: block", class: "img-fluid rounded" %> 
+      <% end %>
     <% end %>
 
   <hr>  
@@ -97,6 +98,7 @@
       </td> 
     </tbody>
     </table>
+
   <% end %>
 
 </div>

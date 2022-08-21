@@ -142,6 +142,39 @@ class ResultatsController < ApplicationController
     end
   end
 
+
+  def toggle_creerresultats
+    @eventId = params[:id]
+    @divisionId = Event.find(@eventId).division_id
+    @saisonLiee = Event.find(@eventId).saison_id
+    @numGp = Event.find(@eventId).numero 
+  
+  
+    @pilotesActifDiv = Pilote.all.where(statut: "actif", division_id: @divisionId) 
+      @pilotesActifDiv.all.each do |pilote|
+        ecurieLiee = Pilote.find(pilote.id).ecurie
+        resultat = Resultat.create(pilote_id: pilote.id, event_id: @eventId, ecurie: ecurieLiee)
+      end
+     
+    
+      redirect_to resultats_url(saisonId: @saisonLiee, eventId: @eventId, divisionId: @divisionId, numGp: @numGp), 
+                  notice: "les résultats ont bien été créés"
+  end
+
+  
+  def toggle_supprimerresultats
+    @eventId = params[:id]
+    @divisionId = Event.find(@eventId).division_id
+    @saisonId = Event.find(@eventId).saison_id
+  
+    Resultat.where(event_id: @eventId).destroy_all
+  
+    redirect_to resultats_url(saisonId: @saisonId, eventId: @eventId, divisionId: @divisionId),
+                 notice: "les résultats ont bien été supprimés"
+  end
+
+
+
   def documentedition
     @eventId = params[:eventId]
     @eventNum =  params[:numero]
@@ -209,6 +242,8 @@ end
     end
 
 
+
+
     def valPoints
       if @resultat.course == 1 
          pointsCourse = 25
@@ -264,4 +299,9 @@ end
       
     end
     
+
+    
+
+
+
 end

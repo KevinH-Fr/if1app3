@@ -23,6 +23,10 @@ Rails.application.routes.draw do
 
   resources :resultats do
     get 'documentedition', :on => :collection
+    member do
+      get :toggle_creerresultats
+      get :toggle_supprimerresultats
+    end
   end
   
   resources :classecuries  do

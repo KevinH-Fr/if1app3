@@ -14,10 +14,11 @@
  <table width="500" style="margin-left:auto;margin-right:auto">
     <thead>
       <tr>
-        <th class="th_doc">GP n°</th>
+        <th class="th_doc">GP</th>
         <th class="th_doc">Date</th>
         <th class="th_doc">Pays</th>
         <th class="th_doc">Division</th>
+        <th class="th_doc">Saison</th>
       </tr>
     </thead>
 
@@ -39,6 +40,10 @@
          <td class="val_entete">
           <% divisionId = Event.find(eventId).division_id %> 
           <%= Division.find(divisionId).nom %>
+        </td>
+         <td class="val_entete">
+          <% saisonId = Event.find(eventId).saison_id %> 
+          <%= Saison.find(saisonId).nom %>
         </td>
       
       </tr>

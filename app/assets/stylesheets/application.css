@@ -13,7 +13,7 @@
 
  .navbar-nav
  {
-   font-size: x-small;
+   font-size: small;
 
  }
 
@@ -113,6 +113,8 @@ th, td {
 
 .enteteGp{
   text-decoration: underline;
+  font-size: small;
+  font-weight: normal;
 }
 
 .footer {
@@ -131,6 +133,11 @@ th, td {
   font-size: large;
   height: 40px;
   text-align: center;
+ }
+
+ .eventactif {
+  font-size: small;
+  font-weight: bold;
  }
 
  .cols_pos_score {

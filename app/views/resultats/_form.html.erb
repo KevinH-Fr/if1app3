@@ -11,12 +11,14 @@
     </div>
   <% end %>
 
- <% @eventId = params[:eventId] %>
+ <% @eventId =  session[:event] %>
   
   <div>
     <strong>Event | </strong>
    <%= form.select(:event_id, options_from_collection_for_select(
-                  @event,'id', 'date', :selected => @eventId), :include_blank => true) %>  
+                  @event,'id', 'formatted_name_bis', :selected => form.object.event_id), :include_blank => true) %>  
+
+                   
  </div>
 
 

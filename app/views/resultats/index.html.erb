@@ -21,9 +21,12 @@
        <% if current_user.admin? %>
           <%= link_to "Nouveau résultat", new_resultat_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp), class:"btn btn-sm btn-primary" %>
         
+          <%= link_to "Créer", toggle_creerresultats_resultat_path(@eventId), class:"btn btn-sm btn-warning", style:"margin: 2px"  %>
+          <%= link_to "Supprimer", toggle_supprimerresultats_resultat_path(@eventId), class:"btn btn-sm btn-danger", style:"margin: 2px"%>
+
             <%# PDF event actif %>
             <% numGp = Event.find(@eventId).numero %>
-            <%= link_to "Générer image",   documentedition_resultats_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-sm btn-success" %>
+            <%= link_to "Image", documentedition_resultats_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-sm btn-success" %>
 
           <br/><br/>
       <% end %>

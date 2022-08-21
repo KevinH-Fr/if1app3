@@ -14,16 +14,16 @@
 
             <tbody>
               <tr>
-                <td>
+                <td class="eventactif">
                     <%= Event.find(@eventId).numero %>
                 </td>
-                <td>
+                 <td class="eventactif">
                   <% if Event.find(@eventId).date.present? %>
                     <% datetime = Event.find(@eventId).date.to_date %>
                     <%= datetime.strftime("%d/%m/%y") %>
                   <% end %>
                 </td>
-                <td>
+                <td class="eventactif">
                       <% circuitId = Event.find(@eventId).circuit_id %> 
                       <%= Circuit.find(circuitId).pays %>
                 </td>
@@ -39,7 +39,7 @@
                       <%= image_tag(Circuit.find(circuitId).carte, style: "width: 50px; display: block", class: "img-fluid rounded") %>  
                   <% end %>
                 </td>
-                <td>
+                 <td class="eventactif">
                     <% divisionId = Event.find(@eventId).division_id %> 
                     <%= Division.find(divisionId).nom %>
                 </td>
