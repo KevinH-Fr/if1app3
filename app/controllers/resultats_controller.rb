@@ -173,8 +173,6 @@ class ResultatsController < ApplicationController
                  notice: "les résultats ont bien été supprimés"
   end
 
-
-
   def documentedition
     @eventId = params[:eventId]
     @eventNum =  params[:numero]
@@ -198,10 +196,7 @@ class ResultatsController < ApplicationController
 
       customFilename = "Resultats_" "S#{@saisonId}_" "D#{@divisionId}_" "GP#{@eventNum}_" "#{@circuitNom}"".png"
 
-        send_data(png, disposition: 'inline', 
-                       filename: customFilename, 
-                       type: 'application/png',
-                      format: 'A4')
+        send_data(png, disposition: 'inline', filename: customFilename, type: 'application/png', format: 'A4')
       end 
     end
   end

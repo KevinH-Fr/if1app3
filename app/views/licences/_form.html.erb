@@ -22,7 +22,7 @@
   <div>
     <%= form.label :event, style: "display: block" %>
     <%= form.select(:event_id, options_from_collection_for_select(
-                  @event,'id', 'date', 
+                  @event,'id', 'formatted_name_bis', 
                  :selected => form.object.event_id), 
                  :include_blank => true )%>
   </div>

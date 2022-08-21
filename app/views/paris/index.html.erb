@@ -98,7 +98,8 @@
               <td class="col_centree"> <%= pari.solde %> </td>
              
               <% if current_user.admin? %>
-                <td> <%= pari.updated_at.strftime("%d/%m %H:%M") %> </td>
+                <% horairePari_local = pari.updated_at.to_time + 7200 %>
+                <td> <%=  horairePari_local.strftime("%d/%m %H:%M") %> </td>
               <% end %>
 
 
