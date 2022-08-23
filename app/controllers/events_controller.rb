@@ -4,6 +4,24 @@ class EventsController < ApplicationController
   # GET /events or /events.json
   def index
     @events = Event.all
+
+    @saisons = Saison.all
+    @divisions = Division.all
+    @events = Event.all
+
+    if params[:saisonId]
+      @saisonId = params[:saisonId]
+    end
+
+    if params[:divisionId]
+      @divisionId = params[:divisionId]
+
+      @eventsFiltres = @events.where('saison_id = :saison_id AND division_id = :division_id',
+        saison_id: @saisonId, division_id: @divisionId)
+
+        
+    end
+
   end
 
   # GET /events/1 or /events/1.json
