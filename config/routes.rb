@@ -15,7 +15,11 @@ Rails.application.routes.draw do
 
   resources :friends
   resources :saisons
-  resources :divisions
+
+  resources :divisions do
+    get 'documentedition', :on => :collection
+  end
+  
   resources :circuits
   resources :events
   resources :equipes

@@ -57,6 +57,28 @@ class DivisionsController < ApplicationController
     end
   end
 
+
+  def documentedition
+    @eventId = params[:eventId]
+    @saisonId = params[:saisonId]
+    @divisionId = params[:divisionId]
+
+    @pilotes = Pilote.where(division_id: @divisionId)
+
+    respond_to do |format|
+      format.html
+      format.png do
+      #  png = Grover.new(url_for(only_path: false)).to_png
+      png = Grover.new(url_for(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp)).to_png
+
+      customFilename = "Grille_" "S#{@saisonId}_" "D#{@divisionId}_" ".png"
+
+        send_data(png, disposition: 'inline', filename: customFilename, 
+                       type: 'application/png', format: 'A4')
+      end 
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_division

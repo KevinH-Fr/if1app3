@@ -1,0 +1,66 @@
+
+<body style="background-color: #313130;">
+
+  <br>
+  <h1 class="titre_doc"> Grille </h1>   <br><br>
+
+<%= image_tag asset_url('/images/if1main.png'), style: "width: 140px;", class: "img-fluid rounded", id:"imgLogoIf1" %> 
+
+<%= divisionId = params[:id] %>
+
+ <table width="500" style="margin-left:auto;margin-right:auto">
+    <thead>
+      <tr>
+        <th class="th_doc">Division</th>
+       
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+         <td class="val_entete">
+          <%= Division.find(divisionId).nom %>
+        </td>
+        
+      
+      </tr>
+  </tbody>
+</table>
+
+<hr class="hr_doc"> 
+
+
+
+
+    <%#= tableau data cotes %>
+    <table style="margin-left:auto;margin-right:auto">
+      <thead class="table-dark">
+        <tr>
+          <th class="th_doc">pilote</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <% @pilotes.each_with_index do | pilote, i| %>
+              <td>  
+                  <div class="contenant">
+                    <% idPilote = cote.pilote_id %> 
+                    <% idEcurie = Pilote.find(idPilote).ecurie %> 
+                    <% nomPilote = Pilote.find(idPilote).nom %> 
+                      <%= image_tag Equipe.find(idEcurie).logo, style: "width: 300px; display: block", class: "img-fluid rounded" %>
+                            <div class="texte_centrer">
+                              <%= nomPilote %>
+                            </div>
+                        </div>
+                </td> 
+           
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <%# bas de page depuis partial %>
+  <%= render "shared/baspdf" %>
+
+</body>

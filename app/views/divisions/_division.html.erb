@@ -1,5 +1,6 @@
 <div id="<%= dom_id division %>">
   <p>
+  <br>  
     <strong>Nom:</strong>
     <%= division.nom %>
   </p>
@@ -8,5 +9,13 @@
     <strong>Numero:</strong>
     <%= division.numero %>
   </p>
+
+    <% if current_user.admin? %>
+
+      <%# Doc grille div %>
+ 
+      <%= link_to "Grille",   documentedition_divisions_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, format: :png), class:"btn btn-sm btn-success" %>
+      <br><br>
+    <% end %>
 
 </div>
