@@ -30,8 +30,9 @@
               <% deltaTime = formatDateHoraireCompletGP.to_time - horaireCourant.to_time %>
              
             <%#= deltaTime %> 
-                <% if deltaTime > 7200 %> <%# 2h de decalage en prod soit 7200 secondes %>
+                <% if deltaTime > 7200 %> <%# 2h de decalage en prod soit 7200 secondes %> 
                   <%= link_to "Nouveau pari", new_pari_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp), class:"btn btn-sm btn-primary" %>
+                
                 <% end %>
             <% end %>
           <% end %> 
@@ -40,10 +41,11 @@
     <% if current_user.admin? %>
       
       <%= link_to "calcul résultats", toggle_calculresultats_pari_path(@eventId), class:"btn btn-warning btn-sm", style:"margin: 2px" %>
-      <br><br>
+      
     <% end %>
 
   <%# tab datas %>
+  <br><br>
 
   <div class="table-responsive">
     <table class="table table-striped table-bordered table-hover">
@@ -58,6 +60,7 @@
           <th>ecurie</th>
           <th>cote</th>
           <th>=</th>
+          <th>tempo verif</th>
           <th>solde</th>
           <% if current_user.admin? %>
             <th>horaire</th>
@@ -95,8 +98,28 @@
                   <i class="fa-solid fa-circle-xmark fa-xl" style="color:red"></i>
                 <% end %>
               </td>
-              <td class="col_centree"> <%= pari.solde %> </td>
+
+              <td> 
+                id event : <%= session[:event] %> <br>
+                id pari : <%= pari.id  %> <br>
+                id parieur : <%= pari.parieur.id  %>  <br>
+                id coureur : <%= pari.coureur.id  %> <br>
+                resultat coureur : 
+                
+                <% if Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).present? %>
+                
+                  <%= Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.course %> <br>
+                  statut dns : <%= Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.dns %> 
+                <% else %>
+                  no result
+                <% end %>  
+
+              </td>
+
+              <td class="col_centree"> <%= number_with_precision(pari.solde, precision: 2)  %> </td>
              
+            
+              
               <% if current_user.admin? %>
                 <% horairePari_local = pari.updated_at.to_time + 7200 %>
                 <td> <%=  horairePari_local.strftime("%d/%m %H:%M") %> </td>

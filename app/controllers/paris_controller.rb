@@ -70,7 +70,7 @@ class ParisController < ApplicationController
   def edit
     @event = Event.all
     @divisionId = Event.find(session[:event]).division_id # utiliser param event session
-    @coureur = Pilote.statut_actif.division_courant(@divisionId).all
+    @coureur = Pilote.all
     @parieur = Pilote.statut_actif.division_non_courant(@divisionId).all
     
 
@@ -100,6 +100,7 @@ class ParisController < ApplicationController
   end
 
   def update
+    @coureur = Pilote.all
 
     respond_to do |format|
       if @pari.update(pari_params)
@@ -127,7 +128,7 @@ class ParisController < ApplicationController
 
   def toggle_calculresultats
 
-    @eventId = params[:id]
+    @eventId = session[:event]
     @divisionId = Event.find(@eventId).division_id
     @saisonId = Event.find(@eventId).saison_id
 
@@ -135,42 +136,72 @@ class ParisController < ApplicationController
 
     @parisEvent.all.each do |pari|
 
-      coureurId = pari.coureur_id
+      coureurId = pari.coureur.id
       typePari = pari.paritype
 
-      if Resultat.where(event_id: @eventId, pilote_id: coureurId).present?
-        resultatCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.course
+      if Resultat.where(event_id: @eventId, pilote_id: pari.coureur).present?
+        resultatCoureur = Resultat.where(event_id: @eventId, pilote_id: pari.coureur.id).first.course
         resultatQualif = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.qualification
         statutDnsCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.dns
 
-        if resultatCoureur.nil? # exception resultat pilote sans val qualif et course
-          resultatCoureur = 20
-          resultatQualif = 20
-        end
-         
-      else
-        resultatCoureur = 20
-      end
+        pariMontant = pari.montant
+        pariCote = pari.cote
 
-      pariMontant = pari.montant
-      pariCote = pari.cote
-
-     
-
-
-      if typePari == "victoire" && resultatCoureur == 1 || typePari == "podium" && resultatCoureur <= 3 || typePari == "top10" && resultatCoureur <= 10 || typePari == "pole" && resultatQualif == 1
-
-          pari.update(resultat: true)
-          pari.update(solde: pariMontant * pariCote - pariMontant )
-        else
-          if statutDnsCoureur == true   # rembourser mise si dns
+        # tester si pari vrai ou faux 
+          if typePari == "victoire" && resultatCoureur == 1 || typePari == "podium" && resultatCoureur <= 3 || typePari == "top10" && resultatCoureur <= 10 || typePari == "pole" && resultatQualif == 1
             pari.update(resultat: true)
-            pari.update(solde: pariMontant )
+            pari.update(solde: pariMontant * pariCote - pariMontant )
           else
-            pari.update(resultat: false)
-            pari.update(solde: - pariMontant )
+
+            if statutDnsCoureur == true   # rembourser mise si dns
+              pari.update(resultat: true)
+              pari.update(solde: pariMontant )
+            else
+              pari.update(resultat: false)
+              pari.update(solde: - pariMontant )
+            end
           end
-        end
+
+        end 
+        
+        # si pas de resultat trouvé, alors remboursement 
+      #  pari.update(resultat: false)
+      #  pari.update(solde: 2222)
+      #end
+
+     #   if resultatCoureur.nil? # exception resultat pilote sans val qualif et course
+     #     resultatCoureur = 20
+     #     resultatQualif = 20
+     #   end
+     
+           # si pas de resultat c'est que pilote n'a pas partipé, donc remboursement
+           # donc si pas de resultat rentré pour le pilote coureur, alors remboursement auto
+
+    #    resultatCoureur = 20
+
+      # pari.update(resultat: true)
+     # else
+     #   pari.update(resultat: false)
+     # end
+
+     # pariMontant = pari.montant
+     # pariCote = pari.cote
+
+      #tester paris 2308:
+
+   #   if typePari == "victoire" && resultatCoureur == 1 || typePari == "podium" && resultatCoureur <= 3 || typePari == "top10" && resultatCoureur <= 10 || typePari == "pole" && resultatQualif == 1
+
+      #    pari.update(resultat: true)
+      #    pari.update(solde: pariMontant * pariCote - pariMontant )
+     #   else
+        #  if statutDnsCoureur == true   # rembourser mise si dns
+      #      pari.update(resultat: true)
+        #    pari.update(solde: pariMontant )
+        #  else
+        #    pari.update(resultat: false)
+        #    pari.update(solde: - pariMontant )
+        #  end
+    #    end
 
     end  
     
@@ -179,9 +210,9 @@ class ParisController < ApplicationController
 
   end
 
+
+
   def toggle_recupEvent
-
-
 
     redirect_to new_pari_path(),
     notice: "test recup event courant "
