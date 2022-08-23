@@ -208,6 +208,13 @@ th, td {
     font-family: "F1regular";
   }
 
+  .sous_titre_doc {
+    text-align: center;
+    color: white;
+    background-color: rgb(36, 38, 38);
+    font-family: "F1regular";
+  }
+
   #imgDrapeau{
     position: absolute;
     top: 2%;
