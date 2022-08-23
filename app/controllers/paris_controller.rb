@@ -144,6 +144,12 @@ class ParisController < ApplicationController
         resultatQualif = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.qualification
         statutDnsCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.dns
 
+        if statutDnsCoureur == true 
+          resultatCoureur = 20
+          resultatQualif = 20
+        end
+
+
         pariMontant = pari.montant
         pariCote = pari.cote
 
