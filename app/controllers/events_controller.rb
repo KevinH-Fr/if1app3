@@ -17,7 +17,7 @@ class EventsController < ApplicationController
       @divisionId = params[:divisionId]
 
       @eventsFiltres = @events.where('saison_id = :saison_id AND division_id = :division_id',
-        saison_id: @saisonId, division_id: @divisionId)
+        saison_id: @saisonId, division_id: @divisionId).order(:numero)
 
         
     end
