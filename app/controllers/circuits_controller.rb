@@ -13,6 +13,7 @@ class CircuitsController < ApplicationController
 
   # GET /circuits/1 or /circuits/1.json
   def show
+   
   end
 
   # GET /circuits/new

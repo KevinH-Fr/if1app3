@@ -34,13 +34,17 @@ gem 'active_analytics'
 
 
 
+
+
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  gem 'dotenv-rails'
 end
 
 group :development do
   gem "web-console"
   gem "sqlite3", "~> 1.4"
+
 
 end
 
