@@ -30,6 +30,9 @@ gem 'grover'
 #gem "mini_magick"
 #"gem 'rmagick'
 
+gem 'active_analytics'
+
+
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
