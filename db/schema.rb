@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_26_095852) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_26_110601) do
   create_table "active_analytics_views_per_days", force: :cascade do |t|
     t.string "site", null: false
     t.string "page", null: false
@@ -58,6 +58,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_26_095852) do
     t.string "pays"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "adresse"
+    t.decimal "latitude"
+    t.decimal "longitude"
   end
 
   create_table "classecuries", force: :cascade do |t|

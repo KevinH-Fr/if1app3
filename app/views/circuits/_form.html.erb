@@ -1,4 +1,7 @@
-<%= form_with(model: circuit) do |form| %>
+<%= form_with model: circuit, local: true, data: {
+                                            controller: :maps,
+                                            action: "google-maps-callback@window->maps#initializeMap"
+                                          } do |form| %>
   <% if circuit.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(circuit.errors.count, "error") %> prohibited this circuit from being saved:</h2>
@@ -31,6 +34,23 @@
     <%= form.label :carte %>
     <%= form.file_field :carte %>
   </div>
+
+  <div class="field">
+    <%= form.label :adresse %>
+    <%= form.text_field :adresse %>
+  </div>
+
+  <div class="field">
+    <%= form.label :latitude %>
+    <%= form.text_field :latitude %>
+  </div>
+
+  <div class="field">
+    <%= form.label :longitude %>
+    <%= form.text_field :longitude %>
+  </div>
+
+   <%= content_tag :div, nil, data: { target: "maps.map" }, class: 'map' %>
 
   <div>
   <br/>
