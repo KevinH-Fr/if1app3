@@ -33,11 +33,14 @@
 <br>
 
 <div>
-  <p> <%= Date.today.strftime('%A, %B %d') %> </p>
-  <img src="https://openweathermap.org/img/wn/<%= @data["weather"].first["icon"]%>@2x.png" />
-  <p> <%= @data["weather"].first["main"] %></p>
-  <p> <%= @data["weather"].first["description"] %></p>
-  <p> <%= @data["main"]["temp"] %> ° C</p>
+
+  <% if @data["weather"].present?  %>
+    <p> <%= Date.today.strftime('%A, %B %d') %> </p>
+     <img src="https://openweathermap.org/img/wn/<%= @data["weather"].first["icon"]%>@2x.png" />
+     <p> <%= @data["weather"].first["main"] %></p>
+     <p> <%= @data["weather"].first["description"] %></p>
+     <p> <%= @data["main"]["temp"] %> ° C</p>
+  <% end %>
 </div>
 
 
