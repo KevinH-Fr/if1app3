@@ -21,16 +21,13 @@ class CircuitsController < ApplicationController
     
   end
 
-  # GET /circuits/new
   def new
     @circuit = Circuit.new
   end
 
-  # GET /circuits/1/edit
   def edit
   end
 
-  # POST /circuits or /circuits.json
   def create
     @circuit = Circuit.new(circuit_params)
 
@@ -45,7 +42,6 @@ class CircuitsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /circuits/1 or /circuits/1.json
   def update
     respond_to do |format|
       if @circuit.update(circuit_params)
@@ -58,7 +54,6 @@ class CircuitsController < ApplicationController
     end
   end
 
-  # DELETE /circuits/1 or /circuits/1.json
   def destroy
     @circuit.destroy
 

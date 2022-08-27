@@ -60,8 +60,6 @@ textarea {
 th, td {
    text-align: left;
    font-weight: bold;
-   
- /*  max-width: 50px; */
 }
 
 .th_doc {
@@ -69,7 +67,6 @@ th, td {
   color: white;
   font-size: large;
   text-align: center;
-  
 }
 
 .th_doc_delta {
@@ -83,10 +80,16 @@ th, td {
   font-size: xx-small;
 }
 
- /*
-.col_actions {
- max-width: 60px;
-} */
+.medium_info {
+  font-style: normal;
+  font-size: small;
+}
+
+.small_info {
+ font-style: italic;
+ font-size: xx-small;
+}
+
 
 .col_centree{
   text-align: center;

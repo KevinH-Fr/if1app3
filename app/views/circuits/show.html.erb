@@ -7,74 +7,81 @@
 <% end %>
  
  <% if user_signed_in? %>
+ <br>
 
-  <br>
+ <%= render @circuit %>
 
-    <%= render @circuit %>
+<hr/>
 
-    <%= image_tag(@circuit.drapeau, style: "width: 100px; display: block", class: "img-fluid rounded") if @circuit.drapeau.attached? %>
-      <br/><hr/><br/>
-    <%= image_tag(@circuit.carte, style: "width: 100px; display: block", class: "img-fluid rounded") if @circuit.carte.attached? %>
-
-<hr>
-
-<div class="card" style="width: 90%;">
-
-  <iframe style="border: 0;" src="https://www.google.com/maps/embed/v1/search?key=<%= ENV["MAPS_API_KEY2"] %> 
-    &q=<%= @circuit.nom %>
-    &zoom=14&maptype=satellite" width="100%" height="300" frameborder="0" allowfullscreen="allowfullscreen">
-</iframe>
-  <div class="card-body">
-    <% if @data["weather"].present?  %>
-      <h6 class="card-title">Météo du  <%= Date.today.strftime('%d/%m/%y') %> </h6>
+  <div class="row">
+    <div class="col-sm-6" style="width: 50%;">
+      <div>
+        <%= image_tag(@circuit.drapeau, style: "width: 100px; display: block", class: "img-fluid rounded") if @circuit.drapeau.attached? %>
+      </div>
+    </div>
+    <div class="col-sm-6" style="width: 50%;">
+      <div>
+        <%= image_tag(@circuit.carte, style: "width: 100px; display: block", class: "img-fluid rounded") if @circuit.carte.attached? %>
+      </div>
+    </div>
   </div>
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item"> 
 
-      <table>
-        <tr>
-          <th> 
-            <img src="https://openweathermap.org/img/wn/<%= @data["weather"].first["icon"]%>@2x.png" />
-          </th>
-          <th>
-            <%= @data["weather"].first["description"] %> <br>
-            <%= number_with_precision(@data["main"]["temp"], precision: 1) %> ° C <br>
-          </th>
-          <th  style="padding:10px">
-            <%= @data["main"]["pressure"] %> hPa  <br>
-            <%= @data["main"]["humidity"] %> % humidité  <br>
-          </th>
-          <th style="padding:10px">
-            <%= @data["wind"]["speed"] %> m/s  <br>
-            <%= @data["wind"]["deg"] %> ° direction
-          </th>
+  <hr/>
 
-        </tr>
-      </table>
-      </li>
-    </ul>
+  <div class="card" style="width: 100%; background-color: rgb(200, 200, 200);">
+    <iframe style="border: 0;" src="https://www.google.com/maps/embed/v1/search?key=<%= ENV["MAPS_API_KEY2"] %> 
+      &q=<%= @circuit.nom %>
+      &zoom=14&maptype=satellite" width="100%" height="300" frameborder="0" allowfullscreen="allowfullscreen">
+    </iframe>
 
-    <% end %>
+    <% if @data["weather"].present?  %>
+      <div class="card-body" style="background-color: rgb(31, 29, 29);">
+          <h6 class="card-title text-white" style="text-align:center;">Météo locale du  <%= Date.today.strftime('%d/%m/%y') %> </h6>
+      </div>
+      <ul class="list-group list-group-flush">
+        <table>
+          <tr>
+            <td>
+              <div class="medium_info" style="margin:5px">
+              <%= number_with_precision(@data["main"]["temp"], precision: 1) %> °C
+              </div>
+              <img src="https://openweathermap.org/img/wn/<%= @data["weather"].first["icon"]%>@2x.png" /> <br>
+              <div class="medium_info" style="margin:5px">
+                <%= @data["weather"].first["description"] %> 
+              </div>
 
-</div>
+            </td>
+            <td class="medium_info">
+              <%= @data["main"]["pressure"] %> <small class="small_info"> hPa </small>  <br>
+              <%= @data["main"]["humidity"] %> <small class="small_info"> % hum </small> <br>
+            </td>
+            <td class="medium_info">
+               <%= @data["wind"]["speed"] %>  <small class="small_info"> m/s </small>  <br>
+               <%= @data["wind"]["deg"] %> <small class="small_info">  ° dir </small> 
+            </td>
+          </tr>
+        </table>
+      </ul>
+      <% end %>
+  </div>
 
-<hr>
+<br>
 
     <div>
-     <%= link_to "", circuits_path, class:"fa-solid fa-arrow-rotate-left btn btn-secondary" %>
-         <br/> <br/>
+     <%= link_to "", circuits_path, class:"fa-solid fa-arrow-rotate-left btn btn-secondary", style:"margin:5px;" %>
+  
     <% if current_user.admin? %>
       <table>
         <tr>
           <td>
-            <%= link_to "", edit_circuit_path(@circuit), class:"fa-regular fa-pen-to-square btn btn-primary" %>
+            <%= link_to "", edit_circuit_path(@circuit), class:"fa-regular fa-pen-to-square btn btn-primary", style:"margin:5px;" %>
           </td>
-          <td> | </td>
           <td>
-          <%= button_to "", @circuit, class:"fa-solid fa-trash-can btn btn-danger", method: :delete %>
+          <%= button_to "", @circuit, class:"fa-solid fa-trash-can btn btn-danger", style:"margin:5px;", method: :delete %>
           </td>
         </tr>
       </table>
+        <br>
     <% end %>
 <% else %>
   <br/>
