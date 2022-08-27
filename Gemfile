@@ -32,6 +32,7 @@ gem 'grover'
 
 gem 'active_analytics'
 
+gem 'open-weather-ruby-client'
 
 
 

@@ -30,6 +30,15 @@
     &zoom=14&maptype=satellite" width="90%" height="300" frameborder="0" allowfullscreen="allowfullscreen">
 </iframe>
 
+<br>
+
+<div>
+  <p> <%= Date.today.strftime('%A, %B %d') %> </p>
+  <img src="https://openweathermap.org/img/wn/<%= @data["weather"].first["icon"]%>@2x.png" />
+  <p> <%= @data["weather"].first["main"] %></p>
+  <p> <%= @data["weather"].first["description"] %></p>
+  <p> <%= @data["main"]["temp"] %> ° C</p>
+</div>
 
 
 <hr>
