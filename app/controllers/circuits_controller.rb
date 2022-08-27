@@ -14,8 +14,7 @@ class CircuitsController < ApplicationController
   # GET /circuits/1 or /circuits/1.json
   def show
 
-
-      url = "https://api.openweathermap.org/data/2.5/weather?lat=#{@circuit.latitude}&lon=#{@circuit.longitude}&appid=#{ENV['WEATHER_API_KEY1']}&units=metric"
+      url = "https://api.openweathermap.org/data/2.5/weather?lat=#{@circuit.latitude}&lon=#{@circuit.longitude}&appid=#{ENV['WEATHER_API_KEY1']}&units=metric&lang=fr"
       uri = URI(url)
       res = Net::HTTP.get_response(uri)
       @data = JSON.parse(res.body)
