@@ -1,0 +1,72 @@
+
+<div>
+  <canvas id="myChart" width="20px" height="10px" data-labels="<%= @data_keys %>" data-data="<%= @data_values %>" ></canvas> 
+</div>
+
+
+<% @keys = ['gp1', 'gp2', 'gp3', 'gp4'] %>
+<% @data = [1, 2, 3, 4] %>
+
+
+<script>
+var ctx = document.getElementById('myChart');
+var myChart = new Chart(ctx, {
+ type: 'line',
+ data: {
+  labels: <%= @keys.to_json.html_safe %>,
+  datasets: [{
+   label: '#',
+   data: [12, 19, 3, 5, 2, 12],
+   fill:false,
+   borderColor:"#308af3",
+   pointBackgroundColor: "#308af3",
+   pointBorderWidth: 2,
+   pointHoverBackgroundColor: "#fff",
+   pointHoverBorderWidth: 2,
+   lineTension:0.05
+  }, {
+   label: '# of Votes',
+   data: <%= @data.to_json.html_safe %>,
+   fill:false,
+   borderColor:"#48ba16",
+   pointBackgroundColor: "#48ba16",
+   pointBorderWidth: 2,
+   pointHoverBackgroundColor: "#fff",
+   pointHoverBorderWidth: 2,
+   lineTension:0.05
+  }]
+ },
+ options: {
+    animations: {
+            tension: {
+                duration: 3600,
+                easing: 'easeInCubic',
+                from: 1,
+                to: 0,
+                loop: false
+            }
+            
+        },
+        
+  legend: { display: false },
+  scales: {
+   xAxes: [{
+    gridLines: { display:false },
+   }],
+   yAxes: [{
+    gridLines: {
+     color: "rgba(0, 0, 0, .05)",
+    }
+   }]
+  
+  },
+ }
+});
+</script>
+
+<script>
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+</script>

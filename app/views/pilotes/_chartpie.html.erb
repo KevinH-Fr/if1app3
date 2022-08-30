@@ -1,6 +1,6 @@
 
-<div>
-  <canvas id="myChart" width="20px" height="10px" data-labels="<%= @data_keys %>" data-data="<%= @data_values %>" ></canvas> 
+<div class="chart-container" style="position: relative; height:40%; width:40%">
+    <canvas id="myChartPie"></canvas>
 </div>
 
 <% @piloteId = params[:id] %>
@@ -14,9 +14,9 @@
 
 <script>
 
-const ctx = document.getElementById('myChart').getContext('2d');
+const ctx = document.getElementById('myChartPie').getContext('2d');
 const myChart = new Chart(ctx, {
-    type: 'bar',
+    type: 'pie',
     data: {
         labels: ['Victoire', 'Podium', 'Top5', 'Top10'],
         datasets: [{
@@ -55,7 +55,7 @@ const myChart = new Chart(ctx, {
 
 <script>
   const myChart = new Chart(
-    document.getElementById('myChart'),
+    document.getElementById('myChartPie'),
     config
   );
 </script>

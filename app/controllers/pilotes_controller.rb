@@ -48,10 +48,7 @@ class PilotesController < ApplicationController
       div = Pilote.params[:div]
       @pilotes = Pilote.all.where(division_id: div)
 
-      @data = [1, 2, 3]
 
-      # test pour chart js 
-      render json: @pilotes
     
     else
       @pilotes = Pilote.all
@@ -67,17 +64,6 @@ class PilotesController < ApplicationController
       end
     end
 
- 
-      @data_keys = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-      ]
-      @data_values = [0, 10, 5, 2, 20, 30, 45]
-   
 
   end
 

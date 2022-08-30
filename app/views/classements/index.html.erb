@@ -43,11 +43,15 @@
 <%#= line_chart @classementScores.map { |goal|
     {name: goal.pilote_id, data: goal.score}} %>
 
+    <%= render "chart" %>
+
+<br>
+<hr>
 
 
  <%#= line_chart Classement.event_courant(@eventId).group(:pilote_id).sum(:score) %>
 
-<%= line_chart  Classement.event_courant(@eventId).map { |goal| {name: goal.pilote_id, data: goal.score}} %>
+<%#= line_chart  Classement.event_courant(@eventId).map { |goal| {name: goal.pilote_id, data: goal.score}} %>
 
     <%#= tableau data classement %>
 
