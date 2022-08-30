@@ -84,7 +84,9 @@ class ResultatsController < ApplicationController
 
   # GET /resultats/new
   def new
-    @pilote = Pilote.all
+    @divisionId = params[:divisionId]
+
+    @pilote = Pilote.statut_actif.division_courant(@divisionId).order(:nom)
     @event = Event.all
     @resultat = Resultat.new resultat_params
 

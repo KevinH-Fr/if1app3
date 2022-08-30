@@ -39,8 +39,6 @@ class PilotesController < ApplicationController
   # GET /pilotes/1 or /pilotes/1.json
   def show
 
-
-
   #  @pilote = Pilote.find(params[:div])
 
     @equipe = Equipe.all
@@ -50,6 +48,10 @@ class PilotesController < ApplicationController
       div = Pilote.params[:div]
       @pilotes = Pilote.all.where(division_id: div)
 
+      @data = [1, 2, 3]
+
+      # test pour chart js 
+      render json: @pilotes
     
     else
       @pilotes = Pilote.all
@@ -64,7 +66,6 @@ class PilotesController < ApplicationController
            
       end
     end
-
 
  
       @data_keys = [

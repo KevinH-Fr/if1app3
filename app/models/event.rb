@@ -15,9 +15,11 @@ class Event < ApplicationRecord
     def formatted_name_bis
       divisionNum = Division.find(division_id).numero
       pays = Circuit.find(circuit_id).pays
-      datetime = date.to_date
-     
-      "n°#{numero} | #{pays} | D #{divisionNum} | #{ datetime.strftime("%d/%m/%y")}"
+
+       datetime = date.to_date
+        "n°#{numero} | #{pays} | D #{divisionNum} | #{ date.strftime("%d/%m/%y")}"
+   
+
     end 
 
     before_validation :horaire_defaut
