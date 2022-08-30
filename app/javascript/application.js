@@ -10,3 +10,7 @@ require("@rails/activestorage").start()
 
 import "chartkick"
 import "Chart.bundle"
+
+//= require Chart.min
+
+
