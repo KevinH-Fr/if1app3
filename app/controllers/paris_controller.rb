@@ -26,7 +26,7 @@ class ParisController < ApplicationController
   
       @eventNum = Event.find(@eventId).numero 
 
-      @paris = Pari.event_courant(@eventId).all
+      @paris = Pari.event_courant(@eventId).all.order(:id)
 
       @coureur = Pilote.statut_actif.division_courant(@divisionId).all
       @parieur = Pilote.statut_actif.division_non_courant(@divisionId).all

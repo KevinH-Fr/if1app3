@@ -56,9 +56,9 @@
                   <% idEcurie = Pilote.find(cote.pilote_id).ecurie %>  
                   <% nomEcurie = Equipe.find(idEcurie).nom %> 
                   <% nomEcurie %>
-                  <% if Equipe.find(idEcurie).ecusson.present? %>
+                  <%# if Equipe.find(idEcurie).ecusson.present? %>
                       <%= image_tag Equipe.find(idEcurie).ecusson, style: "width: 50px; display: block", class: "img-fluid rounded" %>
-                  <% end %>
+                  <%# end %>
               </td>
            
             <td class="col_centree"> <%= number_with_precision(cote.coteVictoire, precision:2) %> </td>
