@@ -39,6 +39,8 @@ class PilotesController < ApplicationController
   # GET /pilotes/1 or /pilotes/1.json
   def show
 
+
+
   #  @pilote = Pilote.find(params[:div])
 
     @equipe = Equipe.all
@@ -62,6 +64,9 @@ class PilotesController < ApplicationController
            
       end
     end
+
+
+    @data = Resultat.all
 
   end
 

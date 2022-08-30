@@ -3,6 +3,12 @@
 
     <%= render @pilote %>
 
+ <%= line_chart Resultat.where(pilote_id: @pilote).group(:pilote_id).sum(:score) %>
+
+ <%#= continuer pour passer le graph avec en absisse les events
+  puis reussir à dessiner le graph pour chaque pilote dans classement pour voir la progression
+  %>
+
 
     <div>
 

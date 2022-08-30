@@ -33,6 +33,22 @@
          <br><br>
       <% end %>
 
+
+ <%#= line_chart  Classement.group(:pilote_id).sum(:score) %>
+
+<%#= line_chart({"2021-01-01" => 2, "2021-01-02" => 3}) %>
+
+
+<hr>
+<%#= line_chart @classementScores.map { |goal|
+    {name: goal.pilote_id, data: goal.score}} %>
+
+
+
+ <%#= line_chart Classement.event_courant(@eventId).group(:pilote_id).sum(:score) %>
+
+<%= line_chart  Classement.event_courant(@eventId).map { |goal| {name: goal.pilote_id, data: goal.score}} %>
+
     <%#= tableau data classement %>
 
     <table class="table table-striped table-bordered table-hover">

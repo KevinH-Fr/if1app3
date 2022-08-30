@@ -34,7 +34,7 @@ gem 'active_analytics'
 
 gem 'open-weather-ruby-client'
 
-
+gem "chartkick"
 
 
 group :development, :test do

@@ -77,6 +77,9 @@ class ResultatsController < ApplicationController
   def show
   #  @valPoints = valScore
     @pilote = Pilote.all
+
+
+    @data = Resultat.all
   end
 
   # GET /resultats/new

@@ -7,3 +7,6 @@ require("@rails/activestorage").start()
 //= require jquery
 //= require jquery_ujs
 
+
+import "chartkick"
+import "Chart.bundle"

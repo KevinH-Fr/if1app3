@@ -1,6 +1,10 @@
 
 <% if user_signed_in? %>
 
+ <strong> test charts : </strong>
+<%= pie_chart Pilote.group(:division_id).count %>
+
+
 <div> 
   <table class="table_icon_titre">
     <tr>
