@@ -5,7 +5,7 @@
 
 
 <% @keys = ['gp1', 'gp2', 'gp3', 'gp4'] %>
-<% @data = [1, 2, 3, 4] %>
+<% @data = [25, 30, 32, 45] %>
 
 
 <script>
@@ -16,36 +16,29 @@ var myChart = new Chart(ctx, {
   labels: <%= @keys.to_json.html_safe %>,
   datasets: [{
    label: '#',
-   data: [12, 19, 3, 5, 2, 12],
-   fill:false,
+   data: <%= @data.to_json.html_safe %>,
+   fill:true,
    borderColor:"#308af3",
    pointBackgroundColor: "#308af3",
    pointBorderWidth: 2,
    pointHoverBackgroundColor: "#fff",
    pointHoverBorderWidth: 2,
-   lineTension:0.05
-  }, {
-   label: '# of Votes',
-   data: <%= @data.to_json.html_safe %>,
-   fill:false,
-   borderColor:"#48ba16",
-   pointBackgroundColor: "#48ba16",
-   pointBorderWidth: 2,
-   pointHoverBackgroundColor: "#fff",
-   pointHoverBorderWidth: 2,
-   lineTension:0.05
-  }]
+   lineTension: 0.4,
+  },]
  },
  options: {
+  responsive: true,
     animations: {
-            tension: {
-                duration: 3600,
-                easing: 'easeInCubic',
-                from: 1,
-                to: 0,
-                loop: false
-            }
-            
+            onComplete: () => {
+              delayed = true;
+            },
+            delay: (contect) => {
+              let delay = 0;
+              if (context.type === "data" && context.mode === "default" && !delayed) {
+                delay = context.dataIndex * 300 + context.datasetIndex * 100;
+              }
+              return delay;
+            },
         },
         
   legend: { display: false },
@@ -57,6 +50,7 @@ var myChart = new Chart(ctx, {
     gridLines: {
      color: "rgba(0, 0, 0, .05)",
     }
+  
    }]
   
   },

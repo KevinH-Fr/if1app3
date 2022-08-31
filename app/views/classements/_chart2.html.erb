@@ -1,0 +1,62 @@
+
+
+<div>
+  <canvas id="myChart" width="20px" height="10px" ></canvas> 
+</div>
+
+<script>
+  const labels = [
+    'GP1',
+    'GP2',
+    'GP3',
+    'GP4',
+    'GP5',
+    'GP6',
+  ];
+
+  const data = {
+    labels: labels,
+    datasets: [{
+      label: 'My First dataset',
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: [10, 15, 28, 36, 40, 45],
+    }]
+  };
+
+    let delayed;
+    const config = {
+    type: 'line',
+    data: data,
+    options: {
+        animation: {
+        onComplete: () => {
+            delayed = true;
+        },
+        delay: (context) => {
+            let delay = 0;
+            if (context.type === 'data' && context.mode === 'default' && !delayed) {
+            delay = context.dataIndex * 300 + context.datasetIndex * 100;
+            }
+            return delay;
+        },
+        },
+        scales: {
+        x: {
+            stacked: true,
+        },
+        y: {
+            stacked: true
+        }
+        }
+    }
+    };
+</script>
+
+
+<script>
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+</script>
