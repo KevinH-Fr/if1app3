@@ -4,23 +4,41 @@
   <canvas id="myChart" width="20px" height="10px" ></canvas> 
 </div>
 
+
+event : <%= @eventId = params[:eventId] %> <br>
+saison : <%= @saisonId = params[:saisonId] %> <br>
+division : <%= @divisionId = params[:divisionId] %> <br>
+numgp : <%= @numeroGp = params[:numGp] %> <br>
+
+<hr>
+<% @listeGp = Event.saison_courant(@saisonId).division_courant(@divisionId).numero_until_courant(@numeroGp) %>
+
+ <% @listeGp.each do | gp | %>
+    <%= gp.numero %>
+ <% end %>
+
+<hr>
+
 <script>
+
   const labels = [
-    'GP1',
-    'GP2',
-    'GP3',
-    'GP4',
-    'GP5',
-    'GP6',
+   'gp1',
+   'gp2',
+   'gp3',
+   'gp4',
+   'gp5',
+   'gp6',
   ];
 
   const data = {
     labels: labels,
     datasets: [{
-      label: 'My First dataset',
+      label: "iF1 ViperZ",
+      fill: false,
       backgroundColor: 'rgb(255, 99, 132)',
       borderColor: 'rgb(255, 99, 132)',
       data: [10, 15, 28, 36, 40, 45],
+     
     }]
   };
 
@@ -29,6 +47,11 @@
     type: 'line',
     data: data,
     options: {
+        radius: 5,
+        hitRadius: 30,
+        hoverRadius: 12,
+        responsive: true,
+
         animation: {
         onComplete: () => {
             delayed = true;

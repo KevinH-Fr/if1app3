@@ -42,6 +42,11 @@ class ClassementsController < ApplicationController
     @resultatsFiltres = Resultat.group_by_pilote.select(
         'pilote_id, SUM(score) AS total, COUNT(course) AS nbCourses' )
 
+
+
+    
+       
+
     else
       
       @resultats = Resultat.all
@@ -51,9 +56,15 @@ class ClassementsController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.pdf do
-        render pdf: "classementPilotes", template: "classements/liste", formats: [:html], layout: "pdf"
-      end
+      format.json { render json: {data: @pilotesActifDiv} }
+     # format.pdf do
+     #   render pdf: "classementPilotes", template: "classements/liste", formats: [:html], layout: "pdf"
+     # end
+
+       # test json pour chart
+    #    render json: @pilotesActifDiv
+    # format.json { head :no_content }
+
     end
     
 end

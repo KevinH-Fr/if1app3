@@ -6,6 +6,10 @@ class Event < ApplicationRecord
   has_many :paris, :dependent => :delete_all
 
 
+  scope :saison_courant, -> (saison_courant) { where("saison_id = ?", saison_courant)}
+  scope :division_courant, -> (division_courant) { where("division_id = ?", division_courant)}
+  scope :numero_until_courant, -> (numero_until_courant) { where("numero <= ?", numero_until_courant)}
+
     def formatted_name
        datetime = date.to_date
        datetime.strftime("%d/%m/%y")
