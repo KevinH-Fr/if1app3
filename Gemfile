@@ -38,6 +38,9 @@ gem 'open-weather-ruby-client'
 
 #gem 'chart-js-rails'
 
+gem "rails_charts"
+
+
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

@@ -14,6 +14,12 @@ class ClassementsController < ApplicationController
 
     @q = Classement.ransack(params[:q])
 
+
+
+   
+
+ 
+
     if params[:saisonId]
       @saisonId = params[:saisonId]
     end
@@ -43,7 +49,14 @@ class ClassementsController < ApplicationController
         'pilote_id, SUM(score) AS total, COUNT(course) AS nbCourses' )
 
 
+        @listeGp = Event.division_courant(@divisionId).saison_courant(@saisonId).
+        numero_until_courant(@eventNum).pluck(:numero)
 
+        @polls4 = Classement.division_courant(@divisionId).saison_courant(@saisonId).
+        numero_until_courant(@eventNum).where('pilote_id = 3').pluck(:position)
+
+       
+        #@polls4 = [250]
     
        
 

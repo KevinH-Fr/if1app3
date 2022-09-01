@@ -1,0 +1,53 @@
+
+<div class="chart-container" style="position: relative; height:80%; width:80%">
+    <canvas id="myChartPie"></canvas>
+</div>
+
+
+ <% @saisonId = params[:saisonId] %>
+ <% @divisionId = Event.find(@eventId).division_id %> 
+ <% @eventNum = Event.find(@eventId).numero %>
+   
+test : 
+<%= @labels = Event.where(saison_id: @saisonId, division_id: @divisionId).pluck(:numero)  %> <br>
+
+data :
+<%#= @data = [10, 20, 25, 40, 50, 55 ] %>
+<%= @data = Classement.where(pilote_id: 5).pluck(:score) %>
+
+
+
+
+<script>
+
+var labels = <%= @labels %>;
+var data = <%= @data %>;
+
+const ctx = document.getElementById('myChartPie').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [{
+          /* label: '# of Votes', */
+            data: data,
+        
+  }]
+
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+
+<script>
+  const myChart = new Chart(
+    document.getElementById('myChartPie'),
+    config
+  );
+</script>

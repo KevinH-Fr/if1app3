@@ -8,9 +8,10 @@ require("@rails/activestorage").start()
 //= require jquery_ujs
 
 
-import "chartkick"
-import "Chart.bundle"
 
-//= require Chart.min
 
+import * as echarts from 'echarts';
+import 'echarts/theme/dark';
+
+window.echarts = echarts;
 
