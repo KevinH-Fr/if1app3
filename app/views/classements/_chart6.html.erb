@@ -1,27 +1,54 @@
 
-<div class="chart-container" style="position: relative; height:80%; width:80%">
-    <canvas id="myChartPie"></canvas>
-</div>
+
 
 
  <% @saisonId = params[:saisonId] %>
  <% @divisionId = Event.find(@eventId).division_id %> 
  <% @eventNum = Event.find(@eventId).numero %>
-   
+  <% @numGp = Event.find(@eventId).numero  %>
 test : 
 <%= @labels = Event.where(saison_id: @saisonId, division_id: @divisionId).pluck(:numero)  %> <br>
 
 data :
 <%#= @data = [10, 20, 25, 40, 50, 55 ] %>
-<%= @data = Classement.where(pilote_id: 5).pluck(:score) %>
+
+<% @piloteId = 5 %>
+<br>
+nomPilote :
+<%= @piloteNom = Pilote.find(@piloteId).nom %>
+<br>
+resultat:
+<%# permet d'avoir les resultats du pilote 5 a chaque gp sans somme %>
+<%= @data = Resultat.where(pilote_id: @piloteId).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score) %>
+
+<%# Resultat.pilote_courant(5).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).sum(:score) %>
+ <br>
 
 
+<%# data = Resultat.where(pilote_id: 5).count %>
 
+<%# cumul resultat fonctionne %>
+<br>
+cumul :
+<%= @data = @data.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+ <br>
+<%# essayer obtenir le classement donc avec sum gp apres gp 
+  attendu : 1, 26, 30, 48
+%>
+
+<%#= @data = Classement.where(pilote_id: 5).select(:event_id, :score) %>
+<%#= @data = @data.sort_by(&:event_id) %>
+<%#= @data = @data[0].event_id %>
+
+<div class="chart-container" style="position: relative; height:80%; width:80%">
+    <canvas id="myChartPie"></canvas>
+</div>
 
 <script>
 
 var labels = <%= @labels %>;
 var data = <%= @data %>;
+var pilote1 = <%= @piloteId %>;
 
 const ctx = document.getElementById('myChartPie').getContext('2d');
 const myChart = new Chart(ctx, {
@@ -29,6 +56,7 @@ const myChart = new Chart(ctx, {
     data: {
         labels: labels,
         datasets: [{
+          label: "<%= @piloteNom %>",
           /* label: '# of Votes', */
             data: data,
         
