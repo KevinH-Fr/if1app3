@@ -5,17 +5,7 @@
     <canvas id="myChartPie"></canvas>
 </div>
 
-<% @piloteId = params[:id] %>
-
-<% @nbVictoire = Resultat.pilote_courant(@piloteId).compte_p1 %>
-<% @nbPodium = Resultat.pilote_courant(@piloteId).compte_podium %>
-<% @nbTop5 = Resultat.pilote_courant(@piloteId).compte_top5 %>
-<% @nbTop10 = Resultat.pilote_courant(@piloteId).compte_top10 %>
-
-<% @data = [@nbVictoire, @nbPodium, @nbTop5, @nbTop10] %>
-
 <script>
-
 
 
   const ctx = document.getElementById('myChartPie').getContext('2d');
@@ -25,7 +15,7 @@
           labels: ['Victoire', 'Podium', 'Top5', 'Top10'],
           datasets: [{
             /* label: '# of Votes', */
-              data: <%= @data.to_json.html_safe %>,
+              data:  [1, 2, 3, 4],
           
               backgroundColor: [
                   
@@ -50,9 +40,13 @@
   
 
 
+
 </script>
 
 <script>
+
+$(document).on('ready page:load', function () {
+
 
 
   const myChart = new Chart(
@@ -60,6 +54,8 @@
     config
   );
 
+    // your google chart js
+});
 
 
 </script>

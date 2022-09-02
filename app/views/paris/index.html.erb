@@ -65,7 +65,9 @@
         </tr>
       </thead>
         <tbody>
-            <% @paris.each.order(id) do | pari| %> 
+
+    
+            <% @paris.each do | pari| %> 
             <tr>
               <td> <%= pari.id  %> </td>
               <td> <%= pari.parieur.nom %> </td>
@@ -109,6 +111,7 @@
               <% end %>
             </tr>
           <% end %>
+
       </tbody>
     </table>
   </div>
