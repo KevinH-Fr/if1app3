@@ -1,0 +1,75 @@
+chart 12
+
+
+ <% @saisonId = params[:saisonId] %>
+ <% @divisionId = Event.find(@eventId).division_id %> 
+ <% @eventNum = Event.find(@eventId).numero %>
+ <% @numGp = Event.find(@eventId).numero  %>
+
+<hr>
+
+
+<%= @labels = Event.where(saison_id: @saisonId, division_id: @divisionId).numero_until_courant(@numGp).pluck(:numero)  %> 
+<br>
+
+<%#= @resultatsFiltres.map { |n| n  } %> <br><br>
+
+<%# tableau avec col1 num gp, col2 pilote_id, col3 score  %>
+<% @resultats = Resultat.joins(:event).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:numero, :pilote_id, :score) %> <br><br>
+
+<%# compte du nb de reusltats  %>
+<%= nbResultats = @resultats.count %> <br><br>
+
+<%# permet d'afficher le contenu de l'array %>
+<%= @resultats.each { |n| n } %>
+
+
+
+<div>
+  <canvas id="myChart" width="20px" height="10px" ></canvas> 
+</div>
+
+
+<script>
+
+var labels = <%= @labels %>;
+
+var data4 = <%= @resultats %>;
+
+var couleur4 = 'rgb(150, 150, 132)';
+
+
+  const data = {
+    labels: labels,
+   
+    datasets: [
+
+        {
+      label: "pil1",
+      backgroundColor: couleur4,
+      borderColor: couleur4,
+      data: data4,
+    }
+
+    ]
+  };
+   
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                }
+            }
+        }
+    };
+</script>
+
+<script>
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+</script>

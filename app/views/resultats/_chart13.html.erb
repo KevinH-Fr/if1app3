@@ -1,0 +1,143 @@
+test chart 13
+
+
+ <% @saisonId = params[:saisonId] %>
+ <% @divisionId = Event.find(@eventId).division_id %> 
+ <% @eventNum = Event.find(@eventId).numero %>
+ <% @numGp = Event.find(@eventId).numero  %>
+
+<% @labels = Event.where(saison_id: @saisonId, division_id: @divisionId).numero_until_courant(@numGp).pluck(:numero)  %> 
+<br>
+liste pilotes : <br>
+<% @listePilotes = Pilote.division_courant(@divisionId).statut_actif.pluck(:id, :nom) %> <br>
+<br>
+
+comptePilotes : <%= nbPilotes = @listePilotes.count %> <br>
+ <% @listePilotes[0][0] %> 
+ <% @listePilotes[1][0] %> 
+
+
+<% @piloteId1 = @listePilotes[0][0] %>
+<% @piloteId2 = @listePilotes[1][0] %>
+
+<% @piloteNom1 = Pilote.find(@piloteId1).nom %> 
+<% @piloteNom2 = Pilote.find(@piloteId2).nom %> 
+
+<% @piloteEcurie1 = Pilote.find(@piloteId1).ecurie %>
+<% @piloteEcurie2 = Pilote.find(@piloteId2).ecurie %> 
+
+<% @couleurEcurie1 = Equipe.find(@piloteEcurie1).couleurRgb %> 
+<% @couleurEcurie2 = Equipe.find(@piloteEcurie2).couleurRgb %> 
+
+<% if nbPilotes > 2 %>
+    <% @listePilotes[2][0] %> 
+    <% @piloteId3 = @listePilotes[2][0] %>
+    <% @piloteNom3 = Pilote.find(@piloteId3).nom %> 
+
+<% end %>
+
+
+
+<%# if @piloteEcurie1 == 1 %>
+    <%# @piloteEcurie1 = "rgb(255, 0, 0)" %>
+<%# end %>
+<%# if @piloteEcurie1 == 2 %>
+    <%# @piloteEcurie1 = "rgb(100, 100, 100)" %>
+<%# end %>
+<%# if @piloteEcurie1 == 6 %>
+    <%# @piloteEcurie1 = "rgb(0, 0, 255)" %>
+<%#end %>
+
+
+<%# permet d'avoir les resultats du pilote 5 a chaque gp sans somme %>
+<% @data1 = Resultat.where(pilote_id: @piloteId1).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> <br>
+<% @data2 = Resultat.where(pilote_id: @piloteId2).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> <br>
+<% @data3 = Resultat.where(pilote_id: @piloteId3).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> <br>
+
+<br>
+pilote1: id = <%= @piloteId1 %> nom <%= @piloteNom1 %> data <%= @data1 %> <br>
+pilote2: id = <%= @piloteId2 %> nom <%= @piloteNom2 %> data <%= @data2 %> <br>
+pilote3: id = <%= @piloteId3 %> nom <%= @piloteNom3 %> data <%= @data3 %> <br>
+
+<div>
+  <canvas id="myChart" width="20px" height="10px" ></canvas> 
+</div>
+
+<script>
+
+var labels = <%= @labels %>;
+
+var data1 = <%= @data1 %>;
+var data2 = <%= @data2 %>;
+var data3 = <%= @data3 %>;
+
+
+  const data = {
+    labels: labels,
+   
+    datasets: [
+          
+    {
+      label: "<%= @piloteNom1 %>",
+      backgroundColor: "<%= @couleurEcurie1 %>",
+      borderColor: "<%= @couleurEcurie1 %>",
+      data: data1,
+    },
+
+    {
+      label: "<%= @piloteNom2 %>",
+      backgroundColor: "<%= @couleurEcurie2 %>",
+      borderColor: "<%= @couleurEcurie2 %>",
+      data: data2,
+    },
+
+    {
+      label: "<%= @piloteNom3 %>",
+      backgroundColor: "<%= @couleurEcurie3 %>",
+      borderColor: "<%= @couleurEcurie3 %>",
+      data: data3,
+    }
+
+
+    ]
+  };
+    let delayed;
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            animation: {
+                onComplete: () => {
+                    delayed = true;
+                },
+                delay: (context) => {
+                    let delay = 0;
+                    if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                    delay = context.dataIndex * 1500  + context.datasetIndex * 100;
+                    }
+                    return delay;
+                },
+            },
+
+            borderColor:"#308af3",
+            pointBackgroundColor: "#308af3",
+            pointBorderWidth: 10,
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderWidth: 2,
+            lineTension: 0.4,
+            borderWidth: 6,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                }
+            }
+        }
+    };
+</script>
+
+<script>
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+</script>

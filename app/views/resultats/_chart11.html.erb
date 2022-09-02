@@ -1,0 +1,134 @@
+test chart 11
+
+
+ <% @saisonId = params[:saisonId] %>
+ <% @divisionId = Event.find(@eventId).division_id %> 
+ <% @eventNum = Event.find(@eventId).numero %>
+ <% @numGp = Event.find(@eventId).numero  %>
+
+<% @labels = Event.where(saison_id: @saisonId, division_id: @divisionId).numero_until_courant(@numGp).pluck(:numero)  %> 
+<br>
+liste pilotes : <br>
+<% @listePilotes = Pilote.division_courant(@divisionId).statut_actif.pluck(:id, :nom) %> <br>
+<br>
+
+comptePilotes : <%= @listePilotes.count %> <br>
+ligne1:  <%=  @listePilotes[0] %> <br>
+
+<% if @listePilotes.count > 2 %>
+    pilote4: <%=  @listePilotes[0][0] %> <br>
+    <% @piloteId4 = @listePilotes[1][0] %>
+    <%= @piloteNom4 = Pilote.find(@piloteId4).nom %> <br>
+    data4 : <%= @data4 = Resultat.where(pilote_id: @piloteId4).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> <br>
+<% else %>
+  data4 : <%= @data4 = [0] %> <br>
+<% end %>
+
+<% if @listePilotes.count > 3 %>
+    pilote5: <%= @listePilotes[0][0] %> <br>
+   <% @piloteId5 = @listePilotes[1][0] %>
+   <%= @piloteNom5 = Pilote.find(@piloteId5).nom %> <br>
+   data5 : <%= @data5 = Resultat.where(pilote_id: @piloteId5).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> <br>
+<% else %>
+  data5 : <%= @data5 = [0] %> <br>
+<% end %>
+
+
+
+
+<%# permet d'avoir les resultats du pilote 5 a chaque gp sans somme %>
+
+datagroupCombi: <%#= [@data4, @data5] %> <br>
+
+<br>
+datagroup: <%= @dataGroup = [[1, 25, 4],[2, 3, 6]] %> <br>
+
+test: <%= @dataGroup[0] %> <br>
+
+datagroupDer: <%= @dataGroup = Resultat.group(:pilote_id).
+                                        division_courant(@divisionId).
+                                        saison_courant(@saisonId).
+                                        numero_until_courant(@numGp).
+                                        pluck(:score).map!(&:to_i) %> <br>
+
+index 1 / pilote 1 de datagroupDer: <%= @dataGroup[0] %> <br>
+<br>
+<hr>
+
+dataGroupDer2: <%= @listePilotes %>
+
+
+<hr>
+
+new array:
+<%= arr3D = 
+[
+ [[1,2,3,4],
+  [1,2,3,4],
+  [1,2,3,4]],
+ [[1,2,3,4],
+  [1,2,3,4],
+  [1,2,3,4]],
+] %> <br>
+
+Element at index 2 of the array at 0th row and 1st column:
+<%= arr3D[0][1][2] %>
+
+<div>
+  <canvas id="myChart" width="20px" height="10px" ></canvas> 
+</div>
+
+
+<script>
+
+var labels = <%= @labels %>;
+
+var data4 = <%= @data4 %>;
+var data5 = <%= @data5 %>;
+
+
+var couleur4 = 'rgb(150, 150, 132)';
+var couleur5 = 'rgb(50, 100, 120)';
+
+  const data = {
+    labels: labels,
+   
+    datasets: [
+
+        {
+      label: "<%= @piloteNom4 %>",
+      backgroundColor: couleur4,
+      borderColor: couleur4,
+      data: data4,
+    },
+
+        {
+      label: "<%= @piloteNom5 %>",
+      backgroundColor: couleur5,
+      borderColor: couleur5,
+      data: data5,
+    }
+
+
+    ]
+  };
+   
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true,
+                }
+            }
+        }
+    };
+</script>
+
+<script>
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+</script>

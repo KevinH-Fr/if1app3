@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_26_110601) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_02_222955) do
   create_table "active_analytics_views_per_days", force: :cascade do |t|
     t.string "site", null: false
     t.string "page", null: false
@@ -128,6 +128,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_26_110601) do
     t.text "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "couleurRgb"
   end
 
   create_table "events", force: :cascade do |t|
