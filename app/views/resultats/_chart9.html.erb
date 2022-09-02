@@ -1,0 +1,95 @@
+test chart 9
+
+
+<div class="chart">
+  <canvas id="chart"></canvas>
+</div>
+<div class="chart">
+  <canvas id="chart2"></canvas>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0-beta/dist/chart.min.js"></script>
+
+
+<script>
+
+
+var data = [];
+var prev = 100;
+for (var i=0;i<1000;i++) {
+  prev += 5 - Math.random()*10;
+  data.push({x: i, y: prev});
+}
+
+var delayBetweenPoints = 10;
+var started = {};
+var ctx2 = document.getElementById("chart2").getContext("2d");
+var chart2 = new Chart(ctx2, {
+  type: "line",
+  data: {
+    datasets: [
+      {
+        backgroundColor: "transparent",
+        borderColor: "rgb(255, 99, 132)",
+        borderWidth: 1,
+        pointRadius: 0,
+        data: data,
+        fill: true,
+        animation: (context) => {
+          var delay = 0;
+          var index = context.dataIndex;
+          var chart = context.chart;
+          if (!started[index]) {
+            delay = index * delayBetweenPoints;
+            started[index] = true;
+          }
+          var {x,y} = index > 0 ? chart.getDatasetMeta(0).data[index-1].getProps(['x','y'], true) : {x: 0, y: chart.scales.y.getPixelForValue(100)};
+          
+          return {
+            x: {
+              easing: "linear",
+              duration: delayBetweenPoints,
+              from: x,
+              delay
+            },
+            y: {
+              easing: "linear",
+              duration: delayBetweenPoints * 500,
+              from: y,
+              delay
+            },
+            skip: {
+              type: 'boolean',
+              duration: delayBetweenPoints,
+              from: true,
+              to: false,
+              delay: delay
+            }
+          };
+        }
+      }
+    ]
+  },
+  options: {
+    scales: {
+      x: {
+        type: 'linear'
+      }
+    }
+  },
+  plugins: [{
+    id: 'force_line_update',
+    beforeDatasetDraw(chart, ctx) {
+      ctx.meta.dataset.points = ctx.meta.data;
+    }
+  }]
+});
+
+
+</script>
+
+<script>
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+</script>

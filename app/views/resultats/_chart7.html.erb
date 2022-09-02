@@ -35,24 +35,19 @@ const myChart = new Chart(ctx, {
     data: {
         labels: labels,
         datasets: [
-            {
-          label: "<%= @piloteNom1 %>",
-          /* label: '# of Votes', */
+          {
+            label: "<%= @piloteNom1 %>",
             data: data1,
-        
-  },
-   {
-          label: "<%= @piloteNom2 %>",
-          /* label: '# of Votes', */
+          },
+          {
+            label: "<%= @piloteNom2 %>",
             data: data2,
-        
-  },
-  
-  ]
-  
-
+          },
+       ]
     },
-    options: {
+   
+   options: {
+    
         scales: {
             y: {
                 beginAtZero: true

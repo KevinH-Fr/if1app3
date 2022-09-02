@@ -1,0 +1,95 @@
+test chart 8
+
+
+ <% @saisonId = params[:saisonId] %>
+ <% @divisionId = Event.find(@eventId).division_id %> 
+ <% @eventNum = Event.find(@eventId).numero %>
+ <% @numGp = Event.find(@eventId).numero  %>
+
+<% @labels = Event.where(saison_id: @saisonId, division_id: @divisionId).pluck(:numero)  %> 
+
+<% @piloteId1 = 5 %>
+<% @piloteId2 = 6 %>
+
+<% @piloteNom1 = Pilote.find(@piloteId1).nom %>
+<% @piloteNom2 = Pilote.find(@piloteId2).nom %>
+
+<%# permet d'avoir les resultats du pilote 5 a chaque gp sans somme %>
+<%= @data1 = Resultat.where(pilote_id: @piloteId1).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score) %> 
+<%= @data2 = Resultat.where(pilote_id: @piloteId2).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score) %> 
+
+
+
+<div>
+  <canvas id="myChart" width="20px" height="10px" ></canvas> 
+</div>
+
+<script>
+
+var labels = <%= @labels %>;
+var data1 = <%= @data1 %>;
+var data2 = <%= @data2 %>;
+
+ 
+  const data = {
+    labels: labels,
+   
+    datasets: [
+          
+  
+        {
+      label: "<%= @piloteNom1 %>",
+      backgroundColor: 'rgb(255, 99, 132)',
+      borderColor: 'rgb(255, 99, 132)',
+      data: data1,
+      
+       
+    },
+    {
+      label: "<%= @piloteNom2 %>",
+      backgroundColor: 'rgb(155, 150, 200)',
+      borderColor: 'rgb(155, 150, 200)',
+      data: data2,
+    }
+    ]
+  };
+    let delayed;
+    const config = {
+        type: 'line',
+        data: data,
+        options: {
+            animation: {
+                onComplete: () => {
+                    delayed = true;
+                },
+                delay: (context) => {
+                    let delay = 0;
+                    if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                    delay = context.dataIndex * 300 + context.datasetIndex * 100;
+                    }
+                    return delay;
+                },
+            },
+
+            borderColor:"#308af3",
+            pointBackgroundColor: "#308af3",
+            pointBorderWidth: 10,
+            pointHoverBackgroundColor: "#fff",
+            pointHoverBorderWidth: 2,
+            lineTension: 0.4,
+            borderWidth: 6,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                }
+            }
+        }
+    };
+</script>
+
+<script>
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+</script>
