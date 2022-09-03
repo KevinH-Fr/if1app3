@@ -18,6 +18,9 @@
         
       <%= render "shared/eventactif" %>
 
+  <%= render "chart13" %>
+ <hr>
+
        <% if current_user.admin? %>
           <%= link_to "Nouveau résultat", new_resultat_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId), class:"btn btn-sm btn-primary" %>
         
@@ -32,9 +35,7 @@
       <% end %>
 
 
-  <br>
- <%= render "chart13" %> <br> <hr>
- <br>
+
 
       
       <%# tableau datas %>
