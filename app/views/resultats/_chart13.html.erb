@@ -1,6 +1,5 @@
 test chart 13
 
-
  <% @saisonId = params[:saisonId] %>
  <% @divisionId = Event.find(@eventId).division_id %> 
  <% @eventNum = Event.find(@eventId).numero %>
@@ -9,55 +8,211 @@ test chart 13
 <% @labels = Event.where(saison_id: @saisonId, division_id: @divisionId).numero_until_courant(@numGp).pluck(:numero)  %> 
 <br>
 liste pilotes : <br>
-<% @listePilotes = Pilote.division_courant(@divisionId).statut_actif.pluck(:id, :nom) %> <br>
-<br>
+<% @listePilotes = Pilote.division_courant(@divisionId).statut_actif.pluck(:id, :nom) %> 
 
-comptePilotes : <%= nbPilotes = @listePilotes.count %> <br>
+ <%= nbPilotes = @listePilotes.count %> <br>
  <% @listePilotes[0][0] %> 
- <% @listePilotes[1][0] %> 
-
 
 <% @piloteId1 = @listePilotes[0][0] %>
-<% @piloteId2 = @listePilotes[1][0] %>
-
 <% @piloteNom1 = Pilote.find(@piloteId1).nom %> 
-<% @piloteNom2 = Pilote.find(@piloteId2).nom %> 
-
 <% @piloteEcurie1 = Pilote.find(@piloteId1).ecurie %>
-<% @piloteEcurie2 = Pilote.find(@piloteId2).ecurie %> 
-
 <% @couleurEcurie1 = Equipe.find(@piloteEcurie1).couleurRgb %> 
-<% @couleurEcurie2 = Equipe.find(@piloteEcurie2).couleurRgb %> 
+
+<% if nbPilotes > 1 %>
+    <% @listePilotes[1][0] %> 
+    <% @piloteId2 = @listePilotes[1][0] %>
+    <% @piloteNom2 = Pilote.find(@piloteId2).nom %> 
+    <% @piloteEcurie2 = Pilote.find(@piloteId2).ecurie %> 
+    <% @couleurEcurie2 = Equipe.find(@piloteEcurie2).couleurRgb %> 
+<% end %>
 
 <% if nbPilotes > 2 %>
     <% @listePilotes[2][0] %> 
     <% @piloteId3 = @listePilotes[2][0] %>
     <% @piloteNom3 = Pilote.find(@piloteId3).nom %> 
-
+    <% @piloteEcurie3 = Pilote.find(@piloteId3).ecurie %> 
+    <% @couleurEcurie3 = Equipe.find(@piloteEcurie3).couleurRgb %> 
 <% end %>
 
+<% if nbPilotes > 3 %>
+    <% @listePilotes[3][0] %> 
+    <% @piloteId4 = @listePilotes[3][0] %>
+    <% @piloteNom4 = Pilote.find(@piloteId4).nom %> 
+    <% @piloteEcurie4 = Pilote.find(@piloteId4).ecurie %> 
+    <% @couleurEcurie4 = Equipe.find(@piloteEcurie4).couleurRgb %> 
+<% end %>
 
+<% if nbPilotes > 4 %>
+    <% @listePilotes[4][0] %> 
+    <% @piloteId5 = @listePilotes[4][0] %>
+    <% @piloteNom5 = Pilote.find(@piloteId5).nom %> 
+    <% @piloteEcurie5 = Pilote.find(@piloteId5).ecurie %> 
+    <% @couleurEcurie5 = Equipe.find(@piloteEcurie5).couleurRgb %> 
+<% end %>
 
-<%# if @piloteEcurie1 == 1 %>
-    <%# @piloteEcurie1 = "rgb(255, 0, 0)" %>
-<%# end %>
-<%# if @piloteEcurie1 == 2 %>
-    <%# @piloteEcurie1 = "rgb(100, 100, 100)" %>
-<%# end %>
-<%# if @piloteEcurie1 == 6 %>
-    <%# @piloteEcurie1 = "rgb(0, 0, 255)" %>
-<%#end %>
+<% if nbPilotes > 5 %>
+    <% @listePilotes[5][0] %> 
+    <% @piloteId6 = @listePilotes[5][0] %>
+    <% @piloteNom6 = Pilote.find(@piloteId6).nom %> 
+    <% @piloteEcurie6 = Pilote.find(@piloteId6).ecurie %> 
+    <% @couleurEcurie6 = Equipe.find(@piloteEcurie6).couleurRgb %> 
+<% end %>
 
+<% if nbPilotes > 6 %>
+    <% @listePilotes[6][0] %> 
+    <% @piloteId7 = @listePilotes[6][0] %>
+    <% @piloteNom7 = Pilote.find(@piloteId7).nom %> 
+    <% @piloteEcurie7 = Pilote.find(@piloteId7).ecurie %> 
+    <% @couleurEcurie7 = Equipe.find(@piloteEcurie7).couleurRgb %> 
+<% end %>
+
+<% if nbPilotes > 7 %>
+    <% @listePilotes[7][0] %> 
+    <% @piloteId8 = @listePilotes[7][0] %>
+    <% @piloteNom8 = Pilote.find(@piloteId8).nom %> 
+    <% @piloteEcurie8 = Pilote.find(@piloteId8).ecurie %> 
+    <% @couleurEcurie8 = Equipe.find(@piloteEcurie8).couleurRgb %> 
+<% end %>
+
+<% if nbPilotes > 8 %>
+    <% @listePilotes[8][0] %> 
+    <% @piloteId9 = @listePilotes[8][0] %>
+    <% @piloteNom9 = Pilote.find(@piloteId9).nom %> 
+    <% @piloteEcurie9 = Pilote.find(@piloteId9).ecurie %> 
+    <% @couleurEcurie9 = Equipe.find(@piloteEcurie9).couleurRgb %> 
+<% end %>
+
+<% if nbPilotes > 9 %>
+    <% @listePilotes[9][0] %> 
+    <% @piloteId10 = @listePilotes[9][0] %>
+    <% @piloteNom10 = Pilote.find(@piloteId10).nom %> 
+    <% @piloteEcurie10 = Pilote.find(@piloteId10).ecurie %> 
+    <% @couleurEcurie10 = Equipe.find(@piloteEcurie10).couleurRgb %> 
+<% end %>
+
+<% if nbPilotes > 10 %>
+    <% @listePilotes[10][0] %> 
+    <% @piloteId11 = @listePilotes[10][0] %>
+    <% @piloteNom11 = Pilote.find(@piloteId11).nom %> 
+    <% @piloteEcurie11 = Pilote.find(@piloteId11).ecurie %> 
+    <% @couleurEcurie11 = Equipe.find(@piloteEcurie11).couleurRgb %> 
+<% end %>
+
+<% if nbPilotes > 11 %>
+    <% @listePilotes[11][0] %> 
+    <% @piloteId12 = @listePilotes[11][0] %>
+    <% @piloteNom12 = Pilote.find(@piloteId12).nom %> 
+    <% @piloteEcurie12 = Pilote.find(@piloteId12).ecurie %> 
+    <% @couleurEcurie12 = Equipe.find(@piloteEcurie12).couleurRgb %> 
+<% end %>
+
+<% if nbPilotes > 12 %>
+    <% @listePilotes[12][0] %> 
+    <% @piloteId13 = @listePilotes[12][0] %>
+    <% @piloteNom13 = Pilote.find(@piloteId13).nom %> 
+    <% @piloteEcurie13 = Pilote.find(@piloteId13).ecurie %> 
+    <% @couleurEcurie13 = Equipe.find(@piloteEcurie13).couleurRgb %> 
+<% end %>
+
+<% if nbPilotes > 13 %>
+    <% @listePilotes[13][0] %> 
+    <% @piloteId14 = @listePilotes[13][0] %>
+    <% @piloteNom14 = Pilote.find(@piloteId14).nom %> 
+    <% @piloteEcurie14 = Pilote.find(@piloteId14).ecurie %> 
+    <% @couleurEcurie14 = Equipe.find(@piloteEcurie14).couleurRgb %> 
+<% end %>
+
+<% if nbPilotes > 14 %>
+    <% @listePilotes[14][0] %> 
+    <% @piloteId15 = @listePilotes[14][0] %>
+    <% @piloteNom15 = Pilote.find(@piloteId15).nom %> 
+    <% @piloteEcurie15 = Pilote.find(@piloteId15).ecurie %> 
+    <% @couleurEcurie15 = Equipe.find(@piloteEcurie15).couleurRgb %> 
+<% end %>
+
+<% if nbPilotes > 15 %>
+    <% @listePilotes[15][0] %> 
+    <% @piloteId16 = @listePilotes[15][0] %>
+    <% @piloteNom16 = Pilote.find(@piloteId16).nom %> 
+    <% @piloteEcurie16 = Pilote.find(@piloteId16).ecurie %> 
+    <% @couleurEcurie16 = Equipe.find(@piloteEcurie16).couleurRgb %> 
+<% end %>
+
+<% if nbPilotes > 16 %>
+    <% @listePilotes[16][0] %> 
+    <% @piloteId17 = @listePilotes[16][0] %>
+    <% @piloteNom17 = Pilote.find(@piloteId17).nom %> 
+    <% @piloteEcurie17 = Pilote.find(@piloteId17).ecurie %> 
+    <% @couleurEcurie17 = Equipe.find(@piloteEcurie17).couleurRgb %> 
+<% end %>
+
+<% if nbPilotes > 17 %>
+    <% @listePilotes[17][0] %> 
+    <% @piloteId18 = @listePilotes[17][0] %>
+    <% @piloteNom18 = Pilote.find(@piloteId18).nom %> 
+    <% @piloteEcurie18 = Pilote.find(@piloteId18).ecurie %> 
+    <% @couleurEcurie18 = Equipe.find(@piloteEcurie18).couleurRgb %> 
+<% end %>
+
+<% if nbPilotes > 18 %>
+    <% @listePilotes[18][0] %> 
+    <% @piloteId19 = @listePilotes[18][0] %>
+    <% @piloteNom19 = Pilote.find(@piloteId19).nom %> 
+    <% @piloteEcurie19 = Pilote.find(@piloteId19).ecurie %> 
+    <% @couleurEcurie19 = Equipe.find(@piloteEcurie19).couleurRgb %> 
+<% end %>
+
+<% if nbPilotes > 19 %>
+    <% @listePilotes[19][0] %>  
+    <% @piloteId20 = @listePilotes[19][0] %>
+    <% @piloteNom20 = Pilote.find(@piloteId20).nom %> 
+    <% @piloteEcurie20 = Pilote.find(@piloteId20).ecurie %> 
+    <% @couleurEcurie20 = Equipe.find(@piloteEcurie20).couleurRgb %> 
+<% end %>
 
 <%# permet d'avoir les resultats du pilote 5 a chaque gp sans somme %>
-<% @data1 = Resultat.where(pilote_id: @piloteId1).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> <br>
-<% @data2 = Resultat.where(pilote_id: @piloteId2).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> <br>
-<% @data3 = Resultat.where(pilote_id: @piloteId3).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> <br>
+<% @data1 = Resultat.where(pilote_id: @piloteId1).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+<% @data2 = Resultat.where(pilote_id: @piloteId2).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+<% @data3 = Resultat.where(pilote_id: @piloteId3).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+<% @data4 = Resultat.where(pilote_id: @piloteId4).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+<% @data5 = Resultat.where(pilote_id: @piloteId5).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+<% @data6 = Resultat.where(pilote_id: @piloteId6).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+<% @data7 = Resultat.where(pilote_id: @piloteId7).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+<% @data8 = Resultat.where(pilote_id: @piloteId8).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+<% @data9 = Resultat.where(pilote_id: @piloteId9).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+<% @data10 = Resultat.where(pilote_id: @piloteId10).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %>
+<% @data11 = Resultat.where(pilote_id: @piloteId11).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+<% @data12 = Resultat.where(pilote_id: @piloteId12).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+<% @data13 = Resultat.where(pilote_id: @piloteId13).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+<% @data14 = Resultat.where(pilote_id: @piloteId14).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+<% @data15 = Resultat.where(pilote_id: @piloteId15).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+<% @data16 = Resultat.where(pilote_id: @piloteId16).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+<% @data17 = Resultat.where(pilote_id: @piloteId17).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+<% @data18 = Resultat.where(pilote_id: @piloteId18).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+<% @data19 = Resultat.where(pilote_id: @piloteId19).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+<% @data20 = Resultat.where(pilote_id: @piloteId20).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
 
 <br>
 pilote1: id = <%= @piloteId1 %> nom <%= @piloteNom1 %> data <%= @data1 %> <br>
 pilote2: id = <%= @piloteId2 %> nom <%= @piloteNom2 %> data <%= @data2 %> <br>
 pilote3: id = <%= @piloteId3 %> nom <%= @piloteNom3 %> data <%= @data3 %> <br>
+pilote4: id = <%= @piloteId4 %> nom <%= @piloteNom4 %> data <%= @data4 %> <br>
+pilote5: id = <%= @piloteId5 %> nom <%= @piloteNom5 %> data <%= @data5 %> <br>
+pilote6: id = <%= @piloteId6 %> nom <%= @piloteNom6 %> data <%= @data6 %> <br>
+pilote7: id = <%= @piloteId7 %> nom <%= @piloteNom7 %> data <%= @data7 %> <br>
+pilote8: id = <%= @piloteId8 %> nom <%= @piloteNom8 %> data <%= @data8 %> <br>
+pilote9: id = <%= @piloteId9 %> nom <%= @piloteNom9 %> data <%= @data9 %> <br>
+pilote10: id = <%= @piloteId10 %> nom <%= @piloteNom10 %> data <%= @data10 %> <br>
+pilote11: id = <%= @piloteId11 %> nom <%= @piloteNom11 %> data <%= @data11 %> <br>
+pilote12: id = <%= @piloteId12 %> nom <%= @piloteNom12 %> data <%= @data12 %> <br>
+pilote13: id = <%= @piloteId13 %> nom <%= @piloteNom13 %> data <%= @data13 %> <br>
+pilote14: id = <%= @piloteId14 %> nom <%= @piloteNom14 %> data <%= @data14 %> <br>
+pilote15: id = <%= @piloteId15 %> nom <%= @piloteNom15 %> data <%= @data15 %> <br>
+pilote16: id = <%= @piloteId16 %> nom <%= @piloteNom16 %> data <%= @data16 %> <br>
+pilote17: id = <%= @piloteId17 %> nom <%= @piloteNom17 %> data <%= @data17 %> <br>
+pilote18: id = <%= @piloteId18 %> nom <%= @piloteNom18 %> data <%= @data18 %> <br>
+pilote19: id = <%= @piloteId19 %> nom <%= @piloteNom19 %> data <%= @data19 %> <br>
+pilote20: id = <%= @piloteId20 %> nom <%= @piloteNom20 %> data <%= @data20 %> <br>
 
 <div>
   <canvas id="myChart" width="20px" height="10px" ></canvas> 
@@ -70,7 +225,23 @@ var labels = <%= @labels %>;
 var data1 = <%= @data1 %>;
 var data2 = <%= @data2 %>;
 var data3 = <%= @data3 %>;
-
+var data4 = <%= @data4 %>;
+var data5 = <%= @data5 %>;
+var data6 = <%= @data6 %>;
+var data7 = <%= @data7 %>;
+var data8 = <%= @data8 %>;
+var data9 = <%= @data9 %>;
+var data10 = <%= @data10 %>;
+var data11 = <%= @data11 %>;
+var data12 = <%= @data12 %>;
+var data13 = <%= @data13 %>;
+var data14 = <%= @data14 %>;
+var data15 = <%= @data15 %>;
+var data16 = <%= @data16 %>;
+var data17 = <%= @data17 %>;
+var data18 = <%= @data18 %>;
+var data19 = <%= @data19 %>;
+var data20 = <%= @data20 %>;
 
   const data = {
     labels: labels,
@@ -84,6 +255,7 @@ var data3 = <%= @data3 %>;
       data: data1,
     },
 
+
     {
       label: "<%= @piloteNom2 %>",
       backgroundColor: "<%= @couleurEcurie2 %>",
@@ -91,11 +263,132 @@ var data3 = <%= @data3 %>;
       data: data2,
     },
 
+
     {
       label: "<%= @piloteNom3 %>",
       backgroundColor: "<%= @couleurEcurie3 %>",
       borderColor: "<%= @couleurEcurie3 %>",
       data: data3,
+     
+    },
+
+    {
+      label: "<%= @piloteNom4 %>",
+      backgroundColor: "<%= @couleurEcurie4 %>",
+      borderColor: "<%= @couleurEcurie4 %>",
+      data: data4,
+    },
+
+        {
+      label: "<%= @piloteNom5 %>",
+      backgroundColor: "<%= @couleurEcurie5 %>",
+      borderColor: "<%= @couleurEcurie5 %>",
+      data: data5,
+    },
+
+        {
+      label: "<%= @piloteNom6 %>",
+      backgroundColor: "<%= @couleurEcurie6 %>",
+      borderColor: "<%= @couleurEcurie6 %>",
+      data: data6,
+    },
+
+            {
+      label: "<%= @piloteNom7 %>",
+      backgroundColor: "<%= @couleurEcurie7 %>",
+      borderColor: "<%= @couleurEcurie7 %>",
+      data: data7,
+    },
+
+            {
+      label: "<%= @piloteNom8 %>",
+      backgroundColor: "<%= @couleurEcurie8 %>",
+      borderColor: "<%= @couleurEcurie8 %>",
+      data: data8,
+    },
+
+            {
+      label: "<%= @piloteNom9 %>",
+      backgroundColor: "<%= @couleurEcurie9 %>",
+      borderColor: "<%= @couleurEcurie9 %>",
+      data: data9,
+    },
+
+            {
+      label: "<%= @piloteNom10 %>",
+      backgroundColor: "<%= @couleurEcurie10 %>",
+      borderColor: "<%= @couleurEcurie10 %>",
+      data: data10,
+    },
+
+    {
+      label: "<%= @piloteNom11 %>",
+      backgroundColor: "<%= @couleurEcurie11 %>",
+      borderColor: "<%= @couleurEcurie11 %>",
+      data: data11,
+    },
+
+                {
+      label: "<%= @piloteNom12 %>",
+      backgroundColor: "<%= @couleurEcurie12 %>",
+      borderColor: "<%= @couleurEcurie12 %>",
+      data: data12,
+    },
+
+                {
+      label: "<%= @piloteNom13 %>",
+      backgroundColor: "<%= @couleurEcurie13 %>",
+      borderColor: "<%= @couleurEcurie13 %>",
+      data: data13,
+    },
+
+                {
+      label: "<%= @piloteNom14 %>",
+      backgroundColor: "<%= @couleurEcurie14 %>",
+      borderColor: "<%= @couleurEcurie14 %>",
+      data: data14,
+    },
+
+                {
+      label: "<%= @piloteNom15 %>",
+      backgroundColor: "<%= @couleurEcurie15 %>",
+      borderColor: "<%= @couleurEcurie15 %>",
+      data: data15,
+    },
+
+                {
+      label: "<%= @piloteNom16 %>",
+      backgroundColor: "<%= @couleurEcurie16 %>",
+      borderColor: "<%= @couleurEcurie16 %>",
+      data: data16,
+    },
+
+                {
+      label: "<%= @piloteNom17 %>",
+      backgroundColor: "<%= @couleurEcurie17 %>",
+      borderColor: "<%= @couleurEcurie17 %>",
+      data: data17,
+    },
+
+    {
+      label: "<%= @piloteNom18 %>",
+      backgroundColor: "<%= @couleurEcurie18 %>",
+      borderColor: "<%= @couleurEcurie18 %>",
+      data: data18,
+    },
+
+                {
+      label: "<%= @piloteNom19 %>",
+      backgroundColor: "<%= @couleurEcurie19 %>",
+      borderColor: "<%= @couleurEcurie19 %>",
+      data: data19,
+    },
+
+                {
+      label: "<%= @piloteNom20 %>",
+      backgroundColor: "<%= @couleurEcurie20 %>",
+      borderColor: "<%= @couleurEcurie20 %>",
+      data: data20,
     }
 
 
@@ -106,6 +399,13 @@ var data3 = <%= @data3 %>;
         type: 'line',
         data: data,
         options: {
+           
+            plugins: {
+            legend: {
+                display: false
+            },
+        },
+
             animation: {
                 onComplete: () => {
                     delayed = true;
@@ -118,14 +418,14 @@ var data3 = <%= @data3 %>;
                     return delay;
                 },
             },
-
+           
             borderColor:"#308af3",
             pointBackgroundColor: "#308af3",
-            pointBorderWidth: 10,
+            pointBorderWidth: 5,
             pointHoverBackgroundColor: "#fff",
             pointHoverBorderWidth: 2,
             lineTension: 0.4,
-            borderWidth: 6,
+            borderWidth: 2,
             scales: {
                 y: {
                     beginAtZero: true,

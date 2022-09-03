@@ -20,6 +20,7 @@ PDF generation date:
         <th>Logo</th>
         <th>Voiture</th>
      
+     
       </tr>
     </thead>
 
@@ -30,6 +31,7 @@ PDF generation date:
           <td>  <%= image_tag(equipe.logo, style: "width: 200px; display: block", class: "img-fluid rounded") if equipe.logo.attached? %>  </td> 
           <td>   <%= image_tag(equipe.voiture, style: "width: 200px; display: block", class: "img-fluid rounded") if equipe.voiture.attached? %>  </td> 
 
+        
         </tr>
       <% end %>
     </tbody>
