@@ -11,15 +11,10 @@ class PilotesController < ApplicationController
    
     @divisions = Division.all
 
-
-
-
     @q = Pilote.ransack(params[:q])
   #  @pilotes = @q.result(distinct: true).order(:ecurie)
     @pilotes = @q.result(distinct: true).order(:ecurie).page params[:page]
 
-
-   
     respond_to do |format|
       format.html
       format.pdf do
@@ -47,9 +42,6 @@ class PilotesController < ApplicationController
     if params[:div].present?
       div = Pilote.params[:div]
       @pilotes = Pilote.all.where(division_id: div)
-
-
-    
     else
       @pilotes = Pilote.all
     end
@@ -64,10 +56,7 @@ class PilotesController < ApplicationController
       end
     end
 
-
   end
-
-
 
   # GET /pilotes/new
   def new
@@ -131,13 +120,9 @@ class PilotesController < ApplicationController
       @pilote = Pilote.find(params[:id])
     end
 
-
-   
     # Only allow a list of trusted parameters through.
     def pilote_params
       params.require(:pilote).permit(:nom, :statut, :ecurie, :division_id, :user_id, :div)
     end
-
-  
 
 end

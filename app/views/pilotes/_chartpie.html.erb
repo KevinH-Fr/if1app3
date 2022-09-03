@@ -1,6 +1,5 @@
 
 
-
 <div class="chart-container" style="position: relative; height:40%; width:40%">
     <canvas id="myChartPie"></canvas>
 </div>
@@ -16,7 +15,10 @@
 
 <script>
 
-
+var couleurVictoire =  'rgb(233, 222, 61)';
+var couleurPodium = 'rgb(205, 127, 50)';
+var couleurTop5 =  'rgb(54, 162, 235)';
+var couleurTop10 =  'rgb(82, 189, 93)';
 
   const ctx = document.getElementById('myChartPie').getContext('2d');
   const myChart = new Chart(ctx, {
@@ -27,28 +29,32 @@
             /* label: '# of Votes', */
               data: <%= @data.to_json.html_safe %>,
           
-              backgroundColor: [
-                  
-              'rgb(0, 153, 76)',
-              'rgb(255, 99, 132)',
-              'rgb(54, 162, 235)',
-              'rgb(255, 205, 86)'
-      ],
+              backgroundColor: [                  
+                couleurVictoire, couleurPodium, couleurTop5, couleurTop10
+             ],
       hoverOffset: 40
     }]
 
-
       },
       options: {
+          animation:{
+            animateRotate: true,
+            duration: 5000
+         },
+
+          plugins: {
+            legend: {
+                display: true,
+                position: 'right'
+                
+            },
+        },
           scales: {
-              y: {
-                  beginAtZero: true
-              }
+
           }
       }
   });
   
-
 
 </script>
 
