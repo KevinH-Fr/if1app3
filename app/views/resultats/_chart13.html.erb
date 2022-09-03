@@ -13,10 +13,13 @@
 
  <% nbPilotes = @listePilotesNew.count %> 
 
-<% @piloteId1 = @listePilotesNew[0] %>
-<% @piloteNom1 = Pilote.find(@piloteId1).nom %> 
-<% @piloteEcurie1 = Pilote.find(@piloteId1).ecurie %>
-<% @couleurEcurie1 = Equipe.find(@piloteEcurie1).couleurRgb %> 
+<% if nbPilotes > 0 %>
+    <% @listePilotesNew[0] %> 
+    <% @piloteId1 = @listePilotesNew[0] %>
+    <% @piloteNom1 = Pilote.find(@piloteId1).nom %> 
+    <% @piloteEcurie1 = Pilote.find(@piloteId1).ecurie %> 
+    <% @couleurEcurie1 = Equipe.find(@piloteEcurie1).couleurRgb %> 
+<% end %>
 
 <% if nbPilotes > 1 %>
     <% @listePilotesNew[1] %> 

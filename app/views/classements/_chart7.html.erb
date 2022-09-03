@@ -10,12 +10,14 @@
 <% @listePilotes = Resultat.division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).group(:pilote_id).pluck(:pilote_id) %> 
 
  <% nbPilotes = @listePilotes.count %> 
- <% @listePilotes[0] %> 
 
-<% @piloteId1 = @listePilotes[0] %>
-<% @piloteNom1 = Pilote.find(@piloteId1).nom %> 
-<% @piloteEcurie1 = Pilote.find(@piloteId1).ecurie %>
-<% @couleurEcurie1 = Equipe.find(@piloteEcurie1).couleurRgb %> 
+<% if nbPilotes > 0 %>
+    <% @listePilotes[0] %> 
+    <% @piloteId1 = @listePilotes[0] %>
+    <% @piloteNom1 = Pilote.find(@piloteId1).nom %> 
+    <% @piloteEcurie1 = Pilote.find(@piloteId1).ecurie %> 
+    <% @couleurEcurie1 = Equipe.find(@piloteEcurie1).couleurRgb %> 
+<% end %>
 
 <% if nbPilotes > 1 %>
     <% @listePilotes[1] %> 
