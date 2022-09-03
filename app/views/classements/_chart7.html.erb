@@ -169,58 +169,57 @@
     <% @couleurEcurie20 = Equipe.find(@piloteEcurie20).couleurRgb %> 
 <% end %>
 
-
 <%# permet d'avoir les resultats du pilote 5 a chaque gp sans somme %>
 <%# permet d'avoir les resultats du pilote 5 a chaque gp sans somme %>
-<% @data1 = Resultat.where(pilote_id: @piloteId1).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data2 = Resultat.where(pilote_id: @piloteId2).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data3 = Resultat.where(pilote_id: @piloteId3).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data4 = Resultat.where(pilote_id: @piloteId4).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data5 = Resultat.where(pilote_id: @piloteId5).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data6 = Resultat.where(pilote_id: @piloteId6).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data7 = Resultat.where(pilote_id: @piloteId7).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data8 = Resultat.where(pilote_id: @piloteId8).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data9 = Resultat.where(pilote_id: @piloteId9).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data10 = Resultat.where(pilote_id: @piloteId10).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %>
-<% @data11 = Resultat.where(pilote_id: @piloteId11).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data12 = Resultat.where(pilote_id: @piloteId12).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data13 = Resultat.where(pilote_id: @piloteId13).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data14 = Resultat.where(pilote_id: @piloteId14).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data15 = Resultat.where(pilote_id: @piloteId15).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data16 = Resultat.where(pilote_id: @piloteId16).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data17 = Resultat.where(pilote_id: @piloteId17).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data18 = Resultat.where(pilote_id: @piloteId18).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data19 = Resultat.where(pilote_id: @piloteId19).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data20 = Resultat.where(pilote_id: @piloteId20).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data1 = Resultat.where(pilote_id: @piloteId1).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data2 = Resultat.where(pilote_id: @piloteId2).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data3 = Resultat.where(pilote_id: @piloteId3).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data4 = Resultat.where(pilote_id: @piloteId4).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data5 = Resultat.where(pilote_id: @piloteId5).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data6 = Resultat.where(pilote_id: @piloteId6).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data7 = Resultat.where(pilote_id: @piloteId7).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data8 = Resultat.where(pilote_id: @piloteId8).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data9 = Resultat.where(pilote_id: @piloteId9).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data10 = Resultat.where(pilote_id: @piloteId10).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %>
+  <% @data11 = Resultat.where(pilote_id: @piloteId11).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data12 = Resultat.where(pilote_id: @piloteId12).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data13 = Resultat.where(pilote_id: @piloteId13).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data14 = Resultat.where(pilote_id: @piloteId14).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data15 = Resultat.where(pilote_id: @piloteId15).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data16 = Resultat.where(pilote_id: @piloteId16).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data17 = Resultat.where(pilote_id: @piloteId17).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data18 = Resultat.where(pilote_id: @piloteId18).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data19 = Resultat.where(pilote_id: @piloteId19).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data20 = Resultat.where(pilote_id: @piloteId20).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
 
 
 
 <%# data = Resultat.where(pilote_id: 5).count %>
 
 <%# cumul resultat fonctionne %>
-<% @cumulData1 = @data1.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData2 = @data2.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData3 = @data3.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData4 = @data4.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData5 = @data5.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData6 = @data6.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData7 = @data7.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData8 = @data8.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData9 = @data9.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData10 = @data10.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData11 = @data11.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData12 = @data12.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData13 = @data13.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData14 = @data14.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData15 = @data15.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData16 = @data16.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData17 = @data17.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData18 = @data18.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData19 = @data19.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
-<% @cumulData20 = @data20.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData1 = @data1.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData2 = @data2.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData3 = @data3.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData4 = @data4.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData5 = @data5.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData6 = @data6.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData7 = @data7.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData8 = @data8.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData9 = @data9.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData10 = @data10.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData11 = @data11.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData12 = @data12.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData13 = @data13.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData14 = @data14.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData15 = @data15.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData16 = @data16.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData17 = @data17.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData18 = @data18.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData19 = @data19.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
+  <% @cumulData20 = @data20.inject([]) { |x, y| x + [(x.last || 0) + y] } %>
 
 
-<div class="chart-container" style="position: relative; height:80%; width:80%">
+<div class="chart-container" style="position: relative; height:80%; width:100%">
     <canvas id="myChartPie"></canvas>
 </div>
 
@@ -252,72 +251,61 @@ const data = {
     labels: labels,
    
     datasets: [
-          
+    
     {
       label: "<%= @piloteNom1 %>",
       backgroundColor: "<%= @couleurEcurie1 %>",
       borderColor: "<%= @couleurEcurie1 %>",
       data: data1,
     },
-
-
     {
       label: "<%= @piloteNom2 %>",
       backgroundColor: "<%= @couleurEcurie2 %>",
       borderColor: "<%= @couleurEcurie2 %>",
       data: data2,
     },
-
-
     {
       label: "<%= @piloteNom3 %>",
       backgroundColor: "<%= @couleurEcurie3 %>",
       borderColor: "<%= @couleurEcurie3 %>",
       data: data3,
     },
-
     {
       label: "<%= @piloteNom4 %>",
       backgroundColor: "<%= @couleurEcurie4 %>",
       borderColor: "<%= @couleurEcurie4 %>",
       data: data4,
     },
-
     {
       label: "<%= @piloteNom5 %>",
       backgroundColor: "<%= @couleurEcurie5 %>",
       borderColor: "<%= @couleurEcurie5 %>",
       data: data5,
     },
-
     {
       label: "<%= @piloteNom6 %>",
       backgroundColor: "<%= @couleurEcurie6 %>",
       borderColor: "<%= @couleurEcurie6 %>",
       data: data6,
     },
-
     {
       label: "<%= @piloteNom7 %>",
       backgroundColor: "<%= @couleurEcurie7 %>",
       borderColor: "<%= @couleurEcurie7 %>",
       data: data7,
     },
-
     {
       label: "<%= @piloteNom8 %>",
       backgroundColor: "<%= @couleurEcurie8 %>",
       borderColor: "<%= @couleurEcurie8 %>",
       data: data8,
     },
-
     {
       label: "<%= @piloteNom9 %>",
       backgroundColor: "<%= @couleurEcurie9 %>",
       borderColor: "<%= @couleurEcurie9 %>",
       data: data9,
     },
-
     {
       label: "<%= @piloteNom10 %>",
       backgroundColor: "<%= @couleurEcurie10 %>",
@@ -387,14 +375,12 @@ const data = {
       borderColor: "<%= @couleurEcurie19 %>",
       data: data19,
     },
-
     {
       label: "<%= @piloteNom20 %>",
       backgroundColor: "<%= @couleurEcurie20 %>",
       borderColor: "<%= @couleurEcurie20 %>",
       data: data20,
     }
-
   ]
   };
     let delayed;
@@ -402,8 +388,7 @@ const data = {
         type: 'line',
         data: data,
         options: {
-        
-
+      
             plugins: {
             legend: {
                 display: false
@@ -424,12 +409,12 @@ const data = {
             },
            
             borderColor:"#308af3",
-            /*pointBackgroundColor: "#308af3",*/
-            pointBorderWidth: 5,
-            /*pointHoverBackgroundColor: "#fff",*/
-            pointHoverBorderWidth: 2,
+           /* pointBackgroundColor: "#308af3",*/
+            pointBorderWidth: 3,
+           /* pointHoverBackgroundColor: "#fff", */
+            pointHoverBorderWidth: 6,
             lineTension: 0.4,
-            borderWidth: 2,
+            borderWidth: 4,
              scales: {
               y: {
                 ticks: {

@@ -194,8 +194,8 @@
 
 
 
-<div>
-  <canvas id="myChart" width="20px" height="10px" ></canvas> 
+<div class="chart-container" style="position: relative; height:80%; width:100%">
+  <canvas id="myChart"></canvas> 
 </div>
 
 <script>
@@ -234,14 +234,12 @@ var labels = <%= @labels %>;
       borderColor: "<%= @couleurEcurie1 %>",
       data: data1,
     },
-
     {
       label: "<%= @piloteNom2 %>",
       backgroundColor: "<%= @couleurEcurie2 %>",
       borderColor: "<%= @couleurEcurie2 %>",
       data: data2,
     },
-
     {
       label: "<%= @piloteNom3 %>",
       backgroundColor: "<%= @couleurEcurie3 %>",
@@ -249,120 +247,103 @@ var labels = <%= @labels %>;
       data: data3,
      
     },
-
     {
       label: "<%= @piloteNom4 %>",
       backgroundColor: "<%= @couleurEcurie4 %>",
       borderColor: "<%= @couleurEcurie4 %>",
       data: data4,
     },
-
     {
       label: "<%= @piloteNom5 %>",
       backgroundColor: "<%= @couleurEcurie5 %>",
       borderColor: "<%= @couleurEcurie5 %>",
       data: data5,
     },
-
     {
       label: "<%= @piloteNom6 %>",
       backgroundColor: "<%= @couleurEcurie6 %>",
       borderColor: "<%= @couleurEcurie6 %>",
       data: data6,
     },
-
     {
       label: "<%= @piloteNom7 %>",
       backgroundColor: "<%= @couleurEcurie7 %>",
       borderColor: "<%= @couleurEcurie7 %>",
       data: data7,
     },
-
     {
       label: "<%= @piloteNom8 %>",
       backgroundColor: "<%= @couleurEcurie8 %>",
       borderColor: "<%= @couleurEcurie8 %>",
       data: data8,
     },
-
     {
       label: "<%= @piloteNom9 %>",
       backgroundColor: "<%= @couleurEcurie9 %>",
       borderColor: "<%= @couleurEcurie9 %>",
       data: data9,
     },
-
     {
       label: "<%= @piloteNom10 %>",
       backgroundColor: "<%= @couleurEcurie10 %>",
       borderColor: "<%= @couleurEcurie10 %>",
       data: data10,
     },
-
     {
       label: "<%= @piloteNom11 %>",
       backgroundColor: "<%= @couleurEcurie11 %>",
       borderColor: "<%= @couleurEcurie11 %>",
       data: data11,
     },
-
     {
       label: "<%= @piloteNom12 %>",
       backgroundColor: "<%= @couleurEcurie12 %>",
       borderColor: "<%= @couleurEcurie12 %>",
       data: data12,
     },
-
     {
       label: "<%= @piloteNom13 %>",
       backgroundColor: "<%= @couleurEcurie13 %>",
       borderColor: "<%= @couleurEcurie13 %>",
       data: data13,
     },
-
     {
       label: "<%= @piloteNom14 %>",
       backgroundColor: "<%= @couleurEcurie14 %>",
       borderColor: "<%= @couleurEcurie14 %>",
       data: data14,
     },
-
     {
       label: "<%= @piloteNom15 %>",
       backgroundColor: "<%= @couleurEcurie15 %>",
       borderColor: "<%= @couleurEcurie15 %>",
       data: data15,
     },
-
     {
       label: "<%= @piloteNom16 %>",
       backgroundColor: "<%= @couleurEcurie16 %>",
       borderColor: "<%= @couleurEcurie16 %>",
       data: data16,
     },
-
     {
       label: "<%= @piloteNom17 %>",
       backgroundColor: "<%= @couleurEcurie17 %>",
       borderColor: "<%= @couleurEcurie17 %>",
       data: data17,
     },
-
     {
       label: "<%= @piloteNom18 %>",
       backgroundColor: "<%= @couleurEcurie18 %>",
       borderColor: "<%= @couleurEcurie18 %>",
       data: data18,
     },
-
     {
       label: "<%= @piloteNom19 %>",
       backgroundColor: "<%= @couleurEcurie19 %>",
       borderColor: "<%= @couleurEcurie19 %>",
       data: data19,
     },
-
-                {
+    {
       label: "<%= @piloteNom20 %>",
       backgroundColor: "<%= @couleurEcurie20 %>",
       borderColor: "<%= @couleurEcurie20 %>",
@@ -390,7 +371,7 @@ var labels = <%= @labels %>;
                 delay: (context) => {
                     let delay = 0;
                     if (context.type === 'data' && context.mode === 'default' && !delayed) {
-                    delay = context.dataIndex * 1500  + context.datasetIndex * 100;
+                    delay = context.dataIndex * 3000  + context.datasetIndex * 100;
                     }
                     return delay;
                 },
@@ -398,11 +379,11 @@ var labels = <%= @labels %>;
            
             borderColor:"#308af3",
            /* pointBackgroundColor: "#308af3",*/
-            pointBorderWidth: 5,
+            pointBorderWidth: 3,
            /* pointHoverBackgroundColor: "#fff", */
-            pointHoverBorderWidth: 2,
+            pointHoverBorderWidth: 6,
             lineTension: 0.4,
-            borderWidth: 2,
+            borderWidth: 4,
             scales: {
               y: {
                 ticks: {
