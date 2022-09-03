@@ -171,26 +171,27 @@
 <% end %>
 
 <%# permet d'avoir les resultats du pilote 5 a chaque gp sans somme %>
-<% @data1 = Resultat.where(pilote_id: @piloteId1).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data2 = Resultat.where(pilote_id: @piloteId2).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data3 = Resultat.where(pilote_id: @piloteId3).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data4 = Resultat.where(pilote_id: @piloteId4).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data5 = Resultat.where(pilote_id: @piloteId5).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data6 = Resultat.where(pilote_id: @piloteId6).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data7 = Resultat.where(pilote_id: @piloteId7).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data8 = Resultat.where(pilote_id: @piloteId8).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data9 = Resultat.where(pilote_id: @piloteId9).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data10 = Resultat.where(pilote_id: @piloteId10).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %>
-<% @data11 = Resultat.where(pilote_id: @piloteId11).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data12 = Resultat.where(pilote_id: @piloteId12).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data13 = Resultat.where(pilote_id: @piloteId13).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data14 = Resultat.where(pilote_id: @piloteId14).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data15 = Resultat.where(pilote_id: @piloteId15).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data16 = Resultat.where(pilote_id: @piloteId16).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data17 = Resultat.where(pilote_id: @piloteId17).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data18 = Resultat.where(pilote_id: @piloteId18).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data19 = Resultat.where(pilote_id: @piloteId19).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
-<% @data20 = Resultat.where(pilote_id: @piloteId20).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data1 = Resultat.where(pilote_id: @piloteId1).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data2 = Resultat.where(pilote_id: @piloteId2).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data3 = Resultat.where(pilote_id: @piloteId3).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data4 = Resultat.where(pilote_id: @piloteId4).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data5 = Resultat.where(pilote_id: @piloteId5).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data6 = Resultat.where(pilote_id: @piloteId6).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data7 = Resultat.where(pilote_id: @piloteId7).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data8 = Resultat.where(pilote_id: @piloteId8).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data9 = Resultat.where(pilote_id: @piloteId9).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data10 = Resultat.where(pilote_id: @piloteId10).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %>
+  <% @data11 = Resultat.where(pilote_id: @piloteId11).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data12 = Resultat.where(pilote_id: @piloteId12).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data13 = Resultat.where(pilote_id: @piloteId13).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data14 = Resultat.where(pilote_id: @piloteId14).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data15 = Resultat.where(pilote_id: @piloteId15).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data16 = Resultat.where(pilote_id: @piloteId16).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data17 = Resultat.where(pilote_id: @piloteId17).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data18 = Resultat.where(pilote_id: @piloteId18).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data19 = Resultat.where(pilote_id: @piloteId19).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+  <% @data20 = Resultat.where(pilote_id: @piloteId20).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
+
 
 
 <div>
@@ -201,26 +202,26 @@
 
 var labels = <%= @labels %>;
 
-var data1 = <%= @data1 %>;
-var data2 = <%= @data2 %>;
-var data3 = <%= @data3 %>;
-var data4 = <%= @data4 %>;
-var data5 = <%= @data5 %>;
-var data6 = <%= @data6 %>;
-var data7 = <%= @data7 %>;
-var data8 = <%= @data8 %>;
-var data9 = <%= @data9 %>;
-var data10 = <%= @data10 %>;
-var data11 = <%= @data11 %>;
-var data12 = <%= @data12 %>;
-var data13 = <%= @data13 %>;
-var data14 = <%= @data14 %>;
-var data15 = <%= @data15 %>;
-var data16 = <%= @data16 %>;
-var data17 = <%= @data17 %>;
-var data18 = <%= @data18 %>;
-var data19 = <%= @data19 %>;
-var data20 = <%= @data20 %>;
+  var data1 = <%= @data1 %>;
+  var data2 = <%= @data2 %>;
+  var data3 = <%= @data3 %>;
+  var data4 = <%= @data4 %>;
+  var data5 = <%= @data5 %>;
+  var data6 = <%= @data6 %>;
+  var data7 = <%= @data7 %>;
+  var data8 = <%= @data8 %>;
+  var data9 = <%= @data9 %>;
+  var data10 = <%= @data10 %>;
+  var data11 = <%= @data11 %>;
+  var data12 = <%= @data12 %>;
+  var data13 = <%= @data13 %>;
+  var data14 = <%= @data14 %>;
+  var data15 = <%= @data15 %>;
+  var data16 = <%= @data16 %>;
+  var data17 = <%= @data17 %>;
+  var data18 = <%= @data18 %>;
+  var data19 = <%= @data19 %>;
+  var data20 = <%= @data20 %>;
 
   const data = {
     labels: labels,
@@ -369,6 +370,7 @@ var data20 = <%= @data20 %>;
     }
     ]
   };
+
     let delayed;
     const config = {
         type: 'line',
@@ -402,12 +404,40 @@ var data20 = <%= @data20 %>;
             lineTension: 0.4,
             borderWidth: 2,
             scales: {
-                y: {
-                    beginAtZero: true,
+              y: {
+                ticks: {
+                  font: {
+                    size: 16
+                  },     
+                },
+              beginAtZero: true,
+                title: {
+                  display: true,
+                  text: 'Points',
+                  font: {
+                    size: 18
+                  },
                 }
+              },
+              x: {
+                ticks: {
+                  font: {
+                    size: 16
+                  },  
+                   /* callback: function(value, index, ticks) {
+                        return 'GP ' + value ;*/
+                },
+                title: {
+                  display: true,
+                  text: 'GP',
+                  font: {
+                    size: 18
+                  },
+                }
+              },
             }
-        }
-    };
+          }
+      };
 </script>
 
 <script>

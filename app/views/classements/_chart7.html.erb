@@ -5,7 +5,7 @@
   <% @numGp = Event.find(@eventId).numero  %>
 
 
-<% @labels = Event.where(saison_id: @saisonId, division_id: @divisionId).numero_until_courant(@numGp).pluck(:numero)  %> 
+<% @labels = Event.joins(:circuit).where(saison_id: @saisonId, division_id: @divisionId).numero_until_courant(@numGp).pluck(:numero)  %> 
 
 <% @listePilotes = Resultat.division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).group(:pilote_id).pluck(:pilote_id) %> 
 
@@ -402,6 +402,8 @@ const data = {
         type: 'line',
         data: data,
         options: {
+        
+
             plugins: {
             legend: {
                 display: false
@@ -428,10 +430,38 @@ const data = {
             pointHoverBorderWidth: 2,
             lineTension: 0.4,
             borderWidth: 2,
-            scales: {
-                y: {
-                    beginAtZero: true,
+             scales: {
+              y: {
+                ticks: {
+                  font: {
+                    size: 16
+                  },     
+                },
+              beginAtZero: true,
+                title: {
+                  display: true,
+                  text: 'Points',
+                  font: {
+                    size: 18
+                  },
                 }
+              },
+              x: {
+                ticks: {
+                  font: {
+                    size: 16
+                  },  
+                   /* callback: function(value, index, ticks) {
+                        return 'GP ' + value ;*/
+                },
+                title: {
+                  display: true,
+                  text: 'GP',
+                  font: {
+                    size: 18
+                  },
+                }
+              },
             }
         }
     };
