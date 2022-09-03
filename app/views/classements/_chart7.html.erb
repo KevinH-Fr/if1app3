@@ -7,163 +7,163 @@
 
 <% @labels = Event.where(saison_id: @saisonId, division_id: @divisionId).numero_until_courant(@numGp).pluck(:numero)  %> 
 
-<% @listePilotes = Pilote.division_courant(@divisionId).statut_actif.pluck(:id, :nom) %> 
+<% @listePilotes = Resultat.division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:pilote_id) %> 
 
  <% nbPilotes = @listePilotes.count %> 
- <% @listePilotes[0][0] %> 
+ <% @listePilotes[0] %> 
 
-<% @piloteId1 = @listePilotes[0][0] %>
+<% @piloteId1 = @listePilotes[0] %>
 <% @piloteNom1 = Pilote.find(@piloteId1).nom %> 
 <% @piloteEcurie1 = Pilote.find(@piloteId1).ecurie %>
 <% @couleurEcurie1 = Equipe.find(@piloteEcurie1).couleurRgb %> 
 
 <% if nbPilotes > 1 %>
-    <% @listePilotes[1][0] %> 
-    <% @piloteId2 = @listePilotes[1][0] %>
+    <% @listePilotes[1] %> 
+    <% @piloteId2 = @listePilotes[1] %>
     <% @piloteNom2 = Pilote.find(@piloteId2).nom %> 
     <% @piloteEcurie2 = Pilote.find(@piloteId2).ecurie %> 
     <% @couleurEcurie2 = Equipe.find(@piloteEcurie2).couleurRgb %> 
 <% end %>
 
 <% if nbPilotes > 2 %>
-    <% @listePilotes[2][0] %> 
-    <% @piloteId3 = @listePilotes[2][0] %>
+    <% @listePilotes[2] %> 
+    <% @piloteId3 = @listePilotes[2] %>
     <% @piloteNom3 = Pilote.find(@piloteId3).nom %> 
     <% @piloteEcurie3 = Pilote.find(@piloteId3).ecurie %> 
     <% @couleurEcurie3 = Equipe.find(@piloteEcurie3).couleurRgb %> 
 <% end %>
 
 <% if nbPilotes > 3 %>
-    <% @listePilotes[3][0] %> 
-    <% @piloteId4 = @listePilotes[3][0] %>
+    <% @listePilotes[3] %> 
+    <% @piloteId4 = @listePilotes[3] %>
     <% @piloteNom4 = Pilote.find(@piloteId4).nom %> 
     <% @piloteEcurie4 = Pilote.find(@piloteId4).ecurie %> 
     <% @couleurEcurie4 = Equipe.find(@piloteEcurie4).couleurRgb %> 
 <% end %>
 
 <% if nbPilotes > 4 %>
-    <% @listePilotes[4][0] %> 
-    <% @piloteId5 = @listePilotes[4][0] %>
+    <% @listePilotes[4] %> 
+    <% @piloteId5 = @listePilotes[4] %>
     <% @piloteNom5 = Pilote.find(@piloteId5).nom %> 
     <% @piloteEcurie5 = Pilote.find(@piloteId5).ecurie %> 
     <% @couleurEcurie5 = Equipe.find(@piloteEcurie5).couleurRgb %> 
 <% end %>
 
 <% if nbPilotes > 5 %>
-    <% @listePilotes[5][0] %> 
-    <% @piloteId6 = @listePilotes[5][0] %>
+    <% @listePilotes[5] %> 
+    <% @piloteId6 = @listePilotes[5] %>
     <% @piloteNom6 = Pilote.find(@piloteId6).nom %> 
     <% @piloteEcurie6 = Pilote.find(@piloteId6).ecurie %> 
     <% @couleurEcurie6 = Equipe.find(@piloteEcurie6).couleurRgb %> 
 <% end %>
 
 <% if nbPilotes > 6 %>
-    <% @listePilotes[6][0] %> 
-    <% @piloteId7 = @listePilotes[6][0] %>
+    <% @listePilotes[6] %> 
+    <% @piloteId7 = @listePilotes[6] %>
     <% @piloteNom7 = Pilote.find(@piloteId7).nom %> 
     <% @piloteEcurie7 = Pilote.find(@piloteId7).ecurie %> 
     <% @couleurEcurie7 = Equipe.find(@piloteEcurie7).couleurRgb %> 
 <% end %>
 
 <% if nbPilotes > 7 %>
-    <% @listePilotes[7][0] %> 
-    <% @piloteId8 = @listePilotes[7][0] %>
+    <% @listePilotes[7] %> 
+    <% @piloteId8 = @listePilotes[7] %>
     <% @piloteNom8 = Pilote.find(@piloteId8).nom %> 
     <% @piloteEcurie8 = Pilote.find(@piloteId8).ecurie %> 
     <% @couleurEcurie8 = Equipe.find(@piloteEcurie8).couleurRgb %> 
 <% end %>
 
 <% if nbPilotes > 8 %>
-    <% @listePilotes[8][0] %> 
-    <% @piloteId9 = @listePilotes[8][0] %>
+    <% @listePilotes[8] %> 
+    <% @piloteId9 = @listePilotes[8] %>
     <% @piloteNom9 = Pilote.find(@piloteId9).nom %> 
     <% @piloteEcurie9 = Pilote.find(@piloteId9).ecurie %> 
     <% @couleurEcurie9 = Equipe.find(@piloteEcurie9).couleurRgb %> 
 <% end %>
 
 <% if nbPilotes > 9 %>
-    <% @listePilotes[9][0] %> 
-    <% @piloteId10 = @listePilotes[9][0] %>
+    <% @listePilotes[9] %> 
+    <% @piloteId10 = @listePilotes[9] %>
     <% @piloteNom10 = Pilote.find(@piloteId10).nom %> 
     <% @piloteEcurie10 = Pilote.find(@piloteId10).ecurie %> 
     <% @couleurEcurie10 = Equipe.find(@piloteEcurie10).couleurRgb %> 
 <% end %>
 
 <% if nbPilotes > 10 %>
-    <% @listePilotes[10][0] %> 
-    <% @piloteId11 = @listePilotes[10][0] %>
+    <% @listePilotes[10] %> 
+    <% @piloteId11 = @listePilotes[10] %>
     <% @piloteNom11 = Pilote.find(@piloteId11).nom %> 
     <% @piloteEcurie11 = Pilote.find(@piloteId11).ecurie %> 
     <% @couleurEcurie11 = Equipe.find(@piloteEcurie11).couleurRgb %> 
 <% end %>
 
 <% if nbPilotes > 11 %>
-    <% @listePilotes[11][0] %> 
-    <% @piloteId12 = @listePilotes[11][0] %>
+    <% @listePilotes[11] %> 
+    <% @piloteId12 = @listePilotes[11] %>
     <% @piloteNom12 = Pilote.find(@piloteId12).nom %> 
     <% @piloteEcurie12 = Pilote.find(@piloteId12).ecurie %> 
     <% @couleurEcurie12 = Equipe.find(@piloteEcurie12).couleurRgb %> 
 <% end %>
 
 <% if nbPilotes > 12 %>
-    <% @listePilotes[12][0] %> 
-    <% @piloteId13 = @listePilotes[12][0] %>
+    <% @listePilotes[12] %> 
+    <% @piloteId13 = @listePilotes[12] %>
     <% @piloteNom13 = Pilote.find(@piloteId13).nom %> 
     <% @piloteEcurie13 = Pilote.find(@piloteId13).ecurie %> 
     <% @couleurEcurie13 = Equipe.find(@piloteEcurie13).couleurRgb %> 
 <% end %>
 
 <% if nbPilotes > 13 %>
-    <% @listePilotes[13][0] %> 
-    <% @piloteId14 = @listePilotes[13][0] %>
+    <% @listePilotes[13] %> 
+    <% @piloteId14 = @listePilotes[13] %>
     <% @piloteNom14 = Pilote.find(@piloteId14).nom %> 
     <% @piloteEcurie14 = Pilote.find(@piloteId14).ecurie %> 
     <% @couleurEcurie14 = Equipe.find(@piloteEcurie14).couleurRgb %> 
 <% end %>
 
 <% if nbPilotes > 14 %>
-    <% @listePilotes[14][0] %> 
-    <% @piloteId15 = @listePilotes[14][0] %>
+    <% @listePilotes[14] %> 
+    <% @piloteId15 = @listePilotes[14] %>
     <% @piloteNom15 = Pilote.find(@piloteId15).nom %> 
     <% @piloteEcurie15 = Pilote.find(@piloteId15).ecurie %> 
     <% @couleurEcurie15 = Equipe.find(@piloteEcurie15).couleurRgb %> 
 <% end %>
 
 <% if nbPilotes > 15 %>
-    <% @listePilotes[15][0] %> 
-    <% @piloteId16 = @listePilotes[15][0] %>
+    <% @listePilotes[15] %> 
+    <% @piloteId16 = @listePilotes[15] %>
     <% @piloteNom16 = Pilote.find(@piloteId16).nom %> 
     <% @piloteEcurie16 = Pilote.find(@piloteId16).ecurie %> 
     <% @couleurEcurie16 = Equipe.find(@piloteEcurie16).couleurRgb %> 
 <% end %>
 
 <% if nbPilotes > 16 %>
-    <% @listePilotes[16][0] %> 
-    <% @piloteId17 = @listePilotes[16][0] %>
+    <% @listePilotes[16] %> 
+    <% @piloteId17 = @listePilotes[16] %>
     <% @piloteNom17 = Pilote.find(@piloteId17).nom %> 
     <% @piloteEcurie17 = Pilote.find(@piloteId17).ecurie %> 
     <% @couleurEcurie17 = Equipe.find(@piloteEcurie17).couleurRgb %> 
 <% end %>
 
 <% if nbPilotes > 17 %>
-    <% @listePilotes[17][0] %> 
-    <% @piloteId18 = @listePilotes[17][0] %>
+    <% @listePilotes[17]%> 
+    <% @piloteId18 = @listePilotes[17] %>
     <% @piloteNom18 = Pilote.find(@piloteId18).nom %> 
     <% @piloteEcurie18 = Pilote.find(@piloteId18).ecurie %> 
     <% @couleurEcurie18 = Equipe.find(@piloteEcurie18).couleurRgb %> 
 <% end %>
 
 <% if nbPilotes > 18 %>
-    <% @listePilotes[18][0] %> 
-    <% @piloteId19 = @listePilotes[18][0] %>
+    <% @listePilotes[18] %> 
+    <% @piloteId19 = @listePilotes[18] %>
     <% @piloteNom19 = Pilote.find(@piloteId19).nom %> 
     <% @piloteEcurie19 = Pilote.find(@piloteId19).ecurie %> 
     <% @couleurEcurie19 = Equipe.find(@piloteEcurie19).couleurRgb %> 
 <% end %>
 
 <% if nbPilotes > 19 %>
-    <% @listePilotes[19][0] %>  
-    <% @piloteId20 = @listePilotes[19][0] %>
+    <% @listePilotes[19] %>  
+    <% @piloteId20 = @listePilotes[19] %>
     <% @piloteNom20 = Pilote.find(@piloteId20).nom %> 
     <% @piloteEcurie20 = Pilote.find(@piloteId20).ecurie %> 
     <% @couleurEcurie20 = Equipe.find(@piloteEcurie20).couleurRgb %> 
