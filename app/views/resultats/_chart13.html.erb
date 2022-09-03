@@ -6,14 +6,12 @@
 
 <% @labels = Event.where(saison_id: @saisonId, division_id: @divisionId).numero_until_courant(@numGp).pluck(:numero)  %> 
 
-<% @listePilotes = Pilote.division_courant(@divisionId).statut_actif.pluck(:id, :nom) %> 
+<%# @listePilotes = Pilote.division_courant(@divisionId).statut_actif.pluck(:id, :nom) %> 
 
 
 <% @listePilotesNew = Resultat.division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:pilote_id) %> 
-<% @listePilotesNew.count %>
 
-
- <% nbPilotes = @listePilotes.count %> 
+ <% nbPilotes = @listePilotesNew.count %> 
 
 <% @piloteId1 = @listePilotesNew[0] %>
 <% @piloteNom1 = Pilote.find(@piloteId1).nom %> 
