@@ -7,7 +7,7 @@
 
 <% @labels = Event.where(saison_id: @saisonId, division_id: @divisionId).numero_until_courant(@numGp).pluck(:numero)  %> 
 
-<% @listePilotes = Resultat.division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:pilote_id) %> 
+<% @listePilotes = Resultat.division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).group(:pilote_id).pluck(:pilote_id) %> 
 
  <% nbPilotes = @listePilotes.count %> 
  <% @listePilotes[0] %> 
