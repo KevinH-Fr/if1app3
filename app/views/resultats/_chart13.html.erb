@@ -9,7 +9,7 @@
 <%# @listePilotes = Pilote.division_courant(@divisionId).statut_actif.pluck(:id, :nom) %> 
 
 
-<% @listePilotesNew = Resultat.division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:pilote_id) %> 
+<% @listePilotesNew = Resultat.division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).group(:pilote_id).pluck(:pilote_id) %> 
 
  <% nbPilotes = @listePilotesNew.count %> 
 
