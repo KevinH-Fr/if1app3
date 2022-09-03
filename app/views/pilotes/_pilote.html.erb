@@ -8,18 +8,27 @@
     <%= pilote.statut %>
   </p>
    <% pilote.ecurie %>
-  <p>
+  
     <strong>Ecurie:</strong>
     <%= @equipe = Equipe.find(@pilote.ecurie).nom %> 
 
- <%# si pas d'ecurie selectionnée, image blank, sinon logo ecurie %>
-    <% if pilote.ecurie.blank?%>
-      <%= image_tag 'no-image.png', alt: 'icon', width: '200' %>
-    <% else %>
-      <%= image_tag Equipe.find(@pilote.ecurie).logo, style: "width: 400px; display: block", class: "img-fluid rounded" %> 
-    <% end %>
+    <table>
+      <th>
+          <% if pilote.ecurie.blank?%>
+            <%= image_tag 'no-image.png', alt: 'icon', width: '100' %>
+          <% else %>
+            <%= image_tag Equipe.find(@pilote.ecurie).ecusson, style: "width: 100px; display: block", class: "img-fluid rounded" %> 
+          <% end %>
+      </th>
 
-  </p>
+      <th>
+          <% if pilote.ecurie.present?%>
+            <% if Equipe.find(@pilote.ecurie).voiture.present? %>
+              <%= image_tag Equipe.find(@pilote.ecurie).voiture, style: "width: 150px display: block", class: "img-fluid rounded" %> 
+            <% end %>
+          <% end %>
+      </th>
+    </table>
 
   <p>
     <strong>Division:</strong>
@@ -32,11 +41,7 @@
      <%= User.find(pilote.user_id).full_name if pilote.user_id.present? %>
   </p>
 
-    <% if pilote.ecurie.present?%>
-      <% if Equipe.find(@pilote.ecurie).voiture.present? %>
-        <%= image_tag Equipe.find(@pilote.ecurie).voiture, style: "width: 400px; display: block", class: "img-fluid rounded" %> 
-      <% end %>
-    <% end %>
+
 
   <hr>  
 
@@ -45,8 +50,11 @@
   <% if nbCourses > 0 %>
     <h5> Stats :</h5>
 
+    <%= render "chartpie" %> 
 
-   <strong> Nb courses : </strong> <%= nbCourses %> <br> 
+
+
+   <strong> Nb courses : </strong> <%= nbCourses %> <br> <br>
 
     <table class="table">
     <thead class="table-dark">
@@ -101,7 +109,7 @@
     </tbody>
     </table>
 
-
+ 
 
   <% end %>
 

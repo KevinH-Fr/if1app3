@@ -1,4 +1,3 @@
-test chart 13
 
  <% @saisonId = params[:saisonId] %>
  <% @divisionId = Event.find(@eventId).division_id %> 
@@ -6,11 +5,10 @@ test chart 13
  <% @numGp = Event.find(@eventId).numero  %>
 
 <% @labels = Event.where(saison_id: @saisonId, division_id: @divisionId).numero_until_courant(@numGp).pluck(:numero)  %> 
-<br>
-liste pilotes : <br>
+
 <% @listePilotes = Pilote.division_courant(@divisionId).statut_actif.pluck(:id, :nom) %> 
 
- <%= nbPilotes = @listePilotes.count %> <br>
+ <% nbPilotes = @listePilotes.count %> 
  <% @listePilotes[0][0] %> 
 
 <% @piloteId1 = @listePilotes[0][0] %>
@@ -193,26 +191,9 @@ liste pilotes : <br>
 <% @data20 = Resultat.where(pilote_id: @piloteId20).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).pluck(:score).map!(&:to_i) %> 
 
 <br>
-pilote1: id = <%= @piloteId1 %> nom <%= @piloteNom1 %> data <%= @data1 %> <br>
-pilote2: id = <%= @piloteId2 %> nom <%= @piloteNom2 %> data <%= @data2 %> <br>
-pilote3: id = <%= @piloteId3 %> nom <%= @piloteNom3 %> data <%= @data3 %> <br>
-pilote4: id = <%= @piloteId4 %> nom <%= @piloteNom4 %> data <%= @data4 %> <br>
-pilote5: id = <%= @piloteId5 %> nom <%= @piloteNom5 %> data <%= @data5 %> <br>
-pilote6: id = <%= @piloteId6 %> nom <%= @piloteNom6 %> data <%= @data6 %> <br>
-pilote7: id = <%= @piloteId7 %> nom <%= @piloteNom7 %> data <%= @data7 %> <br>
-pilote8: id = <%= @piloteId8 %> nom <%= @piloteNom8 %> data <%= @data8 %> <br>
-pilote9: id = <%= @piloteId9 %> nom <%= @piloteNom9 %> data <%= @data9 %> <br>
-pilote10: id = <%= @piloteId10 %> nom <%= @piloteNom10 %> data <%= @data10 %> <br>
-pilote11: id = <%= @piloteId11 %> nom <%= @piloteNom11 %> data <%= @data11 %> <br>
-pilote12: id = <%= @piloteId12 %> nom <%= @piloteNom12 %> data <%= @data12 %> <br>
-pilote13: id = <%= @piloteId13 %> nom <%= @piloteNom13 %> data <%= @data13 %> <br>
-pilote14: id = <%= @piloteId14 %> nom <%= @piloteNom14 %> data <%= @data14 %> <br>
-pilote15: id = <%= @piloteId15 %> nom <%= @piloteNom15 %> data <%= @data15 %> <br>
-pilote16: id = <%= @piloteId16 %> nom <%= @piloteNom16 %> data <%= @data16 %> <br>
-pilote17: id = <%= @piloteId17 %> nom <%= @piloteNom17 %> data <%= @data17 %> <br>
-pilote18: id = <%= @piloteId18 %> nom <%= @piloteNom18 %> data <%= @data18 %> <br>
-pilote19: id = <%= @piloteId19 %> nom <%= @piloteNom19 %> data <%= @data19 %> <br>
-pilote20: id = <%= @piloteId20 %> nom <%= @piloteNom20 %> data <%= @data20 %> <br>
+
+
+
 
 <div>
   <canvas id="myChart" width="20px" height="10px" ></canvas> 
