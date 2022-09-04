@@ -1,0 +1,77 @@
+test chart 9 - progressive line
+
+<%= render "varCharts" %> 
+
+<canvas id="myChart"></canvas>
+
+<%= @labels %>
+<%= @cumulData1[0][0] %>
+
+
+pilote1: id = <%= @piloteId1 %> nom <%= @piloteNom1 %> data <%= @data1 %> <br>
+
+
+<script>
+
+const labels = <%= @labels %>;
+
+var data1 = <%= @cumulData1 %>;
+var data2 = <%= @cumulData2 %>;
+var data3 = <%= @cumulData3 %>;
+var data4 = <%= @cumulData4 %>;
+var data5 = <%= @cumulData5 %>;
+var data6 = <%= @cumulData6 %>;
+var data7 = <%= @cumulData7 %>;
+var data8 = <%= @cumulData8 %>;
+var data9 = <%= @cumulData9 %>;
+var data10 = <%= @cumulData10 %>;
+var data11 = <%= @cumulData11 %>;
+var data12 = <%= @cumulData12 %>;
+var data13 = <%= @cumulData13 %>;
+var data14 = <%= @cumulData14 %>;
+var data15 = <%= @cumulData15 %>;
+var data16 = <%= @cumulData16 %>;
+var data17 = <%= @cumulData17 %>;
+var data18 = <%= @cumulData18 %>;
+var data19 = <%= @cumulData19 %>;
+var data20 = <%= @cumulData20 %>;
+
+/*const labels = [1, 2, 3, 4];*/
+
+var myData = [{x: 1, y: data1[0]}, {x: 2, y: 2}, {x: 3, y: 1}, {x: 4, y: 3}];
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'line',
+  
+    data: {
+        labels: labels,
+        datasets: [{
+            data: [myData[0]],
+            lineTension: 0
+        }]
+    },
+    options: {
+    }
+});
+var next = function() {
+    var data = myChart.data.datasets[0].data;
+    var count = data.length;
+    data[count] = data[count - 1];
+    myChart.update({duration: 0});
+    data[count] = myData[count];
+    myChart.update();
+    if (count < myData.length) {
+        setTimeout(next, 3000);
+    }
+}
+setTimeout(next, 2000);
+
+</script>
+
+
+<script>
+  const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+</script>
