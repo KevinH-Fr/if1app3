@@ -10,6 +10,25 @@
     <% if Pilote.where(user_id: current_user.id).first.present? %>
       <div> Votre compte est associé au pilote :    
       <strong> <%= Pilote.where(user_id: current_user.id).first.nom %> </strong>. </div> <br>
+
+        
+        <% parieurId = Pilote.where(user_id: current_user.id).first.id %>
+        <% parieurNom = Pilote.where(user_id: current_user.id).first.nom %> 
+        <% soldeParieur = Pari.where(parieur_id: parieurId).pluck('SUM(solde) AS total').first %>
+
+        <% if soldeParieur.nil? %>
+           <% soldeParieur = 1000 %>
+        <% else %>
+          <% soldeParieur = Pari.where(parieur_id: parieurId).pluck('SUM(solde) AS total').first %>
+        <% end %>
+
+        <div>  
+         Votre solde de  <strong> Points Paris </strong> est de :
+
+         <strong>  <%= number_with_precision(soldeParieur, precision: 2) %> </strong>
+        </div>
+        <br>
+
     <% end %>
 
     
@@ -29,3 +48,4 @@
     <br/> <br/>
     <%= link_to "Créer un compte", new_user_registration_path, class:"btn btn-sm btn-warning" %>
 <% end %>
+
