@@ -19,7 +19,7 @@
         <% if soldeParieur.nil? %>
            <% soldeParieur = 1000 %>
         <% else %>
-          <% soldeParieur = Pari.where(parieur_id: parieurId).pluck('SUM(solde) AS total').first %>
+          <% soldeParieur = 1000 + Pari.where(parieur_id: parieurId).pluck('SUM(solde) AS total').first %>
         <% end %>
 
         <div>  
