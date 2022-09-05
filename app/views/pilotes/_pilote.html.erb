@@ -50,68 +50,67 @@
   <% if nbCourses > 0 %>
     <h5> Stats :</h5>
 
-    <%= render "chartpie" %> 
 
+     <%= render "chartpie" %> 
 
+    
+      <strong> Nb courses : </strong> <%= nbCourses %> <br> <br>
 
-   <strong> Nb courses : </strong> <%= nbCourses %> <br> <br>
+        <table class="table">
+        <thead class="table-dark">
+          <th> résultat </th>
+          <th> nombre</th>
+          <th> %</th>
+        </thead>
+          
+        <tbody>
+          <td>Victoire</td>
+          <td>
+            <% nbVictoire = Resultat.pilote_courant(pilote.id).compte_p1 %>
+            <%= nbVictoire %> 
+          </td>
+          <td>
+            <% pourcentageVictoire = Float(nbVictoire) / nbCourses * 100 %>
+            <%= pourcentageVictoire.to_i %> %
+          </td>
+        </tbody>
+        <tbody>
+          <td>Podium</td>
+          <td>
+            <% nbPodium = Resultat.pilote_courant(pilote.id).compte_podium %>
+            <%= nbPodium %> 
+          </td>
+          <td>
+            <% pourcentagePodium = Float(nbPodium) / nbCourses * 100 %>
+            <%= pourcentagePodium.to_i %> %  
+          </td>
+        </tbody>
+        <tbody>
+          <td>Top5</td>
+          <td>
+            <% nbTop5 = Resultat.pilote_courant(pilote.id).compte_top5 %>
+            <%= nbTop5 %> 
+          </td>
+          <td>
+            <% pourcentageTop5 = Float(nbTop5) / nbCourses * 100 %>
+            <%= pourcentageTop5.to_i %> %  
+          </td>  
+        </tbody>
+        <tbody>
+            <td>Top10</td>
+          <td>
+            <% nbTop10 = Resultat.pilote_courant(pilote.id).compte_top10 %>
+            <%= nbTop10 %> 
+          </td>
+          <td>
+            <% pourcentageTop10 = Float(nbTop10) / nbCourses * 100 %>
+            <%= pourcentageTop10.to_i %> %  
+          </td> 
+        </tbody>
+        </table>
+  
 
-    <table class="table">
-    <thead class="table-dark">
-      <th> résultat </th>
-      <th> nombre</th>
-      <th> %</th>
-    </thead>
-      
-    <tbody>
-      <td>Victoire</td>
-      <td>
-        <% nbVictoire = Resultat.pilote_courant(pilote.id).compte_p1 %>
-        <%= nbVictoire %> 
-      </td>
-      <td>
-        <% pourcentageVictoire = Float(nbVictoire) / nbCourses * 100 %>
-        <%= pourcentageVictoire.to_i %> %
-      </td>
-    </tbody>
-    <tbody>
-      <td>Podium</td>
-      <td>
-        <% nbPodium = Resultat.pilote_courant(pilote.id).compte_podium %>
-        <%= nbPodium %> 
-      </td>
-      <td>
-        <% pourcentagePodium = Float(nbPodium) / nbCourses * 100 %>
-        <%= pourcentagePodium.to_i %> %  
-      </td>
-    </tbody>
-    <tbody>
-      <td>Top5</td>
-      <td>
-        <% nbTop5 = Resultat.pilote_courant(pilote.id).compte_top5 %>
-        <%= nbTop5 %> 
-      </td>
-      <td>
-        <% pourcentageTop5 = Float(nbTop5) / nbCourses * 100 %>
-        <%= pourcentageTop5.to_i %> %  
-      </td>  
-    </tbody>
-    <tbody>
-        <td>Top10</td>
-      <td>
-        <% nbTop10 = Resultat.pilote_courant(pilote.id).compte_top10 %>
-        <%= nbTop10 %> 
-      </td>
-      <td>
-        <% pourcentageTop10 = Float(nbTop10) / nbCourses * 100 %>
-        <%= pourcentageTop10.to_i %> %  
-      </td> 
-    </tbody>
-    </table>
-
- 
-
-  <% end %>
+<% end %>
 
 </div>
 

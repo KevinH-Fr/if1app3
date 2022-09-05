@@ -3,14 +3,17 @@ import "controllers"
 
 //import "@hotwired/turbo-rails"
 import { Turbo } from "@hotwired/turbo-rails"
+
 Turbo.session.drive = false
+
 
 require("@rails/activestorage").start()
 
 
+//= require jquery_ujs
 
 //= require jquery
-//= require jquery_ujs
+
 //= require Chart.min
 
 
