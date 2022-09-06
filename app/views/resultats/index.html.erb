@@ -62,7 +62,8 @@
                 <td>  
                     <% idPilote = res.pilote_id %> 
                     <% nomPilote = Pilote.find(idPilote).nom %> 
-                    <%= nomPilote %>
+                     <%= link_to nomPilote, pilote_path(idPilote) %>
+                
                 </td> 
                 <td> 
                   <% idEcurie = res.ecurie %>  

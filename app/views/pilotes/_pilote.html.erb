@@ -52,20 +52,6 @@
 
      <%= render "charts" %> 
       <br>
-    
-
-      <h5> Moyennes</h5> 
-      courses | nombre : <%= nbCourses %> <br> <br>
-      points | moyenne : <%= scoreMoyen = Resultat.score_course_moyen(pilote.id) %> <br>
-      position course | moyenne : <%= posCourseMoyen = Resultat.pos_course_moyen(pilote.id) %> <br>
-      position qualif | moyenne : <%= posQualifeMoyen = Resultat.pos_qualif_moyen(pilote.id) %> <br>
-      diff qualif course | moyenne :  <%= diffQualifCourseMoyen = posCourseMoyen - posQualifeMoyen  %> <br> <br>
-      <%# negatif places gagnées, positif places perdues%>
-
-      meilleur tour | nombre : <%= Resultat.with_mt.nb_pilote(pilote.id) %> <br>
-      pilote du jour | nombre : <%= Resultat.with_dotd.nb_pilote(pilote.id) %> <br>
-      DNF | nombre : <%= Resultat.with_dnf.nb_pilote(pilote.id) %> <br>
-      DNS | nombre : <%= Resultat.with_dns.nb_pilote(pilote.id) %> <br> <br>
 
         <table class="table">
         <thead class="table-dark">

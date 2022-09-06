@@ -53,13 +53,49 @@
 <% @data1 =  Resultat.joins(:event).where(pilote_id: @piloteId).pluck(:score).map!(&:to_i)  %> 
 
 
+<% nbCourses = Resultat.nb_courses(@piloteId)  %>
+<% scoreMoyen = Resultat.score_course_moyen(@piloteId) %> 
+<% posCourseMoyen = number_with_precision(Resultat.pos_course_moyen(@piloteId), precision: 2) %>
+<% posQualifMoyen = number_with_precision(Resultat.pos_qualif_moyen(@piloteId), precision: 2) %>
+
+<% if posQualifMoyen.length < 2 %> <%# si retourne active record sans value, length tres long, sinon length 2 max%>
+  <% posQualifMoyen = Resultat.pos_qualif_moyen(@piloteId) %> 
+<% else %>
+  <% posQualifMoyen = 20 %> <%# 20 par defaut %>
+<% end %>
+
+<% posCourseMoyen  %>
+<% posQualifMoyen  %> 
+
+<% diffQualifCourseMoyen = posQualifMoyen - Float(posCourseMoyen)   %> 
+
+<% nbMt = Resultat.with_mt.nb_pilote(@piloteId ) %> 
+<% nbDotd = Resultat.with_dotd.nb_pilote(@piloteId ) %> 
+<% nbDnf = Resultat.with_dnf.nb_pilote(@piloteId ) %> 
+<% nbDns = Resultat.with_dns.nb_pilote(@piloteId ) %> 
+
+    <% piloteEcurie = Pilote.find(@piloteId).ecurie %> 
+    <% @couleurEcurie = Equipe.find(piloteEcurie).couleurRgb %> 
+    <% @couleurEcurie %> 
+
+    <% @data2 = [nbCourses, scoreMoyen, posCourseMoyen.to_i, posQualifMoyen.to_i, diffQualifCourseMoyen.to_i, nbMt, nbDotd, nbDnf, nbDns] %> 
 
     <script>
    
-    var couleurVictoire =  'rgb(233, 222, 61)';
-    var couleurPodium = 'rgb(205, 127, 50)';
-    var couleurTop5 =  'rgb(54, 162, 235)';
-    var couleurTop10 =  'rgb(82, 189, 93)';
+      var couleurVictoire =  'rgb(233, 222, 61)';
+      var couleurPodium = 'rgb(205, 127, 50)';
+      var couleurTop5 =  'rgb(54, 162, 235)';
+      var couleurTop10 =  'rgb(82, 189, 93)';
+
+      var couleurNbCourse =  'rgb(21, 67, 96)';  
+      var couleurPoints = 'rgb(241, 196, 15)';
+      var couleurCourse =  'rgb(54, 162, 235)';
+      var couleurQualif =  'rgb(195, 155, 211)';
+      var couleurDiff =  'rgb(82, 189, 93)';
+      var couleurMt = 'rgb(108, 52, 131)';
+      var couleurDotd =  'rgb(54, 162, 235)';
+      var couleurDnf =  'rgb(203, 67, 53)';
+      var couleurDns =  'rgb(236, 112, 99)';
 
 // CHART donut
     const data = {
@@ -107,7 +143,7 @@
 var labels = <%= @labels %>;
 var labels = <%= @labels %>;
 var data1 = <%= @data1 %>;
-var data2 = ['1', '5'];
+
 
 // CHART LINE
     const dataLine = {
@@ -115,21 +151,17 @@ var data2 = ['1', '5'];
       datasets: [{
         label: 'score',
         data:  data1,
-        fill: true,
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        backgroundColor: [
-          'rgba(0, 0, 100, 0.2)'
-        ],
-        borderColor: [
-          'rgba(0, 0, 100, 1)'
-        ],
+        fill: false,
+        backgroundColor: "<%= @couleurEcurie %>",
+        borderColor: "<%= @couleurEcurie %>",
+
         borderWidth: 4
       }]
     };
 
 
 
-        let delayed;
+    let delayed;
 
     const configLine = {
       type: 'line',
@@ -200,31 +232,42 @@ var data2 = ['1', '5'];
     );
 
 
-
-
 // CHART BAR
     const dataBar = {
       labels: ['courses (nb)','points (moy)','pos. course (moy)','pos. qualif (moy)','diff. qualif course (moy)','MT (nb)', 'DOTD (nb)', 'DNF (nb)', 'DNS (nb)'],
       datasets: [{
-        label: 'score',
-        data:  ['1', '5'],
+      
+        data: <%= @data2 %>,
         fill: true,
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        backgroundColor: 'rgba(23, 32, 42, 0.2)',
         backgroundColor: [
-          'rgba(0, 0, 100, 0.2)'
+          couleurNbCourse,
+          couleurPoints,
+          couleurCourse,
+          couleurQualif,
+          couleurDiff,
+          couleurMt,
+          couleurDotd,
+          couleurDnf,
+          couleurDns 
         ],
         borderColor: [
           'rgba(0, 0, 100, 1)'
         ],
-        borderWidth: 4
+        borderWidth: 3
       }]
     };
-
 
     const configBar = {
       type: 'bar',
       data: dataBar,
       options: {
+
+        plugins: {
+            legend: {
+                display: false
+            },
+        },
         aspectRatio: 1,
 
         animation: {
@@ -239,7 +282,7 @@ var data2 = ['1', '5'];
                     return delay;
                 },
             },
-           
+
             borderColor:"#308af3",
            /* pointBackgroundColor: "#308af3",*/
             pointBorderWidth: 10,
@@ -247,39 +290,6 @@ var data2 = ['1', '5'];
             pointHoverBorderWidth: 20,
             lineTension: 0.4,
 
-            scales: {
-              y: {
-                ticks: {
-                  font: {
-                    size: 16
-                  },     
-                },
-              beginAtZero: true,
-                title: {
-                  display: true,
-                  text: 'Points',
-                  font: {
-                    size: 18
-                  },
-                }
-              },
-              x: {
-                ticks: {
-                  font: {
-                    size: 16
-                  },  
-                   /* callback: function(value, index, ticks) {
-                        return 'GP ' + value ;*/
-                },
-                title: {
-                  display: true,
-                  text: 'GP',
-                  font: {
-                    size: 18
-                  },
-                }
-              },
-            }
           }
       };
 

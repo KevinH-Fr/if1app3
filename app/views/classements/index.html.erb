@@ -59,7 +59,13 @@
         <tr>
         <% @classements.order(:position).limit(20).each do | classement | %>
             <td class="col_centree">  <%= classement.position %></td>
-            <td> <%= Pilote.find(classement.pilote_id).nom %>  </td>
+            
+            <td> 
+              <% idPilote = classement.pilote_id %>  
+              <% nomPilote = Pilote.find(classement.pilote_id).nom %>  
+              <%= link_to nomPilote, pilote_path(idPilote) %>
+            </td>
+            
              <td> 
                   <% idEcurie = Pilote.find(classement.pilote_id).ecurie %>  
                   <% nomEcurie = Equipe.find(idEcurie).nom %> 
