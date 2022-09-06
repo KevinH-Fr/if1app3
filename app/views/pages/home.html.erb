@@ -5,7 +5,7 @@
     <%= render "home/accueil" %>
 
     Hello <strong> <%= current_user.email %> </strong> ! <br/> <br>
-    <div> Vous êtes connecté en tant que <strong><%= current_user.role %> </strong>. </div>
+    <div> Vous êtes connecté(e) en tant que <strong><%= current_user.role %> </strong>. </div>
 
     <% if Pilote.where(user_id: current_user.id).first.present? %>
       <div> Votre compte est associé au pilote :    
