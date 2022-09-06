@@ -49,7 +49,10 @@
 <% @nbTop10 = Resultat.pilote_courant(@piloteId).compte_top10 %>
 
 <% @data = [@nbVictoire, @nbPodium, @nbTop5, @nbTop10] %>
-<% @labels = Resultat.joins(:event).where(pilote_id: @piloteId).pluck(:numero)  %> 
+
+<% @labels = Resultat.joins(:event).where(pilote_id: @piloteId).pluck(:numero) %> 
+<% @labels = @labels.sort { |a, b| b <=> a }.reverse %>
+
 <% @data1 =  Resultat.joins(:event).where(pilote_id: @piloteId).pluck(:score).map!(&:to_i)  %> 
 
 
