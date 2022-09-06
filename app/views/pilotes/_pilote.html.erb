@@ -1,11 +1,16 @@
 <div id="<%= dom_id pilote %>">
   <p>
     <strong>Nom:</strong>
-    <%= pilote.nom %>
+     <strong style="font-size: x-large">   <%= pilote.nom %> </strong>
   </p>
   <p>
     <strong>Statut:</strong>
-    <%= pilote.statut %>
+    <% statutPilote = pilote.statut %>
+    <% if statutPilote == "actif" %>
+       <strong style="color: green">  <%= pilote.statut %> </strong>
+    <% else %>
+        <strong style="color: red">  <%= pilote.statut %> </strong>
+    <% end %>
   </p>
    <% pilote.ecurie %>
   

@@ -8,11 +8,12 @@
     <div>
 
      <% if current_user.admin? %>
+
        <table> 
          <tr>
-            <td>  <%= link_to "", edit_pilote_path(@pilote), class:"fa-regular fa-pen-to-square btn btn-primary" %>  </td>
-            <td> | </td>
-            <td> <%= button_to "", @pilote, class:"fa-solid fa-trash-can btn btn-danger", method: :delete %>  </td>
+            <td style="padding-right: 5px;">  <%= link_to "", edit_pilote_path(@pilote), class:"fa-regular fa-pen-to-square btn btn-primary" %>  </td>
+            <td style="padding: 5px;"> <%= button_to "", @pilote, class:"fa-solid fa-trash-can btn btn-danger", method: :delete %>  </td>
+         
          </tr>
        </table>
      <% end %>

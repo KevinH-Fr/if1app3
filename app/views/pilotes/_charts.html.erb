@@ -80,6 +80,8 @@
     <% piloteEcurie = Pilote.find(@piloteId).ecurie %> 
     <% @couleurEcurie = Equipe.find(piloteEcurie).couleurRgb %> 
     <% @couleurEcurie %> 
+    <% @couleurEcurieOpacity = @couleurEcurie[0...-1] %>
+    <% @couleurEcurieOpacity = @couleurEcurieOpacity + ", 0.3)"  %>
 
     <% @data2 = [nbCourses, scoreMoyen, posCourseMoyen.to_i, posQualifMoyen.to_i, diffQualifCourseMoyen.to_i, nbMt, nbDotd, nbDnf, nbDns] %> 
 
@@ -89,6 +91,11 @@
       var couleurPodium = 'rgb(205, 127, 50)';
       var couleurTop5 =  'rgb(54, 162, 235)';
       var couleurTop10 =  'rgb(82, 189, 93)';
+
+      var couleurVictoireOpacity =  'rgb(233, 222, 61, 0.5)';
+      var couleurPodiumOpacity = 'rgb(205, 127, 50, 0.5)';
+      var couleurTop5Opacity =  'rgb(54, 162, 235, 0.5)';
+      var couleurTop10Opacity =  'rgb(82, 189, 93, 0.5)';
 
       var couleurNbCourse =  'rgb(21, 67, 96)';  
       var couleurPoints = 'rgb(241, 196, 15)';
@@ -100,6 +107,16 @@
       var couleurDnf =  'rgb(203, 67, 53)';
       var couleurDns =  'rgb(236, 112, 99)';
 
+      var couleurNbCourseOpacity =  'rgb(21, 67, 96, 0.6)';  
+      var couleurPointsOpacity = 'rgb(241, 196, 15, 0.6)';
+      var couleurCourseOpacity =  'rgb(54, 162, 235, 0.6)';
+      var couleurQualifOpacity =  'rgb(195, 155, 211, 0.6)';
+      var couleurDiffOpacity =  'rgb(82, 189, 93, 0.6)';
+      var couleurMtOpacity = 'rgb(108, 52, 131, 0.6)';
+      var couleurDotdOpacity =  'rgb(54, 162, 235, 0.6)';
+      var couleurDnfOpacity =  'rgb(203, 67, 53, 0.6)';
+      var couleurDnsOpacity =  'rgb(236, 112, 99, 0.6)';
+
 // CHART donut
     const data = {
       labels: ['Victoire', 'Podium', 'Top5', 'Top10'],
@@ -107,12 +124,12 @@
       
         data: <%= @data.to_json.html_safe %>,
         backgroundColor: [
+          couleurVictoireOpacity, couleurPodiumOpacity, couleurTop5Opacity, couleurTop10Opacity
+        ],
+        borderColor: [
           couleurVictoire, couleurPodium, couleurTop5, couleurTop10
         ],
        
-        borderColor: [
-          'rgba(0, 0, 0, 1)'
-        ],
         hoverOffset: 40, 
         borderWidth: 2
       }]
@@ -154,15 +171,12 @@ var data1 = <%= @data1 %>;
       datasets: [{
         label: 'score',
         data:  data1,
-        fill: false,
-        backgroundColor: "<%= @couleurEcurie %>",
+        fill: true,
         borderColor: "<%= @couleurEcurie %>",
-
+        backgroundColor: "<%= @couleurEcurieOpacity %>",
         borderWidth: 4
       }]
     };
-
-
 
     let delayed;
 
@@ -171,7 +185,6 @@ var data1 = <%= @data1 %>;
       data: dataLine,
       options: {
         aspectRatio: 1,
-
         animation: {
                 onComplete: () => {
                     delayed = true;
@@ -184,7 +197,7 @@ var data1 = <%= @data1 %>;
                     return delay;
                 },
             },
-           
+          
             borderColor:"#308af3",
            /* pointBackgroundColor: "#308af3",*/
             pointBorderWidth: 10,
@@ -243,6 +256,17 @@ var data1 = <%= @data1 %>;
         fill: true,
         backgroundColor: 'rgba(23, 32, 42, 0.2)',
         backgroundColor: [
+          couleurNbCourseOpacity,
+          couleurPointsOpacity,
+          couleurCourseOpacity,
+          couleurQualifOpacity,
+          couleurDiffOpacity,
+          couleurMtOpacity,
+          couleurDotdOpacity,
+          couleurDnfOpacity,
+          couleurDnsOpacity 
+        ],
+        borderColor: [
           couleurNbCourse,
           couleurPoints,
           couleurCourse,
@@ -252,9 +276,6 @@ var data1 = <%= @data1 %>;
           couleurDotd,
           couleurDnf,
           couleurDns 
-        ],
-        borderColor: [
-          'rgba(0, 0, 100, 1)'
         ],
         borderWidth: 3
       }]
