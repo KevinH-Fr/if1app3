@@ -36,11 +36,13 @@
     <%= Division.find(divisionLiee).nom %>
   </p>
 
+
+<% if current_user.admin? %>
    <p>
     <strong>User lié:</strong>
      <%= User.find(pilote.user_id).full_name if pilote.user_id.present? %>
   </p>
-
+<% end %>
 
 
   <hr>  
