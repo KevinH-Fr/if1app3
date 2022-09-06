@@ -12,7 +12,7 @@
       }
       .chartCard {
         width: 100%;
-        height: 50%;
+        height: 5%;
        /* background: rgba(255, 26, 104, 0.2);*/
        /* display: flex; */
         align-items: center;
@@ -46,11 +46,8 @@
 <% @nbTop10 = Resultat.pilote_courant(@piloteId).compte_top10 %>
 
 <% @data = [@nbVictoire, @nbPodium, @nbTop5, @nbTop10] %>
-
-<%= @labels = Resultat.joins(:event).where(pilote_id: @piloteId).pluck(:numero)  %> 
-
-<%= @data1 =  Resultat.joins(:event).where(pilote_id: @piloteId).pluck(:score).map!(&:to_i)  %> 
-
+<% @labels = Resultat.joins(:event).where(pilote_id: @piloteId).pluck(:numero)  %> 
+<% @data1 =  Resultat.joins(:event).where(pilote_id: @piloteId).pluck(:score).map!(&:to_i)  %> 
 
     <script>
    
@@ -59,7 +56,7 @@
     var couleurTop5 =  'rgb(54, 162, 235)';
     var couleurTop10 =  'rgb(82, 189, 93)';
 
-   // bar 
+// CHART donut
     const data = {
       labels: ['Victoire', 'Podium', 'Top5', 'Top10'],
       datasets: [{
@@ -102,11 +99,6 @@
       config
     );
 
-
-
-
-
-
 var labels = <%= @labels %>;
 var data1 = <%= @data1 %>;
 
@@ -116,23 +108,28 @@ var data1 = <%= @data1 %>;
       datasets: [{
         label: 'score',
         data:  data1,
+        fill: true,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
         backgroundColor: [
-          'rgba(0, 0, 0, 0.2)'
+          'rgba(0, 0, 100, 0.2)'
         ],
         borderColor: [
-          'rgba(0, 0, 0, 1)'
+          'rgba(0, 0, 100, 1)'
         ],
         borderWidth: 4
       }]
     };
 
-    // config 
+
+
+// CHART LINE
         let delayed;
 
     const configLine = {
       type: 'line',
       data: dataLine,
       options: {
+        aspectRatio: 1,
 
         animation: {
                 onComplete: () => {
@@ -151,7 +148,7 @@ var data1 = <%= @data1 %>;
            /* pointBackgroundColor: "#308af3",*/
             pointBorderWidth: 10,
            /* pointHoverBackgroundColor: "#fff", */
-            pointHoverBorderWidth: 8,
+            pointHoverBorderWidth: 20,
             lineTension: 0.4,
 
             scales: {

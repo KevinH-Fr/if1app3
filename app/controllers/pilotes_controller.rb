@@ -42,6 +42,7 @@ class PilotesController < ApplicationController
     if params[:div].present?
       div = Pilote.params[:div]
       @pilotes = Pilote.all.where(division_id: div)
+
     else
       @pilotes = Pilote.all
     end

@@ -15,6 +15,10 @@ class Resultat < ApplicationRecord
     validates :event_id, presence: true
 
     scope :with_mt, -> { where("(mt) = true") }
+    scope :with_dotd, -> { where("(dotd) = true") }
+
+    scope :with_dnf, -> { where("(dnf) = true") }
+    scope :with_dns, -> { where("(dns) = true") }
 
 scope :division_courant, -> (division_courant) { joins(:event).where("division_id = ?", division_courant)}
 scope :saison_courant, -> (saison_courant) { joins(:event).where("saison_id = ?", saison_courant)}
@@ -45,6 +49,13 @@ scope :compte_top5, -> {where("(course) <= 5").count}
 scope :compte_top10, -> {where("(course) <= 10").count}
 
 scope :nb_courses, -> (pilote_courant) { where("pilote_id = ?", pilote_courant).count}
+
+scope :pos_course_moyen, -> (pilote_courant) { where("pilote_id = ?", pilote_courant).average(:course)}
+scope :score_course_moyen, -> (pilote_courant) { where("pilote_id = ?", pilote_courant).average(:score)}
+
+scope :pos_qualif_moyen, -> (pilote_courant) { where("pilote_id = ?", pilote_courant).average(:qualification)}
+
+scope :nb_pilote, -> (pilote_courant) { where("pilote_id = ?", pilote_courant).count}
 
 scope :order_score_positions, 
       -> {order(score: :DESC ) }
