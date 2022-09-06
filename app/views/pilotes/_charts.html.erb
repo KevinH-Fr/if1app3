@@ -38,44 +38,59 @@
       </div>
     </div>
 
+<% @piloteId = params[:id] %>
+
+<% @nbVictoire = Resultat.pilote_courant(@piloteId).compte_p1 %>
+<% @nbPodium = Resultat.pilote_courant(@piloteId).compte_podium %>
+<% @nbTop5 = Resultat.pilote_courant(@piloteId).compte_top5 %>
+<% @nbTop10 = Resultat.pilote_courant(@piloteId).compte_top10 %>
+
+<% @data = [@nbVictoire, @nbPodium, @nbTop5, @nbTop10] %>
+
+<%= @labels = Resultat.joins(:event).where(pilote_id: @piloteId).pluck(:numero)  %> 
+
+<%= @data1 =  Resultat.joins(:event).where(pilote_id: @piloteId).pluck(:score).map!(&:to_i)  %> 
+
+
     <script>
    
+    var couleurVictoire =  'rgb(233, 222, 61)';
+    var couleurPodium = 'rgb(205, 127, 50)';
+    var couleurTop5 =  'rgb(54, 162, 235)';
+    var couleurTop10 =  'rgb(82, 189, 93)';
+
    // bar 
     const data = {
-      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      labels: ['Victoire', 'Podium', 'Top5', 'Top10'],
       datasets: [{
-        label: 'Weekly Sales',
-        data: [18, 12, 6, 9, 12, 3, 9],
+      
+        data: <%= @data.to_json.html_safe %>,
         backgroundColor: [
-          'rgba(255, 26, 104, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)',
-          'rgba(0, 0, 0, 0.2)'
+          couleurVictoire, couleurPodium, couleurTop5, couleurTop10
         ],
+       
         borderColor: [
-          'rgba(255, 26, 104, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)',
           'rgba(0, 0, 0, 1)'
         ],
-        borderWidth: 1
+        hoverOffset: 40, 
+        borderWidth: 2
       }]
     };
 
     // config 
     const config = {
-      type: 'bar',
+      type: 'doughnut',
+     
       data,
       options: {
+          animation:{
+            animateRotate: true,
+            duration: 5000
+         },
         scales: {
           y: {
-            beginAtZero: true
+            beginAtZero: true,
+            display: false
           }
         }
       }
@@ -88,34 +103,92 @@
     );
 
 
+
+
+
+
+var labels = <%= @labels %>;
+var data1 = <%= @data1 %>;
+
     // line
     const dataLine = {
-      labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+      labels: labels,
       datasets: [{
-        label: 'line',
-        data: [18, 12, 6, 9, 12, 3, 9],
+        label: 'score',
+        data:  data1,
         backgroundColor: [
           'rgba(0, 0, 0, 0.2)'
         ],
         borderColor: [
           'rgba(0, 0, 0, 1)'
         ],
-        borderWidth: 1
+        borderWidth: 4
       }]
     };
 
     // config 
+        let delayed;
+
     const configLine = {
       type: 'line',
       data: dataLine,
       options: {
-        scales: {
-          y: {
-            beginAtZero: true
+
+        animation: {
+                onComplete: () => {
+                    delayed = true;
+                },
+                delay: (context) => {
+                    let delay = 0;
+                    if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                    delay = context.dataIndex * 1500  + context.datasetIndex * 100;
+                    }
+                    return delay;
+                },
+            },
+           
+            borderColor:"#308af3",
+           /* pointBackgroundColor: "#308af3",*/
+            pointBorderWidth: 10,
+           /* pointHoverBackgroundColor: "#fff", */
+            pointHoverBorderWidth: 8,
+            lineTension: 0.4,
+
+            scales: {
+              y: {
+                ticks: {
+                  font: {
+                    size: 16
+                  },     
+                },
+              beginAtZero: true,
+                title: {
+                  display: true,
+                  text: 'Points',
+                  font: {
+                    size: 18
+                  },
+                }
+              },
+              x: {
+                ticks: {
+                  font: {
+                    size: 16
+                  },  
+                   /* callback: function(value, index, ticks) {
+                        return 'GP ' + value ;*/
+                },
+                title: {
+                  display: true,
+                  text: 'GP',
+                  font: {
+                    size: 18
+                  },
+                }
+              },
+            }
           }
-        }
-      }
-    };
+      };
 
         // render init block
     const myChartLine = new Chart(
