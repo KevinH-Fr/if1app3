@@ -137,7 +137,7 @@
       }
     };
 
-        // render init block
+
     const myChart = new Chart(
       document.getElementById('myChart'),
       config
@@ -179,7 +179,7 @@ var data1 = <%= @data1 %>;
                 delay: (context) => {
                     let delay = 0;
                     if (context.type === 'data' && context.mode === 'default' && !delayed) {
-                    delay = context.dataIndex * 1500  + context.datasetIndex * 100;
+                    delay = context.dataIndex * 2500  + context.datasetIndex * 100;
                     }
                     return delay;
                 },
@@ -228,7 +228,6 @@ var data1 = <%= @data1 %>;
           }
       };
 
-        // render init block
     const myChartLine = new Chart(
       document.getElementById('myChartLine'),
       configLine
@@ -280,7 +279,7 @@ var data1 = <%= @data1 %>;
                 delay: (context) => {
                     let delay = 0;
                     if (context.type === 'data' && context.mode === 'default' && !delayed) {
-                    delay = context.dataIndex * 1500  + context.datasetIndex * 100;
+                    delay = context.dataIndex * 2000  + context.datasetIndex * 10;
                     }
                     return delay;
                 },
