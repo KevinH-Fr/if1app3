@@ -37,7 +37,6 @@ class Pari < ApplicationRecord
     end
 
 
-
     validate :verif_montant
 
     def verif_montant

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_02_222955) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_07_134705) do
   create_table "active_analytics_views_per_days", force: :cascade do |t|
     t.string "site", null: false
     t.string "page", null: false
@@ -176,6 +176,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_02_222955) do
     t.boolean "resultat"
     t.decimal "solde"
     t.integer "paritype"
+    t.boolean "manuel"
     t.index ["coureur_id"], name: "index_paris_on_coureur_id"
     t.index ["event_id"], name: "index_paris_on_event_id"
     t.index ["parieur_id"], name: "index_paris_on_parieur_id"

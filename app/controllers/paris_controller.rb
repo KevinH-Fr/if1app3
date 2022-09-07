@@ -136,80 +136,47 @@ class ParisController < ApplicationController
 
     @parisEvent.all.each do |pari|
 
+      # 07/09 ajouter exception pour pari manuel à ne pas modifier dans le call de calculs auto
+
       coureurId = pari.coureur.id
       typePari = pari.paritype
+      pariManuel = pari.manuel
 
-      if Resultat.where(event_id: @eventId, pilote_id: pari.coureur).present?
-        resultatCoureur = Resultat.where(event_id: @eventId, pilote_id: pari.coureur.id).first.course
-        resultatQualif = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.qualification
-        statutDnsCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.dns
-
-        if statutDnsCoureur == true 
-          resultatCoureur = 20
-          resultatQualif = 20
-        end
-
-
+      if pariManuel == true 
         pariMontant = pari.montant
-        pariCote = pari.cote
+        pari.update(resultat: true)
+        pari.update(solde: pariMontant)
+      else
 
-        # tester si pari vrai ou faux 
-          if typePari == "victoire" && resultatCoureur == 1 || typePari == "podium" && resultatCoureur <= 3 || typePari == "top10" && resultatCoureur <= 10 || typePari == "pole" && resultatQualif == 1
-            pari.update(resultat: true)
-            pari.update(solde: pariMontant * pariCote - pariMontant )
-          else
+        if Resultat.where(event_id: @eventId, pilote_id: pari.coureur).present?
+            resultatCoureur = Resultat.where(event_id: @eventId, pilote_id: pari.coureur.id).first.course
+            resultatQualif = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.qualification
+            statutDnsCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.dns
 
-            if statutDnsCoureur == true   # rembourser mise si dns
-              pari.update(resultat: true)
-              pari.update(solde: pariMontant )
-            else
-              pari.update(resultat: false)
-              pari.update(solde: - pariMontant )
+            if statutDnsCoureur == true 
+              resultatCoureur = 20
+              resultatQualif = 20
             end
-          end
 
-        end 
-        
-        # si pas de resultat trouvé, alors remboursement 
-      #  pari.update(resultat: false)
-      #  pari.update(solde: 2222)
-      #end
+            pariMontant = pari.montant
+            pariCote = pari.cote
 
-     #   if resultatCoureur.nil? # exception resultat pilote sans val qualif et course
-     #     resultatCoureur = 20
-     #     resultatQualif = 20
-     #   end
-     
-           # si pas de resultat c'est que pilote n'a pas partipé, donc remboursement
-           # donc si pas de resultat rentré pour le pilote coureur, alors remboursement auto
-
-    #    resultatCoureur = 20
-
-      # pari.update(resultat: true)
-     # else
-     #   pari.update(resultat: false)
-     # end
-
-     # pariMontant = pari.montant
-     # pariCote = pari.cote
-
-      #tester paris 2308:
-
-   #   if typePari == "victoire" && resultatCoureur == 1 || typePari == "podium" && resultatCoureur <= 3 || typePari == "top10" && resultatCoureur <= 10 || typePari == "pole" && resultatQualif == 1
-
-      #    pari.update(resultat: true)
-      #    pari.update(solde: pariMontant * pariCote - pariMontant )
-     #   else
-        #  if statutDnsCoureur == true   # rembourser mise si dns
-      #      pari.update(resultat: true)
-        #    pari.update(solde: pariMontant )
-        #  else
-        #    pari.update(resultat: false)
-        #    pari.update(solde: - pariMontant )
-        #  end
-    #    end
-
-    end  
+            # tester si pari vrai ou faux 
+              if typePari == "victoire" && resultatCoureur == 1 || typePari == "podium" && resultatCoureur <= 3 || typePari == "top10" && resultatCoureur <= 10 || typePari == "pole" && resultatQualif == 1
+                pari.update(resultat: true)
+                pari.update(solde: pariMontant * pariCote - pariMontant )
+              else
+                if statutDnsCoureur == true   # rembourser mise si dns
+                  pari.update(resultat: true)
+                  pari.update(solde: pariMontant )
+                else
+                  pari.update(resultat: false)
+                  pari.update(solde: - pariMontant )
+                end
+              end
+          end 
+        end  
+      end
     
     redirect_to paris_url(saisonId: @saisonId, eventId: @eventId, divisionId: @divisionId),
                notice: "les résultats des paris de l'event courant ont bien été mis à jour"
@@ -231,7 +198,7 @@ class ParisController < ApplicationController
 
     def pari_params
       
-      params.fetch(:pari, {}).permit(:montant, :cote, :resultat, :solde, :event_id, :parieur_id, :coureur_id, :paritype)
+      params.fetch(:pari, {}).permit(:montant, :cote, :resultat, :solde, :event_id, :parieur_id, :coureur_id, :paritype, :manuel)
       
 
     end

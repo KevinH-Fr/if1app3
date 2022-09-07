@@ -13,6 +13,11 @@
   <% end %>
 
 
+        <% if current_user.id == 1 %>
+          <%= form.label :manuel, style: "display: block" %>
+          <%= form.check_box :manuel %>
+        <% end %>
+
    <div>
       <% form.label :event, style: "display: block" %>
       <%#= form.select(:event_id, options_from_collection_for_select(
@@ -23,9 +28,13 @@
 
     <div>   
      <% @parieurId = Pilote.where(user_id: current_user.id).first.id %>
+
+     
         <%#= form.label :parieur, style: "display: block" %>
         <%#= form.select(:parieur_id, options_from_collection_for_select(  @parieur,'id', 'nom', 
                     :selected => @parieur),  :include_blank => true) %>
+
+
        <%= form.hidden_field(:parieur_id, value: @parieurId) %>        
     </div>
 
@@ -33,6 +42,8 @@
     <%= form.button "Validate", formaction: new_pari_path, 
         formmethod: :get, data: {turbo_frame: :montant_field, form_element_target: "submitbtn"} %>
   </div>
+
+
   
   <%= turbo_frame_tag :montant_field do %>
     <div>
@@ -106,6 +117,9 @@
               <%# if numGp_prec => 1 %>
                 <%# eventId_prec = Event.find_by(saison_id: saisonId, division_id: divisionId, numero: numGp_prec).id %>
               <%# end %>
+
+              <% pariManuel = form.object.manuel %>
+
            
             <% typepari = form.object.paritype %>
             <% @montantPari = form.object.montant %>
@@ -121,13 +135,17 @@
               <% if typepari == "pole" %>
                 <% @valCote = Cote.find_by(event_id: eventId, pilote_id: piloteId).cotePole %>
               <% end %>
-                <div> cote retenue | <strong>  <%= number_with_precision(@valCote, precision: 2) %> </strong>  </div>
-                <div> gains possibles | <strong>  <%= number_with_precision(@valCote * form.object.montant, precision: 0) %> </strong>  </div>
+
+                <div> cote retenue : <strong>  <%= number_with_precision(@valCote, precision: 2) %> </strong>  </div>
+                <div> gains possibles : <strong>  <%= number_with_precision(@valCote * form.object.montant, precision: 0) %> </strong>  </div>
                <%# <div> montant parié  | <strong>   form.object.montant  </strong>  </div> %>
 
                 
           <% end %>
         <% end %>
+
+
+
         <%# valCote = valCote %> 
         <% form.label :cote, style: "display: block" %>
         <%= form.hidden_field :cote, value: @valCote %>
