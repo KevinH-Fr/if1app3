@@ -48,12 +48,18 @@ class Pari < ApplicationRecord
 
       soldeParieurAvant = Pari.saison_courant(saisonId).division_courant(divisionId).numero_until_courant(eventNum).pilote_courant(self.parieur_id).sum(:solde)
 
+      if Pilote.find(self.parieur_id).Gainrivaliteprec == true 
+         montantBase = 2000 
+      else
+         montantBase = 1000
+      end
+
       if soldeParieurAvant.present?
-        if 1000 + soldeParieurAvant - montant < 0 
+        if montantBase + soldeParieurAvant - montant < 0 
           errors.add(:montant, "insuffisant, impossible de miser plus que votre solde de points | Solde : #{soldeParieurAvant + montant}" ) 
         end
       else
-        if 1000 - montant < 0 
+        if montantBase - montant < 0 
           errors.add(:montant, "insuffisant, impossible de miser plus que votre solde de points."  "#{self.parieur_id} | #{soldeParieurAvant}" ) 
         end
       end

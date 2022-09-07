@@ -45,7 +45,14 @@
                 <% idEcurie = Pilote.find(pari.parieur_id).ecurie %>  
                 <%= image_tag Equipe.find(idEcurie).ecusson, style: "width: 50px; display: block", class: "img-fluid rounded" %>
               </td>
-              <td> <%= number_with_precision(1000 + pari.total, precision: 2 ) %> </td>
+              <td>
+                <% if Pilote.find(pari.parieur_id).Gainrivaliteprec == true %> 
+                  <% montantBase = 2000 %>
+                <% else %>
+                  <% montantBase = 1000 %>
+                <% end %>
+                  <%= number_with_precision(montantBase + pari.total, precision: 2 ) %> 
+              </td>
               
             </tr>
           <% end %>

@@ -35,7 +35,14 @@
                         </div>
               </td> 
                
-              <td class="cols_pos_score_wide"> <%= number_with_precision(1000 + pari.total, precision: 2) %> </td>
+              <td class="cols_pos_score_wide">
+                <% if Pilote.find(idPilote).Gainrivaliteprec == true %> 
+                    <% montantBase = 2000 %>
+                  <% else %>
+                    <% montantBase = 1000 %>
+                  <% end %>
+                 <%= number_with_precision(montantBase + pari.total, precision: 2) %> 
+              </td>
               
           
            

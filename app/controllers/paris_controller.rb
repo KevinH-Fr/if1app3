@@ -17,6 +17,8 @@ class ParisController < ApplicationController
 
       @eventsFiltres = @events.where('saison_id = :saison_id AND division_id = :division_id',
         saison_id: @saisonId, division_id: @divisionId)
+
+
     end
 
     if params[:eventId]
@@ -40,6 +42,7 @@ class ParisController < ApplicationController
       end
     end
 
+
     else
       
     end
@@ -47,6 +50,7 @@ class ParisController < ApplicationController
   end
 
   def show
+    
   end
 
   def new
@@ -69,6 +73,7 @@ class ParisController < ApplicationController
     @coureur = Pilote.all
     @parieur = Pilote.statut_actif.division_non_courant(@divisionId).all
     
+
   end
 
   def create
@@ -111,7 +116,7 @@ class ParisController < ApplicationController
   def destroy
 
     @pari.destroy
-    eventId = params[:id]
+    eventId = session[:event]
     divisionId = Event.find(eventId).division_id
     saisonId = Event.find(eventId).saison_id
 
@@ -131,47 +136,43 @@ class ParisController < ApplicationController
 
     @parisEvent.all.each do |pari|
 
-      # 07/09 ajouter exception pour pari manuel à ne pas modifier dans le call de calculs auto
-
       coureurId = pari.coureur.id
       typePari = pari.paritype
-      pariManuel = pari.manuel
 
-      if pariManuel == true 
+      if Resultat.where(event_id: @eventId, pilote_id: coureurId).present?
+        resultatCoureur = Resultat.where(event_id: @eventId, pilote_id: pari.coureur.id).first.course
+        resultatQualif = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.qualification
+        statutDnsCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.dns
+
+        if statutDnsCoureur == true 
+          resultatCoureur = 20
+          resultatQualif = 20
+        end
+
+
         pariMontant = pari.montant
-        pari.update(resultat: true)
-        pari.update(solde: pariMontant)
-      else
+        pariCote = pari.cote
 
-        if Resultat.where(event_id: @eventId, pilote_id: pari.coureur).present? && pariManuel == false 
-            resultatCoureur = Resultat.where(event_id: @eventId, pilote_id: pari.coureur.id).first.course
-            resultatQualif = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.qualification
-            statutDnsCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.dns
+        # tester si pari vrai ou faux 
+          if typePari == "victoire" && resultatCoureur == 1 || typePari == "podium" && resultatCoureur <= 3 || typePari == "top10" && resultatCoureur <= 10 || typePari == "pole" && resultatQualif == 1
+            pari.update(resultat: true)
+            pari.update(solde: pariMontant * pariCote - pariMontant )
+          else
 
-            if statutDnsCoureur == true 
-              resultatCoureur = 20
-              resultatQualif = 20
+            if statutDnsCoureur == true   # rembourser mise si dns
+              pari.update(resultat: true)
+              pari.update(solde: pariMontant )
+            else
+              pari.update(resultat: false)
+              pari.update(solde: - pariMontant )
             end
+          end
 
-            pariMontant = pari.montant
-            pariCote = pari.cote
+        end 
+        
 
-            # tester si pari vrai ou faux 
-              if typePari == "victoire" && resultatCoureur == 1 || typePari == "podium" && resultatCoureur <= 3 || typePari == "top10" && resultatCoureur <= 10 || typePari == "pole" && resultatQualif == 1
-                pari.update(resultat: true)
-                pari.update(solde: pariMontant * pariCote - pariMontant )
-              else
-                if statutDnsCoureur == true   # rembourser mise si dns
-                  pari.update(resultat: true)
-                  pari.update(solde: pariMontant )
-                else
-                  pari.update(resultat: false)
-                  pari.update(solde: - pariMontant )
-                end
-              end
-          end 
-        end  
-      end
+
+    end  
     
     redirect_to paris_url(saisonId: @saisonId, eventId: @eventId, divisionId: @divisionId),
                notice: "les résultats des paris de l'event courant ont bien été mis à jour"
@@ -193,7 +194,7 @@ class ParisController < ApplicationController
 
     def pari_params
       
-      params.fetch(:pari, {}).permit(:montant, :cote, :resultat, :solde, :event_id, :parieur_id, :coureur_id, :paritype, :manuel)
+      params.fetch(:pari, {}).permit(:montant, :cote, :resultat, :solde, :event_id, :parieur_id, :coureur_id, :paritype)
       
 
     end

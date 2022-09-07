@@ -61,6 +61,7 @@
           <% if current_user.admin? %>
             <th>horaire</th>
           <% end %>
+           
           <th colspan="3">Actions</th>
         </tr>
       </thead>
@@ -103,6 +104,14 @@
                 <% horairePari_local = pari.updated_at.to_time + 7200 %>
                 <td> <%=  horairePari_local.strftime("%d/%m %H:%M") %> </td>
               <% end %>
+
+             
+               <%#= session[:event] %> 
+               <%#= Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.course %>
+               <%#= pari.paritype %>
+                <%#= pari.resultat %>
+                 <%#= pari.event_id %>
+             
              
               <td> <%= link_to '', pari, class:"fa-solid fa-eye btn btn-primary btn-sm" %>  </td>
               <% if current_user.admin? %>
