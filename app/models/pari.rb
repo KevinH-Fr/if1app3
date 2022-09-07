@@ -48,7 +48,7 @@ class Pari < ApplicationRecord
 
       soldeParieurAvant = Pari.saison_courant(saisonId).division_courant(divisionId).numero_until_courant(eventNum).pilote_courant(self.parieur_id).sum(:solde)
 
-      if Pilote.find(self.parieur_id).Gainrivaliteprec == true 
+      if Pilote.find(self.parieur_id).rivaliteprec == true 
          montantBase = 2000 
       else
          montantBase = 1000

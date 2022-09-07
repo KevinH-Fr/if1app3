@@ -16,7 +16,7 @@
         <% parieurNom = Pilote.where(user_id: current_user.id).first.nom %> 
         <% soldeParieur = Pari.where(parieur_id: parieurId).pluck('SUM(solde) AS total').first %>
 
-        <% if Pilote.find(parieurId).Gainrivaliteprec == true %> 
+        <% if Pilote.find(parieurId).rivaliteprec == true %> 
             <% montantBase = 2000 %>
         <% else %>
             <% montantBase = 1000 %>

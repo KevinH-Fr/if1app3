@@ -46,7 +46,7 @@
                 <%= image_tag Equipe.find(idEcurie).ecusson, style: "width: 50px; display: block", class: "img-fluid rounded" %>
               </td>
               <td>
-                <% if Pilote.find(pari.parieur_id).Gainrivaliteprec == true %> 
+                <% if Pilote.find(pari.parieur_id).rivaliteprec == true %> 
                   <% montantBase = 2000 %>
                 <% else %>
                   <% montantBase = 1000 %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_07_173833) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_07_191411) do
   create_table "active_analytics_views_per_days", force: :cascade do |t|
     t.string "site", null: false
     t.string "page", null: false
@@ -200,6 +200,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_07_173833) do
     t.integer "nb_p5"
     t.integer "points"
     t.boolean "Gainrivaliteprec"
+    t.boolean "rivaliteprec"
     t.index ["division_id"], name: "index_pilotes_on_division_id"
     t.index ["user_id"], name: "index_pilotes_on_user_id"
   end
