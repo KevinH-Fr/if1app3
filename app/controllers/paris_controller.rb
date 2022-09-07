@@ -143,7 +143,7 @@ class ParisController < ApplicationController
         pari.update(solde: pariMontant)
       else
 
-        if Resultat.where(event_id: @eventId, pilote_id: pari.coureur).present?
+        if Resultat.where(event_id: @eventId, pilote_id: pari.coureur).present? && pariManuel == false 
             resultatCoureur = Resultat.where(event_id: @eventId, pilote_id: pari.coureur.id).first.course
             resultatQualif = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.qualification
             statutDnsCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.dns
