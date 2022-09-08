@@ -11,7 +11,7 @@
 
         <% if current_user.admin? %>
             <%= link_to "", edit_resultat_path(@resultat), class:"fa-regular fa-pen-to-square btn btn-primary" %> |
-            <%= button_to "", @resultat, class:"fa-solid fa-trash-can btn btn-danger", method: :delete %>
+            <%= button_to "", @resultat, class:"fa-solid fa-trash-can btn btn-danger", method: :delete, :onclick => "return confirm('Sûr ?')"  %>
         <% end %>
 
     </div>

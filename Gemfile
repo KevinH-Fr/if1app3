@@ -65,4 +65,8 @@ group :test do
   gem "webdrivers"
 end
 
+group :development, :test do
+  gem 'foreman'
+end
+
 gem "devise", "~> 4.8"

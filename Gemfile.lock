@@ -139,6 +139,7 @@ GEM
     faraday_middleware (1.2.0)
       faraday (~> 1.0)
     ffi (1.15.5-x64-mingw-ucrt)
+    foreman (0.87.2)
     globalid (1.0.0)
       activesupport (>= 5.0)
     grover (1.1.1)
@@ -337,6 +338,7 @@ DEPENDENCIES
   debug
   devise (~> 4.8)
   dotenv-rails
+  foreman
   grover
   hotwire-rails
   importmap-rails
