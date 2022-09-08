@@ -3,15 +3,19 @@
     <strong>Email:</strong>
     <%= user.email %>
   </p>
-  <br/>
   <p>
     <strong>Role:</strong>
     <%= user.role %>
   </p>
-  <br/>
+
+  <p>
+   <% if Pilote.where(user_id: user.id).first.present? %>
+       <strong>Pilote associé :</strong>    
+      <%= Pilote.where(user_id: user.id).first.nom %> 
+   <% end %>
+  </p>
 
   
-   
 
 </div>
 

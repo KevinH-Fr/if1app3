@@ -11,6 +11,7 @@
         <%= link_to "", events_path, class:"fa-solid fa-arrow-rotate-left btn btn-secondary"  %>
       </div>
     <% else %>
-    <br/>   <strong>Vous n'avez pas les droits...</strong>
+     <%= render "shared/demandeconnexion" %>
+
   <% end %>
 <% end %>

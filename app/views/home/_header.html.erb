@@ -13,6 +13,12 @@
          <%#  <li class="nav-item">
       	<%= link_to 'A propos',
       		home_index_path, class:"nav-link" %> 
+
+             <li class="nav-item">
+               <% if current_user.present? %>
+                  <%= link_to 'Compte', user_path(current_user), class:"nav-link" %> 
+               <% end %>
+            </li>
       
 
          <% if user_signed_in? %>
