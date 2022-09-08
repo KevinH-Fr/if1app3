@@ -51,7 +51,8 @@
               <%= cote.position %>
             </td>
             <td>
-              <%= Pilote.find(cote.pilote_id).nom %>
+              <% nomPilote = Pilote.find(cote.pilote_id).nom %>
+              <%= link_to nomPilote, pilote_path(cote.pilote_id) %>
             </td>
              <td> 
                   <% idEcurie = Pilote.find(cote.pilote_id).ecurie %>  
