@@ -139,7 +139,6 @@ GEM
     faraday_middleware (1.2.0)
       faraday (~> 1.0)
     ffi (1.15.5-x64-mingw-ucrt)
-    foreman (0.87.2)
     globalid (1.0.0)
       activesupport (>= 5.0)
     grover (1.1.1)
@@ -176,6 +175,10 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
+    launchy (2.5.0)
+      addressable (~> 2.7)
+    letter_opener (1.8.1)
+      launchy (>= 2.2, < 3)
     loofah (2.18.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
@@ -338,12 +341,12 @@ DEPENDENCIES
   debug
   devise (~> 4.8)
   dotenv-rails
-  foreman
   grover
   hotwire-rails
   importmap-rails
   jbuilder
   kaminari
+  letter_opener
   open-weather-ruby-client
   pg (~> 1.4, >= 1.4.1)
   puma (~> 5.0)

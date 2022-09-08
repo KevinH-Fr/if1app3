@@ -40,6 +40,9 @@ gem 'open-weather-ruby-client'
 
 #gem "rails_charts"
 
+# inside Gemfile
+gem 'letter_opener', group: :development
+
 
 gem 'chart-js-rails'
 
@@ -65,8 +68,8 @@ group :test do
   gem "webdrivers"
 end
 
-group :development, :test do
-  gem 'foreman'
-end
+#group :development, :test do
+#  gem 'foreman'
+#end
 
 gem "devise", "~> 4.8"

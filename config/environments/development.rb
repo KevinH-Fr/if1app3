@@ -1,6 +1,15 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
+
+config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+ 
+config.action_mailer.delivery_method = :letter_opener
+config.action_mailer.perform_deliveries = true
+
+
+
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded any time
@@ -38,20 +47,8 @@ Rails.application.configure do
   config.active_storage.service = :cloudinary
 
 
-
-
-
-
   # Don't care if the mailer can't send.
-  #config.action_mailer.raise_delivery_errors = false
-
-
-
-
-
-
-
-
+  config.action_mailer.raise_delivery_errors = true
 
 
   config.action_mailer.perform_caching = false
@@ -91,21 +88,22 @@ Rails.application.configure do
  #config.action_mailer.default_url_options = { :host => 'localhost:3000' }
  #config.action_mailer.default_url_options = {host:'localhost', port: 3000}
 
- config.action_mailer.delivery_method = :smtp
- host = 'example.com' #replace with your own url
+ #config.action_mailer.delivery_method = :smtp
+ #host = 'example.com' #replace with your own url
  
- config.action_mailer.default_url_options = {host:'localhost', port: 3000}
+ #config.action_mailer.default_url_options = {host:'localhost', port: 3000}
  
  # SMTP settings for gmail
- config.action_mailer.smtp_settings = {
-   :address              => "smtp.gmail.com",
-   :port                 => 587,
-   :user_name            => "if1.app.mailer@gmail.com",
-   :password             => "djklnkokqyojbbtx",
-   :authentication       => "plain",
-   :enable_starttls_auto => true
- }
+ #config.action_mailer.smtp_settings = {
+ #  :address              => "smtp.gmail.com",
+ #  :port                 => 587,
+ #  :user_name            => "if1.app.mailer@gmail.com",
+ #  :password             => "djklnkokqyojbbtx",
+ #  :authentication       => "plain",
+ #  :enable_starttls_auto => true
+ #}
  
+
  
  #config.action_mailer.raise_delivery_errors = true
  #config.action_mailer.delivery_method = :smtp

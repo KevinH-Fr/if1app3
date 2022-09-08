@@ -46,6 +46,9 @@ class FriendsController < ApplicationController
 
     respond_to do |format|
       if @friend.save
+        
+        FriendMailer.friend_created.deliver_later
+
         format.html { redirect_to friend_url(@friend), notice: "Friend was successfully created." }
         format.json { render :show, status: :created, location: @friend }
       else
