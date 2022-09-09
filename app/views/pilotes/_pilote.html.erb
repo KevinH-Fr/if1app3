@@ -116,7 +116,18 @@
             <%= pourcentageTop10.to_i %> %  
           </td> 
         </tbody>
-        </table>
+         <tbody>
+            <td>Hors top10</td>
+          <td>
+            <% nbHorsTop10 = Resultat.pilote_courant(pilote.id).compte_horsTop10 %>
+            <%= nbHorsTop10 %> 
+          </td>
+          <td>
+            <% pourcentageHorsTop10 = Float(nbHorsTop10) / nbCourses * 100 %>
+            <%= pourcentageHorsTop10.to_i %> %  
+          </td> 
+        </tbody>
+      </table>
   
 
 <% end %>

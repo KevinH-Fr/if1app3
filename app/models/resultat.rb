@@ -47,6 +47,7 @@ scope :compte_p5, -> { where("(course) = 5").count}
 scope :compte_podium, -> {where("(course) <= 3").count}
 scope :compte_top5, -> {where("(course) <= 5").count}
 scope :compte_top10, -> {where("(course) <= 10").count}
+scope :compte_horsTop10, -> {where("(course) >= 11").count}
 
 scope :nb_courses, -> (pilote_courant) { where("pilote_id = ?", pilote_courant).count}
 

@@ -47,8 +47,10 @@
 <% @nbPodium = Resultat.pilote_courant(@piloteId).compte_podium %>
 <% @nbTop5 = Resultat.pilote_courant(@piloteId).compte_top5 %>
 <% @nbTop10 = Resultat.pilote_courant(@piloteId).compte_top10 %>
+<% @nbHorsTop10 = Resultat.pilote_courant(@piloteId).compte_horsTop10 %>
 
-<% @data = [@nbVictoire, @nbPodium, @nbTop5, @nbTop10] %>
+
+<% @data = [@nbVictoire, @nbPodium, @nbTop5, @nbTop10, @nbHorsTop10] %>
 
 <% @labels = Resultat.joins(:event).where(pilote_id: @piloteId).pluck(:numero) %> 
 <% @labels = @labels.sort { |a, b| b <=> a }.reverse %>
@@ -91,11 +93,13 @@
       var couleurPodium = 'rgb(205, 127, 50)';
       var couleurTop5 =  'rgb(54, 162, 235)';
       var couleurTop10 =  'rgb(82, 189, 93)';
+      var couleurHorsTop10 =  'rgb(64, 64, 64)';
 
       var couleurVictoireOpacity =  'rgb(233, 222, 61, 0.5)';
       var couleurPodiumOpacity = 'rgb(205, 127, 50, 0.5)';
       var couleurTop5Opacity =  'rgb(54, 162, 235, 0.5)';
       var couleurTop10Opacity =  'rgb(82, 189, 93, 0.5)';
+      var couleurHorsTop10Opacity =  'rgb(95, 95, 95)';
 
       var couleurNbCourse =  'rgb(21, 67, 96)';  
       var couleurPoints = 'rgb(241, 196, 15)';
@@ -119,15 +123,15 @@
 
 // CHART donut
     const data = {
-      labels: ['Victoire', 'Podium', 'Top5', 'Top10'],
+      labels: ['Victoire', 'Podium', 'Top5', 'Top10', 'HorsTop10'],
       datasets: [{
       
         data: <%= @data.to_json.html_safe %>,
         backgroundColor: [
-          couleurVictoireOpacity, couleurPodiumOpacity, couleurTop5Opacity, couleurTop10Opacity
+          couleurVictoireOpacity, couleurPodiumOpacity, couleurTop5Opacity, couleurTop10Opacity, couleurHorsTop10Opacity
         ],
         borderColor: [
-          couleurVictoire, couleurPodium, couleurTop5, couleurTop10
+          couleurVictoire, couleurPodium, couleurTop5, couleurTop10, couleurHorsTop10
         ],
        
         hoverOffset: 40, 
