@@ -39,8 +39,11 @@
 
     <% if current_user.admin? %>
       <%= link_to "calcul résultats", toggle_calculresultats_pari_path(@eventId), class:"btn btn-warning btn-sm", style:"margin: 2px" %>
+      <br>
     <% end %>
 
+  <br>
+  <strong> Nb paris: </strong><%= @paris.count %>
   <%# tab datas %>
   <br><br>
 

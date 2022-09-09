@@ -14,12 +14,6 @@ class ClassementsController < ApplicationController
 
     @q = Classement.ransack(params[:q])
 
-
-
-   
-
- 
-
     if params[:saisonId]
       @saisonId = params[:saisonId]
     end
@@ -55,11 +49,6 @@ class ClassementsController < ApplicationController
         @polls4 = Classement.division_courant(@divisionId).saison_courant(@saisonId).
         numero_until_courant(@eventNum).where('pilote_id = 3').pluck(:position)
 
-       
-        #@polls4 = [250]
-    
-       
-
     else
       
       @resultats = Resultat.all
@@ -73,10 +62,6 @@ class ClassementsController < ApplicationController
      # format.pdf do
      #   render pdf: "classementPilotes", template: "classements/liste", formats: [:html], layout: "pdf"
      # end
-
-       # test json pour chart
-    #    render json: @pilotesActifDiv
-    # format.json { head :no_content }
 
     end
     
@@ -202,24 +187,6 @@ def toggle_triclassements
       valScore = classement.score
       classement.update(position:  valPosition)
 
-      #  if @numGp == 1 
-      #    valCoteBase = 1 
-      #    classement.update(cote_victoire:  valCoteBase + 1.4)
-      #    classement.update(cote_podium:  valCoteBase + 0.9 )
-      #    classement.update(cote_top10:  valCoteBase + 0.3)
-     #   else
-      #    eventN_1 = Event.find_by(saison_id: @saisonId, division_id: @divisionId, numero: @numGp - 1).id
-       #   max_points = Classement.saison_courant(@saisonId).division_courant(@divisionId).numero_until_courant(@numGp).max_points.score.to_i
-
-       #   valScoreN_1 = Classement.find_by(pilote_id: classement.pilote_id, event_id: eventN_1).score
-       #   positionN_1 = Classement.find_by(pilote_id: classement.pilote_id, event_id: eventN_1).position
-   
-
-      #    valCoteBase = 1 + (((max_points - valScore)/100) * i )
-      #    classement.update(cote_victoire:  valCoteBase + 1.4)
-      #    classement.update(cote_podium:  valCoteBase + 0.9 )
-      #    classement.update(cote_top10:  valCoteBase + 0.3)
-       # end
       end
 
       redirect_to classements_url(saisonId: @saisonId, eventId: @eventId, divisionId: @divisionId, numGp: @numGp), 

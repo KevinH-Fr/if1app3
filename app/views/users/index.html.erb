@@ -29,10 +29,9 @@
             <th>pilote lié</th>
             <th>email </th>
             <th>changer rôle</th>
-          
-          
           </tr>
         </thead>
+
         <tbody>
           <% @admins.each do |user| %>
             <tr>
@@ -48,15 +47,13 @@
                 <td> <%= link_to "User", toggle_status_user_path(user), class:"btn btn-secondary", 
                       :onclick => "return confirm('Etes-vous certain de vouloir passer cet utilisateur en simple user ?')" %> </td>
                 
-              
-              
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
 
-    <br/> <hr/> <br/>
+    <hr/> <br/>
 
     <h5> Liste des membres </h5>
     <strong> Nombre: <%= @users.count %> </strong>
