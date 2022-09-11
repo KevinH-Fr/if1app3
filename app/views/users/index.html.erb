@@ -12,7 +12,6 @@
        </table>
     </div>
 
-
     <% @users = User.all.where(role: 0).order(:id) %>
     <% @admins = User.all.where(role: 2).order(:id) %>
 
@@ -28,6 +27,7 @@
             <th> # </th>
             <th>pilote lié</th>
             <th>email </th>
+            <th>dernière connexion</th>
             <th>changer rôle</th>
           </tr>
         </thead>
@@ -44,6 +44,13 @@
                   <% end %>
                  </td>
                 <td> <%= user.email %> </td>
+                <td> 
+                  <% depuisDerCo = user.current_sign_in_at %>
+                  <% if depuisDerCo.present? %>
+                    <%= time_ago_in_words(depuisDerCo) %>
+                  <% end %>
+                </td>
+                      
                 <td> <%= link_to "User", toggle_status_user_path(user), class:"btn btn-secondary", 
                       :onclick => "return confirm('Etes-vous certain de vouloir passer cet utilisateur en simple user ?')" %> </td>
                 
@@ -65,8 +72,8 @@
             <th> # </th>
              <th> pilote lié</th>
             <th> email </th>
+            <th>dernière connexion</th>
             <th> changer role </th>
-        
           </tr>
         </thead>
         <tbody>
@@ -80,6 +87,12 @@
                   <% end %>
                  </td>
                 <td> <%= user.email %> </td>
+                <td> 
+                  <% depuisDerCo = user.current_sign_in_at %>
+                  <% if depuisDerCo.present? %>
+                    <%= time_ago_in_words(depuisDerCo) %>
+                  <% end %>
+                </td>
                 <td> <%= link_to "Admin", toggle_status_user_path(user), class:"btn btn-secondary", 
                         :onclick => "return confirm('Etes-vous certain de vouloir passer cet utilisateur en admin ?')" %> </td> 
 
