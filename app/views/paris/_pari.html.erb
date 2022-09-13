@@ -53,4 +53,30 @@
     <%= pari.solde %>
   </p>
 
+
+  <% if current_user.admin? %>
+    <strong> étapes calcul pari: </strong> <br>
+    type pari : <%= pari.paritype %> <br>
+    
+      <% if Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).present? %> 
+       resultat course : <%= Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.course %> <br>
+       statut dns : <%= Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.dns %> <br>
+        <% if pari.paritype == "victoire" && Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.course == 1  %>
+          pari sur p1 gagné
+        <% else %>
+          pari sur p1 perdu 
+        <% end %>
+        <% if pari.paritype == "podium" && Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.course <= 3  %>
+          pari sur podium gagné
+        <% else %>
+          pari sur podium perdu 
+        <% end %>
+      <% else %>
+       pas de resultat present pour ce pari 
+      <% end %>
+     <br> <br>
+
+  <% end %>
+
+
 </div>

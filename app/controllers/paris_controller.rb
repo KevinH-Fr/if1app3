@@ -139,7 +139,7 @@ class ParisController < ApplicationController
       typePari = pari.paritype
       
       if Resultat.where(event_id: @eventId, pilote_id: coureurId).present?
-        resultatCoureur = Resultat.where(event_id: @eventId, pilote_id: pari.coureur.id).first.course
+        resultatCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.course
         resultatQualif = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.qualification
         statutDnsCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.dns
         pariMontant = pari.montant
