@@ -157,10 +157,10 @@ class ParisController < ApplicationController
               pari.update(solde: - pariMontant )
             end
           end
-      else
-        pariMontant = pari.montant
-        pari.update(resultat: false)
-        pari.update(solde: - pariMontant )
+     # else
+      #  pariMontant = pari.montant
+      #  pari.update(resultat: false)
+      #  pari.update(solde: - pariMontant )
       end
         
 
