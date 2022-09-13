@@ -136,7 +136,7 @@ class ParisController < ApplicationController
     # a verifier avec la var @eventId
   #  @parisEvent = Pari.event_courant(@eventId)
 
-    @pariEvent = Pari.where(event_id: 11)
+    @pariEvent = Pari.where(event_id: @eventId)
 
 
     @pariEvent.each do |pari|
@@ -152,25 +152,30 @@ class ParisController < ApplicationController
         pariCote = pari.cote
     
           if statutDnsCoureur == true #remboursement dns
+            pari = Pari.find_by(id: pari.id)
             pari.update(resultat: true)
             pari.update(solde: pariMontant )
           else
             if typePari == "victoire" && resultatCoureur == 1 
+              pari = Pari.find_by(id: pari.id)
               pari.update(resultat: true)
               pari.update(solde: pariMontant * pariCote - pariMontant )
             else 
 
               if typePari == "podium" && resultatCoureur <= 3
+                pari = Pari.find_by(id: pari.id)
                 pari.update(resultat: true)
                 pari.update(solde: pariMontant * pariCote - pariMontant )
               else 
 
                 if typePari == "top10" && resultatCoureur <= 10
+                  pari = Pari.find_by(id: pari.id)
                   pari.update(resultat: true)
                   pari.update(solde: pariMontant * pariCote - pariMontant )
                 else 
 
                   if typePari == "pole" && resultatQualif == 1
+                    pari = Pari.find_by(id: pari.id)
                     pari.update(resultat: true)
                     pari.update(solde: pariMontant * pariCote - pariMontant )
                   end 
