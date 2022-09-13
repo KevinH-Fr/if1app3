@@ -1,3 +1,4 @@
 class Parieur < ApplicationRecord
 
+ 
 end

@@ -39,6 +39,11 @@ Rails.application.routes.draw do
   
   resources :parieurs do
     get 'documentedition', :on => :collection
+    member do
+      get :toggle_creerparieurs
+      get :toggle_supprimerparieurs
+      get :toggle_updateparieurs
+    end
   end
 
   resources :classements do

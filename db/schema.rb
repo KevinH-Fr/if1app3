@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_11_092822) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_13_221336) do
   create_table "active_analytics_views_per_days", force: :cascade do |t|
     t.string "site", null: false
     t.string "page", null: false
@@ -164,6 +164,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_11_092822) do
     t.index ["pilote_id"], name: "index_licences_on_pilote_id"
   end
 
+  create_table "parieurs", force: :cascade do |t|
+    t.integer "pilote_id", null: false
+    t.integer "event_id", null: false
+    t.decimal "cumul"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_parieurs_on_event_id"
+    t.index ["pilote_id"], name: "index_parieurs_on_pilote_id"
+  end
+
   create_table "paris", force: :cascade do |t|
     t.integer "typePari"
     t.integer "parieur_id"
@@ -265,6 +275,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_11_092822) do
   add_foreign_key "events", "saisons"
   add_foreign_key "licences", "events"
   add_foreign_key "licences", "pilotes"
+  add_foreign_key "parieurs", "events"
+  add_foreign_key "parieurs", "pilotes"
   add_foreign_key "paris", "events"
   add_foreign_key "paris", "pilotes", column: "coureur_id"
   add_foreign_key "paris", "pilotes", column: "parieur_id"

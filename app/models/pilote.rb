@@ -17,8 +17,5 @@ class Pilote < ApplicationRecord
     scope :total_points, -> { Resultat.select('SUM(score) AS total') }
 
     
-    
-
-
 
 end

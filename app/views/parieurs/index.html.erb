@@ -20,13 +20,24 @@
         <% if current_user.admin? %>
           <%# Doc event actif %>
           <% numGp = Event.find(@eventId).numero %>
+                  
+           <%= link_to "Créer", toggle_creerparieurs_parieur_path(@eventId), class:"btn btn-sm btn-warning", style:"margin: 2px"  %>
+           <%= link_to "Update", toggle_updateparieurs_parieur_path(@eventId), class:"btn btn-sm btn-primary", style:"margin: 2px" %>
+           <%#= link_to "Trier", toggle_triclassements_classement_path(@eventId), class:"btn btn-sm btn-secondary", style:"margin: 2px"%>
+           <%= link_to "Supprimer", toggle_supprimerparieurs_parieur_path(@eventId), class:"btn btn-sm btn-danger", style:"margin: 2px", :onclick => "return confirm('Sûr ?')" %>
+
+        
           <%= link_to "Image", documentedition_parieurs_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp, format: :png), class:"btn btn-sm btn-success" %>
+       
           <br><br>
         <% end %>
 
-  <%# tab datas %>
 
-  <div class="table-responsive">
+<%#tab data new %>
+
+<% @parisEventNew = Parieur.where(event_id: @eventId).order(:cumul).reverse %>
+
+<div class="table-responsive">
     <table class="table table-striped table-bordered table-hover">
       <thead class="table-dark">
         <tr>  
@@ -36,21 +47,17 @@
         </tr>
       </thead>
         <tbody>
-            <% @parisEvent.each_with_index do | pari, i | %> 
+            <% @parisEventNew.each_with_index do | parieur, i | %> 
             <tr>
               <td> <%= i + 1 %>  </td>
-              <td> <%= Pilote.find(pari.parieur_id).nom %> </td>
+              <td> <%= Pilote.find(parieur.pilote_id).nom %> </td>
               <td>
-                <% idEcurie = Pilote.find(pari.parieur_id).ecurie %>  
+                <% idEcurie = Pilote.find(parieur.pilote_id).ecurie %>  
                 <%= image_tag Equipe.find(idEcurie).ecusson, style: "width: 50px; display: block", class: "img-fluid rounded" %>
               </td>
               <td>
-                <% if Pilote.find(pari.parieur_id).rivaliteprec == true %> 
-                  <% montantBase = 2000 %>
-                <% else %>
-                  <% montantBase = 1000 %>
-                <% end %>
-                  <%= number_with_precision(montantBase + pari.total, precision: 2 ) %> 
+                  <%#= number_with_precision(parieur.cumul, precision: 2, separator: ".") %> 
+                   <%=  number_with_delimiter(parieur.cumul, locale: :fr) %>
               </td>
               
             </tr>
@@ -58,6 +65,7 @@
       </tbody>
     </table>
   </div>
+
 
   <% end %>
 <% else %>

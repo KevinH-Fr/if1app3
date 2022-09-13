@@ -26,6 +26,8 @@ class Pari < ApplicationRecord
 
     scope :sum_parieur, -> {select('parieur_id, SUM(solde) AS total')}
 
+
+
     before_validation :modifier_solde
 
     private

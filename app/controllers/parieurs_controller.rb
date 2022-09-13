@@ -29,13 +29,10 @@ class ParieursController < ApplicationController
           @divisionId = Event.find(@eventId).division_id 
           @saisonId = Event.find(@eventId).saison_id
   
-         # modifier formuler pour que ca fonctionne avec pg
-         
-       #  @parisEvent = Pari.saison_courant(@saisonId).division_courant(@divisionId).numero_until_courant(@eventNum).group_sum_order
-      
-        @parisEvent = Pari.saison_courant(@saisonId).division_courant(@divisionId).numero_until_courant(@eventNum).group_by_parieur.select('parieur_id, SUM(solde) AS total')
-         @parisEvent = @parisEvent.order(:total).reverse
 
+
+         @parisEvent = Pari.saison_courant(@saisonId).division_courant(@divisionId).numero_until_courant(@eventNum)
+                        .group_by_parieur.select('parieur_id, SUM(solde) AS total')
 
       respond_to do |format|
         format.html
@@ -96,4 +93,62 @@ class ParieursController < ApplicationController
       end
     end
     
+
+    def toggle_creerparieurs
+      @eventId = params[:id]
+      @divisionId = Event.find(@eventId).division_id
+      @saisonLiee = Event.find(@eventId).saison_id
+      @numGp = Event.find(@eventId).numero 
+    
+      @pilotes = Pilote.statut_actif.division_non_courant(@divisionId).all
+        @pilotes.all.each do |pilote|
+          parieur = Parieur.create(pilote_id: pilote.id, event_id: @eventId)
+        end
+      
+      redirect_to parieurs_url(saisonId: @saisonLiee, eventId: @eventId, divisionId: @divisionId, numGp: @numGp), 
+                    notice: "les classements parieurs ont bien été créés"
+    end
+
+
+    def toggle_supprimerparieurs
+      @eventId = params[:id]
+      @divisionId = Event.find(@eventId).division_id
+      @saisonId = Event.find(@eventId).saison_id
+    
+      Parieur.where(event_id: @eventId).destroy_all
+    
+      redirect_to parieurs_url(saisonId: @saisonId, eventId: @eventId, divisionId: @divisionId),
+                   notice: "les classements des parieurs de l'event courant ont bien été supprimés"
+    end
+
+
+    def toggle_updateparieurs
+      @eventId = params[:id]
+      @divisionId = Event.find(@eventId).division_id
+      @saisonId = Event.find(@eventId).saison_id
+      @numGp = Event.find(@eventId).numero 
+    
+      @parieursEvent = Parieur.all.where(event_id: @eventId)
+      
+        @parieursEvent.each do |parieur|
+          @piloteId = parieur.pilote_id
+    
+            if Pilote.find(parieur.pilote_id).rivaliteprec == true 
+               montantBase = 2000 
+            else
+               montantBase = 1000 
+            end
+
+          # obtenir le score total du pilote, ajouter les filtres les uns apres les autres
+          valScore = Pari.pilote_courant(@piloteId).saison_courant(@saisonId).numero_until_courant(@numGp).sum(:solde)
+    
+          parieur.update(cumul: valScore + montantBase )
+    
+          
+        end
+    
+      redirect_to parieurs_url(saisonId: @saisonId, eventId: @eventId, divisionId: @divisionId, numGp: @numGp), 
+                    notice: "les classements des parieurs ont bien été mis à jour"
+    end
+
   end
