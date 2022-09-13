@@ -153,7 +153,7 @@ class ParisController < ApplicationController
 
     
           if statutDnsCoureur == true 
-            solde = pariMontant
+            solde = 0
             resultatPari = true
           else
             if typePari == "victoire" && resultatCoureur == 1 ||
