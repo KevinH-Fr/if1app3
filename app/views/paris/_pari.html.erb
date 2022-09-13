@@ -71,6 +71,11 @@
         <% else %>
           pari sur podium perdu 
         <% end %>
+         <% if pari.paritype == "top10" && Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.course <= 10  %>
+          pari sur top10 gagné
+        <% else %>
+          pari sur top10 perdu 
+        <% end %>
       <% else %>
        pas de resultat present pour ce pari 
       <% end %>
