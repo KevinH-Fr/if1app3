@@ -61,6 +61,8 @@
       <% if Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).present? %> 
        resultat course : <%= Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.course %> <br>
        statut dns : <%= Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.dns %> <br>
+       pari event id : <%= pari.event_id %> <br>
+       resultat event id : <%= Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.event_id %> <br>
        <% if Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.dns == false %>
           <% if pari.paritype == "victoire" && Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.course == 1  %>
             pari sur p1 gagné

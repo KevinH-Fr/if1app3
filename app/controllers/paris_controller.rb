@@ -137,11 +137,12 @@ class ParisController < ApplicationController
     @parisEvent.all.each do |pari|
       coureurId = pari.coureur.id
       typePari = pari.paritype
+      eventIdPari = pari.event_id
       
-      if Resultat.where(event_id: @eventId, pilote_id: coureurId).present?
-        resultatCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.course
-        resultatQualif = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.qualification
-        statutDnsCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.dns
+      if Resultat.where(event_id: eventIdPari, pilote_id: coureurId).present?
+        resultatCoureur = Resultat.where(event_id: eventIdPari, pilote_id: coureurId).first.course
+        resultatQualif = Resultat.where(event_id: eventIdPari, pilote_id: coureurId).first.qualification
+        statutDnsCoureur = Resultat.where(event_id: eventIdPari, pilote_id: coureurId).first.dns
         pariMontant = pari.montant
         pariCote = pari.cote
     
@@ -171,7 +172,7 @@ class ParisController < ApplicationController
                 end
               end
             end
-              
+
 
           end 
           
