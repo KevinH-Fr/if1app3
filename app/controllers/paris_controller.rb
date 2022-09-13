@@ -132,9 +132,14 @@ class ParisController < ApplicationController
     @divisionId = Event.find(@eventId).division_id
     @saisonId = Event.find(@eventId).saison_id
 
-    @parisEvent = Pari.event_courant(@eventId)
 
-    @parisEvent.all.each do |pari|
+    # a verifier avec la var @eventId
+  #  @parisEvent = Pari.event_courant(@eventId)
+
+    @pariEvent = Pari.where(event_id: 11)
+
+
+    @pariEvent.each do |pari|
       coureurId = pari.coureur.id
       typePari = pari.paritype
       eventIdPari = pari.event_id
@@ -150,28 +155,28 @@ class ParisController < ApplicationController
             pari.update(resultat: true)
             pari.update(solde: pariMontant )
           else
-         #   if typePari == "victoire" && resultatCoureur == 1 
-         #     pari.update(resultat: true)
-         #     pari.update(solde: pariMontant * pariCote - pariMontant )
-         #   else 
+            if typePari == "victoire" && resultatCoureur == 1 
+              pari.update(resultat: true)
+              pari.update(solde: pariMontant * pariCote - pariMontant )
+            else 
 
-         #     if typePari == "podium" && resultatCoureur <= 3
-         #       pari.update(resultat: true)
-         #       pari.update(solde: pariMontant * pariCote - pariMontant )
-         #     else 
+              if typePari == "podium" && resultatCoureur <= 3
+                pari.update(resultat: true)
+                pari.update(solde: pariMontant * pariCote - pariMontant )
+              else 
 
                 if typePari == "top10" && resultatCoureur <= 10
                   pari.update(resultat: true)
                   pari.update(solde: pariMontant * pariCote - pariMontant )
-         #       else 
+                else 
 
-         #         if typePari == "pole" && resultatQualif == 1
-         #           pari.update(resultat: true)
-         #           pari.update(solde: pariMontant * pariCote - pariMontant )
-         #         end 
+                  if typePari == "pole" && resultatQualif == 1
+                    pari.update(resultat: true)
+                    pari.update(solde: pariMontant * pariCote - pariMontant )
+                  end 
                 end
-         #     end
-         #   end
+              end
+            end
 
 
           end 

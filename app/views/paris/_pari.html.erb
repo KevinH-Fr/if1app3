@@ -57,7 +57,8 @@
   <% if current_user.admin? %>
     <strong> étapes calcul pari: </strong> <br>
     type pari : <%= pari.paritype %> <br>
-    
+    resultat table pari : <%= pari.resultat %> <br>
+
       <% if Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).present? %> 
        resultat course : <%= Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.course %> <br>
        statut dns : <%= Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.dns %> <br>
