@@ -41,7 +41,7 @@
     <table class="table table-striped table-bordered table-hover">
       <thead class="table-dark">
         <tr>  
-          <th>#</th>
+          <th style="text-align: center;">#</th>
           <th colspan=2>parieur</th>
           <th>cumul</th>
         </tr>
@@ -49,13 +49,13 @@
         <tbody>
             <% @parisEventNew.each_with_index do | parieur, i | %> 
             <tr>
-              <td> <%= i + 1 %>  </td>
+              <td class="col_centree"> <%= i + 1 %>  </td>
               <td> <%= Pilote.find(parieur.pilote_id).nom %> </td>
               <td>
                 <% idEcurie = Pilote.find(parieur.pilote_id).ecurie %>  
                 <%= image_tag Equipe.find(idEcurie).ecusson, style: "width: 50px; display: block", class: "img-fluid rounded" %>
               </td>
-              <td>
+              <td class="col_centree">
                   <%#= number_with_precision(parieur.cumul, precision: 2, separator: ".") %> 
                    <%=  number_with_delimiter(parieur.cumul, locale: :fr) %>
               </td>
