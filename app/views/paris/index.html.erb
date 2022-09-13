@@ -40,9 +40,7 @@
     <% if current_user.admin? %>
       <%= link_to "calcul résultats", toggle_calculresultats_pari_path(@eventId), class:"btn btn-warning btn-sm", style:"margin: 2px" %>
       <br>
-      <%= Pari.event_courant(session[:event]).count %> <br>
-      <%= Pari.where(event_id: @eventId).count %>
-      <br>
+
     <% end %>
 
   <br>
@@ -69,7 +67,7 @@
           <th>solde</th>
           <% if current_user.admin? %>
             <th>horaire</th>
-            <th>calculs</th>
+          <%# <th>calculs</th> %> 
           <% end %>
            
           <th colspan="3">Actions</th>
@@ -115,31 +113,7 @@
                 <td> <%=  horairePari_local.strftime("%d/%m %H:%M") %> </td>
                 
                 <td>
-                    pari  id : <%= pari.id %> <br>
-                    type pari : <%= pari.paritype %> <br>
-                    resultat table : <%= pari.resultat %> <br>
-
-                      <% if Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).present? %> 
-                      resultat course : <%= Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.course %> <br>
-                      statut dns : <%= Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.dns %> <br>
-                      pari event id : <%= pari.event_id %> <br>
-                      resultat event id : <%= Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.event_id %> <br>
-                      <% if Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.dns == false %>
-                          <% if pari.paritype == "victoire" && Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.course == 1  %>
-                            pari sur p1 gagné
-                          <% else %>
-                            <% if pari.paritype == "podium" && Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.course <= 3  %>
-                              pari sur podium gagné
-                            <% else %>
-                              <% if pari.paritype == "top10" && Resultat.where(event_id: session[:event], pilote_id: pari.coureur.id).first.course <= 10  %>
-                                pari sur top10 gagné
-                              <% else %>
-                                pari perdu 
-                              <% end %>
-                            <% end %>
-                          <% end %>
-                        <% end %>
-                      <% end %>
+                 
                 </td>
               <% end %>
 

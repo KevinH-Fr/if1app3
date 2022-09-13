@@ -66,6 +66,8 @@ class Pari < ApplicationRecord
     end
 
 
+
+
     after_initialize :set_default_montant, :set_default_cote, :set_default_resultat, :if => :new_record?
     def set_default_montant
       self.montant ||= 0

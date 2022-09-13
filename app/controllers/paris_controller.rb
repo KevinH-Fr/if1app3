@@ -152,33 +152,57 @@ class ParisController < ApplicationController
         pariCote = pari.cote
     
           if statutDnsCoureur == true #remboursement dns
-            pari = Pari.find_by(id: pari.id)
-            pari.update(resultat: true)
-            pari.update(solde: pariMontant )
+           # pari = Pari.find_by(id: pari.id)
+           # pari.update(resultat: true)
+           # pari.update(solde: pariMontant )
+
+            pari = Pari.find(pari.id)
+            pari.assign_attributes({resultat: true})
+            pari.save(validate: false)
           else
             if typePari == "victoire" && resultatCoureur == 1 
-              pari = Pari.find_by(id: pari.id)
-              pari.update(resultat: true)
-              pari.update(solde: pariMontant * pariCote - pariMontant )
+             # pari = Pari.find_by(id: pari.id)
+             # pari.update(resultat: true)
+             # pari.update(solde: pariMontant * pariCote - pariMontant )
+            
+             pari = Pari.find(pari.id)
+             pari.assign_attributes({resultat: true})
+             pari.save(validate: false)
+
             else 
 
               if typePari == "podium" && resultatCoureur <= 3
-                pari = Pari.find_by(id: pari.id)
-                pari.update(resultat: true)
-                pari.update(solde: pariMontant * pariCote - pariMontant )
-              else 
+             #   pari = Pari.find_by(id: pari.id)
+             #   pari.update(resultat: true)
+             #   pari.update(solde: pariMontant * pariCote - pariMontant )
+
+              pari = Pari.find(pari.id)
+              pari.assign_attributes({resultat: true})
+              pari.save(validate: false)  
+
+            else 
 
                 if typePari == "top10" && resultatCoureur <= 10
-                  pari = Pari.find_by(id: pari.id)
-                  pari.update(resultat: true)
-                  pari.update(solde: pariMontant * pariCote - pariMontant )
+               #   pari = Pari.find_by(id: pari.id)
+               #   pari.update(resultat: true)
+               #   pari.update(solde: pariMontant * pariCote - pariMontant )
+
+                  pari = Pari.find(pari.id)
+                  pari.assign_attributes({resultat: true})
+                  pari.save(validate: false)
+
                 else 
 
                   if typePari == "pole" && resultatQualif == 1
-                    pari = Pari.find_by(id: pari.id)
-                    pari.update(resultat: true)
-                    pari.update(solde: pariMontant * pariCote - pariMontant )
-                  end 
+                #    pari = Pari.find_by(id: pari.id)
+                #    pari.update(resultat: true)
+                #    pari.update(solde: pariMontant * pariCote - pariMontant )
+              
+                pari = Pari.find(pari.id)
+                pari.assign_attributes({resultat: true})
+                pari.save(validate: false)
+              
+              end 
                 end
               end
             end
