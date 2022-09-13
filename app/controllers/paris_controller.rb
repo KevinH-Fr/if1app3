@@ -135,40 +135,33 @@ class ParisController < ApplicationController
     @parisEvent = Pari.event_courant(@eventId)
 
     @parisEvent.all.each do |pari|
-
       coureurId = pari.coureur.id
       typePari = pari.paritype
-
+      
       if Resultat.where(event_id: @eventId, pilote_id: coureurId).present?
         resultatCoureur = Resultat.where(event_id: @eventId, pilote_id: pari.coureur.id).first.course
         resultatQualif = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.qualification
         statutDnsCoureur = Resultat.where(event_id: @eventId, pilote_id: coureurId).first.dns
-
-        if statutDnsCoureur == true 
-          resultatCoureur = 20
-          resultatQualif = 20
-        end
-
-
         pariMontant = pari.montant
         pariCote = pari.cote
-
-        # tester si pari vrai ou faux 
-          if typePari == "victoire" && resultatCoureur == 1 || typePari == "podium" && resultatCoureur <= 3 || typePari == "top10" && resultatCoureur <= 10 || typePari == "pole" && resultatQualif == 1
+    
+          if statutDnsCoureur == true #remboursement dns
             pari.update(resultat: true)
-            pari.update(solde: pariMontant * pariCote - pariMontant )
+            pari.update(solde: pariMontant )
           else
-
-            if statutDnsCoureur == true   # rembourser mise si dns
+            if typePari == "victoire" && resultatCoureur == 1 || typePari == "podium" && resultatCoureur <= 3 || typePari == "top10" && resultatCoureur <= 10 || typePari == "pole" && resultatQualif == 1
               pari.update(resultat: true)
-              pari.update(solde: pariMontant )
+              pari.update(solde: pariMontant * pariCote - pariMontant )
             else
               pari.update(resultat: false)
               pari.update(solde: - pariMontant )
             end
           end
-
-        end 
+      else
+        pariMontant = pari.montant
+        pari.update(resultat: false)
+        pari.update(solde: - pariMontant )
+      end
         
 
 
