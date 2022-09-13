@@ -152,9 +152,9 @@ class ParisController < ApplicationController
             if typePari == "victoire" && resultatCoureur == 1 || typePari == "podium" && resultatCoureur <= 3 || typePari == "top10" && resultatCoureur <= 10 || typePari == "pole" && resultatQualif == 1
               pari.update(resultat: true)
               pari.update(solde: pariMontant * pariCote - pariMontant )
-            else
-              pari.update(resultat: false)
-              pari.update(solde: - pariMontant )
+           # else
+           #   pari.update(resultat: false)
+           #   pari.update(solde: - pariMontant )
             end
           end
      # else
