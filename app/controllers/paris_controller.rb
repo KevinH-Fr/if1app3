@@ -149,22 +149,37 @@ class ParisController < ApplicationController
             pari.update(resultat: true)
             pari.update(solde: pariMontant )
           else
-            if typePari == "victoire" && resultatCoureur == 1 || typePari == "podium" && resultatCoureur <= 3 || typePari == "top10" && resultatCoureur <= 10 || typePari == "pole" && resultatQualif == 1
+            if typePari == "victoire" && resultatCoureur == 1 
               pari.update(resultat: true)
               pari.update(solde: pariMontant * pariCote - pariMontant )
-           # else
-           #   pari.update(resultat: false)
-           #   pari.update(solde: - pariMontant )
-            end
-          end
+            end 
+
+            if typePari == "podium" && resultatCoureur <= 3
+              pari.update(resultat: true)
+              pari.update(solde: pariMontant * pariCote - pariMontant )
+            end 
+
+            if typePari == "top10" && resultatCoureur <= 10
+              pari.update(resultat: true)
+              pari.update(solde: pariMontant * pariCote - pariMontant )
+            end 
+
+            if typePari == "pole" && resultatQualif == 1
+              pari.update(resultat: true)
+              pari.update(solde: pariMontant * pariCote - pariMontant )
+            end 
+          end 
+          
+          # else
+          #   pari.update(resultat: false)
+          #   pari.update(solde: - pariMontant )
+       
      # else
       #  pariMontant = pari.montant
       #  pari.update(resultat: false)
       #  pari.update(solde: - pariMontant )
       end
         
-
-
     end  
     
     redirect_to paris_url(saisonId: @saisonId, eventId: @eventId, divisionId: @divisionId),
