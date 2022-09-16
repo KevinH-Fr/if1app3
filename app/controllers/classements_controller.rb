@@ -157,6 +157,17 @@ def toggle_updateclassements
       nbP9 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 9).count
       nbP10 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 10).count
 
+      nbP11 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 11).count
+      nbP12 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 12).count
+      nbP13 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 13).count
+      nbP14 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 14).count
+      nbP15 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 15).count
+      nbP16 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 16).count
+      nbP17 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 17).count
+      nbP18 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 18).count
+      nbP19 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 19).count
+      nbP20 = Resultat.pilote_courant(classement.pilote_id).division_courant(@divisionId).saison_courant(@saisonId).numero_until_courant(@numGp).where(course: 20).count
+
       classement.update(nb_p1:  nbP1)
       classement.update(nb_p2:  nbP2)
       classement.update(nb_p3:  nbP3)
@@ -167,6 +178,17 @@ def toggle_updateclassements
       classement.update(nb_p8:  nbP8)
       classement.update(nb_p9:  nbP9)
       classement.update(nb_p10:  nbP10)
+
+      classement.update(nb_p1:  nbP11)
+      classement.update(nb_p2:  nbP12)
+      classement.update(nb_p3:  nbP13)
+      classement.update(nb_p4:  nbP14)
+      classement.update(nb_p5:  nbP15)
+      classement.update(nb_p6:  nbP16)
+      classement.update(nb_p7:  nbP17)
+      classement.update(nb_p8:  nbP18)
+      classement.update(nb_p9:  nbP19)
+      classement.update(nb_p10:  nbP20)
       
     end
 
@@ -179,7 +201,6 @@ def toggle_triclassements
   @divisionId = Event.find(@eventId).division_id
   @saisonId = Event.find(@eventId).saison_id
   @numGp = Event.find(@eventId).numero 
-
   @classementsEvent = Classement.all.where(event_id: @eventId).order_score_positions
     @classementsEvent.each_with_index do |classement, i|
       i = i + 1
