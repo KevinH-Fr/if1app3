@@ -40,7 +40,7 @@
 
             <tbody>
             <tr>
-            <% @licencesFiltres.limit(20).each_with_index do | licence, i| %>
+            <% @licencesFiltres.each_with_index do | licence, i| %>
             
                 <td>
                 <% if licence.pilote_id.present? %>
