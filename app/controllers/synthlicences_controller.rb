@@ -56,7 +56,7 @@ class SynthlicencesController < ApplicationController
       division_id = :division_id',  
       numero: params[:numGp],
       saison_id: params[:saisonId],
-      division_id: params[:divisionId]).group(:event_id, :penalite, :recupere, :pilote_id)
+      division_id: params[:divisionId]).group(:event_id, :pilote_id)
       .select('pilote_id, event_id, penalite, recupere, SUM(penalite) AS total_penalite, SUM(recupere) AS total_recupere')
   
     respond_to do |format|
