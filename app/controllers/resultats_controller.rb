@@ -32,6 +32,8 @@ class ResultatsController < ApplicationController
       @eventId = params[:eventId]
       @eventNum = Event.find(@eventId).numero 
 
+      session[:event] = params[:eventId]
+
      @resultatsFiltres = Resultat.joins(:event).where(
          'event_id = :event_id',
           event_id: @eventId)
