@@ -44,9 +44,8 @@
     <% end %>
 
   <br>
-  <strong> Nb paris: </strong><%= @paris.count %>
-
-
+  <strong> Nb paris: </strong><%= @paris.count %> <br>
+  <strong> Total parié: </strong><%= number_with_precision(@paris.sum(:montant), delimiter: ' ', precision: 0)  %>
 
   <%# tab datas %>
   <br><br>
@@ -112,9 +111,6 @@
                 <% horairePari_local = pari.updated_at.to_time + 7200 %>
                 <td> <%=  horairePari_local.strftime("%d/%m %H:%M") %> </td>
                 
-                <td>
-                 
-                </td>
               <% end %>
 
              
