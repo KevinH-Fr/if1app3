@@ -176,8 +176,10 @@ th, td {
 }
 
  .cols_hide {
+  font-weight: bold;
+  font-size: large;
   width: 50px;
-  background-color: #4a4a48;
+  background-color: #aeaeac;
   box-shadow:inset 0px 0px 0px 4px #313130;
   text-align: center;
  }
