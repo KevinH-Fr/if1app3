@@ -50,10 +50,10 @@
                    <% rankN_1 = 20 %>
                 <% end %>
 
-               <% @valDeltaRank = classement.position.to_i - rankN_1.to_i %>
-               
+                <% @valDeltaRank = rankN_1.to_i - classement.position.to_i %>
+
                  <td class="cols_hide">
-                  <% if @valDeltaRank <= 0 %>
+                  <% if @valDeltaRank >= 0 %>
                       <strong style="color:green;">
                       <%= sprintf("%+d", @valDeltaRank) %>
                       </strong>
