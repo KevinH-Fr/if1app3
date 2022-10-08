@@ -28,10 +28,6 @@
               {include_blank: true} %>
   </div>
   <br>
-  <div>
-    <%#= form.label :pilote2, style: "display: block" %>
-    <%#= form.text_field :pilote2 %>
-  </div>
 
   <div>
     <%= form.label :responsable_commissaire, style: "display: block" %>
@@ -40,28 +36,44 @@
               {include_blank: true} %>
   </div>
   <br>
-  <div>
-    <%= form.label :article_enfreint, style: "display: block" %>
-    <%= form.select :reglement_id, @reglements.all.collect { | article | [article.id, article.id] },
-              {include_blank: true} %>
+
+
+
+
+  <div data-controller="form-element">
+    <%= form.button "Validate", formaction: new_rapportdoi_path(), 
+        formmethod: :get, data: { turbo_frame: :penalitelicence_field, form_element_target: "submitbtn" } %>
+    <div>
+      <%= form.label :article_enfreint, style: "display: block" %>
+      <%= form.number_field :reglement_id, { data: { action: "change->form-element#remotesubmit"}, class:"text-center"} %>
+    </div>
   </div>
-  <br>
-  <div>
+
+  <%= turbo_frame_tag :penalitelicence_field do %>
+    test valeur article enfreint: <%= articleId = form.object.reglement_id %>
+    <% valPenalite = form.object.reglement_id %>
     <%= form.label :penalite_licence, style: "display: block" %>
-    <%= form.number_field :penalitelicence %>
+    <%= form.number_field :penalitelicence, value: valPenalite %>
+    
+    <div>
+      <%= form.submit "Valider", class:"btn btn-success" %>
   </div>
+  <% end %>
+</div>
   <br>
+
   <div>
     <%= form.label :penalite_temps, style: "display: block" %>
     <%= form.number_field :penalitetemps %>
   </div>
+
   <br>
   <div>
     <%= form.label :commentaire, style: "display: block" %>
     <%= form.text_area :commentaire %>
   </div>
 
-  <div>
-    <%= form.submit "Valider", class:"btn btn-success" %>
-  </div>
+</div>
+
+
 <% end %>
