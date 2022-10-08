@@ -1,0 +1,66 @@
+class RapportdoisController < ApplicationController
+  before_action :set_rapportdoi, only: %i[ show edit update destroy ]
+
+  def index
+    @rapportdois = Rapportdoi.all
+  end
+
+  def show
+  end
+
+  def new
+    @rapportdoi = Rapportdoi.new
+    @pilotes = Pilote.all
+    @reglements = Reglement.all
+  end
+
+  def edit
+    @pilotes = Pilote.all
+    @event = Event.all
+    @reglements = Reglement.all
+  end
+
+  def create
+    @rapportdoi = Rapportdoi.new(rapportdoi_params)
+
+    respond_to do |format|
+      if @rapportdoi.save
+        format.html { redirect_to rapportdoi_url(@rapportdoi), notice: "Rapportdoi was successfully created." }
+        format.json { render :show, status: :created, location: @rapportdoi }
+      else
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @rapportdoi.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def update
+    respond_to do |format|
+      if @rapportdoi.update(rapportdoi_params)
+        format.html { redirect_to rapportdoi_url(@rapportdoi), notice: "Rapportdoi was successfully updated." }
+        format.json { render :show, status: :ok, location: @rapportdoi }
+      else
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @rapportdoi.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def destroy
+    @rapportdoi.destroy
+
+    respond_to do |format|
+      format.html { redirect_to rapportdois_url, notice: "Rapportdoi was successfully destroyed." }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+    def set_rapportdoi
+      @rapportdoi = Rapportdoi.find(params[:id])
+    end
+
+    def rapportdoi_params
+      params.require(:rapportdoi).permit(:event_id, :pilote_id, :pilote2, :responsable, :reglement_id, :penalitelicence, :penalitetemps, :commentaire)
+    end
+end

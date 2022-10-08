@@ -1,0 +1,2 @@
+module RapportdoisHelper
+end
