@@ -60,6 +60,10 @@
             </li>
 
             <% if current_user.admin? %>
+              <li class="nav-item">
+                 <%= link_to 'Règlement',
+                    reglements_path, class:"nav-link" %> 
+              </li>
                <li class="nav-item">
                   <%= link_to 'Licences',
                   licences_path, class:"nav-link" %> 
