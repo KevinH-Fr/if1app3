@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  event: one
+  pilote1: one
+  pilote2: one
+  responsable: one
+  article: one
+  penalitelicence: 1
+  penalitetemps: 1
+  commentaire: MyText
+
+two:
+  event: two
+  pilote1: two
+  pilote2: two
+  responsable: two
+  article: two
+  penalitelicence: 1
+  penalitetemps: 1
+  commentaire: MyText

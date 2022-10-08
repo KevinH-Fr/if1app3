@@ -1,0 +1,58 @@
+<%= form_with(model: rapport) do |form| %>
+  <% if rapport.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(rapport.errors.count, "error") %> prohibited this rapport from being saved:</h2>
+
+      <ul>
+        <% rapport.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :event_id, style: "display: block" %>
+    <%= form.text_field :event_id %>
+  </div>
+
+  <div>
+    <%= form.label :pilote1_id, style: "display: block" %>
+    <%= form.select(:pilote1_id, options_from_collection_for_select(
+                    @pilote,'id', 'nom'), {include_blank: true}) %>
+  </div>
+
+  <div>
+    <%= form.label :pilote2_id, style: "display: block" %>
+    <%= form.text_field :pilote2_id %>
+  </div>
+
+  <div>
+    <%= form.label :responsable_id, style: "display: block" %>
+    <%= form.text_field :responsable_id %>
+  </div>
+
+  <div>
+    <%= form.label :article_id, style: "display: block" %>
+    <%= form.text_field :article_id %>
+  </div>
+
+  <div>
+    <%= form.label :penalitelicence, style: "display: block" %>
+    <%= form.number_field :penalitelicence %>
+  </div>
+
+  <div>
+    <%= form.label :penalitetemps, style: "display: block" %>
+    <%= form.number_field :penalitetemps %>
+  </div>
+
+  <div>
+    <%= form.label :commentaire, style: "display: block" %>
+    <%= form.text_area :commentaire %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
