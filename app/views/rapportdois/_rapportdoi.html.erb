@@ -1,17 +1,17 @@
 <div id="<%= dom_id rapportdoi %>">
   <p>
     <strong>Event:</strong>
-    <%= rapportdoi.event_id %>
+    <%= Event.find(rapportdoi.event_id).formatted_name_bis %>
   </p>
 
   <p>
     <strong>Pilote:</strong>
-    <%= rapportdoi.pilote_id %>
+    <%= Pilote.find(rapportdoi.pilote_id).nom %>
   </p>
 
   <p>
     <strong>Responsable commissaire:</strong>
-    <%= rapportdoi.responsable %>
+    <%= Pilote.find(rapportdoi.responsable).nom %>
   </p>
 
   <p>

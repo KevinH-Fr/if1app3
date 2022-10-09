@@ -9,9 +9,10 @@ class RapportdoisController < ApplicationController
   end
 
   def new
-    @rapportdoi = Rapportdoi.new
+    @rapportdoi = Rapportdoi.new rapportdoi_params
     @pilotes = Pilote.all
     @reglements = Reglement.all
+    @event = Event.all
   end
 
   def edit
@@ -61,6 +62,6 @@ class RapportdoisController < ApplicationController
     end
 
     def rapportdoi_params
-      params.require(:rapportdoi).permit(:event_id, :pilote_id, :pilote2, :responsable, :reglement_id, :penalitelicence, :penalitetemps, :commentaire)
+      params.fetch(:rapportdoi, {}).permit(:event_id, :pilote_id, :responsable, :reglement_id, :penalitelicence, :penalitetemps, :commentaire)
     end
 end
