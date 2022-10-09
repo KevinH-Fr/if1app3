@@ -3,12 +3,39 @@
 <h1>Rapportdois</h1>
 
 <div id="rapportdois">
-  <% @rapportdois.each do |rapportdoi| %>
-    <%= render rapportdoi %>
-    <p>
-      <%= link_to "Show this rapportdoi", rapportdoi %>
-    </p>
-  <% end %>
-</div>
 
-<%= link_to "New rapportdoi", new_rapportdoi_path %>
+
+
+  <div class="table-responsive">
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="table-dark">
+        <tr>  
+          <th>#</th>
+          <th>Pilote</th>
+          <th>Event</th>
+          <th>Infraction</th>
+          <th>Sanction</th>
+          <th colspan="3">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @rapportdois.each do |rapport| %> 
+          <tr>
+            <td> <%= rapport.id  %> </td>
+            <td> <%= Pilote.find(rapport.pilote_id).nom %> </td>
+            <td> <%= Event.find(rapport.event_id).formatted_name_bis %> </td>
+            <td> <%= Reglement.find(rapport.reglement_id).numero %> | <%= Reglement.find(rapport.reglement_id).titre %> </td>
+            <td> <%= rapport.penalitelicence %> pts | <%= rapport.penalitetemps %> sec</td>
+            <td> <%= link_to '', rapport, class:"fa-solid fa-eye btn btn-primary btn-sm" %>  </td>
+              <% if current_user.admin? %>
+                <td> <%= button_to '', rapport, class:"fa-solid fa-trash-can btn btn-danger btn-sm", method: :delete, :onclick => "return confirm('Sûr ?')" %>  </td> 
+                <td> <%= link_to "", edit_rapportdoi_path(rapport), class:"fa-regular fa-pen-to-square btn btn-secondary btn-sm" %> </td> 
+              <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+<br>
+<%= link_to "Nouveau rapport", new_rapportdoi_path, class:"btn btn-success" %>

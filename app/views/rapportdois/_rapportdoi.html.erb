@@ -11,7 +11,7 @@
 
   <p>
     <strong>Responsable commissaire:</strong>
-    <%= Pilote.find(rapportdoi.responsable).nom %>
+    <%= Pilote.find(rapportdoi.responsable).nom if rapportdoi.responsable.present? %>
   </p>
 
   <p>
