@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_15_200405) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_15_213426) do
   create_table "active_analytics_views_per_days", force: :cascade do |t|
     t.string "site", null: false
     t.string "page", null: false
@@ -220,7 +220,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_15_200405) do
     t.integer "pilote_id"
     t.string "pilote2"
     t.string "responsable"
-    t.integer "reglement_id", null: false
+    t.integer "reglement_id"
     t.integer "penalitelicence"
     t.integer "penalitetemps"
     t.text "commentaire"

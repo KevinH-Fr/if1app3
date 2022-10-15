@@ -37,32 +37,35 @@
 
 <hr class="hr_doc_doi">
 
-<strong> Décision : </strong> <%= Rapportdoi.find(@rapportdoiId).decision %> <br> <br>
+<strong> Décision : </strong> <%= decision = Rapportdoi.find(@rapportdoiId).decision %> <br> <br>
 <%# faire une bascule fait de course ou sanction %>
 
-<strong> Article enfreint : </strong> <br>
-  <% reglementId = Rapportdoi.find(@rapportdoiId).reglement_id %> 
- article :  <%= Reglement.find(reglementId).numero %> <br>
- description : <%= Reglement.find(reglementId).description %> <br>
-<br>
+<% if decision == "responsable" %>
+  <strong> Article enfreint : </strong> <br>
+    <% reglementId = Rapportdoi.find(@rapportdoiId).reglement_id %> 
+  article :  <%= Reglement.find(reglementId).numero %> <br>
+  description : <%= Reglement.find(reglementId).description %> <br>
+  <br>
+<% end %>
 
 <strong> Commentaires : </strong> <br>
 <%= Rapportdoi.find(@rapportdoiId).commentaire %>
 <br><br>
 
-<strong> Sanctions : </strong> <br>
- licence :
- <strong style="color: red;">
-  <%= Rapportdoi.find(@rapportdoiId).penalitelicence %> points <br>
- </strong>
-
- temps : 
-<strong style="color: red;">
-  <%= Rapportdoi.find(@rapportdoiId).penalitetemps %> secondes <br>
-</strong>
+<% if decision == "responsable" %>
+  <strong> Sanctions : </strong> <br>
+  licence :
+  <strong style="color: red;">
+    <%= Rapportdoi.find(@rapportdoiId).penalitelicence %> points <br>
+  </strong>
+  temps : 
+  <strong style="color: red;">
+    <%= Rapportdoi.find(@rapportdoiId).penalitetemps %> secondes <br>
+  </strong>
+<% end %>
 
 <hr class="hr_doc_doi">
 
 <strong> Responsable commissaire : </strong> <%= responsableNom %> <br>
-
+<br>
 </body>

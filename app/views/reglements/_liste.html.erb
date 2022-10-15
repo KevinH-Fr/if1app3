@@ -4,6 +4,7 @@
     <thead class="table-dark">
       <tr>
       <th>Numero</th>
+      <th>Titre</th>
       <th>Description</th>
       <th>Pénalité licence</th>
       <th>Pénalité temps</th>
@@ -15,6 +16,7 @@
        <% @reglements.each_with_index do | reglement | %>
         <tr>
          <td class="text-center"> <%= reglement.numero %>  </td>
+         <td> <%= reglement.titre %>  </td>
          <td> <%= reglement.description %>  </td>
          <td class="text-center"> <%= reglement.penalite %>  </td>
          <td class="text-center"> <%= reglement.penalitetemps %>  </td>

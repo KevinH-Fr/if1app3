@@ -7,4 +7,6 @@
 <%= render "liste" %>
 <hr>  
 
-<%= link_to "Nouvel article", new_reglement_path, class:"btn btn-success" %>
+<% if current_user.admin? %>
+  <%= link_to "Nouvel article", new_reglement_path, class:"btn btn-success" %>
+<% end %>

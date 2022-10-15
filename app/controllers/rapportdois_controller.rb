@@ -49,8 +49,12 @@ class RapportdoisController < ApplicationController
   end
 
   def create
+    
     @rapportdoi = Rapportdoi.new(rapportdoi_params)
-
+    @pilotes = Pilote.all
+    @event = Event.all
+    @reglements = Reglement.all
+    
     respond_to do |format|
       if @rapportdoi.save
         format.html { redirect_to rapportdoi_url(@rapportdoi), notice: "Rapportdoi was successfully created." }

@@ -222,17 +222,10 @@ def toggle_majdepuisdoi
   @saisonLiee = Event.find(@eventId).saison_id
   @numEvent = Event.find(@eventId).numero
 
-
-  # pour chaque pilote dans les licences de l'event courant
-  # chercher un rapport doi avec points licences perdus
-  # si existe, recupérer points, 
-  # si n'existe pas, placer un zero
-
   @licencesEvent = Licence.all.where(event_id: @eventId)
 
   @licencesEvent.all.each do |lic|
     piloteId = lic.pilote_id
-
     #penalite = Rapportdoi.where(event_id: @eventId, pilote_id: piloteId).sum(:penalitelicence)
     penalite = Rapportdoi.event_courant(@eventId).pilote_courant(piloteId).sum_penalite
 
@@ -243,7 +236,6 @@ def toggle_majdepuisdoi
 
   redirect_to licences_url(numGp: @numEvent, saisonId: @saisonLiee, eventId: @eventId, divisionId: @divisionLiee), 
   notice: "les maj depuis doi ont bien été faites"
-
 
 end 
 
