@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_15_213426) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_15_220243) do
   create_table "active_analytics_views_per_days", force: :cascade do |t|
     t.string "site", null: false
     t.string "page", null: false
@@ -233,6 +233,24 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_15_213426) do
     t.index ["reglement_id"], name: "index_rapportdois_on_reglement_id"
   end
 
+  create_table "rapports", force: :cascade do |t|
+    t.integer "event_id", null: false
+    t.integer "pilote1_id", null: false
+    t.integer "pilote2_id", null: false
+    t.integer "responsable_id", null: false
+    t.integer "article_id", null: false
+    t.integer "penalitelicence"
+    t.integer "penalitetemps"
+    t.text "commentaire"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_rapports_on_article_id"
+    t.index ["event_id"], name: "index_rapports_on_event_id"
+    t.index ["pilote1_id"], name: "index_rapports_on_pilote1_id"
+    t.index ["pilote2_id"], name: "index_rapports_on_pilote2_id"
+    t.index ["responsable_id"], name: "index_rapports_on_responsable_id"
+  end
+
   create_table "reglements", force: :cascade do |t|
     t.string "version"
     t.string "titre"
@@ -315,6 +333,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_15_213426) do
   add_foreign_key "rapportdois", "events"
   add_foreign_key "rapportdois", "pilotes"
   add_foreign_key "rapportdois", "reglements"
+  add_foreign_key "rapports", "articles"
+  add_foreign_key "rapports", "events"
+  add_foreign_key "rapports", "pilote1s"
+  add_foreign_key "rapports", "pilote2s"
+  add_foreign_key "rapports", "responsables"
   add_foreign_key "resultats", "events"
   add_foreign_key "resultats", "pilotes"
 end
