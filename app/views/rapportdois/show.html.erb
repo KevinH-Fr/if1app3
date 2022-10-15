@@ -18,9 +18,9 @@
     <% @eventId = @rapportdoi.event_id %>
     <% @saisonId = Event.find(@eventId).saison_id %>
     <% @divisionId = Event.find(@eventId).division_id %>
-    <% numGp = Event.find(@eventId).numero %>
+    <% numGp = Event.find(@eventId).numero %> <br>
 
     <%= link_to "Générer image", documentedition_rapportdois_path(
-                rapportdoiId: @rapportdoi, saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp, 
+                rapportdoiId: @rapportdoi.id, saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp, 
                 format: :png), class:"btn btn-sm btn-success" %> 
   <% end %>

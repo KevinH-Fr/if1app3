@@ -9,6 +9,8 @@ class RapportdoisController < ApplicationController
   end
 
   def documentedition
+    @rapportdois = Rapportdoi.all
+
     @eventId = params[:eventId]
     @eventNum = Event.find(@eventId).numero 
     @saisonId = params[:saisonId]
@@ -17,14 +19,13 @@ class RapportdoisController < ApplicationController
     @circuitId = Event.find(@eventId).circuit_id
     @circuitNom = Circuit.find(@circuitId).pays
 
-#    @rapportdoiId = @rapportdoi
+    @rapportdoiId = params[:rapportdoiId]
 
-    @piloteImplique = 
 
     respond_to do |format|
       format.html
       format.png do
-      png = Grover.new(url_for(rapportdoiId: @rapportdoi, saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp)).to_png
+      png = Grover.new(url_for(rapportdoiId: @rapportdoiId, saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp)).to_png
 
       customFilename = "RapportDoi_" "S#{@saisonId}_" "D#{@divisionId}_" "GP#{@eventNum}_" "#{@circuitNom}"".png"
 
@@ -62,6 +63,11 @@ class RapportdoisController < ApplicationController
   end
 
   def update
+
+    @event = Event.all
+    @pilotes = Pilote.all
+    @reglements = Reglement.all
+
     respond_to do |format|
       if @rapportdoi.update(rapportdoi_params)
         format.html { redirect_to rapportdoi_url(@rapportdoi), notice: "Rapportdoi was successfully updated." }
@@ -88,6 +94,6 @@ class RapportdoisController < ApplicationController
     end
 
     def rapportdoi_params
-      params.fetch(:rapportdoi, {}).permit(:event_id, :pilote_id, :responsable, :reglement_id, :penalitelicence, :penalitetemps, :commentaire)
+      params.fetch(:rapportdoi, {}).permit(:event_id, :demandeur, :pilote_id, :responsable, :reglement_id, :penalitelicence, :penalitetemps, :commentaire)
     end
 end

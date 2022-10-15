@@ -5,8 +5,14 @@
   </p>
 
   <p>
-    <strong>Pilote:</strong>
-    <%= Pilote.find(rapportdoi.pilote_id).nom %>
+    <strong>Demandeur:</strong>
+    <%= Pilote.find(rapportdoi.demandeur).nom if rapportdoi.demandeur.present? %>
+  </p>
+
+  <p>
+    <strong>Impliqué:</strong>
+   
+    <%= Pilote.find(rapportdoi.pilote_id).nom if rapportdoi.pilote_id.present?  %>
   </p>
 
   <p>

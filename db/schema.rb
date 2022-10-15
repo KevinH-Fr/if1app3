@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_08_201714) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_15_160555) do
   create_table "active_analytics_views_per_days", force: :cascade do |t|
     t.string "site", null: false
     t.string "page", null: false
@@ -217,7 +217,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_08_201714) do
 
   create_table "rapportdois", force: :cascade do |t|
     t.integer "event_id", null: false
-    t.integer "pilote_id", null: false
+    t.integer "pilote_id"
     t.string "pilote2"
     t.string "responsable"
     t.integer "reglement_id", null: false
@@ -226,6 +226,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_08_201714) do
     t.text "commentaire"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "demandeur"
     t.index ["event_id"], name: "index_rapportdois_on_event_id"
     t.index ["pilote_id"], name: "index_rapportdois_on_pilote_id"
     t.index ["reglement_id"], name: "index_rapportdois_on_reglement_id"
