@@ -1,4 +1,4 @@
-<p style="color: green"><%= notice %></p>
+<br>
 
 <%= render @rapportdoi %>
 
@@ -14,4 +14,13 @@
         </td> 
       </tr>
     </table>
+
+    <% @eventId = @rapportdoi.event_id %>
+    <% @saisonId = Event.find(@eventId).saison_id %>
+    <% @divisionId = Event.find(@eventId).division_id %>
+    <% numGp = Event.find(@eventId).numero %>
+
+    <%= link_to "Générer image", documentedition_rapportdois_path(
+                rapportdoiId: @rapportdoi, saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: numGp, 
+                format: :png), class:"btn btn-sm btn-success" %> 
   <% end %>

@@ -1,0 +1,52 @@
+
+<% eventId = @eventId %>
+<%# Event.find(eventId).date %>
+<% circuitId = Event.find(eventId).circuit_id %> 
+
+ 
+
+ <table width="500" style="margin-left:auto;margin-right:auto">
+    <thead>
+      <tr>
+        <th class="th_doc_doi">GP</th>
+        <th class="th_doc_doi">Date</th>
+        <th colspan="2" class="th_doc_doi">Pays</th>
+        <th class="th_doc_doi">Division</th>
+        <th class="th_doc_doi">Saison</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <td class="val_entete_doi">
+            <%= Event.find(eventId).numero %>
+        </td>
+        <td class="val_entete_doi">
+          <% if Event.find(@eventId).date.present? %>
+              <% datetime = Event.find(@eventId).date.to_date %>
+              <%= datetime.strftime("%d/%m/%y") %>
+          <% end %>
+        </td>
+        <td class="val_entete_doi">
+          <% circuitId = Event.find(eventId).circuit_id %> 
+          <%= Circuit.find(circuitId).pays %>
+        </td>
+        <td>
+          <% if Circuit.find(circuitId).drapeau.present? %>
+            <%= image_tag(Circuit.find(circuitId).drapeau, style: "width: 40px; display: block", class: "img-fluid rounded") %> 
+          <% end %>
+        </td>
+         <td class="val_entete_doi">
+          <% divisionId = Event.find(eventId).division_id %> 
+          <%= Division.find(divisionId).nom %>
+        </td>
+         <td class="val_entete_doi">
+          <% saisonId = Event.find(eventId).saison_id %> 
+          <%= Saison.find(saisonId).nom %>
+        </td>
+      
+      </tr>
+  </tbody>
+</table>
+
+<hr class="hr_doc_doi"> 

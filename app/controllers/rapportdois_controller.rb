@@ -8,6 +8,32 @@ class RapportdoisController < ApplicationController
   def show
   end
 
+  def documentedition
+    @eventId = params[:eventId]
+    @eventNum = Event.find(@eventId).numero 
+    @saisonId = params[:saisonId]
+    @divisionId = params[:divisionId]
+
+    @circuitId = Event.find(@eventId).circuit_id
+    @circuitNom = Circuit.find(@circuitId).pays
+
+#    @rapportdoiId = @rapportdoi
+
+    @piloteImplique = 
+
+    respond_to do |format|
+      format.html
+      format.png do
+      png = Grover.new(url_for(rapportdoiId: @rapportdoi, saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp)).to_png
+
+      customFilename = "RapportDoi_" "S#{@saisonId}_" "D#{@divisionId}_" "GP#{@eventNum}_" "#{@circuitNom}"".png"
+
+        send_data(png, disposition: 'inline', filename: customFilename, 
+                       type: 'application/png', format: 'A4')
+      end 
+    end
+  end
+
   def new
     @rapportdoi = Rapportdoi.new rapportdoi_params
     @pilotes = Pilote.all

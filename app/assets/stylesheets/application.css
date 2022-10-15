@@ -69,6 +69,13 @@ th, td {
   text-align: center;
 }
 
+.th_doc_doi {
+  background-color: rgb(100, 97, 97);
+  color: black;
+  font-size: small;
+  text-align: center;
+}
+
 .th_doc_delta {
   background-color: rgb(37, 36, 36);
   color: white;
@@ -135,6 +142,12 @@ th, td {
   color: rgb(255, 255, 255);
   font-size: large;
   height: 40px;
+  text-align: center;
+ }
+
+ .val_entete_doi {
+  font-size: small;
+  height: 25px;
   text-align: center;
  }
 
@@ -235,6 +248,11 @@ th, td {
   .hr_doc{
     border-top: 2px solid  #ccc;
     background-color: #ccc;
+  }
+
+  .hr_doc_doi{
+    border-top: 2px solid  rgb(0, 0, 0);
+    background-color: black;
   }
 
   .btns_edition{

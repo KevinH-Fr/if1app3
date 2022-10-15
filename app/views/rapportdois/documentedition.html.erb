@@ -1,0 +1,61 @@
+
+<body style="">
+
+ <%# haut de page %>
+ <%= image_tag asset_url('/images/if1fia.png'), style: "width: 260px; margin-left:240px; margin-top:20px;", class: "img-fluid rounded", id:"imgLogoIf1" %>
+ <br>
+
+ <br> <br> <br> <br> <br>
+ <% rapportdoiId = params[:rapportdoiId] %>
+ <% piloteImpliqueId = Rapportdoi.find(rapportdoiId).pilote_id %>
+ <% piloteImpliqueNom = Pilote.find(piloteImpliqueId).nom %>
+ <% piloteImpliqueIdEcurie = Pilote.find(piloteImpliqueId).ecurie %>
+ <% piloteImpliqueEcurie = Equipe.find(piloteImpliqueIdEcurie).nom %>
+
+ <% responsableId = Rapportdoi.find(rapportdoiId).responsable %>
+ <% responsableNom = Pilote.find(responsableId).nom %>
+
+
+ <h5 class="mx-2 text-decoration-underline"> Rapport DOI n° <%= rapportdoiId %>  </h5> <br>
+
+ <%= render "hautpdf" %>
+
+
+
+<strong> Pilote : </strong> <%= piloteImpliqueNom %> <br>
+<strong> Ecurie : </strong> <%= piloteImpliqueEcurie %> <br>
+
+<hr class="hr_doc_doi">
+
+<strong> Incident : </strong> <br> <br>
+<%# voir precedents rapports doi et verifier notion de titre de la doi %>
+
+<strong> Décision : </strong> <br> <br>
+<%# faire une bascule fait de course ou sanction %>
+
+<strong> Article enfreint : </strong> <br>
+  <% reglementId = Rapportdoi.find(rapportdoiId).reglement_id %> 
+ article :  <%= Reglement.find(reglementId).numero %> <br>
+ description : <%= Reglement.find(reglementId).description %> <br>
+<br>
+
+<strong> Commentaires : </strong> <br>
+<%= Rapportdoi.find(rapportdoiId).commentaire %>
+<br><br>
+
+<strong> Sanctions : </strong> <br>
+ licence :
+ <strong style="color: red;">
+  <%= Rapportdoi.find(rapportdoiId).penalitelicence %> points <br>
+ </strong>
+
+ temps : 
+<strong style="color: red;">
+  <%= Rapportdoi.find(rapportdoiId).penalitetemps %> secondes <br>
+</strong>
+
+<hr class="hr_doc_doi">
+
+<strong> Responsable commissaire : </strong> <%= responsableNom %> <br>
+
+</body>

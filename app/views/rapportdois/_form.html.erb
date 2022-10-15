@@ -38,23 +38,27 @@
    
     </div>
 
-    <%= turbo_frame_tag :penalitelicence_field do %> <br>
-    <strong> synthèse:</strong>
-      article: <%= articleId = form.object.reglement_id %> 
-      <%= Reglement.find(articleId).titre %> 
-      <% penaliteLicence = Reglement.find(articleId).penalite %>
-      <% penaliteTemps = Reglement.find(articleId).penalitetemps %> <br> 
-      <strong> description: </strong> <%= Reglement.find(articleId).description %> <br>
+    <%= turbo_frame_tag :penalitelicence_field do %> 
+   
+      <% articleId = form.object.reglement_id %> 
+       <% if articleId.present? %>
+        <% penaliteLicence = Reglement.find(articleId).penalite %>
+        <% penaliteTemps = Reglement.find(articleId).penalitetemps %> <br> 
+          
+        <strong> Article: </strong> <%= Reglement.find(articleId).numero %> |
+        <%= Reglement.find(articleId).titre %> <br>
+        <strong> Description: </strong> <%= Reglement.find(articleId).description %> <br>
 
-    <br>
-    
-    <%= form.label :penalite_licence, style: "display: block" %>
-    <%= form.text_field :penalitelicence, value: penaliteLicence %>
+       <br>
+      
+       <%= form.label :penalite_licence, style: "display: block" %>
+       <%= form.text_field :penalitelicence, value: penaliteLicence %>
 
-  <div>
-    <%= form.label :penalite_temps, style: "display: block" %>
-    <%= form.number_field :penalitetemps, value: penaliteTemps %>
-  </div>
+       <div>
+         <%= form.label :penalite_temps, style: "display: block" %>
+         <%= form.number_field :penalitetemps, value: penaliteTemps %>
+       </div>
+     <% end %>
 
   <br>
   <div>

@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  resources :rapportdois
+
+
+  resources :rapportdois do
+    get 'documentedition', :on => :collection
+  end
+  
   resources :rapports
   resources :reglements
 
