@@ -95,6 +95,7 @@ Rails.application.routes.draw do
       get :toggle_creerlicences
       get :toggle_supprimerlicences
       get :toggle_calculrecuplicences
+      get :toggle_majdepuisdoi
       get :toggle_calculrecuplicencesIndiv
   
     end

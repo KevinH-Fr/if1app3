@@ -26,11 +26,14 @@
     <% numGp = Event.find(eventId).numero %>
     <% circuitId = Event.find(eventId).circuit_id %>
     <% circuitPays = Circuit.find(circuitId).pays %>
-    <%= link_to "Créer", toggle_creerlicences_licence_path(eventId), class:"btn btn-sm btn-warning", style:"margin: 2px", :onclick => "return confirm('Sûr ?')" %>
-    <%= link_to "Supprimer", toggle_supprimerlicences_licence_path(eventId), class:"btn btn-sm btn-danger",style:"margin: 2px", :onclick => "return confirm('Sûr ?')" %>
-  
-    <%= link_to "Calculs recup", toggle_calculrecuplicences_licence_path(eventId), class:"btn btn-sm btn-success", style:"margin: 2px" %>
+    <%= link_to "Créer", toggle_creerlicences_licence_path(eventId), class:"btn btn-sm btn-warning m-1", :onclick => "return confirm('Sûr ?')" %>
+
+    <%= link_to "Maj depuis DOI", toggle_majdepuisdoi_licence_path(eventId), class:"btn btn-sm btn-primary m-1" %>
    
+    <%= link_to "Calculs recup", toggle_calculrecuplicences_licence_path(eventId), class:"btn btn-sm btn-success m-1" %>
+    <br>
+    <%= link_to "Supprimer", toggle_supprimerlicences_licence_path(eventId), class:"btn btn-sm btn-danger m-1", :onclick => "return confirm('Sûr ?')" %>
+  
    <br> 
 
   <%# tab datas %>
