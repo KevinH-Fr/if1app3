@@ -30,7 +30,15 @@
     <%= form.select :responsable, @pilotes.all.collect { | pilote | [pilote.nom, pilote.id] },
               {include_blank: true} %>
   </div>
-  <br>
+
+<br>
+
+    <%= form.label :decision, style: "display: block" %>
+    <%= form.select :decision, ["responsable", "fait de course", "autre"],
+              {include_blank: true} %>
+ 
+
+  <br><br>
 
   <div data-controller="form-element">
     <%= form.button "Validate", formaction: new_rapportdoi_path, 

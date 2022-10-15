@@ -20,6 +20,11 @@
     <%= Pilote.find(rapportdoi.responsable).nom if rapportdoi.responsable.present? %>
   </p>
 
+    <p>
+    <strong>Décision:</strong>
+    <%= rapportdoi.decision %>
+  </p>
+
   <p>
     <strong>Article enfreint:</strong>
     <%= rapportdoi.reglement_id %>

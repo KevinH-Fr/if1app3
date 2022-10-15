@@ -8,7 +8,8 @@
       <thead class="table-dark">
         <tr>  
           <th>#</th>
-          <th>Pilote</th>
+          <th>Demandeur</th>
+          <th>Impliqué</th>
           <th>Event</th>
           <th>Infraction</th>
           <th>Sanction</th>
@@ -19,7 +20,8 @@
         <% @rapportdois.each do |rapport| %> 
           <tr>
             <td> <%= rapport.id  %> </td>
-            <td> <%= Pilote.find(rapport.pilote_id).nom %> </td>
+            <td> <%= Pilote.find(rapport.demandeur).nom if rapport.demandeur.present? %> </td>
+            <td> <%= Pilote.find(rapport.pilote_id).nom if rapport.pilote_id.present? %> </td>
             <td> <%= Event.find(rapport.event_id).formatted_name_bis %> </td>
             <td> <%= Reglement.find(rapport.reglement_id).numero %> | <%= Reglement.find(rapport.reglement_id).titre %> </td>
             <td> <%= rapport.penalitelicence %> pts | <%= rapport.penalitetemps %> sec</td>

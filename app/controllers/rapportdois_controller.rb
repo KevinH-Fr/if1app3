@@ -94,6 +94,6 @@ class RapportdoisController < ApplicationController
     end
 
     def rapportdoi_params
-      params.fetch(:rapportdoi, {}).permit(:event_id, :demandeur, :pilote_id, :responsable, :reglement_id, :penalitelicence, :penalitetemps, :commentaire)
+      params.fetch(:rapportdoi, {}).permit(:event_id, :demandeur, :pilote_id, :responsable, :decision, :reglement_id, :penalitelicence, :penalitetemps, :commentaire)
     end
 end
