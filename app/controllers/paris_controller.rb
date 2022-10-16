@@ -55,7 +55,9 @@ class ParisController < ApplicationController
 
   def new
     @pari = Pari.new(pari_params)
-    @divisionId = params[:divisionId]
+
+    @divisionId = Event.find(session[:event]).division_id
+    #@divisionId = params[:divisionId]
    # @eventId = params[:eventId]
 
    @event_id_test = session[:event]
@@ -78,7 +80,8 @@ class ParisController < ApplicationController
 
   def create
     @pari = Pari.new(pari_params)
-    @divisionId = params[:divisionId]
+    @divisionId = Event.find(session[:event]).division_id
+    #@divisionId = params[:divisionId]
 
     @coureur = Pilote.all
 
