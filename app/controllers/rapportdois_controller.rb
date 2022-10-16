@@ -37,7 +37,7 @@ class RapportdoisController < ApplicationController
 
   def new
     @rapportdoi = Rapportdoi.new rapportdoi_params
-   # @pilotes = Pilote.all
+    @pilotes = Pilote.all
     @reglements = Reglement.all
     @event = Event.all
   end

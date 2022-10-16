@@ -12,22 +12,22 @@
 
   <div>
     <%= form.label :event_id, style: "display: block" %>
-    <%#= form.select :event_id, @event.all.collect {|event|[event.formatted_name_bis, event.id]}, {include_blank: true} %>
+    <%= form.select :event_id, @event.all.collect {|event|[event.formatted_name_bis, event.id]}, {include_blank: true} %>
   </div> <br>
 
     <div>
     <%= form.label :demandeur, style: "display: block" %>
-    <%#= form.select :demandeur, @pilotes.all.collect {|pilote|[pilote.nom, pilote.id]}, {include_blank: true} %>
+    <%= form.select :demandeur, @pilotes.all.collect {|pilote|[pilote.nom, pilote.id]}, {include_blank: true} %>
   </div>  <br>
 
   <div>
     <%= form.label :pilote_id, style: "display: block" %>
-    <%#= form.select :pilote_id, @pilotes.all.collect {|pilote|[pilote.nom, pilote.id]}, {include_blank: true} %>
+    <%= form.select :pilote_id, @pilotes.all.collect {|pilote|[pilote.nom, pilote.id]}, {include_blank: true} %>
   </div>  <br>
 
     <div>
     <%= form.label :responsable_commissaire, style: "display: block" %>
-    <%#= form.select :responsable, @pilotes.all.collect { | pilote | [pilote.nom, pilote.id] },
+    <%= form.select :responsable, @pilotes.all.collect { | pilote | [pilote.nom, pilote.id] },
               {include_blank: true} %>
   </div>
 
@@ -41,49 +41,49 @@
   <br><br>
 
   <div data-controller="form-element">
-    <%#= form.button "Validate", formaction: new_rapportdoi_path, 
+    <%= form.button "Validate", formaction: new_rapportdoi_path, 
         formmethod: :get, data: { turbo_frame: :penalitelicence_field, form_element_target: "submitbtn" } %>
     <div>
-      <%#= form.label :article_enfreint, style: "display: block" %>
+      <%= form.label :article_enfreint, style: "display: block" %>
        
-       <%#= form.select :reglement_id, @reglements.all.collect { | reglement | [reglement.titre, reglement.id] },
+       <%= form.select :reglement_id, @reglements.all.collect { | reglement | [reglement.titre, reglement.id] },
               {include_blank: true}, 
               {data: { action: "change->form-element#remotesubmit"}} %>
    
     </div>
 
-    <%#= turbo_frame_tag :penalitelicence_field do %> 
+    <%= turbo_frame_tag :penalitelicence_field do %> 
    
-      <%# articleId = form.object.reglement_id %> 
-       <%# if articleId.present? %>
-        <%# penaliteLicence = Reglement.find(articleId).penalite %>
-        <%# penaliteTemps = Reglement.find(articleId).penalitetemps %> <br> 
+      <% articleId = form.object.reglement_id %> 
+       <% if articleId.present? %>
+        <% penaliteLicence = Reglement.find(articleId).penalite %>
+        <% penaliteTemps = Reglement.find(articleId).penalitetemps %> <br> 
           
-        <strong> Article: </strong> <%#= Reglement.find(articleId).numero %> |
-        <%#= Reglement.find(articleId).titre %> <br>
-        <strong> Description: </strong> <%#= Reglement.find(articleId).description %> <br>
+        <strong> Article: </strong> <%= Reglement.find(articleId).numero %> |
+        <%= Reglement.find(articleId).titre %> <br>
+        <strong> Description: </strong> <%= Reglement.find(articleId).description %> <br>
 
        <br>
       
-       <%#= form.label :penalite_licence, style: "display: block" %>
-       <%#= form.text_field :penalitelicence, value: penaliteLicence %>
+       <%= form.label :penalite_licence, style: "display: block" %>
+       <%= form.text_field :penalitelicence, value: penaliteLicence %>
 
        <div>
-         <%#= form.label :penalite_temps, style: "display: block" %>
-         <%#= form.number_field :penalitetemps, value: penaliteTemps %>
+         <%= form.label :penalite_temps, style: "display: block" %>
+         <%= form.number_field :penalitetemps, value: penaliteTemps %>
        </div>
-     <%# end %>
+     <% end %>
 
   <br>
   <div>
-    <%#= form.label :commentaire, style: "display: block" %>
-    <%#= form.text_area :commentaire, class:"form-control" %>
+    <%= form.label :commentaire, style: "display: block" %>
+    <%= form.text_area :commentaire, class:"form-control" %>
   </div>
 
     <br> 
 
-    <%#= form.submit "Créer", class: 'btn btn-success' %>
+    <%= form.submit "Créer", class: 'btn btn-success' %>
 
   </div>
-  <%# end %>
+  <% end %>
 <% end %>

@@ -233,24 +233,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_15_220243) do
     t.index ["reglement_id"], name: "index_rapportdois_on_reglement_id"
   end
 
-  create_table "rapports", force: :cascade do |t|
-    t.integer "event_id", null: false
-    t.integer "pilote1_id", null: false
-    t.integer "pilote2_id", null: false
-    t.integer "responsable_id", null: false
-    t.integer "article_id", null: false
-    t.integer "penalitelicence"
-    t.integer "penalitetemps"
-    t.text "commentaire"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["article_id"], name: "index_rapports_on_article_id"
-    t.index ["event_id"], name: "index_rapports_on_event_id"
-    t.index ["pilote1_id"], name: "index_rapports_on_pilote1_id"
-    t.index ["pilote2_id"], name: "index_rapports_on_pilote2_id"
-    t.index ["responsable_id"], name: "index_rapports_on_responsable_id"
-  end
-
   create_table "reglements", force: :cascade do |t|
     t.string "version"
     t.string "titre"
