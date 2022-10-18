@@ -2,7 +2,7 @@ class ReglementsController < ApplicationController
   before_action :set_reglement, only: %i[ show edit update destroy ]
 
   def index
-    @reglements = Reglement.all
+    @reglements = Reglement.all.order(:numero)
   end
 
   def show

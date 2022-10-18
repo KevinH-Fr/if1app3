@@ -71,7 +71,7 @@ th, td {
 
 .th_doc_doi {
   background-color: rgb(100, 97, 97);
-  color: black;
+  color: rgb(255, 255, 255);
   font-size: small;
   text-align: center;
 }
@@ -147,7 +147,6 @@ th, td {
 
  .val_entete_doi {
   font-size: small;
-  color: rgb(255, 255, 255);
   height: 25px;
   text-align: center;
  }
