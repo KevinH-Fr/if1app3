@@ -37,14 +37,14 @@ class RapportdoisController < ApplicationController
 
   def new
     @rapportdoi = Rapportdoi.new rapportdoi_params
-    @pilotes = Pilote.all
+    @pilotes = Pilote.all.order(:nom)
     @reglements = Reglement.all
-    @event = Event.all
+    @event = Event.all.order(:date)
   end
 
   def edit
-   # @pilotes = Pilote.all
-    @event = Event.all
+    @pilotes = Pilote.all.order(:nom)
+    @event = Event.all.order(:date)
     @reglements = Reglement.all
   end
 
@@ -52,7 +52,7 @@ class RapportdoisController < ApplicationController
     
     @rapportdoi = Rapportdoi.new(rapportdoi_params)
   #  @pilotes = Pilote.all
-    @event = Event.all
+    @event = Event.all.order(:date)
     @reglements = Reglement.all
     
     respond_to do |format|
