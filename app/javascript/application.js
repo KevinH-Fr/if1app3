@@ -4,7 +4,7 @@ import "controllers"
 //import "@hotwired/turbo-rails"
 import { Turbo } from "@hotwired/turbo-rails"
 
-Turbo.session.drive = false
+Turbo.session.drive = true
 
 
 require("@rails/activestorage").start()
