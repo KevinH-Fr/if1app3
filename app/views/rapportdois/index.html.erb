@@ -24,7 +24,10 @@
               <td> <%= Pilote.find(rapport.demandeur).nom if rapport.demandeur.present? %> </td>
               <td> <%= Pilote.find(rapport.pilote_id).nom if rapport.pilote_id.present? %> </td>
               <td> <%= Event.find(rapport.event_id).formatted_name_bis %> </td>
-              <td> <%= Reglement.find(rapport.reglement_id).numero %> | <%= Reglement.find(rapport.reglement_id).titre %> </td>
+              <td>
+                <% if rapport.reglement_id.present? %>
+                  <%= Reglement.find(rapport.reglement_id).numero %> | <%= Reglement.find(rapport.reglement_id).titre %> </td>
+                <% end %>
               <td> <%= rapport.penalitelicence %> pts | <%= rapport.penalitetemps %> sec</td>
               
               <td> <%= link_to '', rapport, class:"fa-solid fa-eye btn btn-primary btn-sm" %>  </td>
