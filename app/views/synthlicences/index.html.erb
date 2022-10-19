@@ -40,8 +40,10 @@
 
             <tbody>
             <tr>
+
             <% @licencesFiltres.each_with_index do | licence, i| %>
             
+            <% if Pilote.find(licence.pilote_id).statut == "actif" %>
                 <td>
                 <% if licence.pilote_id.present? %>
                     <%= Pilote.find(licence.pilote_id).nom  %>
@@ -63,9 +65,11 @@
                <td class="col_centree">
                   <strong> <%= @licencesValDepart.to_i - licence.total_penalite.to_i + licence.total_recupere.to_i %> </strong>
                 </td>
-                
-            </tr>
-            <% end %>
+            
+              </tr>
+              <% end %>
+        <% end %>
+
         </tbody>
         </table>
     </div>

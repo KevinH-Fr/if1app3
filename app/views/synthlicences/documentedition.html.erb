@@ -23,36 +23,39 @@
             <tr>
             <% @licencesFiltres.each_with_index do | licence, i| %>
             
-              <td>  
-                <div class="contenant">
-                  <% idPilote = licence.pilote_id %> 
-                  <% idEcurie = Pilote.find(idPilote).ecurie %> 
-                  <% nomPilote = Pilote.find(idPilote).nom %> 
-                  <%= image_tag Equipe.find(idEcurie).logo, style: "width: 300px; display: block", class: "img-fluid rounded" %>
-                    <div class="texte_centrer">
-                      <%= nomPilote %>
-                    </div>
-                </div>
-              </td> 
+              <% if Pilote.find(licence.pilote_id).statut == "actif" %>
 
-               <td class="cols_pos_score">
-                  <strong class="col_rank_perte">
-                    <%= licence.total_penalite %>
-                  </strong>
-                </td>
-               <td class="cols_pos_score">
-                  <strong class="col_rank_gain">
-                    <%= licence.total_recupere %>
-                  </strong>
-                </td>
+                <td>  
+                  <div class="contenant">
+                    <% idPilote = licence.pilote_id %> 
+                    <% idEcurie = Pilote.find(idPilote).ecurie %> 
+                    <% nomPilote = Pilote.find(idPilote).nom %> 
+                    <%= image_tag Equipe.find(idEcurie).logo, style: "width: 300px; display: block", class: "img-fluid rounded" %>
+                      <div class="texte_centrer">
+                        <%= nomPilote %>
+                      </div>
+                  </div>
+                </td> 
+
                 <td class="cols_pos_score">
-                <strong>
-                    <%= @licencesValDepart.to_i - licence.total_penalite.to_i + licence.total_recupere.to_i %>
-                </strong>
-                </td>
-                
-            </tr>
-            <% end %>
+                    <strong class="col_rank_perte">
+                      <%= licence.total_penalite %>
+                    </strong>
+                  </td>
+                <td class="cols_pos_score">
+                    <strong class="col_rank_gain">
+                      <%= licence.total_recupere %>
+                    </strong>
+                  </td>
+                  <td class="cols_pos_score">
+                  <strong>
+                      <%= @licencesValDepart.to_i - licence.total_penalite.to_i + licence.total_recupere.to_i %>
+                  </strong>
+                  </td>
+                  
+              </tr>
+              <% end %>
+           <% end %>
         </tbody>
       </table>
 
