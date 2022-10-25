@@ -58,10 +58,13 @@
   <strong style="color: red;">
     <%= Rapportdoi.find(@rapportdoiId).penalitelicence %> points <br>
   </strong>
-  temps : 
-  <strong style="color: red;">
-    <%= Rapportdoi.find(@rapportdoiId).penalitetemps %> secondes <br>
-  </strong>
+
+  <% if Rapportdoi.find(@rapportdoiId).penalitetemps.present? %>
+    temps : 
+    <strong style="color: red;">
+      <%= Rapportdoi.find(@rapportdoiId).penalitetemps %> secondes <br>
+    </strong>
+  <% end %>
 <% end %>
 
 <hr class="hr_doc_doi">

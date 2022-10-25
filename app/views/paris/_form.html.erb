@@ -140,7 +140,7 @@
               <% end %>
 
                 <div> cote retenue : <strong>  <%= number_with_precision(@valCote, precision: 2) %> </strong>  </div>
-                <div> gains possibles : <strong>  <%= number_with_precision(@valCote * form.object.montant, precision: 0) %> </strong>  </div>
+                <div> gains possibles : <strong>  <%= number_with_precision(@valCote * form.object.montant, delimiter: " ", precision: 0) %> </strong>  </div>
                <%# <div> montant parié  | <strong>   form.object.montant  </strong>  </div> %>
 
                 
