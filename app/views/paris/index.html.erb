@@ -86,7 +86,7 @@
                     <%# end %>
                 </td>
 
-              <td class="col_centree"> <%= pari.montant %> </td>
+              <td class="col_centree"> <%= number_with_precision(pari.montant, delimiter: " ", precision: 0) %> </td>
               <td class="col_centree"> <%= pari.paritype %> </td>
               <td> <%= pari.coureur.nom %> </td>
               <td> 
@@ -105,7 +105,7 @@
                 <% end %>
               </td>
 
-              <td class="col_centree"> <%= number_with_precision(pari.solde, precision: 2)  %> </td>
+              <td class="col_centree"> <%= number_with_precision(pari.solde,  delimiter: ' ', precision: 0)  %> </td>
               
               <% if current_user.admin? %>
                 <% horairePari_local = pari.updated_at.to_time + 7200 %>
