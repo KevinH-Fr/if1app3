@@ -86,10 +86,12 @@ class CotesController < ApplicationController
               valPosition = Classement.find_by(pilote_id: @piloteId, event_id: eventN_1).position
             end
               valCoteBase = 1 + (((max_points.to_f - valScore)/100) * valPosition )
+              valCoteBaseTop10 = 1 + (((max_points.to_f - valScore)/100) * (valPosition/1.5) )
+
               cote.update(position: valPosition )
               cote.update(coteVictoire: valCoteBase + ((1.2 * valPosition) /1 )) 
               cote.update(cotePodium:  valCoteBase + ((0.9 * valPosition) /1.5))
-              cote.update(coteTop10:   valCoteBase + ((0.04 * valPosition) /2))
+              cote.update(coteTop10:   valCoteBaseTop10 + ((0.04 * valPosition) /2))
               cote.update(cotePole: valCoteBase + ((1.1 * valPosition) /1 )) 
           else
             @texteNotif = "le classement du GP précédent doit d'abord être créé"
