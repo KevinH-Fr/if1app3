@@ -2,7 +2,7 @@ class RapportdoisController < ApplicationController
   before_action :set_rapportdoi, only: %i[ show edit update destroy ]
 
   def index
-    @rapportdois = Rapportdoi.all
+    @rapportdois = Rapportdoi.all.order(:id)
   end
 
   def show

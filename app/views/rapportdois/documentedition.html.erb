@@ -29,8 +29,12 @@
  <%= render "hautpdf" %>
 
 <strong> Déposé par : </strong> <%= piloteDemandeurNom %> <br>
-<strong> Ecurie : </strong> <%= piloteDemandeurEcurie %> <br> <br>
 
+<% if piloteDemandeurNom == "Commissaires" %>
+  <br>
+<% else %>
+  <strong> Ecurie : </strong> <%= piloteDemandeurEcurie %> <br> <br>
+<% end %>
 
 <strong> Pilote impliqué : </strong> <%= piloteImpliqueNom %> <br>
 <strong> Ecurie : </strong> <%= piloteImpliqueEcurie %> <br>
