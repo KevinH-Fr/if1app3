@@ -226,7 +226,7 @@ var labels = <%= @labels %>;
   var data19 = <%= @data19 %>;
   var data20 = <%= @data20 %>;
 
-  const data = {
+  var data = {
     labels: labels,
    
     datasets: [
@@ -355,8 +355,8 @@ var labels = <%= @labels %>;
     ]
   };
 
-    let delayed;
-    const config = {
+    var delayed;
+    var config = {
         type: 'line',
         data: data,
         options: {
@@ -372,7 +372,7 @@ var labels = <%= @labels %>;
                     delayed = true;
                 },
                 delay: (context) => {
-                    let delay = 0;
+                    var delay = 0;
                     if (context.type === 'data' && context.mode === 'default' && !delayed) {
                     delay = context.dataIndex * 2000  + context.datasetIndex * 100;
                     }
@@ -425,7 +425,7 @@ var labels = <%= @labels %>;
 </script>
 
 <script>
-  const myChart = new Chart(
+  var myChart = new Chart(
     document.getElementById('myChart'),
     config
   );

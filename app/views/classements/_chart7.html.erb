@@ -249,7 +249,7 @@ var data18 = <%= @cumulData18 %>;
 var data19 = <%= @cumulData19 %>;
 var data20 = <%= @cumulData20 %>;
 
-const data = {
+var data = {
     labels: labels,
    
     datasets: [
@@ -385,8 +385,8 @@ const data = {
     }
   ]
   };
-    let delayed;
-    const config = {
+    var delayed;
+    var config = {
         type: 'line',
         data: data,
         options: {
@@ -403,7 +403,7 @@ const data = {
                     delayed = true;
                 },
                 delay: (context) => {
-                    let delay = 0;
+                    var delay = 0;
                     if (context.type === 'data' && context.mode === 'default' && !delayed) {
                     delay = context.dataIndex * 3000  + context.datasetIndex * 100;
                     }
@@ -457,7 +457,7 @@ const data = {
 </script>
 
 <script>
-  const myChart = new Chart(
+  var myChart = new Chart(
     document.getElementById('myChartPie'),
     config
   );

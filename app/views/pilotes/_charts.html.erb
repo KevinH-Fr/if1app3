@@ -63,11 +63,21 @@
 <% posCourseMoyen = number_with_precision(Resultat.pos_course_moyen(@piloteId), precision: 2) %>
 <% posQualifMoyen = number_with_precision(Resultat.pos_qualif_moyen(@piloteId), precision: 2) %>
 
-<% if posQualifMoyen.length < 2 %> <%# si retourne active record sans value, length tres long, sinon length 2 max%>
-  <% posQualifMoyen = Resultat.pos_qualif_moyen(@piloteId) %> 
+<% Resultat.where(pilote_id: @piloteId).pluck(:qualification)  %>
+<% nbQualifs = Resultat.where(pilote_id: @piloteId).count(:qualification)  %>
+<% sumPos = Resultat.where(pilote_id: @piloteId).sum(:qualification)  %>
+
+<% if nbQualifs > 0 %>
+  <% posQualifMoyen = sumPos / nbQualifs %>
 <% else %>
-  <% posQualifMoyen = 20 %> <%# 20 par defaut %>
+ <% posQualifMoyen = 20 %>
 <% end %>
+
+<%# if posQualifMoyen.length < 2 %> <%# si retourne active record sans value, length tres long, sinon length 2 max%>
+  <%# posQualifMoyen = Resultat.pos_qualif_moyen(@piloteId) %> 
+<%# else %>
+  <%# posQualifMoyen = 20 %> <%# 20 par defaut %>
+<%# end %>
 
 <% posCourseMoyen  %>
 <% posQualifMoyen  %> 
@@ -122,7 +132,7 @@
       var couleurDnsOpacity =  'rgb(236, 112, 99, 0.6)';
 
 // CHART donut
-    const data = {
+    var data = {
       labels: ['Victoire', 'Podium', 'Top5', 'Top10', 'HorsTop10'],
       datasets: [{
       
@@ -140,7 +150,7 @@
     };
 
     // config 
-    const config = {
+    var config = {
       type: 'doughnut',
      
       data,
@@ -159,7 +169,7 @@
     };
 
 
-    const myChart = new Chart(
+    var myChart = new Chart(
       document.getElementById('myChart'),
       config
     );
@@ -170,7 +180,7 @@ var data1 = <%= @data1 %>;
 
 
 // CHART LINE
-    const dataLine = {
+    var dataLine = {
       labels: labels,
       datasets: [{
         label: 'score',
@@ -182,9 +192,9 @@ var data1 = <%= @data1 %>;
       }]
     };
 
-    let delayed;
+    var delayed;
 
-    const configLine = {
+    var configLine = {
       type: 'line',
       data: dataLine,
       options: {
@@ -194,7 +204,7 @@ var data1 = <%= @data1 %>;
                     delayed = true;
                 },
                 delay: (context) => {
-                    let delay = 0;
+                    var delay = 0;
                     if (context.type === 'data' && context.mode === 'default' && !delayed) {
                     delay = context.dataIndex * 2500  + context.datasetIndex * 100;
                     }
@@ -245,14 +255,14 @@ var data1 = <%= @data1 %>;
           }
       };
 
-    const myChartLine = new Chart(
+    var myChartLine = new Chart(
       document.getElementById('myChartLine'),
       configLine
     );
 
 
 // CHART BAR
-    const dataBar = {
+    var dataBar = {
       labels: ['courses (nb)','points (moy)','pos. course (moy)','pos. qualif (moy)','diff. qualif course (moy)','MT (nb)', 'DOTD (nb)', 'DNF (nb)', 'DNS (nb)'],
       datasets: [{
       
@@ -285,7 +295,7 @@ var data1 = <%= @data1 %>;
       }]
     };
 
-    const configBar = {
+    var configBar = {
       type: 'bar',
       data: dataBar,
       options: {
@@ -321,7 +331,7 @@ var data1 = <%= @data1 %>;
       };
 
         // render init block
-    const myChartBar = new Chart(
+    var myChartBar = new Chart(
       document.getElementById('myChartBar'),
       configBar
     );
