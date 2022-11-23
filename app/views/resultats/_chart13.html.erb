@@ -355,7 +355,7 @@ var labels = <%= @labels %>;
     ]
   };
 
-    var delayed;
+    var delayedResultatLine;
     var config = {
         type: 'line',
         data: data,
@@ -369,11 +369,11 @@ var labels = <%= @labels %>;
 
             animation: {
                 onComplete: () => {
-                    delayed = true;
+                    delayedResultatLine = true;
                 },
                 delay: (context) => {
                     var delay = 0;
-                    if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                    if (context.type === 'data' && context.mode === 'default' && !delayedResultatLine) {
                     delay = context.dataIndex * 2000  + context.datasetIndex * 100;
                     }
                     return delay;

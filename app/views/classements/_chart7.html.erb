@@ -385,7 +385,7 @@ var data = {
     }
   ]
   };
-    var delayed;
+    var delayedClassementLine;
     var config = {
         type: 'line',
         data: data,
@@ -400,11 +400,11 @@ var data = {
             animation: {
                easing: 'linear',
                 onComplete: () => {
-                    delayed = true;
+                    delayedClassementLine = true;
                 },
                 delay: (context) => {
-                    var delay = 0;
-                    if (context.type === 'data' && context.mode === 'default' && !delayed) {
+                    let delay = 0;
+                    if (context.type === 'data' && context.mode === 'default' && !delayedClassementLine) {
                     delay = context.dataIndex * 3000  + context.datasetIndex * 100;
                     }
                     return delay;
