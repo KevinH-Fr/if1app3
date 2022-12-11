@@ -89,7 +89,7 @@
        <br>
       <div>
         <%= form.label :montant, style: "display: block" %>
-        <%= form.number_field :montant, 
+        <%= form.number_field :montant,
               {data: { action: "change->form-element#remotesubmit"}} %>
       </div>
        <br>

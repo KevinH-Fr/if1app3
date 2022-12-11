@@ -30,7 +30,7 @@
               <% deltaTime = formatDateHoraireCompletGP.to_time - horaireCourant.to_time %>
              
             <%#= deltaTime %> 
-                <% if deltaTime > 7200 %> <%# 2h de decalage en prod soit 7200 secondes %> 
+                <% if deltaTime > 3600 %> <%# 3200 = 1h? 2h de decalage en prod soit 7200 secondes %> 
                   <%= link_to "Nouveau pari", new_pari_path(saisonId: @saisonId, divisionId: @divisionId, eventId: @eventId, numGp: @numGp), class:"btn btn-sm btn-success" %>
                 <% end %>
             <% end %>
