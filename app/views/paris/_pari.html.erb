@@ -24,7 +24,7 @@
 
   <p>
     <strong>Montant:</strong>
-    <%= pari.montant %>
+    <%= number_with_precision(pari.montant, precision: 0, delimiter: " ")%>
   </p>
 
   <p>
