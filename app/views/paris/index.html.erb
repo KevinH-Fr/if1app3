@@ -108,7 +108,7 @@
               <td class="col_centree"> <%= number_with_precision(pari.solde,  delimiter: ' ', precision: 0)  %> </td>
               
               <% if current_user.admin? %>
-                <% horairePari_local = pari.updated_at.to_time + 7200 %>
+                <% horairePari_local = pari.updated_at.to_time + 3600 %>
                 <td> <%=  horairePari_local.strftime("%d/%m %H:%M") %> </td>
                 
               <% end %>
